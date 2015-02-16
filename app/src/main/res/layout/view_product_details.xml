@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <br.com.doubletouch.vendasup.presentation.view.components.AutoLoadImageView
+        android:id="@+id/iv_cover"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:background="@android:color/darker_gray"/>
+
+    <TextView
+        android:id="@+id/tv_fullname"
+        style="@style/AppTheme.TextViewHeader"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/content_margin_left"
+        android:layout_marginRight="@dimen/content_margin_right">
+
+        <TextView
+            style="@style/AppTheme.TextViewTitle"
+            android:text="@string/tv_product_code"/>
+        <TextView
+            android:id="@+id/tv_product_code"
+            style="@style/AppTheme.TextViewContent" />
+
+        <TextView
+            style="@style/AppTheme.TextViewTitle"
+            android:text="@string/tv_product_description"/>
+
+        <TextView
+            android:id="@+id/tv_product_description"
+            style="@style/AppTheme.TextViewContent"/>
+
+
+        </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">VendasUp</string>
+    <string name="title_activity_product_list">Produtos</string>
+    <string name="title_activity_product_details">Detalhes do Produto</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_carga_inicial">CargaInicialActivity</string>
+    <string name="preco">Preço:</string>
+    <string name="exception_message_generic">Opss. Ocorreu um erro.</string>
+    <string name="exception_message_syncronization">Ocorreu um erro ao receber os dados.</string>
+
+    <string name="btn_text_retry">Voltar</string>
+
+    <string name="string_content_description">View não acessivel</string>
+
+    <string name="tv_product_code">Código</string>
+    <string name="tv_product_description">Descrição</string>
+
+</resources>
