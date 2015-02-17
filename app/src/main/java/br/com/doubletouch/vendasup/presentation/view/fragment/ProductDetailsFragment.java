@@ -45,8 +45,8 @@ public class ProductDetailsFragment extends BaseFragment implements ProductDetai
     @InjectView(R.id.iv_cover)
     ImageView iv_cover;
 
-    @InjectView(R.id.tv_fullname)
-    TextView tv_fullname;
+    @InjectView(R.id.tv_product_description)
+    TextView tv_product_description;
 
     @InjectView(R.id.tv_product_code)
     TextView tv_product_code;
@@ -135,7 +135,7 @@ public class ProductDetailsFragment extends BaseFragment implements ProductDetai
         if(product != null){
             imageLoader.displayImage(product.getPictureUrl(), this.iv_cover);
             //this.iv_cover.setImageUrl(product.getPictureUrl());
-            this.tv_fullname.setText(product.getDescription());
+            this.tv_product_description.setText(product.getDescription());
             this.tv_product_code.setText(product.getProductID());
             this.tv_product_barcode.setText(product.getBarcode());
             this.tv_product_reference.setText(product.getReference());

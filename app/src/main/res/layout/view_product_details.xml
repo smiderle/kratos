@@ -16,46 +16,7 @@
             android:id="@+id/iv_cover"
             android:layout_width="match_parent"
             android:layout_height="@dimen/iv_height_main"
-            android:background="@android:color/darker_gray"/>
-
-        <TextView
-            android:id="@+id/tv_fullname"
-            style="@style/AppTheme.TextViewHeader"/>
-
-        <!-- RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="@dimen/lv_row_icon_padding">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_label"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true"
-                    android:layout_marginLeft="33dp"
-                    android:layout_marginStart="33dp"
-                    android:id="@+id/imageView" />
-
-            <TextView
-                android:text="@string/tv_product_code"
-                style="@style/AppTheme.TextViewTitle"
-                android:id="@+id/tv_produto_codigo"
-                android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/imageView"
-                android:layout_toEndOf="@+id/imageView"
-                android:layout_marginLeft="22dp"
-                android:layout_marginStart="22dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_product_code"
-                android:layout_below="@+id/tv_produto_codigo"
-                android:layout_alignLeft="@+id/tv_produto_codigo"
-                android:layout_alignStart="@+id/tv_produto_codigo" />
-
-        </RelativeLayout -->
+            android:background="@color/indigo_500"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -95,6 +56,40 @@
                     android:layout_below="@+id/tv_product_id"
                     android:layout_alignLeft="@+id/tv_product_id"
                     android:layout_alignStart="@+id/tv_product_id" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/lv_row_padding_top"
+                android:paddingBottom="@dimen/lv_row_padding_botton">
+                <ImageView
+                    android:id="@+id/imageDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_cube_outline"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+                <TextView
+                    android:id="@+id/tv_product_description_title"
+                    android:text="@string/tv_product_description"
+                    style="@style/AppTheme.TextViewPrimary"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@+id/imageDescription"
+                    android:layout_toEndOf="@+id/imageDescription"
+                    android:layout_marginLeft="22dp"
+                    android:layout_marginStart="22dp" />
+
+                <TextView
+                    android:id="@+id/tv_product_description"
+                    style="@style/AppTheme.TextViewSecundary"
+                    android:text="@string/tv_default_product_description"
+                    android:layout_below="@+id/tv_product_description_title"
+                    android:layout_alignLeft="@+id/tv_product_description_title"
+                    android:layout_alignStart="@+id/tv_product_description_title" />
 
             </RelativeLayout>
 
@@ -213,7 +208,7 @@
                     android:id="@+id/imageStock"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_cube_outline"
+                    android:src="@drawable/ic_checkbox_multiple_blank_outline"
                     android:layout_centerVertical="true"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true" />

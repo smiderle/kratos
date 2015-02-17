@@ -36,31 +36,26 @@
     <style name="AppTheme.TextViewPrimary">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">@dimen/header_margin</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">@dimen/font_size_h5</item>
-        <item name="android:textColor">@color/indigo_500</item>
+        <item name="android:textColor">@color/grey_700</item>
     </style>
 
     <style name="AppTheme.TextViewSecundary">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">@dimen/header_margin</item>
         <item name="android:textSize">@dimen/font_size_h3</item>
+        <item name="android:textColor">@color/grey_500</item>
     </style>
 
-    <style name="AppTheme.TextViewInListViewPrimary">
+    <style name="AppTheme.TextViewInListViewPrimary" parent="AppTheme.TextViewPrimary">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">@dimen/font_size_h5</item>
-        <item name="android:textColor">@color/material_blue_grey_800</item>
     </style>
 
-    <style name="AppTheme.TextViewInListViewSecundory">
+    <style name="AppTheme.TextViewInListViewSecundory" parent="AppTheme.TextViewSecundary">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">@dimen/font_size_h3</item>
-        <item name="android:textColor">@color/grey_600</item>
     </style>
 
     <!--
@@ -69,14 +64,14 @@
      -->
     <style name="AppTheme.Kratos.Light" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="actionBarStyle">@style/Kratos.ActionBar</item>
-
+        <!-- Remove a sombra de baixo do action bar -->
+        <item name="android:windowContentOverlay">@null</item>
     </style>
 
     <!-- Action bar -->
     <style name="Kratos.ActionBar" parent="Widget.AppCompat.ActionBar.Solid">
         <item name="titleTextStyle">@style/Kratos.Actionbar.Title</item>
         <item name="background">@color/indigo_500</item>
-
     </style>
 
     <!-- Texto do ActionBar -->

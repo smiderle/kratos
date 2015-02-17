@@ -7,7 +7,9 @@
     android:orientation="horizontal"
     android:paddingTop="@dimen/lv_row_padding_top"
     android:paddingBottom="@dimen/lv_row_padding_botton"
-    android:background="@color/background_material_light">
+    android:paddingLeft="@dimen/activity_padding_left"
+    android:paddingRight="@dimen/activity_padding_right"
+    android:background="@drawable/selector_listview">
 
     <RelativeLayout
         android:layout_width="fill_parent"

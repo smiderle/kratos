@@ -39,7 +39,6 @@ public class ProductListActivity extends BaseActivity implements ProductListFrag
     @Override
     public void onProductClicked(Product product) {
         this.navigator.navigateToProductDetails(this, product.getID());
-        Toast.makeText(this, product.getDescription(), Toast.LENGTH_LONG).show();
     }
 
 
@@ -51,31 +50,4 @@ public class ProductListActivity extends BaseActivity implements ProductListFrag
         }
         return super.onOptionsItemSelected(item);
     }
-/*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        //Carrega o arquivo de menu.
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_search_view, menu);
-
-        //Pega o Componente.
-        SearchView mSearchView = (SearchView) menu.findItem(R.id.search).getActionView();
-        //Define um texto de ajuda:
-        mSearchView.setQueryHint("Pesquisar");
-
-        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-
-                return false;
-            }
-        });
-
-        return true;
-    }*/
 }
