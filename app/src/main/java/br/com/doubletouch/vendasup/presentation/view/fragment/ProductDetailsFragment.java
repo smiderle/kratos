@@ -2,10 +2,10 @@ package br.com.doubletouch.vendasup.presentation.view.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -22,14 +22,12 @@ import br.com.doubletouch.vendasup.domain.executor.PostExecutionThread;
 import br.com.doubletouch.vendasup.domain.executor.ThreadExecutor;
 import br.com.doubletouch.vendasup.domain.interactor.GetProductDetailsUseCase;
 import br.com.doubletouch.vendasup.domain.interactor.GetProductDetailsUseCaseImpl;
-import br.com.doubletouch.vendasup.domain.interactor.GetProductListUseCase;
-import br.com.doubletouch.vendasup.domain.interactor.GetProductListUserCaseImpl;
 import br.com.doubletouch.vendasup.domain.repository.ProductRepository;
 import br.com.doubletouch.vendasup.presentation.UIThread;
 import br.com.doubletouch.vendasup.presentation.presenter.ProductDetailsPresenter;
-import br.com.doubletouch.vendasup.presentation.presenter.ProductListPresenter;
 import br.com.doubletouch.vendasup.presentation.view.ProductDetailsView;
-import br.com.doubletouch.vendasup.presentation.view.components.AutoLoadImageView;
+import br.com.doubletouch.vendasup.util.DoubleUtil;
+import br.com.doubletouch.vendasup.util.image.ImageLoader;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -45,7 +43,7 @@ public class ProductDetailsFragment extends BaseFragment implements ProductDetai
 
 
     @InjectView(R.id.iv_cover)
-    AutoLoadImageView iv_cover;
+    ImageView iv_cover;
 
     @InjectView(R.id.tv_fullname)
     TextView tv_fullname;
@@ -53,14 +51,28 @@ public class ProductDetailsFragment extends BaseFragment implements ProductDetai
     @InjectView(R.id.tv_product_code)
     TextView tv_product_code;
 
-    @InjectView(R.id.tv_product_description)
-    TextView tv_product_description;
+    @InjectView(R.id.tv_product_barcode)
+    TextView tv_product_barcode;
+
+    @InjectView(R.id.tv_product_reference)
+    TextView tv_product_reference;
+
+    @InjectView(R.id.tv_product_package)
+    TextView tv_product_package;
+
+    @InjectView(R.id.tv_product_stock)
+    TextView tv_product_stock;
+
+    @InjectView(R.id.tv_product_price)
+    TextView tv_product_price;
 
     @InjectView(R.id.rl_progress)
     RelativeLayout rl_progress;
 
     @InjectView(R.id.rl_retry)
     RelativeLayout rl_retry;
+
+    private ImageLoader imageLoader;
 
 
     public ProductDetailsFragment(){
@@ -80,6 +92,7 @@ public class ProductDetailsFragment extends BaseFragment implements ProductDetai
      */
     private void initialize(){
         this.productId = getArguments().getInt(ARGUMENT_KEY_PRODUCT_ID);
+        imageLoader = new ImageLoader(getContext());
     }
 
     @Override
@@ -120,10 +133,15 @@ public class ProductDetailsFragment extends BaseFragment implements ProductDetai
     @Override
     public void renderProduct(Product product) {
         if(product != null){
-            this.iv_cover.setImageUrl(product.getPictureUrl());
+            imageLoader.displayImage(product.getPictureUrl(), this.iv_cover);
+            //this.iv_cover.setImageUrl(product.getPictureUrl());
             this.tv_fullname.setText(product.getDescription());
             this.tv_product_code.setText(product.getProductID());
-            this.tv_product_description.setText(product.getDescription());
+            this.tv_product_barcode.setText(product.getBarcode());
+            this.tv_product_reference.setText(product.getReference());
+            this.tv_product_package.setText(product.getPackaging());
+            this.tv_product_stock.setText(DoubleUtil.formatToCurrency(product.getStockAmount(), false));
+            this.tv_product_price.setText(DoubleUtil.formatToCurrency(product.getSalePrice(), true));
         }
 
     }

@@ -10,12 +10,9 @@ import br.com.doubletouch.vendasup.data.database.ProductDatabase;
  */
 public class ProductDataStoreFactory {
 
-    private final Context context;
-
     private final ProductDatabase productDatabase;
 
     public ProductDataStoreFactory(Context context, ProductDatabase productDatabase) {
-        this.context = context;
         this.productDatabase = productDatabase;
     }
 

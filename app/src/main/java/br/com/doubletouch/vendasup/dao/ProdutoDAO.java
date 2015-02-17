@@ -56,7 +56,7 @@ public class ProdutoDAO extends AbstractDAO {
 
     public void saveOrUpdate( Product product){
 
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         sb.append("INSERT OR REPLACE INTO ");
         sb.append(Product.ProductDB.TABELA);
         sb.append("(");
@@ -115,7 +115,7 @@ public class ProdutoDAO extends AbstractDAO {
     }
 
     public ArrayList<Product> getAll(Cursor c){
-        ArrayList<Product> products = new ArrayList<Product>();
+        ArrayList<Product> products = new ArrayList<>();
         if(c.moveToFirst()){
             int idxIdProduto = c.getColumnIndex(Product.ProductDB.IDPRODUTO);
             int idxIdFilial = c.getColumnIndex(Product.ProductDB.IDFILIAL);

@@ -1,12 +1,11 @@
 package br.com.doubletouch.vendasup.data.database;
 
-import android.database.sqlite.SQLiteConstraintException;
-
 import java.util.List;
 
 import br.com.doubletouch.vendasup.data.entity.Product;
 
 /**
+ *
  * Created by LADAIR on 12/02/2015.
  */
 public class ProductDatabaseImpl implements ProductDatabase {
@@ -28,5 +27,11 @@ public class ProductDatabaseImpl implements ProductDatabase {
 
         List<Product> products = productPersistence.getAll();
         callback.onProductListLoaded(products);
+    }
+
+    @Override
+    public synchronized void listByFilter(String description, String productId,Integer branchId, ProductListFilterCallback callback) {
+        List<Product> products = productPersistence.getByDescriptionOrProductId(description, productId, branchId);
+        callback.onProductListFilterLoaded(products);
     }
 }

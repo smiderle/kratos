@@ -12,6 +12,12 @@ public class CloudProductDataStore implements ProductDataStore {
     }
 
     @Override
+    public void getProductListFilter(String description, String productId, Integer branchId, ProductListFilterCallback productListFilterCallback) {
+
+    }
+
+
+    @Override
     public void getProductDetails(Integer productId, ProductDetailsCallback productDetailsCallback) {
 
     }

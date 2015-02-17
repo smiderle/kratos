@@ -38,8 +38,8 @@ public class ProductSQLite implements ProductPersistence {
 
     @Override
     public List<Product> getAll(){
-        ArrayList<Product> products = new ArrayList<Product>();
-        Cursor c = db.query(Product.ProductDB.TABELA, Product.ProductDB.COLUNAS, null, null, null, null, null, "2500");
+        ArrayList<Product> products = new ArrayList<>();
+        Cursor c = db.query(Product.ProductDB.TABELA, Product.ProductDB.COLUNAS, null, null, null, null, null, ProductPersistence.LIMIT);
 
         if(c.moveToFirst()){
             do {
@@ -59,6 +59,35 @@ public class ProductSQLite implements ProductPersistence {
     public void update( Product product){
         String where = Product.ProductDB.ID +" = ? ";
         db.update(Product.ProductDB.TABELA, getContentValues(product), where, new String[]{ String.valueOf(product.getID()) });
+    }
+
+
+    @Override
+    public List<Product> getByDescriptionOrProductId(String description, String productId, Integer branchId) {
+        List<Product> products = new ArrayList<>();
+
+        StringBuilder where = new StringBuilder();
+        where.append("(");
+        where.append(Product.ProductDB.DESCRICAO);
+        where.append(" like '%");
+        where.append(description);
+        where.append("%' OR ");
+        where.append(Product.ProductDB.ID);
+        where.append(" = ? )");
+        where.append(" AND ");
+        where.append(Product.ProductDB.IDFILIAL);
+        where.append(" = ? ");
+
+        Cursor c = db.query(Product.ProductDB.TABELA, Product.ProductDB.COLUNAS, where.toString(), new String[]{ productId, String.valueOf( branchId )}, null, null, null, ProductPersistence.LIMIT);
+
+        if(c.moveToFirst()){
+            do {
+                products.add(getByCursor(c));
+            } while (c.moveToNext());
+        }
+        c.close();
+
+        return products;
     }
 
     @Override
@@ -123,4 +152,5 @@ public class ProductSQLite implements ProductPersistence {
 
         return product;
     }
+
 }

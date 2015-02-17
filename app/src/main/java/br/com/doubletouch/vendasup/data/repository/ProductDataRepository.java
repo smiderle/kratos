@@ -53,6 +53,22 @@ public class ProductDataRepository implements ProductRepository {
     }
 
     @Override
+    public void getProductListByFilter(String description, String productId, Integer branchId, final ProductListFilterCallback productListFilterCallback) {
+        final ProductDataStore productDataStore = this.productDataStoreFactory.create();
+        productDataStore.getProductListFilter(description, productId, branchId, new ProductDataStore.ProductListFilterCallback() {
+            @Override
+            public void onProductListFilterLoaded(Collection<Product> productsCollection) {
+                productListFilterCallback.onProductListFilterLoaded(productsCollection);
+            }
+
+            @Override
+            public void onError(Exception exception) {
+                productListFilterCallback.onError(new RepositoryErrorBundle(exception));
+            }
+        });
+    }
+
+    @Override
     public void getProductById(int productId, final ProductDetailsCallback productDetailsCallback) {
         final ProductDataStore productDataStore = this.productDataStoreFactory.create();
         productDataStore.getProductDetails(productId, new ProductDataStore.ProductDetailsCallback() {

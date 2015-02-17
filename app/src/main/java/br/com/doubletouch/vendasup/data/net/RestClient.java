@@ -38,7 +38,7 @@ public class RestClient {
     /**
      * Parametros que serão enviados no GET
      */
-    private LinkedHashMap<String, String> parameters = new LinkedHashMap<String, String>();
+    private LinkedHashMap<String, String> parameters = new LinkedHashMap<>();
 
     /**
      * Resource

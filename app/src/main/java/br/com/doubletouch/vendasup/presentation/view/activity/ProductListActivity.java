@@ -3,7 +3,7 @@ package br.com.doubletouch.vendasup.presentation.view.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.StrictMode;
+import android.view.MenuItem;
 import android.view.Window;
 import android.widget.Toast;
 
@@ -26,6 +26,7 @@ public class ProductListActivity extends BaseActivity implements ProductListFrag
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_list);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         this.initialize();
     }
 
@@ -40,4 +41,41 @@ public class ProductListActivity extends BaseActivity implements ProductListFrag
         this.navigator.navigateToProductDetails(this, product.getID());
         Toast.makeText(this, product.getDescription(), Toast.LENGTH_LONG).show();
     }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                navigator.previousActivity(ProductListActivity.this);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+/*
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //Carrega o arquivo de menu.
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_search_view, menu);
+
+        //Pega o Componente.
+        SearchView mSearchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        //Define um texto de ajuda:
+        mSearchView.setQueryHint("Pesquisar");
+
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+
+                return false;
+            }
+        });
+
+        return true;
+    }*/
 }

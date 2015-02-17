@@ -29,7 +29,7 @@ import br.com.doubletouch.vendasup.util.StreamUtils;
  */
 public class ImageLoader {
 
-    MemoryCache memoryCache=new MemoryCache();
+    MemoryCache memoryCache = new MemoryCache();
     FileCache fileCache;
     private Map<ImageView, String> imageViews=Collections.synchronizedMap(new WeakHashMap<ImageView, String>());
     ExecutorService executorService;
@@ -52,6 +52,7 @@ public class ImageLoader {
             } else {
                 queuePhoto(url, imageView);
                 imageView.setImageResource(stub_id);
+
             }
         }
     }
@@ -121,8 +122,7 @@ public class ImageLoader {
     }
 
     //Task for the queue
-    private class PhotoToLoad
-    {
+    private class PhotoToLoad {
         public String url;
         public ImageView imageView;
         public PhotoToLoad(String u, ImageView i){
@@ -159,8 +159,7 @@ public class ImageLoader {
     }
 
     //Used to display bitmap in the UI thread
-    class BitmapDisplayer implements Runnable
-    {
+    class BitmapDisplayer implements Runnable {
         Bitmap bitmap;
         PhotoToLoad photoToLoad;
         public BitmapDisplayer(Bitmap b, PhotoToLoad p){bitmap=b;photoToLoad=p;}

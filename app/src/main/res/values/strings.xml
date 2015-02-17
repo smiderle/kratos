@@ -7,7 +7,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_carga_inicial">CargaInicialActivity</string>
-    <string name="preco">Preço:</string>
+
     <string name="exception_message_generic">Opss. Ocorreu um erro.</string>
     <string name="exception_message_syncronization">Ocorreu um erro ao receber os dados.</string>
 
@@ -15,7 +15,25 @@
 
     <string name="string_content_description">View não acessivel</string>
 
-    <string name="tv_product_code">Código</string>
+    <string name="tv_product_id">Código</string>
     <string name="tv_product_description">Descrição</string>
+    <string name="tv_product_reference">Referência</string>
+    <string name="tv_product_package">Embalagem</string>
+    <string name="tv_product_stock">Estoque</string>
+    <string name="tv_product_price">Preço</string>
+    <string name="tv_product_barcode">Código de Barras</string>
+    <string name="tv_product_price_whit_sifrao">Preço R$</string>
+    <string name="tv_product_stock_whit_colon">Estoque:</string>
+    <string name="tv_product_price_whit_colon">Preço:</string>
+
+    <string name="search_title">Pesquisar</string>
+    <string name="tv_default_product_description">Sem Descrição</string>
+    <string name="tv_default_product_reference">Sem Referência</string>
+    <string name="tv_default_product_code">Sem Código</string>
+    <string name="tv_default_product_package">Sem Embalagem</string>
+    <string name="tv_default_product_stock">0,00</string>
+    <string name="tv_default_product_price">0,00</string>
+    <string name="tv_default_product_barcode">Sem Código de Barras</string>
+
 
 </resources>

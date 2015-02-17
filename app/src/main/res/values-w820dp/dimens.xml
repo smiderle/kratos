@@ -2,5 +2,38 @@
     <!-- Example customization of dimensions originally defined in res/values/dimens.xml
          (such as screen margins) for screens with more than 820dp of available width. This
          would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively). -->
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">64dp</dimen>
+    <dimen name="activity_vertical_margin">64dp</dimen>
+    <dimen name="font_size_h1">16sp</dimen>
+    <dimen name="font_size_h2">18sp</dimen>
+    <dimen name="font_size_h3">20sp</dimen>
+    <dimen name="font_size_h4">22sp</dimen>
+    <dimen name="font_size_h5">24sp</dimen>
+    <dimen name="font_size_h6">26sp</dimen>
+    <dimen name="font_size_h7">28sp</dimen>
+    <dimen name="font_size_h8">30sp</dimen>
+    <dimen name="font_size_h9">32sp</dimen>
+    <dimen name="font_size_h10">34sp</dimen>
+
+    <!--User Header stuff-->
+    <dimen name="header_text_size">40sp</dimen>
+    <dimen name="header_margin">5dp</dimen>
+
+
+    <!--Listview rows stuff-->
+    <dimen name="lv_row_padding_top">16dp</dimen>
+    <dimen name="lv_row_padding_botton">16dp</dimen>
+    <dimen name="lv_row_text_size">20sp</dimen>
+    <dimen name="lv_row_icon_width">50dp</dimen>
+    <dimen name="lv_row_icon_padding">5dp</dimen>
+
+    <dimen name="content_margin_left">16dp</dimen>
+    <dimen name="content_margin_right">16dp</dimen>
+
+    <!-- Altura da imagem principal que parace nos detalhes -->
+    <dimen name="iv_height_main">180dp</dimen>
+
+
 </resources>

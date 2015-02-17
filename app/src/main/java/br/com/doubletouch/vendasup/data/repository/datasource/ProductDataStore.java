@@ -19,6 +19,12 @@ public interface ProductDataStore {
         void onError(Exception exception);
     }
 
+    interface  ProductListFilterCallback {
+        void onProductListFilterLoaded(Collection<Product> productsCollection);
+
+        void onError(Exception exception);
+    }
+
     /**
       * Callback usado para os clients serem notificados quando um produto for carregado ou ocorrer algum erro
      */
@@ -34,6 +40,9 @@ public interface ProductDataStore {
      * @param productListCallback  O {@link br.com.doubletouch.vendasup.domain.repository.ProductRepository.ProductListCallback} usado para notificar os clients.
      */
     void getProductList(Integer branchId, ProductListCallback productListCallback);
+
+
+    void getProductListFilter(String description, String productId,Integer branchId, ProductListFilterCallback productListFilterCallback);
 
     /**
      *

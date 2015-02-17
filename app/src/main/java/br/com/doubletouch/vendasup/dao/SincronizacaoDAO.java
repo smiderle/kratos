@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import br.com.doubletouch.vendasup.data.entity.Sincronizacao;
 
 /**
+ *
  * Created by LADAIR on 09/02/2015.
  */
 public class SincronizacaoDAO {
@@ -17,7 +18,7 @@ public class SincronizacaoDAO {
 
     public void saveOrUpdate( Sincronizacao sincronizacao ){
 
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         sb.append("INSERT OR REPLACE INTO ");
         sb.append(Sincronizacao.SincronizacaoDB.TABELA);
         sb.append("(");

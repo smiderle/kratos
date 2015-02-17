@@ -127,6 +127,18 @@ public class Product {
         this.pictureUrl = pictureUrl;
     }
 
+    public String getProductIdAndDescription(){
+        if(productID != null && description != null){
+            return this.productID+" - "+ this.description;
+        }
+
+        if(productID == null && description != null){
+            return this.description;
+        }
+
+        return "";
+    }
+
     public static final class ProductDB {
 
         private ProductDB(){}

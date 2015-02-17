@@ -26,26 +26,62 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginBottom">@dimen/header_margin</item>
-        <item name="android:textSize">@dimen/header_text_size</item>
+        <item name="android:textSize">@dimen/font_size_h5</item>
         <item name="android:textStyle">bold</item>
         <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/grey_600</item>
         <item name="android:background">@android:color/background_light</item>
     </style>
 
-    <style name="AppTheme.TextViewTitle">
+    <style name="AppTheme.TextViewPrimary">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">@dimen/header_margin</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/accent_material_dark</item>
-
+        <item name="android:textSize">@dimen/font_size_h5</item>
+        <item name="android:textColor">@color/indigo_500</item>
     </style>
 
-    <style name="AppTheme.TextViewContent">
+    <style name="AppTheme.TextViewSecundary">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">@dimen/header_margin</item>
-        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:textSize">@dimen/font_size_h3</item>
+    </style>
+
+    <style name="AppTheme.TextViewInListViewPrimary">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/font_size_h5</item>
+        <item name="android:textColor">@color/material_blue_grey_800</item>
+    </style>
+
+    <style name="AppTheme.TextViewInListViewSecundory">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/font_size_h3</item>
+        <item name="android:textColor">@color/grey_600</item>
+    </style>
+
+    <!--
+        Theme customizado
+        Referencia : https://developer.android.com/training/material/theme.html
+     -->
+    <style name="AppTheme.Kratos.Light" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="actionBarStyle">@style/Kratos.ActionBar</item>
+
+    </style>
+
+    <!-- Action bar -->
+    <style name="Kratos.ActionBar" parent="Widget.AppCompat.ActionBar.Solid">
+        <item name="titleTextStyle">@style/Kratos.Actionbar.Title</item>
+        <item name="background">@color/indigo_500</item>
+
+    </style>
+
+    <!-- Texto do ActionBar -->
+    <style name="Kratos.Actionbar.Title" parent="Base.TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/white</item>
     </style>
 
 

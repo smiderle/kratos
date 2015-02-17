@@ -2,7 +2,6 @@ package br.com.doubletouch.vendasup.domain.interactor;
 
 import java.util.Collection;
 
-import br.com.doubletouch.vendasup.VendasUp;
 import br.com.doubletouch.vendasup.data.entity.Product;
 import br.com.doubletouch.vendasup.domain.exception.ErrorBundle;
 import br.com.doubletouch.vendasup.domain.executor.PostExecutionThread;
@@ -10,18 +9,21 @@ import br.com.doubletouch.vendasup.domain.executor.ThreadExecutor;
 import br.com.doubletouch.vendasup.domain.repository.ProductRepository;
 
 /**
- * Essa classe é a implementação de {@link br.com.doubletouch.vendasup.domain.interactor.GetProductListUseCase}
- * Created by LADAIR on 12/02/2015.
+ * Created by LADAIR on 17/02/2015.
  */
-public class GetProductListUserCaseImpl implements GetProductListUseCase {
+public class GetProductListFilterUseCaseImpl implements GetProductListFilterUseCase {
+
+    private String description;
+    private String productId;
+    private Integer branchId;
 
     private final ProductRepository productRepository;
     private final ThreadExecutor threadExecutor;
     private final PostExecutionThread postExecutionThread;
 
-    private Callback callback;
+    private GetProductListFilterUseCase.Callback callback;
 
-    public GetProductListUserCaseImpl(ProductRepository productRepository, ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread) {
+    public GetProductListFilterUseCaseImpl(ProductRepository productRepository, ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread) {
 
         if(productRepository == null || threadExecutor == null || postExecutionThread == null){
             throw  new IllegalArgumentException("Os parametros do construtor não podem ser nulos.");
@@ -32,24 +34,30 @@ public class GetProductListUserCaseImpl implements GetProductListUseCase {
         this.postExecutionThread = postExecutionThread;
     }
 
+
+
     @Override
-    public void execute(Callback callback) {
+    public void execute(String description, String productId, Integer branchId, Callback callback) {
         if (callback == null) {
             throw new IllegalArgumentException("Interactor callback não pode ser null!!!");
         }
-
+        this.description = description;
+        this.productId = productId;
+        this.branchId = branchId;
         this.callback = callback;
         this.threadExecutor.execute(this);
     }
 
     @Override
     public void run() {
-        this.productRepository.getProductList(VendasUp.getUsuarioLogado().getOrganizationID(), this.productListCallback);
+        this.productRepository.getProductListByFilter(description, productId, branchId, this.productListFilterCallback);
     }
 
-    private final ProductRepository.ProductListCallback productListCallback = new ProductRepository.ProductListCallback() {
+
+
+    private final ProductRepository.ProductListFilterCallback productListFilterCallback = new ProductRepository.ProductListFilterCallback() {
         @Override
-        public void onProductListLoaded(Collection<Product> productsCollection) {
+        public void onProductListFilterLoaded(Collection<Product> productsCollection) {
             notifyGetProductListSuccessfully(productsCollection);
         }
 
@@ -63,7 +71,7 @@ public class GetProductListUserCaseImpl implements GetProductListUseCase {
         this.postExecutionThread.post(new Runnable() {
             @Override
             public void run() {
-                callback.onProductListLoaded(productsCollection);
+                callback.onProductListFilterLoaded(productsCollection);
             }
         });
     }

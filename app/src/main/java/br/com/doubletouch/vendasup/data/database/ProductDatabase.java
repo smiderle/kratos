@@ -1,7 +1,6 @@
 package br.com.doubletouch.vendasup.data.database;
 
 import java.util.Collection;
-import java.util.List;
 
 import br.com.doubletouch.vendasup.data.entity.Product;
 
@@ -16,6 +15,12 @@ public interface ProductDatabase {
      */
     interface ProductListCallback {
         void onProductListLoaded(Collection<Product> productsCollection);
+
+        void onError(Exception exception);
+    }
+
+    interface ProductListFilterCallback {
+        void onProductListFilterLoaded(Collection<Product> productsCollection);
 
         void onError(Exception exception);
     }
@@ -42,5 +47,7 @@ public interface ProductDatabase {
      * @param callback o {@link br.com.doubletouch.vendasup.data.database.ProductDatabase.ProductListCallback} que notificara os clients.
      */
     void list(final Integer branchId , final ProductListCallback callback);
+
+    void listByFilter(final String description, String productId,Integer branchId, final ProductListFilterCallback callback);
 
 }

@@ -33,6 +33,21 @@ public class DatabaseProductDataStore implements ProductDataStore {
     }
 
     @Override
+    public void getProductListFilter(String description, String productId,Integer branchId,  final ProductListFilterCallback productListFilterCallback) {
+        this.productDatabase.listByFilter(description,productId,branchId, new ProductDatabase.ProductListFilterCallback() {
+            @Override
+            public void onProductListFilterLoaded(Collection<Product> productsCollection) {
+                productListFilterCallback.onProductListFilterLoaded(productsCollection);
+            }
+
+            @Override
+            public void onError(Exception exception) {
+                productListFilterCallback.onError(exception);
+            }
+        });
+    }
+
+    @Override
     public void getProductDetails(Integer productId, final ProductDetailsCallback productDetailsCallback) {
         this.productDatabase.get(productId, new ProductDatabase.ProductDetailsCallback() {
             @Override

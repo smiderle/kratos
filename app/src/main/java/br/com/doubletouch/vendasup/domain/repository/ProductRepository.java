@@ -21,6 +21,12 @@ public interface ProductRepository {
         void onError(ErrorBundle errorBundle);
     }
 
+    interface ProductListFilterCallback {
+        void onProductListFilterLoaded(Collection<Product> productsCollection);
+
+        void onError(ErrorBundle errorBundle);
+    }
+
     /**
      * Callback usado para ser notificado quando um produto for carregado ou um erro ocorrer.
      */
@@ -35,6 +41,9 @@ public interface ProductRepository {
      * @param productListCallback  O {@link br.com.doubletouch.vendasup.domain.repository.ProductRepository.ProductListCallback} usado para notificar os clients.
      */
     void getProductList(Integer branchId, ProductListCallback productListCallback);
+
+
+    void getProductListByFilter(String description, String productId, Integer branchId, ProductListFilterCallback productListFilterCallback);
 
     /**
      *

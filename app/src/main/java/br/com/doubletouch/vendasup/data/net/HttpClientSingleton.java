@@ -8,6 +8,7 @@ import org.apache.http.params.HttpParams;
 
 
 /**
+ *
  * Created by LADAIR on 27/01/2015.
  */
 public class HttpClientSingleton {
@@ -15,7 +16,6 @@ public class HttpClientSingleton {
     private static final int JSON_CONNECTION_TIMEOUT = 5000;
     private static final int JSON_SOCKET_TIMEOUT = 7000;
     private static HttpClientSingleton instance;
-    private HttpParams httpParameters;
     private DefaultHttpClient httpclient;
 
     private void setTimeOut(HttpParams params) {
@@ -24,7 +24,7 @@ public class HttpClientSingleton {
     }
 
     private HttpClientSingleton() {
-        httpParameters = new BasicHttpParams();
+        HttpParams httpParameters = new BasicHttpParams();
         setTimeOut(httpParameters);
         httpclient = new DefaultHttpClient(httpParameters);
     }

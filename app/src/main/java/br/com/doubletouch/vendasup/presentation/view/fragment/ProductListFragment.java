@@ -5,7 +5,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -24,8 +27,10 @@ import br.com.doubletouch.vendasup.data.repository.ProductDataRepository;
 import br.com.doubletouch.vendasup.data.repository.datasource.ProductDataStoreFactory;
 import br.com.doubletouch.vendasup.domain.executor.PostExecutionThread;
 import br.com.doubletouch.vendasup.domain.executor.ThreadExecutor;
+import br.com.doubletouch.vendasup.domain.interactor.GetProductListFilterUseCase;
+import br.com.doubletouch.vendasup.domain.interactor.GetProductListFilterUseCaseImpl;
 import br.com.doubletouch.vendasup.domain.interactor.GetProductListUseCase;
-import br.com.doubletouch.vendasup.domain.interactor.GetProductListUserCaseImpl;
+import br.com.doubletouch.vendasup.domain.interactor.GetProductListUseCaseImpl;
 import br.com.doubletouch.vendasup.domain.repository.ProductRepository;
 import br.com.doubletouch.vendasup.presentation.UIThread;
 import br.com.doubletouch.vendasup.presentation.presenter.ProductListPresenter;
@@ -91,7 +96,35 @@ public class ProductListFragment extends BaseFragment implements ProductListView
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        setHasOptionsMenu(true);
         this.loadProductList();
+    }
+
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+
+        //Carrega o arquivo de menu.
+        inflater.inflate(R.menu.menu_search_view, menu);
+
+        //Pega o Componente.
+        SearchView mSearchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        //Define um texto de ajuda:
+        mSearchView.setQueryHint("Pesquisar");
+
+        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                productListPresenter.onProductFilterChange(s);
+                return false;
+            }
+        });
     }
 
     @Override
@@ -105,8 +138,9 @@ public class ProductListFragment extends BaseFragment implements ProductListView
 
         ProductDataStoreFactory productDataStoreFactory  = new ProductDataStoreFactory(this.getContext(), productDatabase);
         ProductRepository productRepository = ProductDataRepository.getInstace(productDataStoreFactory);
-        GetProductListUseCase getProductListUseCase = new GetProductListUserCaseImpl(productRepository, threadExecutor, postExecutionThread);
-        this.productListPresenter = new ProductListPresenter(this,getProductListUseCase);
+        GetProductListUseCase getProductListUseCase = new GetProductListUseCaseImpl(productRepository, threadExecutor, postExecutionThread);
+        GetProductListFilterUseCase getProductListFilterUseCase = new GetProductListFilterUseCaseImpl(productRepository, threadExecutor, postExecutionThread);
+        this.productListPresenter = new ProductListPresenter(this,getProductListUseCase, getProductListFilterUseCase);
     }
 
     @Override

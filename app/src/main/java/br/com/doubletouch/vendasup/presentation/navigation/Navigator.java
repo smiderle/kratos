@@ -1,5 +1,6 @@
 package br.com.doubletouch.vendasup.presentation.navigation;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
@@ -31,6 +32,15 @@ public class Navigator {
             Intent intentToLaunch = ProductDetailsActivity.getCallingIntent(context, productId);
             context.startActivity(intentToLaunch);
         }
+    }
 
+    /**
+     * Finaliza a activity atula, retornando para a anterior.
+     * @param activity
+     */
+    public void previousActivity(Activity activity){
+        if(activity != null){
+            activity.finish();
+        }
     }
 }

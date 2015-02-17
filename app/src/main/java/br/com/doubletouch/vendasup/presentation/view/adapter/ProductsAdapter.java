@@ -13,6 +13,7 @@ import java.util.List;
 
 import br.com.doubletouch.vendasup.R;
 import br.com.doubletouch.vendasup.data.entity.Product;
+import br.com.doubletouch.vendasup.util.DoubleUtil;
 import br.com.doubletouch.vendasup.util.image.ImageLoader;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -52,9 +53,10 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
     @Override
     public void onBindViewHolder(ProductViewHolder holder, int position) {
         final Product product = this.productsCollection.get(position);
-        holder.lblProdutoDescricao.setText(product.getDescription());
-        holder.lblProdutoEstoque.setText(String.valueOf(product.getStockAmount()));
-        holder.lblProdutoPreco.setText( String.valueOf( product.getSalePrice() ));
+
+        holder.lblProdutoDescricao.setText(product.getProductIdAndDescription());
+        holder.lblProdutoEstoque.setText(DoubleUtil.formatToCurrency(product.getStockAmount(), false));
+        holder.lblProdutoPreco.setText( DoubleUtil.formatToCurrency( product.getSalePrice() , true));
 
         imageLoader.displayImage(product.getPictureUrl(), holder.imgProduto);
 

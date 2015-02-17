@@ -1,7 +1,5 @@
 package br.com.doubletouch.vendasup.domain.interactor;
 
-import java.util.Collection;
-
 import br.com.doubletouch.vendasup.data.entity.Product;
 import br.com.doubletouch.vendasup.domain.exception.ErrorBundle;
 
