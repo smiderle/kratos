@@ -35,8 +35,8 @@ import br.com.doubletouch.vendasup.domain.repository.ProductRepository;
 import br.com.doubletouch.vendasup.presentation.UIThread;
 import br.com.doubletouch.vendasup.presentation.presenter.ProductListPresenter;
 import br.com.doubletouch.vendasup.presentation.view.ProductListView;
+import br.com.doubletouch.vendasup.presentation.view.adapter.KratosLayoutManager;
 import br.com.doubletouch.vendasup.presentation.view.adapter.ProductsAdapter;
-import br.com.doubletouch.vendasup.presentation.view.adapter.ProductsLayoutManager;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -54,7 +54,7 @@ public class ProductListFragment extends BaseFragment implements ProductListView
 
 
     private ProductListPresenter productListPresenter;
-    private ProductsLayoutManager productsLayoutManager;
+    private KratosLayoutManager kratosLayoutManager;
     private ProductListListener productListListener;
     private ProductsAdapter productAdapter;
 
@@ -197,8 +197,8 @@ public class ProductListFragment extends BaseFragment implements ProductListView
     }
 
     private void setupUI(){
-        this.productsLayoutManager = new ProductsLayoutManager(getActivity());
-        this.rv_products.setLayoutManager(productsLayoutManager);
+        this.kratosLayoutManager = new KratosLayoutManager(getActivity());
+        this.rv_products.setLayoutManager(kratosLayoutManager);
     }
 
     private ProductsAdapter.OnItemClickListener onItemClickListener = new ProductsAdapter.OnItemClickListener() {

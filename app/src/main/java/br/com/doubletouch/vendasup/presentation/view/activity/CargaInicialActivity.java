@@ -104,7 +104,7 @@ public class CargaInicialActivity extends ActionBarActivity {
     }
     @OnClick(R.id.btnProdutos)
     void onButtonNavigateToProductListClick(){
-        new Navigator().navigateToProductList(CargaInicialActivity.this);
+        new Navigator().navigateToMenu(CargaInicialActivity.this);
     }
 
 

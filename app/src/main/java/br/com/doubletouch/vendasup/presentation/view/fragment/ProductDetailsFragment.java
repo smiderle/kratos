@@ -96,7 +96,7 @@ public class ProductDetailsFragment extends BaseFragment implements ProductDetai
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+      public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.initialize();
     }

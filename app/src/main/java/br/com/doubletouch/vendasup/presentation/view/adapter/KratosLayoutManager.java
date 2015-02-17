@@ -6,8 +6,8 @@ import android.support.v7.widget.LinearLayoutManager;
 /**
  * Layout manager to position items inside a {@link android.support.v7.widget.RecyclerView}.
  */
-public class ProductsLayoutManager extends LinearLayoutManager {
-    public ProductsLayoutManager(Context context) {
+public class KratosLayoutManager extends LinearLayoutManager {
+    public KratosLayoutManager(Context context) {
         super(context);
     }
 }

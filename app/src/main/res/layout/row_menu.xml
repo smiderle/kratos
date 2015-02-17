@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="UseCompoundDrawables"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingTop="@dimen/lv_row_padding_top"
+    android:paddingBottom="@dimen/lv_row_padding_botton"
+    android:paddingLeft="@dimen/activity_padding_left"
+    android:paddingRight="@dimen/activity_padding_right"
+    android:background="@drawable/selector_listview">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:id="@+id/iv_menu_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_label" />
+
+        <TextView
+            android:id="@+id/tv_menu_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Descricao"
+            android:layout_marginLeft="@dimen/lv_tv_margin_left"
+            android:layout_marginStart="@dimen/lv_tv_margin_left"
+            android:layout_centerVertical="true"
+            style="@style/AppTheme.TextViewInListViewPrimary"
+
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>
