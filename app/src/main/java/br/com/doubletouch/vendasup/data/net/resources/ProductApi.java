@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import br.com.doubletouch.vendasup.VendasUp;
+import br.com.doubletouch.vendasup.data.entity.mapper.ProductEntityJsonMaper;
 import br.com.doubletouch.vendasup.exception.SyncronizationException;
 import br.com.doubletouch.vendasup.data.entity.Product;
 import br.com.doubletouch.vendasup.util.GsonUtil;
@@ -17,7 +18,7 @@ import br.com.doubletouch.vendasup.data.net.ServiceResponse;
 /**
  * Created by LADAIR on 27/01/2015.
  */
-public class ProdutoApi {
+public class ProductApi {
 
 
     /*public List<Produto> getAllByChangeGreaterThan(Long ultimaSincronizacao, Integer offset) throws Exception {
@@ -46,7 +47,7 @@ public class ProdutoApi {
     }*/
 
 
-    public  ApiResponse<ServiceResponse<List<Product>>> getAllByChangeGreaterThan(Long ultimaSincronizacao, Integer offset) throws IOException, SyncronizationException {
+    public  ApiResponse<ServiceResponse<List<Product>>> getAllByChangeGreaterThan(Long ultimaSincronizacao, Integer offset, ProductEntityJsonMaper productEntityJsonMaper) throws IOException, SyncronizationException {
         List<Product> products = null;
 
         RestClient restClient = new RestClient(Endpoints.ENDPOINT_PRODUTO, Methods.PRODUTO_GET_ALL_BY_CHANGE_GREATER_THAN );
@@ -57,8 +58,7 @@ public class ProdutoApi {
         RESTResponse response = restClient.get();
 
         if( response.getCode() == 200 ){
-            ApiResponse<ServiceResponse<List<Product>>> apiResponse = new GsonUtil<Product>().parse(response.getJson());
-
+            ApiResponse<ServiceResponse<List<Product>>> apiResponse = productEntityJsonMaper.transformProductCollection(response.getJson());
             if( apiResponse.getCode().equals( ApiResponse.CODE_SUCESS ) ){
                 return apiResponse;
             } else {

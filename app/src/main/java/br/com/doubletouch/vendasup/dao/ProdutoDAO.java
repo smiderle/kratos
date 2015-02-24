@@ -3,8 +3,12 @@ package br.com.doubletouch.vendasup.dao;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import br.com.doubletouch.vendasup.data.entity.Product;
 
@@ -47,6 +51,22 @@ public class ProdutoDAO extends AbstractDAO {
 
     public long save( Product product){
         return db.insertOrThrow(Product.ProductDB.TABELA, null, getContentValues(product));
+    }
+
+
+    public long save( List<Product> products){
+        int i = 0;
+        //return db.insertOrThrow(Product.ProductDB.TABELA, null, getContentValues(product));
+        Log.i("KRATOS", "INICIOU OS INSERTS" + new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date()));
+        db.beginTransaction();
+        for(Product product : products){
+            db.insertWithOnConflict(Product.ProductDB.TABELA, null, getContentValues(product), SQLiteDatabase.CONFLICT_REPLACE);
+        }
+        db.setTransactionSuccessful();
+        db.endTransaction();
+        Log.i("KRATOS", "FINALIZOU OS INSERTS" + new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date()));
+        return 1l;
+        //return db.insertWithOnConflict(Product.ProductDB.TABELA, null, getContentValues(product), SQLiteDatabase.CONFLICT_REPLACE);
     }
 
     public long update( Product product){

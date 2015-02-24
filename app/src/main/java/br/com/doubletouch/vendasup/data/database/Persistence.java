@@ -27,6 +27,12 @@ public interface Persistence<T> {
     void insert(T t);
 
     /**
+     * Insere uma lista de registros.
+     * @param t
+     */
+    void insert(List<T> t);
+
+    /**
      * Atualiza um registro.
      * @param t
      */

@@ -144,7 +144,7 @@ public class Product {
         private ProductDB(){}
 
         public static final String TABELA = "PRODUTO";
-        public static final String ID = "ID";
+        public static final String ID = "_id";
         public static final String IDPRODUTO = "IDPRODUTO";
         public static final String IDEMPRESA = "IDEMPRESA";
         public static final String IDFILIAL = "IDFILIAL";

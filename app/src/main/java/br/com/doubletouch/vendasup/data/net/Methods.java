@@ -6,4 +6,5 @@ package br.com.doubletouch.vendasup.data.net;
 public interface Methods {
 
     public static final String PRODUTO_GET_ALL_BY_CHANGE_GREATER_THAN = "getAllByChangeGreaterThan";
+    public static final String CUSTOMER_GET_ALL_BY_CHANGE_GREATER_THAN = "getAllByChangeGreaterThan";
 }

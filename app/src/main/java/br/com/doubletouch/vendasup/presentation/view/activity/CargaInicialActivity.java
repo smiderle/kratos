@@ -92,12 +92,7 @@ public class CargaInicialActivity extends ActionBarActivity {
             Integracao integracao = new Integracao();
             integracao.receberProdutos();
 
-            List<Product> produtosSalvos = produtoController.listaTodos();
-            for (Product product : produtosSalvos){
-                Log.i("KRATOS", product.getDescription());
-            }
-
-
+            integracao.receberClientes();
         } catch (Exception e) {
             e.printStackTrace();
         }

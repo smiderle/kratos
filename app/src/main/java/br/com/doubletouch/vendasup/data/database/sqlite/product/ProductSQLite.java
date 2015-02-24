@@ -52,7 +52,17 @@ public class ProductSQLite implements ProductPersistence {
 
     @Override
     public void insert( Product product){
-        db.insertOrThrow(Product.ProductDB.TABELA, null, getContentValues(product));
+        db.insertWithOnConflict(Product.ProductDB.TABELA, null, getContentValues(product), SQLiteDatabase.CONFLICT_REPLACE);
+    }
+
+    @Override
+    public void insert(List<Product> products) {
+        db.beginTransaction();
+        for(Product product : products){
+            db.insertWithOnConflict(Product.ProductDB.TABELA, null, getContentValues(product), SQLiteDatabase.CONFLICT_REPLACE);
+        }
+        db.setTransactionSuccessful();
+        db.endTransaction();
     }
 
     @Override

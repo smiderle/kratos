@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import br.com.doubletouch.vendasup.VendasUp;
+import br.com.doubletouch.vendasup.dao.script.CustomerSQL;
 import br.com.doubletouch.vendasup.dao.script.ProdutoSQL;
 import br.com.doubletouch.vendasup.dao.script.SincronizacaoSQL;
 
@@ -49,7 +50,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private String[] scripts(){
         return new String[]{
                 ProdutoSQL.create(),
-                SincronizacaoSQL.create()
+                SincronizacaoSQL.create(),
+                CustomerSQL.create()
         };
 
     }
