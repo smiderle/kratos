@@ -19,7 +19,7 @@ public class CustomerDataStoreFactory {
 
 
     public CustomerDataStore create(){
-        CustomerDataStore customerDataStore = new DatabaseCustomerDataStore(customerDatabase);
+        CustomerDataStore customerDataStore = new DatabaseCustomersDataStore(customerDatabase);
         return customerDataStore;
     }
 }
