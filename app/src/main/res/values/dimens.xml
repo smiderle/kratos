@@ -43,6 +43,11 @@
     <!-- Margem que o TextView dentro do ListView tera da borda-->
     <dimen name="lv_tv_margin_left">90dp</dimen>
 
+    <dimen name="parallax_min_header_height">212dp</dimen>
+    <dimen name="parallax_height">258dp</dimen>
+    <dimen name="parallax_tab_height">48dp</dimen>
 
+    <!-- Espaço a esquerda dos textos que estão após as imagens dos EditTexts de detalhes do produto por exemplo-->
+    <dimen name="tv_title_marginleft_of_image">22dp</dimen>
 
 </resources>

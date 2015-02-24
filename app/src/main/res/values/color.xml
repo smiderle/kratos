@@ -324,4 +324,7 @@
     <color name="white">#FFFFFF</color>
     <!-- White -->
 
+    <!-- Cor principal do sistema -->
+    <color name="primary_color">@color/indigo_500</color>
+
 </resources>

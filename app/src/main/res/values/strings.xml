@@ -5,6 +5,8 @@
     <string name="title_activity_product_list">Produtos</string>
     <string name="title_activity_product_details">Detalhes do Produto</string>
     <string name="title_activity_menu">Menu</string>
+    <string name="title_activity_customer_list">Clientes</string>
+    <string name="title_activity_customer_details">Detalhes do Cliente</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_carga_inicial">CargaInicialActivity</string>
@@ -27,14 +29,39 @@
     <string name="tv_product_stock_whit_colon">Estoque:</string>
     <string name="tv_product_price_whit_colon">Preço:</string>
 
+    <string name="tv_customer_name">Nome</string>
+    <string name="tv_customer_nickname">Apelido</string>
+    <string name="tv_customer_person_type">Tipo</string>
+    <string name="tv_customer_cpf">CPF</string>
+    <string name="tv_customer_cnpj">CNPJ</string>
+    <string name="tv_customer_inscricao">Inscrição Estadual</string>
+    <string name="tv_customer_rg">RG</string>
+    <string name="tv_customer_birthday">Aniversário</string>
+    <string name="tv_customer_observation">Observação</string>
+
+
+
+
+
+    <string name="tv_customer_phone_whit_colon">Fone:</string>
+
     <string name="search_title">Pesquisar</string>
-    <string name="tv_default_product_description">Sem Descrição</string>
-    <string name="tv_default_product_reference">Sem Referência</string>
-    <string name="tv_default_product_code">Sem Código</string>
-    <string name="tv_default_product_package">Sem Embalagem</string>
+    <string name="tv_default_product_description">Descrição não cadastrado</string>
+    <string name="tv_default_product_reference">Referência não cadastrado</string>
+    <string name="tv_default_product_code">Código não cadastrado</string>
+    <string name="tv_default_product_package">Embalagem não cadastrada</string>
     <string name="tv_default_product_stock">0,00</string>
     <string name="tv_default_product_price">0,00</string>
-    <string name="tv_default_product_barcode">Sem Código de Barras</string>
+    <string name="tv_default_product_barcode">Sem código de barras</string>
+    <string name="tv_default_customer_name">Nome não cadastrado</string>
+    <string name="tv_default_customer_nickname">Apelido não cadastrado</string>
+    <string name="tv_default_customer_phone">Sem telefone</string>
+    <string name="tv_default_customer_person_type">Tipo não cadastrado</string>
+    <string name="tv_default_customer_cpfcnpj">CPF/CNPJ não cadastrado</string>
+    <string name="tv_default_customer_inscricao">RG/Inscrição não cadastrado</string>
+    <string name="tv_default_customer_birthday">Aniversário não cadastrado</string>
+    <string name="tv_default_customer_observation">Observação não cadastrada</string>
+
 
 
 </resources>

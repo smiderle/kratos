@@ -12,14 +12,14 @@
     android:background="@drawable/selector_listview">
 
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/tv_customer_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/lblProdutoDescricao"
-            android:text="Descricao"
+            android:text="@string/tv_customer_name"
             android:layout_marginLeft="@dimen/lv_tv_margin_left"
             android:layout_marginStart="@dimen/lv_tv_margin_left"
             android:layout_alignParentTop="true"
@@ -30,41 +30,26 @@
             style="@style/AppTheme.TextViewInListViewPrimary" />
 
         <TextView
-            android:text="@string/tv_product_stock_whit_colon"
-            android:id="@+id/txtView"
-            android:layout_below="@+id/lblProdutoDescricao"
-            android:layout_alignLeft="@+id/lblProdutoDescricao"
-            android:layout_alignStart="@+id/lblProdutoDescricao"
+            android:id="@+id/tv_customer_phone_title"
+            android:layout_width="wrap_content"
+            android:text="@string/tv_customer_phone_whit_colon"
+            android:layout_below="@+id/tv_customer_name"
+            android:layout_alignLeft="@+id/tv_customer_name"
+            android:layout_alignStart="@+id/tv_customer_name"
             style="@style/AppTheme.TextViewInListViewSecundory"/>
 
         <TextView
-            android:text="10,00"
-            android:id="@+id/lblProdutoEstoque"
-            android:layout_alignTop="@+id/txtView"
-            android:layout_toRightOf="@+id/txtView"
-            android:layout_toEndOf="@+id/txtView"
-            style="@style/AppTheme.TextViewInListViewSecundory"/>
-
-        <TextView
-            android:text="@string/tv_product_price_whit_colon"
-            android:id="@+id/textView"
-            android:layout_below="@+id/lblProdutoDescricao"
-            android:layout_toLeftOf="@+id/lblProdutoPreco"
-            android:layout_toStartOf="@+id/lblProdutoPreco"
-            style="@style/AppTheme.TextViewInListViewSecundory"/>
-
-        <TextView
-            android:text="1"
-            android:id="@+id/lblProdutoPreco"
-            android:layout_below="@+id/lblProdutoDescricao"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
+            android:id="@+id/tv_customer_phone"
+            android:text="@string/tv_default_customer_phone"
+            android:layout_alignTop="@+id/tv_customer_phone_title"
+            android:layout_toRightOf="@+id/tv_customer_phone_title"
+            android:layout_toEndOf="@+id/tv_customer_phone_title"
             style="@style/AppTheme.TextViewInListViewSecundory"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_customer_picture"
             android:layout_width="@dimen/lv_iv_width"
             android:layout_height="@dimen/lv_iv_height"
-            android:id="@+id/imgImagemProduto"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_launcher" />
 

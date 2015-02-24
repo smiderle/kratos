@@ -25,6 +25,7 @@
             android:paddingLeft="@dimen/activity_padding_left"
             android:paddingRight="@dimen/activity_padding_right">
 
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -46,8 +47,8 @@
                     android:layout_alignParentTop="true"
                     android:layout_toRightOf="@+id/imageView"
                     android:layout_toEndOf="@+id/imageView"
-                    android:layout_marginLeft="22dp"
-                    android:layout_marginStart="22dp" />
+                    android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
+                    android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
 
                 <TextView
                     android:id="@+id/tv_product_code"
@@ -80,8 +81,8 @@
                     android:layout_alignParentTop="true"
                     android:layout_toRightOf="@+id/imageDescription"
                     android:layout_toEndOf="@+id/imageDescription"
-                    android:layout_marginLeft="22dp"
-                    android:layout_marginStart="22dp" />
+                    android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
+                    android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
 
                 <TextView
                     android:id="@+id/tv_product_description"
@@ -115,8 +116,8 @@
                     android:layout_alignParentTop="true"
                     android:layout_toRightOf="@+id/imageReference"
                     android:layout_toEndOf="@+id/imageReference"
-                    android:layout_marginLeft="22dp"
-                    android:layout_marginStart="22dp" />
+                    android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
+                    android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
 
                 <TextView
                     android:id="@+id/tv_product_reference"
@@ -150,8 +151,8 @@
                     android:layout_alignParentTop="true"
                     android:layout_toRightOf="@+id/imagePackage"
                     android:layout_toEndOf="@+id/imagePackage"
-                    android:layout_marginLeft="22dp"
-                    android:layout_marginStart="22dp" />
+                    android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
+                    android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
 
                 <TextView
                     android:id="@+id/tv_product_package"
@@ -185,8 +186,8 @@
                     android:layout_alignParentTop="true"
                     android:layout_toRightOf="@+id/imageBarcode"
                     android:layout_toEndOf="@+id/imageBarcode"
-                    android:layout_marginLeft="22dp"
-                    android:layout_marginStart="22dp" />
+                    android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
+                    android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
 
                 <TextView
                     android:id="@+id/tv_product_barcode"
@@ -220,8 +221,8 @@
                     android:layout_alignParentTop="true"
                     android:layout_toRightOf="@+id/imageStock"
                     android:layout_toEndOf="@+id/imageStock"
-                    android:layout_marginLeft="22dp"
-                    android:layout_marginStart="22dp" />
+                    android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
+                    android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
 
                 <TextView
                     android:id="@+id/tv_product_stock"
@@ -255,8 +256,8 @@
                     android:layout_alignParentTop="true"
                     android:layout_toRightOf="@+id/imagePrice"
                     android:layout_toEndOf="@+id/imagePrice"
-                    android:layout_marginLeft="22dp"
-                    android:layout_marginStart="22dp" />
+                    android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
+                    android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
 
                 <TextView
                     android:id="@+id/tv_product_price"
@@ -267,6 +268,8 @@
                     android:layout_alignStart="@+id/tv_product_price_title"/>
 
             </RelativeLayout>
+
+
 
         </LinearLayout>
 

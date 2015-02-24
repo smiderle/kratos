@@ -33,7 +33,7 @@
     <dimen name="content_margin_right">16dp</dimen>
 
     <!-- Altura da imagem principal que parace nos detalhes -->
-    <dimen name="iv_height_main">180dp</dimen>
+    <!--dimen name="iv_height_main">180dp</dimen -->
 
 
 </resources>
