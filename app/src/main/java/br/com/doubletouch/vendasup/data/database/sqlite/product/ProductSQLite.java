@@ -37,9 +37,11 @@ public class ProductSQLite implements ProductPersistence {
     }
 
     @Override
-    public List<Product> getAll(){
+    public List<Product> getAll(Integer branchId){
         ArrayList<Product> products = new ArrayList<>();
-        Cursor c = db.query(Product.ProductDB.TABELA, Product.ProductDB.COLUNAS, null, null, null, null, null, ProductPersistence.LIMIT);
+
+        String where = Product.ProductDB.IDFILIAL+" = ? ";
+        Cursor c = db.query(Product.ProductDB.TABELA, Product.ProductDB.COLUNAS, where, new String[]{String.valueOf(branchId)}, null, null, null, ProductPersistence.LIMIT);
 
         if(c.moveToFirst()){
             do {

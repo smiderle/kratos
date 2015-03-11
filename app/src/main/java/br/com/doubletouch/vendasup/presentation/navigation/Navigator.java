@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import br.com.doubletouch.vendasup.presentation.view.activity.BaseActivity;
+import br.com.doubletouch.vendasup.presentation.view.activity.CustomerDetailsActivity;
 import br.com.doubletouch.vendasup.presentation.view.activity.MenuActivity;
 import br.com.doubletouch.vendasup.presentation.view.activity.ProductDetailsActivity;
 import br.com.doubletouch.vendasup.presentation.view.activity.ProductListActivity;
@@ -39,6 +40,17 @@ public class Navigator {
     public void navigateToProductDetails(Context context, Integer productId){
         if(context != null){
             Intent intentToLaunch = ProductDetailsActivity.getCallingIntent(context, productId);
+            context.startActivity(intentToLaunch);
+        }
+    }
+
+    /**
+     * Navega para os detalhes do cliente.
+     * @param context
+     */
+    public void navigateToCustomerDetails(Context context, Integer customerId, boolean isEditionMode){
+        if(context != null){
+            Intent intentToLaunch = CustomerDetailsActivity.getCallingIntent(context, customerId, isEditionMode);
             context.startActivity(intentToLaunch);
         }
     }

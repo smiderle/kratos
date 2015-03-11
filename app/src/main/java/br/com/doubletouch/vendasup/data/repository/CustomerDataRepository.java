@@ -89,4 +89,22 @@ public class CustomerDataRepository implements CustomerRepository {
             }
         });
     }
+
+    @Override
+    public void saveCustomer(Customer customer,final CustomerSaveCallback customerSaveCallback) {
+        final CustomerDataStore customerDataStore = this.customerDataStoreFactory.create();
+        customerDataStore.saveCustomer(customer, new CustomerDataStore.CustomerSaveCallback(){
+
+            @Override
+            public void onCustomerSave(Customer customer) {
+                customerSaveCallback.onCustomerSaved(customer);
+            }
+
+            @Override
+            public void onError(Exception exception) {
+                customerSaveCallback.onError(new RepositoryErrorBundle(exception));
+            }
+        });
+
+    }
 }

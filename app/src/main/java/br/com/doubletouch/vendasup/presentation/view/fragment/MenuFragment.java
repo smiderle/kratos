@@ -42,7 +42,7 @@ public class MenuFragment extends BaseFragment implements MenuView {
     }
 
     @Override
-    void initializePresenter() {
+    public void initializePresenter() {
         menuPresenter = new MenuPresenter(this);
     }
 

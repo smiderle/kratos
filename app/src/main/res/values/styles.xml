@@ -65,9 +65,12 @@
      -->
     <style name="AppTheme.Kratos.Light" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="actionBarStyle">@style/Kratos.ActionBar</item>
+
         <!-- Remove a sombra de baixo do action bar -->
         <item name="android:windowContentOverlay">@null</item>
     </style>
+
+
 
     <!-- Action bar -->
     <style name="Kratos.ActionBar" parent="Widget.AppCompat.ActionBar.Solid">
@@ -79,6 +82,5 @@
     <style name="Kratos.Actionbar.Title" parent="Base.TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:textColor">@color/white</item>
     </style>
-
 
 </resources>

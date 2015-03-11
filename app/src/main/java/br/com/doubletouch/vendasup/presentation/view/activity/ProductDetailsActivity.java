@@ -33,7 +33,7 @@ public class ProductDetailsActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product_details);
+        setContentView(R.layout.activity_generic_details);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         this.initializeActivity(savedInstanceState);
     }

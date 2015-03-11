@@ -128,7 +128,7 @@ public class ProductListFragment extends BaseFragment implements ProductListView
     }
 
     @Override
-    protected void initializePresenter() {
+    public void initializePresenter() {
         ThreadExecutor threadExecutor = JobExecutor.getInstance();
         PostExecutionThread postExecutionThread = UIThread.getInstance();
 

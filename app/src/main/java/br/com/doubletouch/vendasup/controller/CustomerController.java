@@ -14,9 +14,11 @@ import br.com.doubletouch.vendasup.data.entity.Customer;
 public class CustomerController {
 
     public void saveOrUpdate(List<Customer> customers){
+
         CustomerSQLite customerSQLite= new CustomerSQLite();
         customerSQLite.insert(customers);
 
     }
+
 
 }

@@ -26,14 +26,24 @@ public class CustomerSQLite implements CustomerPersistence {
 
     @Override
     public Customer get(Integer id) {
-        throw new UnsupportedOperationException("Não implementado.");
+        Customer customer = null;
+        String where = Customer.CustomerDB.ID+" = ? ";
+        Cursor c = db.query(Customer.CustomerDB.TABELA, Customer.CustomerDB.COLUNAS, where, new String[]{String.valueOf(id)}, null, null, null, null);
+
+        if(c.moveToFirst()){
+            customer = getByCursor(c);
+        }
+
+        c.close();
+        return customer;
     }
 
     @Override
-    public List<Customer> getAll() {
+    public List<Customer> getAll(Integer branchId) {
         {
+            String where = Customer.CustomerDB.IDFILIAL +" = ? ";
             ArrayList<Customer> customers = new ArrayList<>();
-            Cursor c = db.query(Customer.CustomerDB.TABELA, Customer.CustomerDB.COLUNAS, null, null, null, null, null, CustomerPersistence.LIMIT);
+            Cursor c = db.query(Customer.CustomerDB.TABELA, Customer.CustomerDB.COLUNAS, where, new String[]{String.valueOf(branchId)}, null, null, null, CustomerPersistence.LIMIT);
 
             if(c.moveToFirst()){
                 do {
@@ -49,19 +59,17 @@ public class CustomerSQLite implements CustomerPersistence {
 
     @Override
     public void insert(Customer customer) {
-        db.insertOrThrow(Customer.CustomerDB.TABELA, null, getContentValues(customer));
+        db.insertWithOnConflict(Customer.CustomerDB.TABELA, null, getContentValues(customer), SQLiteDatabase.CONFLICT_REPLACE);
     }
 
     @Override
     public void insert(List<Customer> customers) {
-        {
             db.beginTransaction();
             for(Customer customer : customers){
                 db.insertWithOnConflict(Customer.CustomerDB.TABELA, null, getContentValues(customer), SQLiteDatabase.CONFLICT_REPLACE);
             }
             db.setTransactionSuccessful();
             db.endTransaction();
-        }
     }
 
     @Override
@@ -78,7 +86,6 @@ public class CustomerSQLite implements CustomerPersistence {
 
     @Override
     public List<Customer> getByNameOrCustomerId(String name, String customerId, Integer branchId) {
-        {
             List<Customer> products = new ArrayList<>();
 
             StringBuilder where = new StringBuilder();
@@ -103,7 +110,6 @@ public class CustomerSQLite implements CustomerPersistence {
             c.close();
 
             return products;
-        }
     }
 
     private ContentValues getContentValues( Customer customer) {
@@ -135,6 +141,7 @@ public class CustomerSQLite implements CustomerPersistence {
         cv.put(Customer.CustomerDB.TABELA_PRECO, customer.getPriceTable());
         //cv.put(Customer.CustomerDB.PARCELAMENTO, customer.getInstallment());
         cv.put(Customer.CustomerDB.FORMA_PAGAMENTO, customer.getFormPayment());
+        cv.put(Customer.CustomerDB.SYNC_PENDENTE, customer.isSyncPending());
         return cv;
     }
 
@@ -167,6 +174,7 @@ public class CustomerSQLite implements CustomerPersistence {
         int idxPriceTable = c.getColumnIndex(Customer.CustomerDB.TABELA_PRECO);
         int idxInstallment = c.getColumnIndex(Customer.CustomerDB.PARCELAMENTO);
         int idxPayment = c.getColumnIndex(Customer.CustomerDB.FORMA_PAGAMENTO);
+        int idxSincronizado = c.getColumnIndex(Customer.CustomerDB.SYNC_PENDENTE);
 
         Customer customer = new Customer();
         customer.setID(c.getInt(idxId));
@@ -192,6 +200,8 @@ public class CustomerSQLite implements CustomerPersistence {
         customer.setDefaultDiscount(c.getDouble(idxDefaultDiscount));
         customer.setActive(c.getInt(idxActive) == 1);
         customer.setExcluded(c.getInt(idxExcluded) == 1);
+        customer.setSyncPending(c.getInt( idxSincronizado ) == 1);
+
         customer.setPictureUrl(c.getString(idxPicture));
         customer.setPriceTable(c.getInt(idxPriceTable));
         //customer.setInstallment(c.getInt(idxInstallment));

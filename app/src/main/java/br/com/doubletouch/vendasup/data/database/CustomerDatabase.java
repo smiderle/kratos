@@ -36,6 +36,15 @@ public interface CustomerDatabase {
     }
 
     /**
+     * Callback usado para notificar quando o {@link Customer} for salvo
+     */
+    interface CustomerSaveCallback {
+        void onCustomerSave(Customer customer);
+
+        void onError(Exception exception);
+    }
+
+    /**
      * Recupera um {@link Customer}  do banco de dados
      * @param customerId Id do produto
      * @param callback o {@link br.com.doubletouch.vendasup.data.database.CustomerDatabase.CustomerListCallback} que notificara os clients.
@@ -49,6 +58,22 @@ public interface CustomerDatabase {
      */
     void list(final Integer branchId , final CustomerListCallback callback);
 
+    /**
+     * Busca pelo filtro.
+     * @param description
+     * @param customerId
+     * @param branchId
+     * @param callback
+     */
     void listByFilter(final String description, String customerId,Integer branchId, final CustomerListFilterCallback callback);
+
+    /**
+     * Salva o usuário.
+     * @param customer
+     * @param callback
+     */
+    void save(final Customer customer, final CustomerSaveCallback callback);
+
+
 
 }

@@ -5,12 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Window;
-import android.widget.Toast;
 
 import br.com.doubletouch.vendasup.R;
 import br.com.doubletouch.vendasup.data.entity.Customer;
 import br.com.doubletouch.vendasup.presentation.navigation.Navigator;
-import br.com.doubletouch.vendasup.presentation.view.fragment.CustomerListFragment;
+import br.com.doubletouch.vendasup.presentation.view.fragment.customer.CustomerListFragment;
 
 
 public class CustomerListActivity extends BaseActivity implements CustomerListFragment.CustomerListListener {
@@ -38,7 +37,7 @@ public class CustomerListActivity extends BaseActivity implements CustomerListFr
 
     @Override
     public void onCustomerClicked(Customer customer) {
-        //this.navigator.navigateToCustomerDetails(this, customer.getID());
+        this.navigator.navigateToCustomerDetails(this, customer.getID(), false);
     }
 
 

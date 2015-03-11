@@ -62,4 +62,21 @@ public class DatabaseCustomersDataStore implements CustomerDataStore {
             }
         });
     }
+
+    @Override
+    public void saveCustomer(Customer customer, final CustomerSaveCallback customerSaveCallback) {
+        this.customerDatabase.save(customer, new CustomerDatabase.CustomerSaveCallback() {
+
+            @Override
+            public void onCustomerSave(Customer customer) {
+                customerSaveCallback.onCustomerSave(customer);
+            }
+
+            @Override
+            public void onError(Exception exception) {
+                customerSaveCallback.onError(exception);
+            }
+        });
+
+    }
 }

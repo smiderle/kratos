@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_padding_left"
+    android:paddingRight="@dimen/activity_padding_right">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/lv_row_padding_top"
+        android:paddingBottom="@dimen/lv_row_padding_botton">
+
+        <ImageView
+            android:id="@+id/iv_customer_cep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_email_outline"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/tv_phone_home_title"
+            android:text="@string/tv_address_postalcode_title"
+            style="@style/AppTheme.TextViewPrimary"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/iv_customer_cep"
+            android:layout_toEndOf="@+id/iv_customer_cep"
+            android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
+            android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
+
+        <ViewSwitcher
+            android:id="@+id/vs_customer_postalcode"
+            style="@style/AppTheme.TextViewSecundary"
+            android:layout_below="@+id/tv_phone_home_title"
+            android:layout_alignLeft="@+id/tv_phone_home_title"
+            android:layout_alignStart="@+id/tv_phone_home_title" >
+
+
+            <TextView
+                android:id="@+id/tv_customer_postalcode"
+                style="@style/AppTheme.TextViewSecundary"
+                android:text="@string/tv_default_address_postalcode"/>
+
+
+            <EditText
+                android:id="@+id/et_customer_postalcode"
+                style="@style/AppTheme.TextViewSecundary"
+                android:maxLength="10"/>
+
+        </ViewSwitcher>
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/lv_row_padding_top"
+        android:paddingBottom="@dimen/lv_row_padding_botton">
+
+        <ImageView
+            android:id="@+id/iv_customer_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_location_city_grey600_36dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/tv_customer_phone_commercial_title"
+            android:text="@string/tv_address_city_title"
+            style="@style/AppTheme.TextViewPrimary"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/iv_customer_city"
+            android:layout_toEndOf="@+id/iv_customer_city"
+            android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
+            android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
+
+        <ViewSwitcher
+            android:id="@+id/vs_customer_city"
+            style="@style/AppTheme.TextViewSecundary"
+            android:layout_below="@+id/tv_customer_phone_commercial_title"
+            android:layout_alignLeft="@+id/tv_customer_phone_commercial_title"
+            android:layout_alignStart="@+id/tv_customer_phone_commercial_title" >
+
+
+            <TextView
+                android:id="@+id/tv_customer_city"
+                style="@style/AppTheme.TextViewSecundary"
+                android:text="@string/tv_default_address_city"/>
+
+            <EditText
+                android:id="@+id/et_customer_city"
+                style="@style/AppTheme.TextViewSecundary"/>
+
+            </ViewSwitcher>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/lv_row_padding_top"
+        android:paddingBottom="@dimen/lv_row_padding_botton">
+
+        <ImageView
+            android:id="@+id/iv_customer_phone_cell"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_apps"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/tv_customer_district_title"
+            android:text="@string/tv_address_district_title"
+            style="@style/AppTheme.TextViewPrimary"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/iv_customer_phone_cell"
+            android:layout_toEndOf="@+id/iv_customer_phone_cell"
+            android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
+            android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
+
+        <ViewSwitcher
+            android:id="@+id/vs_customer_district"
+            style="@style/AppTheme.TextViewSecundary"
+            android:layout_below="@+id/tv_customer_district_title"
+            android:layout_alignLeft="@+id/tv_customer_district_title"
+            android:layout_alignStart="@+id/tv_customer_district_title">
+
+            <TextView
+                android:id="@+id/tv_customer_district"
+                style="@style/AppTheme.TextViewSecundary"
+                android:text="@string/tv_default_address_district"/>
+
+            <EditText
+                android:id="@+id/et_customer_district"
+                style="@style/AppTheme.TextViewSecundary"
+                android:maxLength="60"/>
+
+            </ViewSwitcher>
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/lv_row_padding_top"
+        android:paddingBottom="@dimen/lv_row_padding_botton">
+
+        <ImageView
+            android:id="@+id/iv_customer_street"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_map_marker"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/tv_customer_street_title"
+            android:text="@string/tv_address_street_title"
+            style="@style/AppTheme.TextViewPrimary"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/iv_customer_street"
+            android:layout_toEndOf="@+id/iv_customer_street"
+            android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
+            android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
+
+        <ViewSwitcher
+            android:id="@+id/vs_customer_street"
+            style="@style/AppTheme.TextViewSecundary"
+            android:layout_below="@+id/tv_customer_street_title"
+            android:layout_alignLeft="@+id/tv_customer_street_title"
+            android:layout_alignStart="@+id/tv_customer_street_title">
+
+            <TextView
+                android:id="@+id/tv_customer_street"
+                style="@style/AppTheme.TextViewSecundary"
+                android:text="@string/tv_default_address_street"/>
+
+            <EditText
+                android:id="@+id/et_customer_street"
+                style="@style/AppTheme.TextViewSecundary"
+                android:maxLength="60"/>
+
+            </ViewSwitcher>
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/lv_row_padding_top"
+        android:paddingBottom="@dimen/lv_row_padding_botton">
+
+        <ImageView
+            android:id="@+id/iv_customer_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_numeric"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/tv_customer_number_title"
+            android:text="@string/tv_address_number_title"
+            style="@style/AppTheme.TextViewPrimary"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/iv_customer_number"
+            android:layout_toEndOf="@+id/iv_customer_number"
+            android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
+            android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
+
+        <ViewSwitcher
+            android:id="@+id/vs_customer_number"
+            style="@style/AppTheme.TextViewSecundary"
+            android:layout_below="@+id/tv_customer_number_title"
+            android:layout_alignLeft="@+id/tv_customer_number_title"
+            android:layout_alignStart="@+id/tv_customer_number_title">
+
+            <TextView
+                android:id="@+id/tv_customer_number"
+                style="@style/AppTheme.TextViewSecundary"
+                android:text="@string/tv_default_address_number"/>
+
+            <EditText
+                android:id="@+id/et_customer_number"
+                style="@style/AppTheme.TextViewSecundary"
+                android:maxLength="8"/>
+            </ViewSwitcher>
+
+
+
+    </RelativeLayout>
+
+</LinearLayout>

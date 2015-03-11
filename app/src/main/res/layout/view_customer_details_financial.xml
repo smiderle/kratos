@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_padding_left"
+    android:paddingRight="@dimen/activity_padding_right">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/lv_row_padding_top"
+        android:paddingBottom="@dimen/lv_row_padding_botton">
+
+        <ImageView
+            android:id="@+id/iv_price_table"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_view_list"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/tv_customer_price_table_title"
+            android:text="@string/tv_customer_price_table_title"
+            style="@style/AppTheme.TextViewPrimary"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/iv_price_table"
+            android:layout_toEndOf="@+id/iv_price_table"
+            android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
+            android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
+
+        <TextView
+            android:id="@+id/tv_customer_price_table"
+            style="@style/AppTheme.TextViewSecundary"
+            android:text="@string/tv_default_customer_price_table"
+            android:layout_below="@+id/tv_customer_price_table_title"
+            android:layout_alignLeft="@+id/tv_customer_price_table_title"
+            android:layout_alignStart="@+id/tv_customer_price_table_title" />
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/lv_row_padding_top"
+        android:paddingBottom="@dimen/lv_row_padding_botton">
+
+        <ImageView
+            android:id="@+id/iv_customer_installment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_numeric_1_box_multiple_outline"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/tv_customer_installment_title"
+            android:text="@string/tv_customer_installment_title"
+            style="@style/AppTheme.TextViewPrimary"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/iv_customer_installment"
+            android:layout_toEndOf="@+id/iv_customer_installment"
+            android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
+            android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
+
+        <TextView
+            android:id="@+id/tv_customer_installment"
+            style="@style/AppTheme.TextViewSecundary"
+            android:text="@string/tv_default_customer_installment"
+            android:layout_below="@+id/tv_customer_installment_title"
+            android:layout_alignLeft="@+id/tv_customer_installment_title"
+            android:layout_alignStart="@+id/tv_customer_installment_title" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/lv_row_padding_top"
+        android:paddingBottom="@dimen/lv_row_padding_botton">
+
+        <ImageView
+            android:id="@+id/iv_customer_phone_commercial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_credit_card"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/tv_customer_payment_title"
+            android:text="@string/tv_customer_payment_title"
+            style="@style/AppTheme.TextViewPrimary"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/iv_customer_phone_commercial"
+            android:layout_toEndOf="@+id/iv_customer_phone_commercial"
+            android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
+            android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
+
+        <TextView
+            android:id="@+id/tv_customer_payment"
+            style="@style/AppTheme.TextViewSecundary"
+            android:text="@string/tv_default_customer_payment"
+            android:layout_below="@+id/tv_customer_payment_title"
+            android:layout_alignLeft="@+id/tv_customer_payment_title"
+            android:layout_alignStart="@+id/tv_customer_payment_title" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/lv_row_padding_top"
+        android:paddingBottom="@dimen/lv_row_padding_botton">
+
+        <ImageView
+            android:id="@+id/iv_customer_credit_limit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_cash"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/tv_customer_credit_limit_title"
+            android:text="@string/tv_customer_credit_limit_title"
+            style="@style/AppTheme.TextViewPrimary"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/iv_customer_credit_limit"
+            android:layout_toEndOf="@+id/iv_customer_credit_limit"
+            android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
+            android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
+
+        <TextView
+            android:id="@+id/tv_customer_credit_limit"
+            style="@style/AppTheme.TextViewSecundary"
+            android:text="@string/tv_default_customer_credit_limit"
+            android:layout_below="@+id/tv_customer_credit_limit_title"
+            android:layout_alignLeft="@+id/tv_customer_credit_limit_title"
+            android:layout_alignStart="@+id/tv_customer_credit_limit_title" />
+
+    </RelativeLayout>
+
+</LinearLayout>

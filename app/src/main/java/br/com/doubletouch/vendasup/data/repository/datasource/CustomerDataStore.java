@@ -35,6 +35,15 @@ public interface CustomerDataStore {
     }
 
     /**
+     * Callback usado para notificar quando o {@link Customer} for salvo
+     */
+    interface CustomerSaveCallback {
+        void onCustomerSave(Customer customer);
+
+        void onError(Exception exception);
+    }
+
+    /**
      * Obtem um a coleção de {@link br.com.doubletouch.vendasup.data.entity.Customer}.
      * @param  branchId Id da Filial
      * @param customerListCallback  O {@link br.com.doubletouch.vendasup.domain.repository.CustomerRepository.CustomerListCallback} usado para notificar os clients.
@@ -51,4 +60,13 @@ public interface CustomerDataStore {
      * @param customerDetailsCallback O {@link br.com.doubletouch.vendasup.domain.repository.CustomerRepository.CustomerDetailsCallback} usado para notificar os clients.
      */
     void getCustomerDetails(final Integer customerId, CustomerDetailsCallback customerDetailsCallback);
+
+
+    /**
+     * Salva o usuário.
+     * @param customer
+     * @param callback
+     */
+    void saveCustomer(final Customer customer, final CustomerSaveCallback callback);
+
 }

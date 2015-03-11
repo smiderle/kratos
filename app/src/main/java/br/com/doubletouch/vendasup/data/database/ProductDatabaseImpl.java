@@ -25,7 +25,7 @@ public class ProductDatabaseImpl implements ProductDatabase {
     @Override
     public synchronized void list(Integer branchId, ProductListCallback callback) {
 
-        List<Product> products = productPersistence.getAll();
+        List<Product> products = productPersistence.getAll(branchId);
         callback.onProductListLoaded(products);
     }
 

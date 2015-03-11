@@ -1,152 +1,67 @@
 package br.com.doubletouch.vendasup.presentation.view.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.util.SparseArrayCompat;
-import android.support.v4.view.ViewPager;
-import android.view.View;
-import android.widget.AbsListView;
-import android.widget.ImageView;
+import android.view.MenuItem;
+import android.widget.Toast;
 
-import br.com.doubletouch.vendasup.presentation.view.ViewHelper;
+import br.com.doubletouch.vendasup.presentation.navigation.Navigator;
 
 import br.com.doubletouch.vendasup.R;
-import br.com.doubletouch.vendasup.presentation.view.components.PagerSlidingTabStrip;
-import br.com.doubletouch.vendasup.presentation.view.components.parallax.ScrollTabHolder;
-import br.com.doubletouch.vendasup.presentation.view.components.parallax.ScrollTabHolderFragment;
-import br.com.doubletouch.vendasup.presentation.view.fragment.CustomerDetailsPersonalFragment;
-import butterknife.ButterKnife;
-import butterknife.InjectView;
+import br.com.doubletouch.vendasup.presentation.view.fragment.customer.CustomerDetailsFragment;
 
 /**
  * Created by LADAIR on 21/02/2015.
  */
 public class CustomerDetailsActivity extends BaseParallaxActivity {
 
-    private final int PAGES_NUMER = 4;
+    private static final String INSTANCE_STATE_PARAM_CUSTOMER__ID = "kratos.STATE_PARAM_CUSTOMER_ID";
+    private static final String INTENT_EXTRA_PARAM_CUSTOMER_ID = "kratos.INTENT_PARAM_CUSTOMER_ID";
+    private static final String INTENT_EXTRA_PARAM_CUSTOMER_EDITION_MODE = "kratos.INTENT_PARAM_CUSTOMER_EDITION_MODE";
+    private static final String INSTANCE_STATE_PARAM_CUSTOMER_EDITION_MODE = "kratos.STATE_PARAM_CUSTOMER_EDITION_MODE";
 
-    @InjectView(R.id.fl_header)
-    public View fl_header;
+    private int customerId;
+    private boolean editionMode;
+    private Navigator navigator;
 
-    @InjectView(R.id.vp_header)
-    public ViewPager vp_header;
-
-    @InjectView(R.id.iv_header)
-    public ImageView iv_header;
-
-    @InjectView(R.id.tabs)
-    public PagerSlidingTabStrip mPagerSlidingTabStrip;
-
-    private PageAdaper pageAdaper;
+    public static Intent getCallingIntent(Context context, int customerId, boolean editionMode){
+        Intent callingIntent = new Intent(context, CustomerDetailsActivity.class);
+        callingIntent.putExtra(INTENT_EXTRA_PARAM_CUSTOMER_ID, customerId);
+        callingIntent.putExtra(INTENT_EXTRA_PARAM_CUSTOMER_EDITION_MODE, editionMode);
+        return callingIntent;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-        setContentView(R.layout.component_parallax_header);
-        ButterKnife.inject(this, CustomerDetailsActivity.this);
-
-        vp_header.setOffscreenPageLimit(PAGES_NUMER);
-        pageAdaper = new PageAdaper(getSupportFragmentManager());
-        pageAdaper.setTabHolderScrollingContent(new OnScrollTabHolderListner());
-
-        vp_header.setAdapter(pageAdaper);
-        mPagerSlidingTabStrip.setViewPager(vp_header);
-        mPagerSlidingTabStrip.setOnPageChangeListener(new OnPageChangeListener());
+        setContentView(R.layout.activity_generic_details);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        initializeActivity(savedInstanceState);
 
     }
 
-
-    /**
-     * Page adapter que ira manipular as fragments das tabs
-     */
-    private class PageAdaper extends FragmentPagerAdapter {
-
-        private SparseArrayCompat<ScrollTabHolder> scrollTabHolder;
-        private ScrollTabHolder listener;
-
-        private final String[] TITLES = {"Principal", "Contato", "Endereço", "Titulos", "Peddidos"};
-
-        public void setTabHolderScrollingContent(ScrollTabHolder listener){
-            this.listener = listener;
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        if(outState != null){
+            outState.putInt(INSTANCE_STATE_PARAM_CUSTOMER__ID, this.customerId);
+            outState.putBoolean(INSTANCE_STATE_PARAM_CUSTOMER_EDITION_MODE, this.editionMode);
         }
-
-        private PageAdaper(FragmentManager fm) {
-            super(fm);
-            this.scrollTabHolder = new SparseArrayCompat<>();
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            ScrollTabHolderFragment fragment = (ScrollTabHolderFragment) CustomerDetailsPersonalFragment.newInstance(position);
-            scrollTabHolder.put(position, fragment);
-
-            if(listener != null){
-                fragment.setScrollTabHolder(listener);
-            }
-            return fragment;
-        }
-
-        @Override
-        public int getCount() {
-            return TITLES.length;
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return TITLES[position];
-        }
-
-        public SparseArrayCompat<ScrollTabHolder> getScrollTabHolders() {
-            return scrollTabHolder;
-        }
+        super.onSaveInstanceState(outState);
     }
 
 
-    public class OnScrollTabHolderListner implements ScrollTabHolder {
-        @Override
-        public void adjustScroll(int scrollHeight) {
+    private void initializeActivity( Bundle savedInstanceState ){
+        if(savedInstanceState == null){
+            this.customerId = getIntent().getIntExtra(INTENT_EXTRA_PARAM_CUSTOMER_ID, -1);
+            this.editionMode = getIntent().getBooleanExtra(INTENT_EXTRA_PARAM_CUSTOMER_EDITION_MODE, false);
 
+            addFragment(R.id.fl_fragment, CustomerDetailsFragment.newInstance(customerId, editionMode));
+        } else {
+            this.customerId = savedInstanceState.getInt(INSTANCE_STATE_PARAM_CUSTOMER__ID);
+            this.editionMode = savedInstanceState.getBoolean(INSTANCE_STATE_PARAM_CUSTOMER_EDITION_MODE);
         }
 
-        @Override
-        public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount, int pagePosition) {
-            if (vp_header.getCurrentItem() == pagePosition) {
-                int scrollY = getScrollY(view);
-                ViewHelper.setTranslationY(fl_header, Math.max(-scrollY, mMinHeaderTranslation));
-            }
-        }
+        navigator = new Navigator();
     }
-
-    /**
-     * Listner para as tabs
-     */
-    public class OnPageChangeListener implements  ViewPager.OnPageChangeListener{
-
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-        }
-
-        @Override
-        public void onPageSelected(int position) {
-
-            SparseArrayCompat<ScrollTabHolder> scrollTabHolders = pageAdaper.getScrollTabHolders();
-            ScrollTabHolder currentHolder = scrollTabHolders.valueAt(position);
-
-            currentHolder.adjustScroll((int) (fl_header.getHeight() + ViewHelper.getTranslationY(fl_header)));
-
-        }
-
-        @Override
-        public void onPageScrollStateChanged(int state) {
-
-        }
-
-    }
-
-
 }

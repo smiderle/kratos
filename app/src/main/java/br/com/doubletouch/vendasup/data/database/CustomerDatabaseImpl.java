@@ -25,7 +25,7 @@ public class CustomerDatabaseImpl implements CustomerDatabase {
     @Override
     public synchronized void list(Integer branchId, CustomerListCallback callback) {
 
-        List<Customer> customers = customerPersistence.getAll();
+        List<Customer> customers = customerPersistence.getAll(branchId);
         callback.onCustomerListLoaded(customers);
     }
 
@@ -33,5 +33,11 @@ public class CustomerDatabaseImpl implements CustomerDatabase {
     public synchronized void listByFilter(String name, String customerId,Integer branchId, CustomerListFilterCallback callback) {
         List<Customer> customers = customerPersistence.getByNameOrCustomerId(name, customerId, branchId);
         callback.onCustomerListFilterLoaded(customers);
+    }
+
+    @Override
+    public synchronized void save(Customer customer, CustomerSaveCallback callback) {
+        customerPersistence.insert(customer);
+        callback.onCustomerSave(customer);
     }
 }

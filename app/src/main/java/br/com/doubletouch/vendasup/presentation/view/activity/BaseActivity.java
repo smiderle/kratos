@@ -1,7 +1,9 @@
 package br.com.doubletouch.vendasup.presentation.view.activity;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
+
+
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 
 /**
@@ -17,7 +19,7 @@ public abstract class BaseActivity extends ActionBarActivity {
      * @param fragment The fragment to be added.
      */
     protected void addFragment(int containerViewId, Fragment fragment) {
-        FragmentTransaction fragmentTransaction = this.getFragmentManager().beginTransaction();
+        FragmentTransaction fragmentTransaction = this.getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(containerViewId, fragment);
         fragmentTransaction.commit();
     }

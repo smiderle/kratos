@@ -15,19 +15,19 @@ import br.com.doubletouch.vendasup.domain.repository.CustomerRepository;
  */
 public class GetCustomerListUseCaseImpl implements GetCustomerListUseCase {
 
-    private final CustomerRepository pustomerRepository;
+    private final CustomerRepository customerRepository;
     private final ThreadExecutor threadExecutor;
     private final PostExecutionThread postExecutionThread;
 
     private Callback callback;
 
-    public GetCustomerListUseCaseImpl(CustomerRepository pustomerRepository, ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread) {
+    public GetCustomerListUseCaseImpl(CustomerRepository customerRepository, ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread) {
 
-        if(pustomerRepository == null || threadExecutor == null || postExecutionThread == null){
+        if(customerRepository == null || threadExecutor == null || postExecutionThread == null){
             throw  new IllegalArgumentException("Os parametros do construtor não podem ser nulos.");
         }
 
-        this.pustomerRepository = pustomerRepository;
+        this.customerRepository = customerRepository;
         this.threadExecutor = threadExecutor;
         this.postExecutionThread = postExecutionThread;
     }
@@ -44,7 +44,7 @@ public class GetCustomerListUseCaseImpl implements GetCustomerListUseCase {
 
     @Override
     public void run() {
-        this.pustomerRepository.getCustomerList(VendasUp.getUsuarioLogado().getOrganizationID(), this.pustomerListCallback);
+        this.customerRepository.getCustomerList(VendasUp.getUsuarioLogado().getBranchID(), this.pustomerListCallback);
     }
 
     private final CustomerRepository.CustomerListCallback pustomerListCallback = new CustomerRepository.CustomerListCallback() {

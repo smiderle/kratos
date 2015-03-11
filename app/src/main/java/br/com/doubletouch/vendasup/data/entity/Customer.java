@@ -1,11 +1,15 @@
 package br.com.doubletouch.vendasup.data.entity;
 
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
 
 /**
  * Created by LADAIR on 17/02/2015.
  */
-public class Customer {
+public class Customer implements Serializable {
 
     @SerializedName("id")
     private Integer ID;
@@ -37,6 +41,7 @@ public class Customer {
     private Integer priceTable;
     //private Integer installment;
     private Integer formPayment;
+    private boolean syncPending;
 
     public Integer getID() {
         return ID;
@@ -270,6 +275,14 @@ public class Customer {
         this.formPayment = formPayment;
     }
 
+    public boolean isSyncPending() {
+        return syncPending;
+    }
+
+    public void setSyncPending(boolean syncPending) {
+        this.syncPending = syncPending;
+    }
+
     public String getCustomerIdAndName(){
         if(this.customerID != null && this.name != null){
             return customerID+" - "+ name;
@@ -315,8 +328,9 @@ public class Customer {
         public static final String PARCELAMENTO = "PARCELAMENTO";
         public static final String FORMA_PAGAMENTO = "FORMA_PAGAMENTO";
         public static final String URL_IMAGEM = "URL_IMAGEM";
+        public static final String SYNC_PENDENTE= "SYNC_PENDENTE";
 
         public static final String[] COLUNAS = new String[]{ID, IDEMPRESA,IDFILIAL,IDCLIENTE, NOME, APELIDO, TIPO_PESSOA, CPF_CNPJ, INSCRICAO, FONE_COMERCIAL,FONE_RESIDENCIAL,FONE_CELULAR, CEP, COMPLEMENTO,
-                OBSERVACAO,FAX,RUA,BAIRRO,NUMERO,EMAIL,DESCONTO_PADRAO,ATIVO, EXCLUIDO, TABELA_PRECO, PARCELAMENTO, FORMA_PAGAMENTO, URL_IMAGEM};
+                OBSERVACAO,FAX,RUA,BAIRRO,NUMERO,EMAIL,DESCONTO_PADRAO,ATIVO, EXCLUIDO, TABELA_PRECO, PARCELAMENTO, FORMA_PAGAMENTO, URL_IMAGEM, SYNC_PENDENTE};
     }
 }

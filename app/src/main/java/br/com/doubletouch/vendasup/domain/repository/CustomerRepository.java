@@ -38,6 +38,16 @@ public interface CustomerRepository {
         void onError(ErrorBundle errorBundle);
     }
 
+
+    /**
+     * Callback usado para notificar quando o {@link Customer} for salvo ou um erro ocorrer.
+     */
+    interface CustomerSaveCallback {
+        void onCustomerSaved(Customer customer);
+
+        void onError(ErrorBundle errorBundle);
+    }
+
     /**
      * Obtem um a coleção de {@link br.com.doubletouch.vendasup.data.entity.Customer}.
      * @param customerListCallback  O {@link br.com.doubletouch.vendasup.domain.repository.CustomerRepository.CustomerListCallback} usado para notificar os clients.
@@ -60,4 +70,13 @@ public interface CustomerRepository {
      * @param customerDetailsCallback O {@link br.com.doubletouch.vendasup.domain.repository.CustomerRepository.CustomerDetailsCallback} usado para notificar os clients.
      */
     void getCustomerById(final int customerId, CustomerDetailsCallback customerDetailsCallback);
+
+
+
+    /**
+     * Salva o usuário.
+     * @param customer
+     * @param callback
+     */
+    void saveCustomer(final Customer customer, final CustomerSaveCallback callback);
 }

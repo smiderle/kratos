@@ -18,7 +18,7 @@ public interface Persistence<T> {
      * Retorna todos os registros.
      * @return
      */
-    List<T> getAll();
+    List<T> getAll(Integer branchId);
 
     /**
      * Insere um registro.

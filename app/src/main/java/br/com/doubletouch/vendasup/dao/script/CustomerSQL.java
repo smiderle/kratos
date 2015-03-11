@@ -37,6 +37,7 @@ public class CustomerSQL {
                 Customer.CustomerDB.PARCELAMENTO + " INTEGER,"+
                 Customer.CustomerDB.FORMA_PAGAMENTO + " INTEGER,"+
                 Customer.CustomerDB.URL_IMAGEM + " TEXT,"+
+                Customer.CustomerDB.SYNC_PENDENTE + " BOOLEAN,"+
                 "PRIMARY KEY( "+ Customer.CustomerDB.ID+" )  );";
         return SQL;
     }

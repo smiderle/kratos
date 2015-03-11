@@ -30,6 +30,7 @@
     <string name="tv_product_price_whit_colon">Preço:</string>
 
     <string name="tv_customer_name">Nome</string>
+    <string name="tv_customer_real_name">Razão Social</string>
     <string name="tv_customer_nickname">Apelido</string>
     <string name="tv_customer_person_type">Tipo</string>
     <string name="tv_customer_cpf">CPF</string>
@@ -38,14 +39,28 @@
     <string name="tv_customer_rg">RG</string>
     <string name="tv_customer_birthday">Aniversário</string>
     <string name="tv_customer_observation">Observação</string>
+    <string name="tv_customer_phone_home_title">Telefone Residêncial</string>
+    <string name="tv_customer_phone_commercial_title">Telefone Comercial</string>
+    <string name="tv_customer_phone_cell_title">Telefone Celular</string>
+    <string name="tv_customer_email_title">Email</string>
 
+    <string name="tv_customer_price_table_title">Tabela de Preço Padrão</string>
+    <string name="tv_customer_payment_title">Forma de Pagamento Padrão</string>
+    <string name="tv_customer_installment_title">Forma de Parcelamento</string>
+    <string name="tv_customer_credit_limit_title">Limite de Crédito</string>
 
-
+    <string name="tv_address_postalcode_title">CEP</string>
+    <string name="tv_address_city_title">Cidade</string>
+    <string name="tv_address_district_title">Bairro</string>
+    <string name="tv_address_street_title">Rua</string>
+    <string name="tv_address_number_title">Numero</string>
 
 
     <string name="tv_customer_phone_whit_colon">Fone:</string>
 
     <string name="search_title">Pesquisar</string>
+    <string name="edit_title">Editar</string>
+    <string name="save_title">Salvar</string>
     <string name="tv_default_product_description">Descrição não cadastrado</string>
     <string name="tv_default_product_reference">Referência não cadastrado</string>
     <string name="tv_default_product_code">Código não cadastrado</string>
@@ -55,13 +70,30 @@
     <string name="tv_default_product_barcode">Sem código de barras</string>
     <string name="tv_default_customer_name">Nome não cadastrado</string>
     <string name="tv_default_customer_nickname">Apelido não cadastrado</string>
-    <string name="tv_default_customer_phone">Sem telefone</string>
+    <string name="tv_default_customer_phone">Telefone não cadastrado</string>
+    <string name="tv_default_customer_email">Email não cadastrado</string>
     <string name="tv_default_customer_person_type">Tipo não cadastrado</string>
     <string name="tv_default_customer_cpfcnpj">CPF/CNPJ não cadastrado</string>
     <string name="tv_default_customer_inscricao">RG/Inscrição não cadastrado</string>
     <string name="tv_default_customer_birthday">Aniversário não cadastrado</string>
     <string name="tv_default_customer_observation">Observação não cadastrada</string>
+    <string name="tv_default_customer_price_table">Nenhuma tabela de preço</string>
+    <string name="tv_default_customer_payment">Nenhuma forma de pagamento</string>
+    <string name="tv_default_customer_installment">Nenhuma forma de parcelamento</string>
+    <string name="tv_default_customer_credit_limit">Nenhum limite de crédito</string>
+
+    <string name="tv_default_address_postalcode">CEP não cadastrado</string>
+    <string name="tv_default_address_city">Cidade não cadastrado</string>
+    <string name="tv_default_address_district">Bairro não cadastrado</string>
+    <string name="tv_default_address_street">Rua não cadastrado</string>
+    <string name="tv_default_address_number">Numero não cadastrado</string>
 
 
+    <string name="sp_title_customer_type">Tipo de pessoa</string>
 
+    <string-array name="customer_type_array">
+        <item>Física</item>
+        <item>Jurídica</item>
+    </string-array>
+    
 </resources>

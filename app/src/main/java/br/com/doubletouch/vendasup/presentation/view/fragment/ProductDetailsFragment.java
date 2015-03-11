@@ -115,7 +115,7 @@ public class ProductDetailsFragment extends BaseFragment implements ProductDetai
     }
 
     @Override
-    void initializePresenter() {
+    public void initializePresenter() {
 
         ThreadExecutor threadExecutor = JobExecutor.getInstance();
         PostExecutionThread postExecutionThread = UIThread.getInstance();
