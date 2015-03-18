@@ -13,17 +13,17 @@ import br.com.doubletouch.vendasup.domain.repository.PriceTableService;
  */
 public class PriceTableServiceImpl implements PriceTableService {
 
-    PriceTableDAO priceTablePersistence;
+    PriceTableDAO priceTableDAO;
 
     public PriceTableServiceImpl(){
-        priceTablePersistence =  new PriceTableDAO();
+        priceTableDAO =  new PriceTableDAO();
     }
 
     public void getPriceTableList( final PriceTableListCallback priceTableListCallback) {
 
         try{
 
-            List<PriceTable> all = priceTablePersistence.getAll( VendasUp.getUsuarioLogado().getBranchID() );
+            List<PriceTable> all = priceTableDAO.getAll( VendasUp.getUsuarioLogado().getBranchID() );
             priceTableListCallback.onPriceTableListLoaded(all);
 
         } catch (Exception e){
@@ -37,7 +37,7 @@ public class PriceTableServiceImpl implements PriceTableService {
 
         if(idPriceTable != null){
             try {
-                PriceTable priceTable = priceTablePersistence.get(idPriceTable);
+                PriceTable priceTable = priceTableDAO.get(idPriceTable);
                 priceTableCallback.onPriceTableLoaded( priceTable );
             } catch (Exception e) {
                 priceTableCallback.onError(new RepositoryErrorBundle(e));
@@ -46,6 +46,13 @@ public class PriceTableServiceImpl implements PriceTableService {
             priceTableCallback.onError(new RepositoryErrorBundle(new IllegalArgumentException("Id não informado")));
         }
 
+
+    }
+
+    @Override
+    public void saveOrUpdateSynchronous(List<PriceTable> tabelas) {
+
+        priceTableDAO.insert(tabelas);
 
     }
 }

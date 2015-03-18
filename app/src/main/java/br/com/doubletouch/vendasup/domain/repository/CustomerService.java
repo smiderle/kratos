@@ -1,6 +1,7 @@
 package br.com.doubletouch.vendasup.domain.repository;
 
 import java.util.Collection;
+import java.util.List;
 
 import br.com.doubletouch.vendasup.data.entity.Customer;
 import br.com.doubletouch.vendasup.domain.exception.ErrorBundle;
@@ -78,4 +79,8 @@ public interface CustomerService {
      * @param callback
      */
     void saveCustomer(final Customer customer, final CustomerSaveCallback callback);
+
+
+
+    public void saveOrUpdateSynchronous(List<Customer> customers) ;
 }

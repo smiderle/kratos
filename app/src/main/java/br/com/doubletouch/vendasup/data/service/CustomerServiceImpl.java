@@ -76,4 +76,9 @@ public class CustomerServiceImpl implements CustomerService {
 
         }
     }
+
+    @Override
+    public void saveOrUpdateSynchronous(List<Customer> customers) {
+        customerDAO.insert(customers);
+    }
 }

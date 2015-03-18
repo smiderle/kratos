@@ -1,6 +1,7 @@
 package br.com.doubletouch.vendasup.domain.repository;
 
 import java.util.Collection;
+import java.util.List;
 
 import br.com.doubletouch.vendasup.data.entity.PriceTable;
 import br.com.doubletouch.vendasup.domain.exception.ErrorBundle;
@@ -25,4 +26,8 @@ public interface PriceTableService {
     void getPriceTableList( PriceTableListCallback priceTableListCallback);
 
     void getPriceTable( Integer idPriceTable, PriceTableCallback priceTableCallback);
+
+
+    public void saveOrUpdateSynchronous(List<PriceTable> tabelas) ;
+
 }

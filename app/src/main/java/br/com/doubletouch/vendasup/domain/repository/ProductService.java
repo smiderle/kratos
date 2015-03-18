@@ -1,6 +1,7 @@
 package br.com.doubletouch.vendasup.domain.repository;
 
 import java.util.Collection;
+import java.util.List;
 
 import br.com.doubletouch.vendasup.domain.exception.ErrorBundle;
 import br.com.doubletouch.vendasup.data.entity.Product;
@@ -52,4 +53,7 @@ public interface ProductService {
      * @param productDetailsCallback O {@link ProductService.ProductDetailsCallback} usado para notificar os clients.
      */
     void getProductById(final int productId, ProductDetailsCallback productDetailsCallback);
+
+
+    public void saveOrUpdateSynchronous(List<Product> produtos) ;
 }

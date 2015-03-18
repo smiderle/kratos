@@ -58,4 +58,11 @@ public class ProductServiceImpl implements ProductService {
         }
 
     }
+
+    @Override
+    public void saveOrUpdateSynchronous(List<Product> produtos) {
+
+        productDAO.insert(produtos);
+
+    }
 }

@@ -13,7 +13,6 @@ import java.util.List;
 
 import br.com.doubletouch.vendasup.R;
 import br.com.doubletouch.vendasup.VendasUp;
-import br.com.doubletouch.vendasup.controller.ProdutoController;
 import br.com.doubletouch.vendasup.data.entity.Product;
 import br.com.doubletouch.vendasup.data.entity.Usuario;
 import br.com.doubletouch.vendasup.presentation.navigation.Navigator;
@@ -35,7 +34,6 @@ public class CargaInicialActivity extends ActionBarActivity {
     EditText txtEmail;
 
 
-    private ProdutoController produtoController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +45,6 @@ public class CargaInicialActivity extends ActionBarActivity {
             StrictMode.setThreadPolicy(policy);
         }
 
-        produtoController = new ProdutoController();
 
         //TODO PROVISÒRIO
         Usuario usuarioLogado = new Usuario();
