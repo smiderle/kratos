@@ -10,19 +10,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import br.com.doubletouch.vendasup.R;
-import br.com.doubletouch.vendasup.data.database.ProductDatabase;
-import br.com.doubletouch.vendasup.data.database.ProductDatabaseImpl;
-import br.com.doubletouch.vendasup.data.database.ProductPersistence;
-import br.com.doubletouch.vendasup.data.database.sqlite.product.ProductSQLite;
 import br.com.doubletouch.vendasup.data.entity.Product;
 import br.com.doubletouch.vendasup.data.executor.JobExecutor;
-import br.com.doubletouch.vendasup.data.repository.ProductDataRepository;
-import br.com.doubletouch.vendasup.data.repository.datasource.ProductDataStoreFactory;
 import br.com.doubletouch.vendasup.domain.executor.PostExecutionThread;
 import br.com.doubletouch.vendasup.domain.executor.ThreadExecutor;
-import br.com.doubletouch.vendasup.domain.interactor.GetProductDetailsUseCase;
-import br.com.doubletouch.vendasup.domain.interactor.GetProductDetailsUseCaseImpl;
-import br.com.doubletouch.vendasup.domain.repository.ProductRepository;
+import br.com.doubletouch.vendasup.domain.interactor.product.GetProductDetailsUseCase;
+import br.com.doubletouch.vendasup.domain.interactor.product.GetProductDetailsUseCaseImpl;
 import br.com.doubletouch.vendasup.presentation.UIThread;
 import br.com.doubletouch.vendasup.presentation.presenter.ProductDetailsPresenter;
 import br.com.doubletouch.vendasup.presentation.view.ProductDetailsView;
@@ -120,13 +113,7 @@ public class ProductDetailsFragment extends BaseFragment implements ProductDetai
         ThreadExecutor threadExecutor = JobExecutor.getInstance();
         PostExecutionThread postExecutionThread = UIThread.getInstance();
 
-        ProductPersistence productPersistence = new ProductSQLite();
-
-        ProductDatabase productDatabase = new ProductDatabaseImpl(productPersistence);
-
-        ProductDataStoreFactory productDataStoreFactory  = new ProductDataStoreFactory(this.getContext(), productDatabase);
-        ProductRepository productRepository = ProductDataRepository.getInstace(productDataStoreFactory);
-        GetProductDetailsUseCase getProductDetailsUseCase = new GetProductDetailsUseCaseImpl(productRepository, threadExecutor, postExecutionThread);
+        GetProductDetailsUseCase getProductDetailsUseCase = new GetProductDetailsUseCaseImpl(threadExecutor, postExecutionThread);
         this.productDetailsPresenter = new ProductDetailsPresenter(this,getProductDetailsUseCase);
     }
 

@@ -39,9 +39,10 @@ public class Customer implements Serializable {
     private boolean excluded ;
     private String pictureUrl;
     private Integer priceTable;
-    //private Integer installment;
     private Integer formPayment;
     private boolean syncPending;
+    private Installment installment;
+    private Integer installmentId;
 
     public Integer getID() {
         return ID;
@@ -258,14 +259,14 @@ public class Customer implements Serializable {
     public void setPriceTable(Integer priceTable) {
         this.priceTable = priceTable;
     }
-/*
-    public Integer getInstallment() {
+
+    public Installment getInstallment() {
         return installment;
     }
 
-    public void setInstallment(Integer installment) {
+    public void setInstallment(Installment installment) {
         this.installment = installment;
-    }*/
+    }
 
     public Integer getFormPayment() {
         return formPayment;
@@ -283,6 +284,14 @@ public class Customer implements Serializable {
         this.syncPending = syncPending;
     }
 
+    public Integer getInstallmentId() {
+        return installmentId;
+    }
+
+    public void setInstallmentId(Integer installmentId) {
+        this.installmentId = installmentId;
+    }
+
     public String getCustomerIdAndName(){
         if(this.customerID != null && this.name != null){
             return customerID+" - "+ name;
@@ -295,42 +304,5 @@ public class Customer implements Serializable {
         return "";
     }
 
-    public static final class CustomerDB {
 
-        private CustomerDB(){}
-
-        public static final String TABELA = "CLIENTE";
-        public static final String ID = "_id";
-        public static final String IDCLIENTE = "IDCLIENTE";
-        public static final String IDEMPRESA = "IDEMPRESA";
-        public static final String IDFILIAL = "IDFILIAL";
-        public static final String NOME = "NOME";
-        public static final String APELIDO = "APELIDO";
-        public static final String TIPO_PESSOA = "TIPO_PESSOA";
-        public static final String CPF_CNPJ = "CPF_CNPJ";
-        public static final String INSCRICAO = "INSCRICAO";
-        public static final String FONE_COMERCIAL = "FONE_COMERCIAL";
-        public static final String FONE_RESIDENCIAL = "FONE_RESIDENCIAL";
-        public static final String FONE_CELULAR = "FONE_CELULAR";
-        public static final String CEP = "CEP";
-        public static final String COMPLEMENTO = "COMPLEMENTO";
-        public static final String OBSERVACAO = "OBSERVACAO";
-        public static final String FAX = "FAX";
-        public static final String RUA = "RUA";
-        public static final String BAIRRO = "BAIRRO";
-        public static final String NUMERO = "NUMERO";
-        public static final String EMAIL = "EMAIL";
-
-        public static final String DESCONTO_PADRAO = "DESCONTO_PADRAO";
-        public static final String ATIVO = "ATIVO";
-        public static final String EXCLUIDO = "EXCLUIDO";
-        public static final String TABELA_PRECO = "TABELA_PRECO";
-        public static final String PARCELAMENTO = "PARCELAMENTO";
-        public static final String FORMA_PAGAMENTO = "FORMA_PAGAMENTO";
-        public static final String URL_IMAGEM = "URL_IMAGEM";
-        public static final String SYNC_PENDENTE= "SYNC_PENDENTE";
-
-        public static final String[] COLUNAS = new String[]{ID, IDEMPRESA,IDFILIAL,IDCLIENTE, NOME, APELIDO, TIPO_PESSOA, CPF_CNPJ, INSCRICAO, FONE_COMERCIAL,FONE_RESIDENCIAL,FONE_CELULAR, CEP, COMPLEMENTO,
-                OBSERVACAO,FAX,RUA,BAIRRO,NUMERO,EMAIL,DESCONTO_PADRAO,ATIVO, EXCLUIDO, TABELA_PRECO, PARCELAMENTO, FORMA_PAGAMENTO, URL_IMAGEM, SYNC_PENDENTE};
-    }
 }

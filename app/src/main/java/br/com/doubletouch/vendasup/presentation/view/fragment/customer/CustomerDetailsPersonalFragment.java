@@ -1,6 +1,7 @@
 package br.com.doubletouch.vendasup.presentation.view.fragment.customer;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -111,6 +112,8 @@ public class CustomerDetailsPersonalFragment extends ScrollTabHolderFragment  {
     @Optional
     TextView tv_customer_observation;
 
+    private Activity activity;
+
     public static Fragment newInstance(int position,boolean isEdition, Customer customer) {
         CustomerDetailsPersonalFragment fragment = new CustomerDetailsPersonalFragment();
         Bundle bundle = new Bundle();
@@ -130,10 +133,17 @@ public class CustomerDetailsPersonalFragment extends ScrollTabHolderFragment  {
     }
 
     @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        this.activity = activity;
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         if(isEdition){
-            sv_content = new ScrollView(getActivity());
+            sv_content = new ScrollView(activity);
             sv_content.setLayoutParams(new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.MATCH_PARENT));
             sv_content.setPadding(0,(int) getResources().getDimension(R.dimen.parallax_tab_height),0,0);
             View viewCustomerDetails = inflater.inflate( R.layout.view_customer_details_personal, null );
@@ -143,7 +153,7 @@ public class CustomerDetailsPersonalFragment extends ScrollTabHolderFragment  {
             sv_content.addView(viewCustomerDetails );
             return sv_content;
         } else {
-            lv_content = new ListView(getActivity());
+            lv_content = new ListView(activity);
             lv_content.setLayoutParams(new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.MATCH_PARENT));
 
             View placeHolderView = inflater.inflate(R.layout.component_parallax_header_placeholder, lv_content, false);
@@ -161,7 +171,7 @@ public class CustomerDetailsPersonalFragment extends ScrollTabHolderFragment  {
 
         } else {
             lv_content.setOnScrollListener(new OnScrollListner());
-            lv_content.setAdapter(new CustomerDetailsPersonalAdapter(getActivity()));
+            lv_content.setAdapter(new CustomerDetailsPersonalAdapter(activity));
         }
 
     }

@@ -2,7 +2,7 @@ package br.com.doubletouch.vendasup.presentation.presenter;
 
 import br.com.doubletouch.vendasup.data.entity.Product;
 import br.com.doubletouch.vendasup.domain.exception.ErrorBundle;
-import br.com.doubletouch.vendasup.domain.interactor.GetProductDetailsUseCase;
+import br.com.doubletouch.vendasup.domain.interactor.product.GetProductDetailsUseCase;
 import br.com.doubletouch.vendasup.presentation.exception.ErrorMessageFactory;
 import br.com.doubletouch.vendasup.presentation.view.ProductDetailsView;
 

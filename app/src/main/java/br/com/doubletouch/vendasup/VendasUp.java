@@ -12,6 +12,7 @@ import br.com.doubletouch.vendasup.domain.OauthAccess;
 public class VendasUp extends Application {
 
     public static Context context;
+    public static final String APP_TAG = "KRATOS";
 
 
     @Override

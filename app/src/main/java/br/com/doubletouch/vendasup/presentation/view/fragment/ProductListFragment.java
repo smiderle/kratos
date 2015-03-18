@@ -17,21 +17,14 @@ import android.widget.RelativeLayout;
 import java.util.List;
 
 import br.com.doubletouch.vendasup.R;
-import br.com.doubletouch.vendasup.data.database.ProductDatabase;
-import br.com.doubletouch.vendasup.data.database.ProductDatabaseImpl;
-import br.com.doubletouch.vendasup.data.database.ProductPersistence;
-import br.com.doubletouch.vendasup.data.database.sqlite.product.ProductSQLite;
 import br.com.doubletouch.vendasup.data.entity.Product;
 import br.com.doubletouch.vendasup.data.executor.JobExecutor;
-import br.com.doubletouch.vendasup.data.repository.ProductDataRepository;
-import br.com.doubletouch.vendasup.data.repository.datasource.ProductDataStoreFactory;
 import br.com.doubletouch.vendasup.domain.executor.PostExecutionThread;
 import br.com.doubletouch.vendasup.domain.executor.ThreadExecutor;
-import br.com.doubletouch.vendasup.domain.interactor.GetProductListFilterUseCase;
-import br.com.doubletouch.vendasup.domain.interactor.GetProductListFilterUseCaseImpl;
-import br.com.doubletouch.vendasup.domain.interactor.GetProductListUseCase;
-import br.com.doubletouch.vendasup.domain.interactor.GetProductListUseCaseImpl;
-import br.com.doubletouch.vendasup.domain.repository.ProductRepository;
+import br.com.doubletouch.vendasup.domain.interactor.product.GetProductListFilterUseCase;
+import br.com.doubletouch.vendasup.domain.interactor.product.GetProductListFilterUseCaseImpl;
+import br.com.doubletouch.vendasup.domain.interactor.product.GetProductListUseCase;
+import br.com.doubletouch.vendasup.domain.interactor.product.GetProductListUseCaseImpl;
 import br.com.doubletouch.vendasup.presentation.UIThread;
 import br.com.doubletouch.vendasup.presentation.presenter.ProductListPresenter;
 import br.com.doubletouch.vendasup.presentation.view.ProductListView;
@@ -132,14 +125,8 @@ public class ProductListFragment extends BaseFragment implements ProductListView
         ThreadExecutor threadExecutor = JobExecutor.getInstance();
         PostExecutionThread postExecutionThread = UIThread.getInstance();
 
-        ProductPersistence productPersistence = new ProductSQLite();
-
-        ProductDatabase productDatabase = new ProductDatabaseImpl(productPersistence);
-
-        ProductDataStoreFactory productDataStoreFactory  = new ProductDataStoreFactory(this.getContext(), productDatabase);
-        ProductRepository productRepository = ProductDataRepository.getInstace(productDataStoreFactory);
-        GetProductListUseCase getProductListUseCase = new GetProductListUseCaseImpl(productRepository, threadExecutor, postExecutionThread);
-        GetProductListFilterUseCase getProductListFilterUseCase = new GetProductListFilterUseCaseImpl(productRepository, threadExecutor, postExecutionThread);
+        GetProductListUseCase getProductListUseCase = new GetProductListUseCaseImpl( threadExecutor, postExecutionThread);
+        GetProductListFilterUseCase getProductListFilterUseCase = new GetProductListFilterUseCaseImpl( threadExecutor, postExecutionThread);
         this.productListPresenter = new ProductListPresenter(this,getProductListUseCase, getProductListFilterUseCase);
     }
 

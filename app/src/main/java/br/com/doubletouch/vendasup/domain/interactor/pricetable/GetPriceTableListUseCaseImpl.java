@@ -2,32 +2,31 @@ package br.com.doubletouch.vendasup.domain.interactor.pricetable;
 
 import java.util.Collection;
 
-import br.com.doubletouch.vendasup.VendasUp;
 import br.com.doubletouch.vendasup.data.entity.PriceTable;
+import br.com.doubletouch.vendasup.data.service.PriceTableServiceImpl;
 import br.com.doubletouch.vendasup.domain.exception.ErrorBundle;
 import br.com.doubletouch.vendasup.domain.executor.PostExecutionThread;
 import br.com.doubletouch.vendasup.domain.executor.ThreadExecutor;
-import br.com.doubletouch.vendasup.domain.repository.PriceTableRepository;
+import br.com.doubletouch.vendasup.domain.repository.PriceTableService;
 
 /**
  * Created by LADAIR on 10/03/2015.
  */
 public class GetPriceTableListUseCaseImpl implements GetPriceTableListUseCase {
 
-
-    private final PriceTableRepository priceTableRepository;
+    private final PriceTableService priceTableService;
     private final ThreadExecutor threadExecutor;
     private final PostExecutionThread postExecutionThread;
 
     private Callback callback;
 
-    public GetPriceTableListUseCaseImpl(PriceTableRepository priceTableRepository, ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread) {
+    public GetPriceTableListUseCaseImpl(ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread) {
 
-        if( priceTableRepository == null || threadExecutor == null || postExecutionThread == null){
+        if( threadExecutor == null || postExecutionThread == null ){
             throw  new IllegalArgumentException("Os parametros do construtor não podem ser nulos.");
         }
 
-        this.priceTableRepository = priceTableRepository;
+        this.priceTableService = new PriceTableServiceImpl();
         this.threadExecutor = threadExecutor;
         this.postExecutionThread = postExecutionThread;
 
@@ -35,16 +34,21 @@ public class GetPriceTableListUseCaseImpl implements GetPriceTableListUseCase {
 
     @Override
     public void execute(Callback callback) {
+        if (callback == null) {
+            throw new IllegalArgumentException("Parametros inválidos.");
+        }
 
+        this.callback = callback;
+        this.threadExecutor.execute(this);
     }
 
     @Override
     public void run() {
-        this.priceTableRepository.getPriceTableList(VendasUp.getUsuarioLogado().getBranchID(), this.priceTableListCallback);
+        this.priceTableService.getPriceTableList( this.priceTableListCallback );
     }
 
 
-    private final PriceTableRepository.PriceTableListCallback priceTableListCallback = new PriceTableRepository.PriceTableListCallback() {
+    private final PriceTableService.PriceTableListCallback priceTableListCallback = new PriceTableService.PriceTableListCallback() {
 
         @Override
         public void onPriceTableListLoaded(Collection<PriceTable> priceTableCollection) {

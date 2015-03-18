@@ -6,8 +6,8 @@ import java.util.List;
 import br.com.doubletouch.vendasup.VendasUp;
 import br.com.doubletouch.vendasup.data.entity.Product;
 import br.com.doubletouch.vendasup.domain.exception.ErrorBundle;
-import br.com.doubletouch.vendasup.domain.interactor.GetProductListFilterUseCase;
-import br.com.doubletouch.vendasup.domain.interactor.GetProductListUseCase;
+import br.com.doubletouch.vendasup.domain.interactor.product.GetProductListFilterUseCase;
+import br.com.doubletouch.vendasup.domain.interactor.product.GetProductListUseCase;
 import br.com.doubletouch.vendasup.presentation.exception.ErrorMessageFactory;
 import br.com.doubletouch.vendasup.presentation.view.ProductListView;
 
@@ -73,7 +73,7 @@ public class ProductListPresenter implements Presenter {
     }
 
     private void getProductListFilter(String filter){
-        this.getProductListFilterUseCase.execute(filter, filter, VendasUp.getUsuarioLogado().getBranchID(), productListFilterCallback);
+        this.getProductListFilterUseCase.execute(filter, filter, productListFilterCallback);
     }
 
     @Override

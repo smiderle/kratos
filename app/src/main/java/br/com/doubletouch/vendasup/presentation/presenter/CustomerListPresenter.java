@@ -3,11 +3,10 @@ package br.com.doubletouch.vendasup.presentation.presenter;
 import java.util.Collection;
 import java.util.List;
 
-import br.com.doubletouch.vendasup.VendasUp;
 import br.com.doubletouch.vendasup.data.entity.Customer;
 import br.com.doubletouch.vendasup.domain.exception.ErrorBundle;
-import br.com.doubletouch.vendasup.domain.interactor.GetCustomerListFilterUseCase;
-import br.com.doubletouch.vendasup.domain.interactor.GetCustomerListUseCase;
+import br.com.doubletouch.vendasup.domain.interactor.customer.GetCustomerListFilterUseCase;
+import br.com.doubletouch.vendasup.domain.interactor.customer.GetCustomerListUseCase;
 import br.com.doubletouch.vendasup.presentation.exception.ErrorMessageFactory;
 import br.com.doubletouch.vendasup.presentation.view.CustomerListView;
 
@@ -73,7 +72,7 @@ public class CustomerListPresenter implements Presenter {
     }
 
     private void getCustomerListFilter(String filter){
-        this.getCustomerListFilterUseCase.execute(filter, filter, VendasUp.getUsuarioLogado().getBranchID(), customerListFilterCallback);
+        this.getCustomerListFilterUseCase.execute(filter, filter, customerListFilterCallback);
     }
 
     @Override

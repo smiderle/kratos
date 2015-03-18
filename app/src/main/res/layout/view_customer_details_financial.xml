@@ -31,13 +31,29 @@
             android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
             android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
 
-        <TextView
-            android:id="@+id/tv_customer_price_table"
+        <ViewSwitcher
+            android:id="@+id/vs_customer_price_table"
             style="@style/AppTheme.TextViewSecundary"
-            android:text="@string/tv_default_customer_price_table"
             android:layout_below="@+id/tv_customer_price_table_title"
             android:layout_alignLeft="@+id/tv_customer_price_table_title"
-            android:layout_alignStart="@+id/tv_customer_price_table_title" />
+            android:layout_alignStart="@+id/tv_customer_price_table_title">
+
+            <TextView
+                android:id="@+id/tv_customer_price_table"
+                style="@style/AppTheme.TextViewSecundary"
+                android:text="@string/tv_default_customer_price_table"/>
+
+
+            <Spinner
+                android:id="@+id/sp_customer_price_table"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dialog"
+                android:prompt="@string/sp_title_price_table">
+
+
+            </Spinner>
+        </ViewSwitcher>
 
     </RelativeLayout>
 
@@ -68,13 +84,33 @@
             android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
             android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
 
-        <TextView
-            android:id="@+id/tv_customer_installment"
+        <ViewSwitcher
+            android:id="@+id/vs_customer_installment"
             style="@style/AppTheme.TextViewSecundary"
-            android:text="@string/tv_default_customer_installment"
             android:layout_below="@+id/tv_customer_installment_title"
             android:layout_alignLeft="@+id/tv_customer_installment_title"
-            android:layout_alignStart="@+id/tv_customer_installment_title" />
+            android:layout_alignStart="@+id/tv_customer_installment_title">
+
+
+            <TextView
+                android:id="@+id/tv_customer_installment"
+                style="@style/AppTheme.TextViewSecundary"
+                android:text="@string/tv_default_customer_installment" />
+
+            <Spinner
+                android:id="@+id/sp_customer_installment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dialog"
+                android:prompt="@string/sp_title_installment">
+
+
+            </Spinner>
+
+        </ViewSwitcher>
+
+
+
 
     </RelativeLayout>
 
@@ -103,13 +139,34 @@
             android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
             android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
 
-        <TextView
-            android:id="@+id/tv_customer_payment"
+        <ViewSwitcher
+            android:id="@+id/vs_customer_payment"
             style="@style/AppTheme.TextViewSecundary"
-            android:text="@string/tv_default_customer_payment"
             android:layout_below="@+id/tv_customer_payment_title"
             android:layout_alignLeft="@+id/tv_customer_payment_title"
-            android:layout_alignStart="@+id/tv_customer_payment_title" />
+            android:layout_alignStart="@+id/tv_customer_payment_title">
+
+            <TextView
+                android:id="@+id/tv_customer_payment"
+                style="@style/AppTheme.TextViewSecundary"
+                android:text="@string/tv_default_customer_payment" />
+
+            <Spinner
+                android:id="@+id/sp_customer_payment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dialog"
+                android:entries="@array/form_payment"
+                android:prompt="@string/sp_title_payment">
+
+            </Spinner>
+
+        </ViewSwitcher>
+
+
+
+
+
 
     </RelativeLayout>
 
@@ -138,13 +195,27 @@
             android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
             android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
 
-        <TextView
-            android:id="@+id/tv_customer_credit_limit"
+        <ViewSwitcher
+            android:id="@+id/vs_customer_credit_limit"
             style="@style/AppTheme.TextViewSecundary"
-            android:text="@string/tv_default_customer_credit_limit"
             android:layout_below="@+id/tv_customer_credit_limit_title"
             android:layout_alignLeft="@+id/tv_customer_credit_limit_title"
-            android:layout_alignStart="@+id/tv_customer_credit_limit_title" />
+            android:layout_alignStart="@+id/tv_customer_credit_limit_title" >
+
+            <TextView
+                android:id="@+id/tv_customer_credit_limit"
+                style="@style/AppTheme.TextViewSecundary"
+                android:text="@string/tv_default_customer_credit_limit"/>
+
+
+            <EditText
+                android:id="@+id/et_customer_credit_limit"
+                style="@style/AppTheme.TextViewSecundary"
+                android:inputType="numberDecimal"/>
+
+        </ViewSwitcher>
+
+
 
     </RelativeLayout>
 

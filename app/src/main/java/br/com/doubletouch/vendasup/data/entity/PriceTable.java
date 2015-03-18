@@ -101,22 +101,8 @@ public class PriceTable implements Serializable {
         this.excluded = excluded;
     }
 
-    public static final class PriceTableDB {
-
-        private PriceTableDB() {
-        }
-
-        public static final String TABELA = "TABELA_PRECO";
-        public static final String ID = "_id";
-        public static final String IDEMPRESA = "IDEMPRESA";
-        public static final String IDFILIAL = "IDFILIAL";
-        public static final String IDTABELAPRECO = "IDTABELAPRECO";
-        public static final String DESCRICAO = "DESCRICAO";
-        public static final String PERCENTAGE = "PERCENTAGE";
-        public static final String ACRESCIMO = "ACRESCIMO";
-        public static final String ATIVO = "ATIVO";
-        public static final String EXCLUIDO = "EXCLUIDO";
-
-        public static final String[] COLUNAS = new String[]{ID, IDEMPRESA, IDFILIAL, IDTABELAPRECO, DESCRICAO, PERCENTAGE, ACRESCIMO, ATIVO, EXCLUIDO};
+    @Override
+    public String toString() {
+        return getID() + " - " + getDescription();
     }
 }

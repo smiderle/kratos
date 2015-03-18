@@ -17,21 +17,14 @@ import android.widget.RelativeLayout;
 import java.util.List;
 
 import br.com.doubletouch.vendasup.R;
-import br.com.doubletouch.vendasup.data.database.CustomerDatabase;
-import br.com.doubletouch.vendasup.data.database.CustomerDatabaseImpl;
-import br.com.doubletouch.vendasup.data.database.CustomerPersistence;
-import br.com.doubletouch.vendasup.data.database.sqlite.product.CustomerSQLite;
 import br.com.doubletouch.vendasup.data.entity.Customer;
 import br.com.doubletouch.vendasup.data.executor.JobExecutor;
-import br.com.doubletouch.vendasup.data.repository.CustomerDataRepository;
-import br.com.doubletouch.vendasup.data.repository.datasource.CustomerDataStoreFactory;
 import br.com.doubletouch.vendasup.domain.executor.PostExecutionThread;
 import br.com.doubletouch.vendasup.domain.executor.ThreadExecutor;
-import br.com.doubletouch.vendasup.domain.interactor.GetCustomerListFilterUseCase;
-import br.com.doubletouch.vendasup.domain.interactor.GetCustomerListFilterUseCaseImpl;
-import br.com.doubletouch.vendasup.domain.interactor.GetCustomerListUseCase;
-import br.com.doubletouch.vendasup.domain.interactor.GetCustomerListUseCaseImpl;
-import br.com.doubletouch.vendasup.domain.repository.CustomerRepository;
+import br.com.doubletouch.vendasup.domain.interactor.customer.GetCustomerListFilterUseCase;
+import br.com.doubletouch.vendasup.domain.interactor.customer.GetCustomerListFilterUseCaseImpl;
+import br.com.doubletouch.vendasup.domain.interactor.customer.GetCustomerListUseCase;
+import br.com.doubletouch.vendasup.domain.interactor.customer.GetCustomerListUseCaseImpl;
 import br.com.doubletouch.vendasup.presentation.UIThread;
 import br.com.doubletouch.vendasup.presentation.presenter.CustomerListPresenter;
 import br.com.doubletouch.vendasup.presentation.view.CustomerListView;
@@ -133,14 +126,8 @@ public class CustomerListFragment extends BaseFragment implements CustomerListVi
         ThreadExecutor threadExecutor = JobExecutor.getInstance();
         PostExecutionThread postExecutionThread = UIThread.getInstance();
 
-        CustomerPersistence customerPersistence = new CustomerSQLite();
-
-        CustomerDatabase customerDatabase = new CustomerDatabaseImpl(customerPersistence);
-
-        CustomerDataStoreFactory customerDataStoreFactory  = new CustomerDataStoreFactory(this.getContext(), customerDatabase);
-        CustomerRepository customerRepository = CustomerDataRepository.getInstace(customerDataStoreFactory);
-        GetCustomerListUseCase getCustomerListUseCase = new GetCustomerListUseCaseImpl(customerRepository, threadExecutor, postExecutionThread);
-        GetCustomerListFilterUseCase getCustomerListFilterUseCase = new GetCustomerListFilterUseCaseImpl(customerRepository, threadExecutor, postExecutionThread);
+        GetCustomerListUseCase getCustomerListUseCase = new GetCustomerListUseCaseImpl( threadExecutor, postExecutionThread);
+        GetCustomerListFilterUseCase getCustomerListFilterUseCase = new GetCustomerListFilterUseCaseImpl( threadExecutor, postExecutionThread);
         this.customerListPresenter = new CustomerListPresenter(this,getCustomerListUseCase, getCustomerListFilterUseCase);
     }
 

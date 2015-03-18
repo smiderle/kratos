@@ -12,6 +12,8 @@ public interface Endpoints {
 
     public static final String ENDPOINT_PRODUTO = CONTEXT.concat(ENDPOINT_PRIVATE).concat(VERSION).concat("/product");
     public static final String ENDPOINT_CUSTOMER = CONTEXT.concat(ENDPOINT_PRIVATE).concat(VERSION).concat("/customer");
+    public static final String ENDPOINT_PRICE_TABLE = CONTEXT.concat(ENDPOINT_PRIVATE).concat(VERSION).concat("/priceTable");
+    public static final String ENDPOINT_INSTALLMENT = CONTEXT.concat(ENDPOINT_PRIVATE).concat(VERSION).concat("/installment");
 
     public static final String ENDPOINT_OAUTH = CONTEXT.concat("/oauth/token");
 }

@@ -1,5 +1,6 @@
 package br.com.doubletouch.vendasup.presentation.view.fragment.customer;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -68,6 +69,7 @@ public class CustomerDetailsContactFragment extends ScrollTabHolderFragment {
     @Optional
     TextView tv_customer_email;
 
+    private Activity activity;
 
     public static final String ARGS = "position";
     public static final String ARGS_CUSTOMER = "customer";
@@ -95,11 +97,19 @@ public class CustomerDetailsContactFragment extends ScrollTabHolderFragment {
         customer = (Customer) getArguments().getSerializable(ARGS_CUSTOMER);
     }
 
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        this.activity = activity;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         if(isEdition){
-            sv_content = new ScrollView(getActivity());
+            sv_content = new ScrollView(activity);
             sv_content.setLayoutParams(new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.MATCH_PARENT));
             sv_content.setPadding(0,(int) getResources().getDimension(R.dimen.parallax_tab_height),0,0);
 
@@ -110,7 +120,7 @@ public class CustomerDetailsContactFragment extends ScrollTabHolderFragment {
             sv_content.addView(viewCustomerDetails );
             return sv_content;
         } else {
-            lv_content = new ListView(getActivity());
+            lv_content = new ListView(activity);
             lv_content.setLayoutParams(new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.MATCH_PARENT));
 
             View placeHolderView = inflater.inflate(R.layout.component_parallax_header_placeholder, lv_content, false);
@@ -128,16 +138,19 @@ public class CustomerDetailsContactFragment extends ScrollTabHolderFragment {
             ((ViewSwitcher) view.findViewById(R.id.vs_customer_phone_home)).showNext();
             ((ViewSwitcher) view.findViewById(R.id.vs_customer_phone_comercial)).showNext();
             ((ViewSwitcher) view.findViewById(R.id.vs_customer_phone_cell)).showNext();
+            ((ViewSwitcher) view.findViewById(R.id.vs_customer_email)).showNext();
 
             et_customer_email.setText(customer.getEmail());
             et_customer_phone_cell.setText(customer.getCellPhone());
             et_customer_phone_commercial.setText(customer.getCommercialPhone());
             et_customer_phone_home.setText(customer.getHomePhone());
+            et_customer_email.setText(customer.getEmail());
         } else {
             tv_customer_email.setText(customer.getEmail());
             tv_customer_phone_cell.setText(customer.getCellPhone());
             tv_customer_phone_commercial.setText(customer.getCommercialPhone());
             tv_customer_phone_home.setText(customer.getHomePhone());
+            tv_customer_email.setText(customer.getEmail());
         }
 
     }
@@ -148,7 +161,7 @@ public class CustomerDetailsContactFragment extends ScrollTabHolderFragment {
 
         if(!isEdition){
             lv_content.setOnScrollListener(new OnScrollListner());
-            lv_content.setAdapter(new CustomerDetailsPersonalAdapter(getActivity()));
+            lv_content.setAdapter(new CustomerDetailsPersonalAdapter(activity));
         }
 
 

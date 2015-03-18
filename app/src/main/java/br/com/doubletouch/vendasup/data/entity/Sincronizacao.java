@@ -40,14 +40,5 @@ public class Sincronizacao {
         this.tableName = tableName;
     }
 
-    public static final class SincronizacaoDB {
 
-        private SincronizacaoDB(){}
-
-        public static final String TABELA = "SINCRONIZACAO";
-        public static final String NOME_TABELA = "NOME_TABELA";
-        public static final String ULTIMA_SINCRONIZACAO = "ULTIMA_SINCRONIZACAO";
-
-        public static final String[] COLUNAS = new String[]{ NOME_TABELA, ULTIMA_SINCRONIZACAO };
-    }
 }

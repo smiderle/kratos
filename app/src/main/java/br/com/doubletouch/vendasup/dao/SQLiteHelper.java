@@ -5,9 +5,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import br.com.doubletouch.vendasup.VendasUp;
-import br.com.doubletouch.vendasup.dao.script.CustomerSQL;
-import br.com.doubletouch.vendasup.dao.script.ProdutoSQL;
-import br.com.doubletouch.vendasup.dao.script.SincronizacaoSQL;
+import br.com.doubletouch.vendasup.data.database.script.InstallmentDB;
+import br.com.doubletouch.vendasup.data.database.script.SincronizacaoDB;
+import br.com.doubletouch.vendasup.data.database.script.ProductDB;
+import br.com.doubletouch.vendasup.data.database.script.PriceTableDB;
+import br.com.doubletouch.vendasup.data.database.script.CustomerDB;
 
 /**
  * Created by LADAIR on 26/01/2015.
@@ -49,9 +51,11 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     private String[] scripts(){
         return new String[]{
-                ProdutoSQL.create(),
-                SincronizacaoSQL.create(),
-                CustomerSQL.create()
+                ProductDB.create(),
+                SincronizacaoDB.create(),
+                CustomerDB.create(),
+                PriceTableDB.create(),
+                InstallmentDB.create(),
         };
 
     }

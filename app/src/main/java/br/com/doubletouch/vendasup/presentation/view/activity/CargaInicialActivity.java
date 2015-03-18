@@ -90,9 +90,16 @@ public class CargaInicialActivity extends ActionBarActivity {
     void onInitLoadClick(){
         try {
             Integracao integracao = new Integracao();
+
+            integracao.receberParcelamentos();
+
             integracao.receberProdutos();
 
             integracao.receberClientes();
+
+            integracao.receberTabelasPrecos();
+
+
         } catch (Exception e) {
             e.printStackTrace();
         }

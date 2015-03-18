@@ -1,6 +1,6 @@
 package br.com.doubletouch.vendasup.controller;
 
-import br.com.doubletouch.vendasup.dao.SincronizacaoDAO;
+import br.com.doubletouch.vendasup.data.database.dao.SincronizacaoDAO;
 import br.com.doubletouch.vendasup.data.entity.Sincronizacao;
 
 /**

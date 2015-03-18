@@ -1,11 +1,9 @@
 package br.com.doubletouch.vendasup.controller;
 
-import android.database.sqlite.SQLiteConstraintException;
-
 import java.util.List;
 
 
-import br.com.doubletouch.vendasup.data.database.sqlite.product.CustomerSQLite;
+import br.com.doubletouch.vendasup.data.database.dao.CustomerDAO;
 import br.com.doubletouch.vendasup.data.entity.Customer;
 
 /**
@@ -15,8 +13,8 @@ public class CustomerController {
 
     public void saveOrUpdate(List<Customer> customers){
 
-        CustomerSQLite customerSQLite= new CustomerSQLite();
-        customerSQLite.insert(customers);
+        CustomerDAO customerDAO = new CustomerDAO();
+        customerDAO.insert(customers);
 
     }
 

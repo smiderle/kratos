@@ -1,11 +1,11 @@
 package br.com.doubletouch.vendasup.presentation.view.fragment.customer;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.util.SparseArrayCompat;
 import android.support.v4.view.ViewPager;
@@ -21,31 +21,16 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import br.com.doubletouch.vendasup.R;
-import br.com.doubletouch.vendasup.data.database.CustomerDatabase;
-import br.com.doubletouch.vendasup.data.database.CustomerDatabaseImpl;
-import br.com.doubletouch.vendasup.data.database.CustomerPersistence;
-import br.com.doubletouch.vendasup.data.database.PriceTableDatabaseImpl;
-import br.com.doubletouch.vendasup.data.database.PriceTablePersistence;
-import br.com.doubletouch.vendasup.data.database.PricetableDatabase;
-import br.com.doubletouch.vendasup.data.database.sqlite.product.CustomerSQLite;
-import br.com.doubletouch.vendasup.data.database.sqlite.product.PriceTableSQLite;
 import br.com.doubletouch.vendasup.data.entity.Customer;
-import br.com.doubletouch.vendasup.data.entity.PriceTable;
 import br.com.doubletouch.vendasup.data.executor.JobExecutor;
-import br.com.doubletouch.vendasup.data.repository.CustomerDataRepository;
-import br.com.doubletouch.vendasup.data.repository.PriceTableDataRepository;
-import br.com.doubletouch.vendasup.data.repository.datasource.CustomerDataStoreFactory;
-import br.com.doubletouch.vendasup.data.repository.datasource.PriceTableDataStoreFactory;
 import br.com.doubletouch.vendasup.domain.executor.PostExecutionThread;
 import br.com.doubletouch.vendasup.domain.executor.ThreadExecutor;
-import br.com.doubletouch.vendasup.domain.interactor.GetCustomerDetailsUseCase;
-import br.com.doubletouch.vendasup.domain.interactor.GetCustomerDetailsUseCaseImpl;
-import br.com.doubletouch.vendasup.domain.interactor.SaveCustomerUseCase;
-import br.com.doubletouch.vendasup.domain.interactor.SaveCustomerUseCaseImpl;
+import br.com.doubletouch.vendasup.domain.interactor.customer.GetCustomerDetailsUseCase;
+import br.com.doubletouch.vendasup.domain.interactor.customer.GetCustomerDetailsUseCaseImpl;
+import br.com.doubletouch.vendasup.domain.interactor.customer.SaveCustomerUseCase;
+import br.com.doubletouch.vendasup.domain.interactor.customer.SaveCustomerUseCaseImpl;
 import br.com.doubletouch.vendasup.domain.interactor.pricetable.GetPriceTableListUseCase;
 import br.com.doubletouch.vendasup.domain.interactor.pricetable.GetPriceTableListUseCaseImpl;
-import br.com.doubletouch.vendasup.domain.repository.CustomerRepository;
-import br.com.doubletouch.vendasup.domain.repository.PriceTableRepository;
 import br.com.doubletouch.vendasup.presentation.UIThread;
 import br.com.doubletouch.vendasup.presentation.navigation.Navigator;
 import br.com.doubletouch.vendasup.presentation.presenter.CustomerDetailsPresenter;
@@ -106,6 +91,8 @@ public class CustomerDetailsFragment  extends BaseParallacxFragment implements C
 
     private Customer customer;
 
+    private Activity activity;
+
     public static CustomerDetailsFragment newInstance(Integer customerId, boolean isEditionMode){
         CustomerDetailsFragment customerDetailsFragment = new CustomerDetailsFragment();
         Bundle argumentsBundle = new Bundle();
@@ -124,6 +111,15 @@ public class CustomerDetailsFragment  extends BaseParallacxFragment implements C
         this.isEdition = getArguments().getBoolean(ARGUMENT_KEY_EDITION);
         imageLoader = new ImageLoader(getContext());
         navigator = new Navigator();
+
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        this.activity = activity;
+
 
     }
 
@@ -183,7 +179,7 @@ public class CustomerDetailsFragment  extends BaseParallacxFragment implements C
         Bundle bundle = new Bundle();
         bundle.putSerializable(CustomerDetailsPersonalFragment.ARGS_CUSTOMER, customer);
         returnIntent.putExtras(bundle);
-        getActivity().setResult(getActivity().RESULT_OK, returnIntent);
+        activity.setResult(activity.RESULT_OK, returnIntent);
 
 
         //Notifica todas os fragments filhos para valorizar os atributos com os dados alterados.
@@ -198,17 +194,17 @@ public class CustomerDetailsFragment  extends BaseParallacxFragment implements C
         CustomerDetailsFragment.this.customerDetailsPresenter.saveCustomer(customer);
 
         //Retorna para a view anterior.
-        getActivity().finish();
+        activity.finish();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
             case android.R.id.home:
-                navigator.previousActivity(getActivity());
+                navigator.previousActivity(activity);
                 break;
             case R.id.it_edit:
-                Intent it = CustomerDetailsActivity.getCallingIntent(getActivity(), customerId, true);
+                Intent it = CustomerDetailsActivity.getCallingIntent(activity, customerId, true);
                 startActivityForResult (it, 1 );
                 break;
             case R.id.it_done:
@@ -226,20 +222,9 @@ public class CustomerDetailsFragment  extends BaseParallacxFragment implements C
         ThreadExecutor threadExecutor = JobExecutor.getInstance();
         PostExecutionThread postExecutionThread = UIThread.getInstance();
 
-        CustomerPersistence customerPersistence = new CustomerSQLite();
-        PriceTablePersistence priceTablePersistence = new PriceTableSQLite();
-
-        CustomerDatabase customerDatabase = new CustomerDatabaseImpl(customerPersistence);
-
-        PricetableDatabase pricetableDatabase = new PriceTableDatabaseImpl(priceTablePersistence);
-
-        CustomerDataStoreFactory customerDataStoreFactory  = new CustomerDataStoreFactory(this.getContext(), customerDatabase);
-        PriceTableDataStoreFactory priceTableDataStoreFactory  = new PriceTableDataStoreFactory(this.getContext(), pricetableDatabase);
-        CustomerRepository customerRepository = CustomerDataRepository.getInstace(customerDataStoreFactory);
-        PriceTableRepository priceTableRepository = PriceTableDataRepository.getInstace(priceTableDataStoreFactory);
-        GetCustomerDetailsUseCase getCustomerDetailsUseCase = new GetCustomerDetailsUseCaseImpl(customerRepository, threadExecutor, postExecutionThread);
-        SaveCustomerUseCase saveCustomerUseCase = new SaveCustomerUseCaseImpl(customerRepository, threadExecutor, postExecutionThread);
-        GetPriceTableListUseCase getPriceTableListUseCase = new GetPriceTableListUseCaseImpl(priceTableRepository, threadExecutor, postExecutionThread);
+        GetCustomerDetailsUseCase getCustomerDetailsUseCase = new GetCustomerDetailsUseCaseImpl(threadExecutor, postExecutionThread);
+        SaveCustomerUseCase saveCustomerUseCase = new SaveCustomerUseCaseImpl(threadExecutor, postExecutionThread);
+        GetPriceTableListUseCase getPriceTableListUseCase = new GetPriceTableListUseCaseImpl(threadExecutor, postExecutionThread);
 
         customerDetailsPresenter = new CustomerDetailsPresenter(this, getCustomerDetailsUseCase, saveCustomerUseCase, getPriceTableListUseCase);
     }
@@ -267,15 +252,15 @@ public class CustomerDetailsFragment  extends BaseParallacxFragment implements C
 
     @Override
     public void customerSaved() {
-        Toast.makeText(getActivity(), "Cliente salvo com sucesso" ,Toast.LENGTH_LONG).show();
-        navigator.previousActivity(getActivity());
+        Toast.makeText(activity, "Cliente salvo com sucesso" ,Toast.LENGTH_LONG).show();
+        navigator.previousActivity(activity);
     }
 
     @Override
     public void showLoading() {
 
         this.rl_progress.setVisibility(View.VISIBLE);
-        this.getActivity().setProgressBarIndeterminateVisibility(true);
+        this.activity.setProgressBarIndeterminateVisibility(true);
 
 
     }
@@ -283,7 +268,7 @@ public class CustomerDetailsFragment  extends BaseParallacxFragment implements C
     @Override
     public void hideLoading() {
         this.rl_progress.setVisibility(View.GONE);
-        this.getActivity().setProgressBarIndeterminateVisibility(false);
+        this.activity.setProgressBarIndeterminateVisibility(false);
 
     }
 
@@ -316,7 +301,7 @@ public class CustomerDetailsFragment  extends BaseParallacxFragment implements C
 
     @Override
     public Context getContext() {
-        return getActivity().getApplicationContext();
+        return activity.getApplicationContext();
     }
 
     /**
@@ -360,7 +345,7 @@ public class CustomerDetailsFragment  extends BaseParallacxFragment implements C
                     fragment = (ScrollTabHolderFragment) CustomerDetailsAddressFragment.newInstance(position,isEdition, customer);
                     break;
                 case 3:
-                    fragment = (ScrollTabHolderFragment) CustomerDetailsFinancialFragment.newInstance(position, customer);
+                    fragment = (ScrollTabHolderFragment) CustomerDetailsFinancialFragment.newInstance(position,isEdition, customer);
                     break;
                 default:
                     //fragment = (ScrollTabHolderFragment) CustomerDetailsAddressFragment.newInstance(position,isEdition, customer);
@@ -450,4 +435,5 @@ public class CustomerDetailsFragment  extends BaseParallacxFragment implements C
 
         this.customerDetailsPresenter.initialize(this.customerId);
     }
+
 }

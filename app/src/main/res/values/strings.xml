@@ -90,10 +90,23 @@
 
 
     <string name="sp_title_customer_type">Tipo de pessoa</string>
+    <string name="sp_title_price_table">Tabela de Preço</string>
+    <string name="sp_title_installment">Forma de Parcelamento</string>
+    <string name="sp_title_payment">Forma de Pagamento</string>
 
     <string-array name="customer_type_array">
         <item>Física</item>
         <item>Jurídica</item>
     </string-array>
+
+    <string-array name="form_payment">
+        <item>Dinheiro</item>
+        <item>Cheque</item>
+        <item>Boleto</item>
+        <item>Cartão</item>
+        <item>Duplicata</item>
+        <item>Promissória</item>
+    </string-array>
+
     
 </resources>
