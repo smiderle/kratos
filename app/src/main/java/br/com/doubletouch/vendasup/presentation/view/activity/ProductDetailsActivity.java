@@ -3,10 +3,10 @@ package br.com.doubletouch.vendasup.presentation.view.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.Window;
 
 import br.com.doubletouch.vendasup.R;
+import br.com.doubletouch.vendasup.data.entity.enumeration.ViewMode;
 import br.com.doubletouch.vendasup.presentation.navigation.Navigator;
 import br.com.doubletouch.vendasup.presentation.view.fragment.ProductDetailsFragment;
 
@@ -20,17 +20,23 @@ public class ProductDetailsActivity extends BaseActivity {
 
     private static final String INTENT_EXTRA_PARAM_PRODUCT_ID = "kratos.INTENT_PARAM_PRODUCT_ID";
     private static final String INSTANCE_STATE_PARAM_PRODUCT_ID = "kratos.STATE_PARAM_PRODUCT_ID";
+    private static final String INTENT_EXTRA_PARAM_PRODUCT_EDITION_MODE = "kratos.INTENT_PARAM_PRODUCT_EDITION_MODE";
+    private static final String INSTANCE_STATE_PARAM_VIEW_MODE = "kratos.STATE_PARAM_PRODUCT_EDITION_MODE";
 
     private int productId;
 
-    public static Intent getCallingIntent(Context context, int productId){
+    private ViewMode viewMode;
+
+    public static Intent getCallingIntent(Context context, int productId, ViewMode viewMode){
         Intent callingIntent = new Intent(context, ProductDetailsActivity.class);
         callingIntent.putExtra(INTENT_EXTRA_PARAM_PRODUCT_ID, productId);
+        callingIntent.putExtra(INTENT_EXTRA_PARAM_PRODUCT_EDITION_MODE, viewMode);
         return callingIntent;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generic_details);
@@ -42,6 +48,7 @@ public class ProductDetailsActivity extends BaseActivity {
     protected void onSaveInstanceState(Bundle outState) {
         if(outState != null){
             outState.putInt(INSTANCE_STATE_PARAM_PRODUCT_ID, this.productId);
+            outState.putSerializable(INSTANCE_STATE_PARAM_VIEW_MODE, viewMode);
         }
         super.onSaveInstanceState(outState);
     }
@@ -49,20 +56,15 @@ public class ProductDetailsActivity extends BaseActivity {
     private void initializeActivity(Bundle savedInstanceState){
         if(savedInstanceState == null){
             this.productId = getIntent().getIntExtra(INTENT_EXTRA_PARAM_PRODUCT_ID, -1);
-            addFragment(R.id.fl_fragment, ProductDetailsFragment.newInstance(productId));
+            this.viewMode = (ViewMode) getIntent().getSerializableExtra(INTENT_EXTRA_PARAM_PRODUCT_EDITION_MODE);
+
+            addFragment(R.id.fl_fragment, ProductDetailsFragment.newInstance(productId, viewMode));
         } else {
             this.productId = savedInstanceState.getInt(INSTANCE_STATE_PARAM_PRODUCT_ID);
+            this.viewMode = (ViewMode) savedInstanceState.getSerializable(INSTANCE_STATE_PARAM_VIEW_MODE);
         }
 
         navigator = new Navigator();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home:
-                navigator.previousActivity(ProductDetailsActivity.this);
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

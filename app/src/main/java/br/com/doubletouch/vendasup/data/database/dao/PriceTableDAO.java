@@ -38,7 +38,8 @@ public class PriceTableDAO {
     public List<PriceTable> getAll(Integer branchId) {
         ArrayList<PriceTable> tabelas = new ArrayList<>();
         String where = PriceTableDB.IDFILIAL + " = ? AND " + PriceTableDB.EXCLUIDO +" = ?";
-        Cursor c = db.query(PriceTableDB.TABELA, PriceTableDB.COLUNAS, where, new String[]{String.valueOf(branchId), "0"}, null, null, null, null);
+        String orderBy = PriceTableDB.ID +" ASC ";
+        Cursor c = db.query(PriceTableDB.TABELA, PriceTableDB.COLUNAS, where, new String[]{String.valueOf(branchId), "0"}, null, null, orderBy, null);
 
         if(c.moveToFirst()){
             do {

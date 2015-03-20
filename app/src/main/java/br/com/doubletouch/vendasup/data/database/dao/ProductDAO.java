@@ -113,10 +113,11 @@ public class ProductDAO {
         cv.put(ProductDB.ID, product.getID());
         cv.put(ProductDB.IDEMPRESA, product.getOrganizationID());
         cv.put(ProductDB.IDFILIAL, product.getBranchID());
-        cv.put(ProductDB.IDPRODUTO, product.getProductID());
         cv.put(ProductDB.PRECO_VENDA, product.getSalePrice());
         cv.put(ProductDB.URL_IMAGEM, product.getPictureUrl());
         cv.put(ProductDB.REFERENCIA, product.getReference());
+        cv.put(ProductDB.ID_MOBILE, product.getIdMobile());
+        cv.put(ProductDB.SYNC_PENDENTE, product.isSyncPending());
 
         return cv;
     }
@@ -127,7 +128,6 @@ public class ProductDAO {
      * @return produto
      */
     private Product getByCursor(Cursor c){
-        int idxIdProduto = c.getColumnIndex(ProductDB.IDPRODUTO);
         int idxIdFilial = c.getColumnIndex(ProductDB.IDFILIAL);
         int idxId = c.getColumnIndex(ProductDB.ID);
         int idxIdEmpresa = c.getColumnIndex(ProductDB.IDEMPRESA);
@@ -140,11 +140,12 @@ public class ProductDAO {
         int idxExcluido = c.getColumnIndex(ProductDB.EXCLUIDO);
         int idxReferencia = c.getColumnIndex(ProductDB.REFERENCIA);
         int idxUrlImagen = c.getColumnIndex(ProductDB.URL_IMAGEM);
+        int idxIdMobile = c.getColumnIndex(ProductDB.ID_MOBILE);
+        int idxSyncPendente= c.getColumnIndex(ProductDB.SYNC_PENDENTE);
 
 
         Product product = new Product();
         product.setID(c.getInt(idxId));
-        product.setProductID(c.getString(idxIdProduto));
         product.setOrganizationID(c.getInt(idxIdEmpresa));
         product.setBranchID(c.getInt(idxIdFilial));
         product.setStockAmount(c.getDouble(idxEstoque));
@@ -156,6 +157,8 @@ public class ProductDAO {
         product.setDescription(c.getString(idxDescricao));
         product.setActive( c.getInt(idxAtivo) == 1 );
         product.setPackaging(c.getString(idxEmbalagem));
+        product.setIdMobile(c.getString(idxIdMobile));
+        product.setSyncPending(c.getInt( idxSyncPendente ) == 1);
 
         return product;
     }

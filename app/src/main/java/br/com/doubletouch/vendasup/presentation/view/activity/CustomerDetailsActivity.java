@@ -3,9 +3,8 @@ package br.com.doubletouch.vendasup.presentation.view.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.widget.Toast;
 
+import br.com.doubletouch.vendasup.data.entity.enumeration.ViewMode;
 import br.com.doubletouch.vendasup.presentation.navigation.Navigator;
 
 import br.com.doubletouch.vendasup.R;
@@ -18,17 +17,19 @@ public class CustomerDetailsActivity extends BaseParallaxActivity {
 
     private static final String INSTANCE_STATE_PARAM_CUSTOMER__ID = "kratos.STATE_PARAM_CUSTOMER_ID";
     private static final String INTENT_EXTRA_PARAM_CUSTOMER_ID = "kratos.INTENT_PARAM_CUSTOMER_ID";
-    private static final String INTENT_EXTRA_PARAM_CUSTOMER_EDITION_MODE = "kratos.INTENT_PARAM_CUSTOMER_EDITION_MODE";
+    private static final String INTENT_EXTRA_PARAM_CUSTOMER_VIEW_MODE = "kratos.INTENT_PARAM_CUSTOMER_EDITION_MODE";
     private static final String INSTANCE_STATE_PARAM_CUSTOMER_EDITION_MODE = "kratos.STATE_PARAM_CUSTOMER_EDITION_MODE";
 
     private int customerId;
-    private boolean editionMode;
+
     private Navigator navigator;
 
-    public static Intent getCallingIntent(Context context, int customerId, boolean editionMode){
+    private ViewMode viewMode;
+
+    public static Intent getCallingIntent(Context context, int customerId, ViewMode viewMode){
         Intent callingIntent = new Intent(context, CustomerDetailsActivity.class);
         callingIntent.putExtra(INTENT_EXTRA_PARAM_CUSTOMER_ID, customerId);
-        callingIntent.putExtra(INTENT_EXTRA_PARAM_CUSTOMER_EDITION_MODE, editionMode);
+        callingIntent.putExtra(INTENT_EXTRA_PARAM_CUSTOMER_VIEW_MODE, viewMode);
         return callingIntent;
     }
 
@@ -45,7 +46,7 @@ public class CustomerDetailsActivity extends BaseParallaxActivity {
     protected void onSaveInstanceState(Bundle outState) {
         if(outState != null){
             outState.putInt(INSTANCE_STATE_PARAM_CUSTOMER__ID, this.customerId);
-            outState.putBoolean(INSTANCE_STATE_PARAM_CUSTOMER_EDITION_MODE, this.editionMode);
+            outState.putSerializable(INSTANCE_STATE_PARAM_CUSTOMER_EDITION_MODE, this.viewMode);
         }
         super.onSaveInstanceState(outState);
     }
@@ -54,12 +55,13 @@ public class CustomerDetailsActivity extends BaseParallaxActivity {
     private void initializeActivity( Bundle savedInstanceState ){
         if(savedInstanceState == null){
             this.customerId = getIntent().getIntExtra(INTENT_EXTRA_PARAM_CUSTOMER_ID, -1);
-            this.editionMode = getIntent().getBooleanExtra(INTENT_EXTRA_PARAM_CUSTOMER_EDITION_MODE, false);
+            viewMode = (ViewMode) getIntent().getSerializableExtra(INTENT_EXTRA_PARAM_CUSTOMER_VIEW_MODE);
 
-            addFragment(R.id.fl_fragment, CustomerDetailsFragment.newInstance(customerId, editionMode));
+            addFragment(R.id.fl_fragment, CustomerDetailsFragment.newInstance(customerId, viewMode));
         } else {
             this.customerId = savedInstanceState.getInt(INSTANCE_STATE_PARAM_CUSTOMER__ID);
-            this.editionMode = savedInstanceState.getBoolean(INSTANCE_STATE_PARAM_CUSTOMER_EDITION_MODE);
+            viewMode = (ViewMode) savedInstanceState.getSerializable(INTENT_EXTRA_PARAM_CUSTOMER_VIEW_MODE);
+
         }
 
         navigator = new Navigator();

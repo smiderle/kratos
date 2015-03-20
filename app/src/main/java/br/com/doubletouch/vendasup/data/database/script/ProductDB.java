@@ -16,9 +16,9 @@ public final class ProductDB {
     public static String create(){
         String SQL = "CREATE TABLE IF NOT EXISTS "+ TABELA+" (" +
                 ID + " INTEGER NOT NULL , " +
+                ID_MOBILE + " TEXT , " +
                 IDEMPRESA+ " INTEGER NOT NULL , "+
                 IDFILIAL+ " INTEGER NOT NULL , " +
-                IDPRODUTO + " TEXT, " +
                 DESCRICAO + " TEXT NOT NULL,"+
                 REFERENCIA +  " TEXT,"+
                 EMBALAGEM + " TEXT,"+
@@ -28,13 +28,14 @@ public final class ProductDB {
                 ATIVO + " BOOLEAN," +
                 EXCLUIDO + " BOOLEAN,"+
                 URL_IMAGEM + " TEXT ,"+
+                SYNC_PENDENTE + " BOOLEAN,"+
                 "PRIMARY KEY( "+ ID +" )  );";
         return SQL;
     }
 
     public static final String TABELA = "PRODUTO";
     public static final String ID = "_id";
-    public static final String IDPRODUTO = "IDPRODUTO";
+    public static final String ID_MOBILE = "ID_MOBILE";
     public static final String IDEMPRESA = "IDEMPRESA";
     public static final String IDFILIAL = "IDFILIAL";
     public static final String DESCRICAO = "DESCRICAO";
@@ -46,7 +47,8 @@ public final class ProductDB {
     public static final String ATIVO = "ATIVO";
     public static final String EXCLUIDO = "EXCLUIDO";
     public static final String URL_IMAGEM = "URL_IMAGEM";
+    public static final String SYNC_PENDENTE= "SYNC_PENDENTE";
 
-    public static final String[] COLUNAS = new String[]{ID, IDEMPRESA,IDFILIAL,IDPRODUTO, DESCRICAO, REFERENCIA, EMBALAGEM, PRECO_VENDA, CODBAR, ESTOQUE,ATIVO, EXCLUIDO, URL_IMAGEM };
+    public static final String[] COLUNAS = new String[]{ID, IDEMPRESA,IDFILIAL, DESCRICAO, REFERENCIA, EMBALAGEM, PRECO_VENDA, CODBAR, ESTOQUE,ATIVO, EXCLUIDO,ID_MOBILE, URL_IMAGEM, SYNC_PENDENTE };
 
 }

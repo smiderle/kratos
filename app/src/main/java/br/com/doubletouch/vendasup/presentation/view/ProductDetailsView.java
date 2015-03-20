@@ -13,4 +13,6 @@ public interface ProductDetailsView extends  LoadDataView {
      * @param product
      */
     void renderProduct(Product product);
+
+    void productSaved();
 }

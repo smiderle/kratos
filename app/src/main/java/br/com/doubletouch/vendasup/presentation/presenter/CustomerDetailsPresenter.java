@@ -4,16 +4,18 @@ import android.util.Log;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
+import br.com.doubletouch.vendasup.VendasUp;
 import br.com.doubletouch.vendasup.data.entity.Customer;
 import br.com.doubletouch.vendasup.data.entity.PriceTable;
+import br.com.doubletouch.vendasup.data.entity.enumeration.PersonType;
 import br.com.doubletouch.vendasup.domain.exception.ErrorBundle;
 import br.com.doubletouch.vendasup.domain.interactor.customer.GetCustomerDetailsUseCase;
 import br.com.doubletouch.vendasup.domain.interactor.customer.SaveCustomerUseCase;
 import br.com.doubletouch.vendasup.domain.interactor.pricetable.GetPriceTableListUseCase;
 import br.com.doubletouch.vendasup.presentation.exception.ErrorMessageFactory;
 import br.com.doubletouch.vendasup.presentation.view.CustomerDetailsView;
-import br.com.doubletouch.vendasup.presentation.view.fragment.CustomerDetailsFinancial;
 
 /**
  * Created by LADAIR on 23/02/2015.
@@ -98,6 +100,21 @@ public class CustomerDetailsPresenter implements Presenter {
 
     private void customerSaved(){
         this.customerDetailsView.customerSaved();
+    }
+
+
+    public void createNewCustomer() {
+        Customer customer = new Customer();
+        customer.setCreditLimit(1000.00);
+        customer.setFormPayment(1);
+        customer.setPersonType(PersonType.FISICA.ordinal());
+        customer.setBranchID(VendasUp.getUsuarioLogado().getBranchID());
+        customer.setOrganizationID(VendasUp.getUsuarioLogado().getOrganizationID());
+        customer.setActive(true);
+        customer.setExcluded(false);
+        customer.setIdMobile(UUID.randomUUID().toString());
+
+        showCustomerDetailsInView(customer);
     }
 
     private void getCustomerDetails(){

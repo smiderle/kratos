@@ -9,6 +9,7 @@ import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -18,6 +19,7 @@ import java.util.List;
 
 import br.com.doubletouch.vendasup.R;
 import br.com.doubletouch.vendasup.data.entity.Customer;
+import br.com.doubletouch.vendasup.data.entity.enumeration.ViewMode;
 import br.com.doubletouch.vendasup.data.executor.JobExecutor;
 import br.com.doubletouch.vendasup.domain.executor.PostExecutionThread;
 import br.com.doubletouch.vendasup.domain.executor.ThreadExecutor;
@@ -26,6 +28,7 @@ import br.com.doubletouch.vendasup.domain.interactor.customer.GetCustomerListFil
 import br.com.doubletouch.vendasup.domain.interactor.customer.GetCustomerListUseCase;
 import br.com.doubletouch.vendasup.domain.interactor.customer.GetCustomerListUseCaseImpl;
 import br.com.doubletouch.vendasup.presentation.UIThread;
+import br.com.doubletouch.vendasup.presentation.navigation.Navigator;
 import br.com.doubletouch.vendasup.presentation.presenter.CustomerListPresenter;
 import br.com.doubletouch.vendasup.presentation.view.CustomerListView;
 import br.com.doubletouch.vendasup.presentation.view.adapter.KratosLayoutManager;
@@ -68,13 +71,21 @@ public class CustomerListFragment extends BaseFragment implements CustomerListVi
         super();
     }
 
+    private Navigator navigator;
+
+    private Activity activity;
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         if(activity instanceof CustomerListListener){
             this.customerListListener = (CustomerListListener) activity;
         }
+
+        this.activity = activity;
     }
+
+
 
     @Nullable
     @Override
@@ -83,6 +94,8 @@ public class CustomerListFragment extends BaseFragment implements CustomerListVi
         View fragmentView = inflater.inflate(R.layout.fragment_customer_list, container, true);
         ButterKnife.inject(this, fragmentView);
         setupUI();
+
+        navigator = new Navigator();
 
         return fragmentView;
     }
@@ -119,6 +132,23 @@ public class CustomerListFragment extends BaseFragment implements CustomerListVi
                 return false;
             }
         });
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                navigator.previousActivity(activity);
+                break;
+            case R.id.add:
+                navigator.navigateToCustomerDetails(activity, 0, ViewMode.INCLUSAO);
+
+                break;
+            default:
+                super.onOptionsItemSelected(item);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

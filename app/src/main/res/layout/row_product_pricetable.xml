@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="UseCompoundDrawables"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/lv_row_padding_top"
+    android:paddingBottom="@dimen/lv_row_padding_botton"
+    android:paddingLeft="@dimen/activity_padding_left"
+    android:paddingRight="@dimen/activity_padding_right"
+    android:background="@drawable/selector_listview">
+
+    <TextView
+        android:id="@+id/tv_price_table"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tabela de Preço"
+        style="@style/AppTheme.TextViewInListViewPrimary"/>
+
+
+    <TextView
+        android:id="@+id/tv_product_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="R$ 25,00"
+        style="@style/AppTheme.TextViewInListViewPrimary"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+
+</RelativeLayout>

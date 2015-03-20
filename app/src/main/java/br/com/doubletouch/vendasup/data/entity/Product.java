@@ -2,15 +2,16 @@ package br.com.doubletouch.vendasup.data.entity;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Entidade produto utilizado na camada data.
  * Created by LADAIR on 26/01/2015.
  */
-public class Product {
+public class Product implements Serializable{
 
     @SerializedName("id")
     private Integer ID;
-    private String productID;
     private Integer organizationID;
     private Integer branchID;
     private String description;
@@ -22,6 +23,12 @@ public class Product {
     private Boolean active;
     private Boolean excluded;
     private String pictureUrl;
+    private boolean syncPending;
+
+    /**
+     * Código que é gravado quando um cliente é inserido pelo mobile. Para poder fazer um update, posteriormente, quando for inserido no banco de dados postgresql com um novo id.
+     */
+    private String idMobile;
 
     public Integer getID() {
         return ID;
@@ -31,13 +38,6 @@ public class Product {
         this.ID = ID;
     }
 
-    public String getProductID() {
-        return productID;
-    }
-
-    public void setProductID(String productID) {
-        this.productID = productID;
-    }
 
     public Integer getOrganizationID() {
         return organizationID;
@@ -127,16 +127,27 @@ public class Product {
         this.pictureUrl = pictureUrl;
     }
 
+
+    public String getIdMobile() {
+        return idMobile;
+    }
+
+    public void setIdMobile(String idMobile) {
+        this.idMobile = idMobile;
+    }
+
+    public boolean isSyncPending() {
+        return syncPending;
+    }
+
+    public void setSyncPending(boolean syncPending) {
+        this.syncPending = syncPending;
+    }
+
     public String getProductIdAndDescription(){
-        if(productID != null && description != null){
-            return this.productID+" - "+ this.description;
-        }
 
-        if(productID == null && description != null){
-            return this.description;
-        }
+        return this.getID()+" - "+ this.description;
 
-        return "";
     }
 
 }

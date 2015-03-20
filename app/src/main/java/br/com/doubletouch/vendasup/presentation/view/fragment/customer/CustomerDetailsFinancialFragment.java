@@ -25,6 +25,7 @@ import br.com.doubletouch.vendasup.R;
 import br.com.doubletouch.vendasup.data.entity.Customer;
 import br.com.doubletouch.vendasup.data.entity.Installment;
 import br.com.doubletouch.vendasup.data.entity.PriceTable;
+import br.com.doubletouch.vendasup.data.entity.enumeration.ViewMode;
 import br.com.doubletouch.vendasup.data.executor.JobExecutor;
 import br.com.doubletouch.vendasup.domain.executor.PostExecutionThread;
 import br.com.doubletouch.vendasup.domain.executor.ThreadExecutor;
@@ -38,7 +39,7 @@ import br.com.doubletouch.vendasup.domain.interactor.pricetable.GetPriceTableUse
 import br.com.doubletouch.vendasup.domain.interactor.pricetable.GetPriceTableUseCaseImpl;
 import br.com.doubletouch.vendasup.presentation.UIThread;
 import br.com.doubletouch.vendasup.presentation.presenter.CustomerDetailsFinancialPresenter;
-import br.com.doubletouch.vendasup.presentation.view.adapter.CustomerDetailsBaseAdapter;
+import br.com.doubletouch.vendasup.presentation.view.adapter.DetailsBaseAdapter;
 import br.com.doubletouch.vendasup.presentation.view.components.parallax.ScrollTabHolderFragment;
 import br.com.doubletouch.vendasup.presentation.view.fragment.CustomerDetailsFinancial;
 import br.com.doubletouch.vendasup.util.DoubleUtil;
@@ -95,20 +96,21 @@ public class CustomerDetailsFinancialFragment extends ScrollTabHolderFragment im
 
     public static final String ARGS = "position";
     public static final String ARGS_CUSTOMER = "customer";
-    public static final String ARGS_STATE_EDITION = "state_edition";
+    public static final String ARGS_VIEW_MODE = "view_mode";
     private int position;
-    private boolean isEdition;
     private Customer customer;
 
     private CustomerDetailsFinancialPresenter customerDetailsFinancialPresenter;
 
     private Activity activity;
 
-    public static Fragment newInstance(int position, boolean isEdition, Customer customer) {
+    private ViewMode viewMode;
+
+    public static Fragment newInstance(int position, ViewMode viewMode, Customer customer) {
         CustomerDetailsFinancialFragment fragment = new CustomerDetailsFinancialFragment();
         Bundle bundle = new Bundle();
         bundle.putInt(ARGS, position);
-        bundle.putBoolean(ARGS_STATE_EDITION, isEdition);
+        bundle.putSerializable(ARGS_VIEW_MODE, viewMode);
         bundle.putSerializable(ARGS_CUSTOMER, customer);
         fragment.setArguments(bundle);
         return fragment;
@@ -118,7 +120,7 @@ public class CustomerDetailsFinancialFragment extends ScrollTabHolderFragment im
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         position = getArguments().getInt(ARGS);
-        isEdition = getArguments().getBoolean(ARGS_STATE_EDITION);
+        viewMode = (ViewMode) getArguments().getSerializable(ARGS_VIEW_MODE);
         customer = (Customer) getArguments().getSerializable(ARGS_CUSTOMER);
 
         initializePresenter();
@@ -147,9 +149,7 @@ public class CustomerDetailsFinancialFragment extends ScrollTabHolderFragment im
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-
-
-        if(isEdition){
+        if( ViewMode.EDICAO.equals(viewMode) || ViewMode.INCLUSAO.equals(viewMode)){
             sv_content = new ScrollView(activity);
             sv_content.setLayoutParams(new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.MATCH_PARENT));
             sv_content.setPadding(0,(int) getResources().getDimension(R.dimen.parallax_tab_height),0,0);
@@ -180,10 +180,10 @@ public class CustomerDetailsFinancialFragment extends ScrollTabHolderFragment im
         super.onActivityCreated(savedInstanceState);
 
 
-        if(!isEdition) {
+        if( ViewMode.VISUALIZACAO.equals(viewMode)){
 
             lv_content.setOnScrollListener(new OnScrollListner());
-            lv_content.setAdapter(new CustomerDetailsPersonalAdapter(activity));
+            lv_content.setAdapter(new DetailsPersonalAdapter(activity));
         }
 
 
@@ -199,7 +199,8 @@ public class CustomerDetailsFinancialFragment extends ScrollTabHolderFragment im
     }
 
     @Override
-    public void setAtributes(Customer customer) {
+    public void setAtributes(Object object) {
+        Customer customer = (Customer) object;
         PriceTable priceTable = (PriceTable) sp_customer_price_table.getSelectedItem();
         customer.setPriceTable(priceTable.getID());
 
@@ -316,7 +317,7 @@ public class CustomerDetailsFinancialFragment extends ScrollTabHolderFragment im
 
         ButterKnife.inject(this, view);
 
-        if(isEdition){
+        if( ViewMode.EDICAO.equals(viewMode) || ViewMode.INCLUSAO.equals(viewMode)){
             ((ViewSwitcher) view.findViewById(R.id.vs_customer_price_table)).showNext();
             ((ViewSwitcher) view.findViewById(R.id.vs_customer_installment)).showNext();
             ((ViewSwitcher) view.findViewById(R.id.vs_customer_payment)).showNext();
@@ -343,11 +344,11 @@ public class CustomerDetailsFinancialFragment extends ScrollTabHolderFragment im
     /**
      * Adapter para o listview(somente com uma linha) com os dados pessoais
      */
-    public class CustomerDetailsPersonalAdapter extends CustomerDetailsBaseAdapter {
+    public class DetailsPersonalAdapter extends DetailsBaseAdapter {
 
         private Context context;
 
-        public CustomerDetailsPersonalAdapter(Context context) {
+        public DetailsPersonalAdapter(Context context) {
             this.context = context;
         }
 

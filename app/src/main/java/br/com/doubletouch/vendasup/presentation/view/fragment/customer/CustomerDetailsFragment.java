@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import br.com.doubletouch.vendasup.R;
 import br.com.doubletouch.vendasup.data.entity.Customer;
+import br.com.doubletouch.vendasup.data.entity.enumeration.ViewMode;
 import br.com.doubletouch.vendasup.data.executor.JobExecutor;
 import br.com.doubletouch.vendasup.domain.executor.PostExecutionThread;
 import br.com.doubletouch.vendasup.domain.executor.ThreadExecutor;
@@ -37,7 +38,6 @@ import br.com.doubletouch.vendasup.presentation.presenter.CustomerDetailsPresent
 import br.com.doubletouch.vendasup.presentation.view.CustomerDetailsView;
 import br.com.doubletouch.vendasup.presentation.view.ViewHelper;
 import br.com.doubletouch.vendasup.presentation.view.activity.BaseParallacxFragment;
-import br.com.doubletouch.vendasup.presentation.view.activity.CustomerDetailsActivity;
 import br.com.doubletouch.vendasup.presentation.view.components.PagerSlidingTabStrip;
 import br.com.doubletouch.vendasup.presentation.view.components.parallax.ScrollTabHolder;
 import br.com.doubletouch.vendasup.presentation.view.components.parallax.ScrollTabHolderFragment;
@@ -53,7 +53,7 @@ public class CustomerDetailsFragment  extends BaseParallacxFragment implements C
 
 
     private static final String ARGUMENT_KEY_CUSTOMER_ID = "kratos.INTENT_EXTRA_PARAM_CUSTOMER_ID";
-    private static final String ARGUMENT_KEY_EDITION = "kratos.INTENT_EXTRA_PARAM_EDITION";
+    private static final String ARGUMENT_KEY_VIEW_MODE = "kratos.INTENT_EXTRA_PARAM_EDITION";
 
     private final int PAGES_NUMER = 4;
 
@@ -87,17 +87,18 @@ public class CustomerDetailsFragment  extends BaseParallacxFragment implements C
 
     MenuItem menuEdit;
 
-    private boolean isEdition;
 
     private Customer customer;
 
     private Activity activity;
 
-    public static CustomerDetailsFragment newInstance(Integer customerId, boolean isEditionMode){
+    private ViewMode viewMode;
+
+    public static CustomerDetailsFragment newInstance(Integer customerId, ViewMode viewMode){
         CustomerDetailsFragment customerDetailsFragment = new CustomerDetailsFragment();
         Bundle argumentsBundle = new Bundle();
         argumentsBundle.putInt(ARGUMENT_KEY_CUSTOMER_ID, customerId);
-        argumentsBundle.putBoolean(ARGUMENT_KEY_EDITION, isEditionMode);
+        argumentsBundle.putSerializable(ARGUMENT_KEY_VIEW_MODE, viewMode);
         customerDetailsFragment.setArguments(argumentsBundle);
         return customerDetailsFragment;
     }
@@ -108,7 +109,7 @@ public class CustomerDetailsFragment  extends BaseParallacxFragment implements C
         super.onCreate(savedInstanceState);
 
         this.customerId = getArguments().getInt(ARGUMENT_KEY_CUSTOMER_ID);
-        this.isEdition = getArguments().getBoolean(ARGUMENT_KEY_EDITION);
+        this.viewMode = (ViewMode) getArguments().getSerializable(ARGUMENT_KEY_VIEW_MODE);
         imageLoader = new ImageLoader(getContext());
         navigator = new Navigator();
 
@@ -120,14 +121,13 @@ public class CustomerDetailsFragment  extends BaseParallacxFragment implements C
 
         this.activity = activity;
 
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View fragmentView;
 
-        if(isEdition){
+        if( ViewMode.EDICAO.equals( viewMode ) || ViewMode.INCLUSAO.equals( viewMode ) ) {
             fragmentView = inflater.inflate(R.layout.fragment_customer_details_form, container, false);
         } else {
             fragmentView = inflater.inflate(R.layout.fragment_customer_details, container, false);
@@ -143,7 +143,23 @@ public class CustomerDetailsFragment  extends BaseParallacxFragment implements C
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        this.customerDetailsPresenter.initialize(this.customerId);
+
+        switch (viewMode){
+            case EDICAO:
+                this.customerDetailsPresenter.initialize(this.customerId);
+                break;
+            case VISUALIZACAO:
+                this.customerDetailsPresenter.initialize(this.customerId);
+                break;
+            case INCLUSAO:
+                this.customerDetailsPresenter.createNewCustomer();
+                break;
+            default:
+                break;
+        }
+
+
+
 
         setHasOptionsMenu(true);
 
@@ -158,7 +174,7 @@ public class CustomerDetailsFragment  extends BaseParallacxFragment implements C
         //Carrega o arquivo de menu.
         inflater.inflate(R.menu.menu_details_view, menu);
 
-        if(isEdition){
+        if( ViewMode.EDICAO.equals( viewMode ) || ViewMode.INCLUSAO.equals( viewMode ) ) {
             menuEdit = menu.findItem(R.id.it_edit).setVisible(false);
             menu.findItem(R.id.it_done).setVisible(true);
         } else {
@@ -193,8 +209,7 @@ public class CustomerDetailsFragment  extends BaseParallacxFragment implements C
         customer.setSyncPending(true);
         CustomerDetailsFragment.this.customerDetailsPresenter.saveCustomer(customer);
 
-        //Retorna para a view anterior.
-        activity.finish();
+        navigator.previousActivity(activity);
     }
 
     @Override
@@ -204,8 +219,7 @@ public class CustomerDetailsFragment  extends BaseParallacxFragment implements C
                 navigator.previousActivity(activity);
                 break;
             case R.id.it_edit:
-                Intent it = CustomerDetailsActivity.getCallingIntent(activity, customerId, true);
-                startActivityForResult (it, 1 );
+                navigator.navigateToCustomerDetailsForResult(activity, customerId, ViewMode.EDICAO);
                 break;
             case R.id.it_done:
                 saveCustomer();
@@ -231,7 +245,8 @@ public class CustomerDetailsFragment  extends BaseParallacxFragment implements C
 
     @Override
     public void renderCustomer(Customer customer) {
-        if(!isEdition){
+
+        if( ViewMode.VISUALIZACAO.equals( viewMode )  ) {
             imageLoader.displayImage(customer.getPictureUrl(), this.iv_header);
         }
 
@@ -336,16 +351,16 @@ public class CustomerDetailsFragment  extends BaseParallacxFragment implements C
 
             switch (position){
                 case 0:
-                    fragment = (ScrollTabHolderFragment) CustomerDetailsPersonalFragment.newInstance(position,isEdition, customer);
+                    fragment = (ScrollTabHolderFragment) CustomerDetailsPersonalFragment.newInstance(position,viewMode, customer);
                     break;
                 case 1:
-                    fragment = (ScrollTabHolderFragment) CustomerDetailsContactFragment.newInstance(position,isEdition, customer);
+                    fragment = (ScrollTabHolderFragment) CustomerDetailsContactFragment.newInstance(position,viewMode, customer);
                     break;
                 case 2:
-                    fragment = (ScrollTabHolderFragment) CustomerDetailsAddressFragment.newInstance(position,isEdition, customer);
+                    fragment = (ScrollTabHolderFragment) CustomerDetailsAddressFragment.newInstance(position,viewMode, customer);
                     break;
                 case 3:
-                    fragment = (ScrollTabHolderFragment) CustomerDetailsFinancialFragment.newInstance(position,isEdition, customer);
+                    fragment = (ScrollTabHolderFragment) CustomerDetailsFinancialFragment.newInstance(position,viewMode, customer);
                     break;
                 default:
                     //fragment = (ScrollTabHolderFragment) CustomerDetailsAddressFragment.newInstance(position,isEdition, customer);
@@ -386,14 +401,15 @@ public class CustomerDetailsFragment  extends BaseParallacxFragment implements C
 
         @Override
         public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount, int pagePosition) {
-            if (!isEdition && vp_header.getCurrentItem() == pagePosition) {
+            if ( ViewMode.VISUALIZACAO.equals( viewMode )  && vp_header.getCurrentItem() == pagePosition) {
                 int scrollY = getScrollY(view);
                 ViewHelper.setTranslationY(fl_header, Math.max(-scrollY, mMinHeaderTranslation));
             }
         }
 
         @Override
-        public void setAtributes(Customer customer) {
+        public void setAtributes(Object object) {
+
 
         }
     }
@@ -414,7 +430,7 @@ public class CustomerDetailsFragment  extends BaseParallacxFragment implements C
             SparseArrayCompat<ScrollTabHolder> scrollTabHolders = pageAdaper.getScrollTabHolders();
             ScrollTabHolder currentHolder = scrollTabHolders.valueAt(position);
 
-            if(!isEdition){
+            if( ViewMode.VISUALIZACAO.equals(viewMode) ){
                 currentHolder.adjustScroll((int) (fl_header.getHeight() + ViewHelper.getTranslationY(fl_header)));
             }
 

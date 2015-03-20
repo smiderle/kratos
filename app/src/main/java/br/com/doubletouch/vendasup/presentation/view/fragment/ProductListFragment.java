@@ -9,6 +9,7 @@ import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -18,6 +19,7 @@ import java.util.List;
 
 import br.com.doubletouch.vendasup.R;
 import br.com.doubletouch.vendasup.data.entity.Product;
+import br.com.doubletouch.vendasup.data.entity.enumeration.ViewMode;
 import br.com.doubletouch.vendasup.data.executor.JobExecutor;
 import br.com.doubletouch.vendasup.domain.executor.PostExecutionThread;
 import br.com.doubletouch.vendasup.domain.executor.ThreadExecutor;
@@ -26,6 +28,7 @@ import br.com.doubletouch.vendasup.domain.interactor.product.GetProductListFilte
 import br.com.doubletouch.vendasup.domain.interactor.product.GetProductListUseCase;
 import br.com.doubletouch.vendasup.domain.interactor.product.GetProductListUseCaseImpl;
 import br.com.doubletouch.vendasup.presentation.UIThread;
+import br.com.doubletouch.vendasup.presentation.navigation.Navigator;
 import br.com.doubletouch.vendasup.presentation.presenter.ProductListPresenter;
 import br.com.doubletouch.vendasup.presentation.view.ProductListView;
 import br.com.doubletouch.vendasup.presentation.view.adapter.KratosLayoutManager;
@@ -63,6 +66,10 @@ public class ProductListFragment extends BaseFragment implements ProductListView
     @InjectView(R.id.bt_retry)
     Button bt_retry;
 
+    private Navigator navigator;
+
+    private Activity activity;
+
     public ProductListFragment() {
         super();
     }
@@ -73,6 +80,9 @@ public class ProductListFragment extends BaseFragment implements ProductListView
         if(activity instanceof ProductListListener){
             this.productListListener = (ProductListListener) activity;
         }
+
+        this.activity = activity;
+
     }
 
     @Nullable
@@ -82,6 +92,8 @@ public class ProductListFragment extends BaseFragment implements ProductListView
         View fragmentView = inflater.inflate(R.layout.fragment_product_list, container, true);
         ButterKnife.inject(this, fragmentView);
         setupUI();
+
+        navigator = new Navigator();
 
         return fragmentView;
     }
@@ -202,5 +214,21 @@ public class ProductListFragment extends BaseFragment implements ProductListView
      */
     private void loadProductList(){
         this.productListPresenter.initialize();
+    }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                navigator.previousActivity(activity);
+                break;
+            case R.id.add:
+                navigator.navigateToProductDetails(activity, 0, ViewMode.INCLUSAO);
+                break;
+
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

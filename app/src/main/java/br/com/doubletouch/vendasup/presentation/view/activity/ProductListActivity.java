@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import br.com.doubletouch.vendasup.R;
 import br.com.doubletouch.vendasup.data.entity.Product;
+import br.com.doubletouch.vendasup.data.entity.enumeration.ViewMode;
 import br.com.doubletouch.vendasup.presentation.navigation.Navigator;
 import br.com.doubletouch.vendasup.presentation.view.fragment.ProductListFragment;
 
@@ -38,16 +39,7 @@ public class ProductListActivity extends BaseActivity implements ProductListFrag
 
     @Override
     public void onProductClicked(Product product) {
-        this.navigator.navigateToProductDetails(this, product.getID());
+        this.navigator.navigateToProductDetails(this, product.getID(), ViewMode.VISUALIZACAO);
     }
 
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home:
-                navigator.previousActivity(ProductListActivity.this);
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

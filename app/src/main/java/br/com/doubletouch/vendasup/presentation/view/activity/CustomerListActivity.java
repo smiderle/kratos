@@ -8,6 +8,7 @@ import android.view.Window;
 
 import br.com.doubletouch.vendasup.R;
 import br.com.doubletouch.vendasup.data.entity.Customer;
+import br.com.doubletouch.vendasup.data.entity.enumeration.ViewMode;
 import br.com.doubletouch.vendasup.presentation.navigation.Navigator;
 import br.com.doubletouch.vendasup.presentation.view.fragment.customer.CustomerListFragment;
 
@@ -37,16 +38,7 @@ public class CustomerListActivity extends BaseActivity implements CustomerListFr
 
     @Override
     public void onCustomerClicked(Customer customer) {
-        this.navigator.navigateToCustomerDetails(this, customer.getID(), false);
+        this.navigator.navigateToCustomerDetails(this, customer.getID(), ViewMode.VISUALIZACAO);
     }
 
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home:
-                navigator.previousActivity(CustomerListActivity.this);
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

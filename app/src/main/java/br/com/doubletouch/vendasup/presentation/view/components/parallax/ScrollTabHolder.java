@@ -9,5 +9,5 @@ public interface ScrollTabHolder {
 
     void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount, int pagePosition);
 
-    void setAtributes(Customer customer);
+    void setAtributes(Object object);
 }

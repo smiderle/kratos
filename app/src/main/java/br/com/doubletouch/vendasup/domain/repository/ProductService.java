@@ -13,6 +13,16 @@ import br.com.doubletouch.vendasup.data.entity.Product;
  */
 public interface ProductService {
 
+
+    /**
+     * Callback usado para notificar quando o {@link Product} for salvo ou um erro ocorrer.
+     */
+    interface ProductSaveCallback {
+        void onProductSaved(Product product);
+
+        void onError(ErrorBundle errorBundle);
+    }
+
     /**
      * Callback usado para ser notificado quando uma lista de produto for carregada ou um erro ocorrer.
      */
@@ -56,4 +66,6 @@ public interface ProductService {
 
 
     public void saveOrUpdateSynchronous(List<Product> produtos) ;
+
+    public void save(Product product,final ProductSaveCallback productSaveCallback);
 }

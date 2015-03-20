@@ -135,6 +135,7 @@ public class CustomerDAO {
         cv.put(CustomerDB.TABELA_PRECO, customer.getPriceTable());
         cv.put(CustomerDB.FORMA_PAGAMENTO, customer.getFormPayment());
         cv.put(CustomerDB.LIMITE_CREDITO, customer.getCreditLimit());
+        cv.put(CustomerDB.ID_MOBILE, customer.getIdMobile());
         cv.put(CustomerDB.SYNC_PENDENTE, customer.isSyncPending());
 
         if(customer.getInstallmentId() != null){
@@ -178,6 +179,7 @@ public class CustomerDAO {
         int idxInstallment = c.getColumnIndex(CustomerDB.PARCELAMENTO);
         int idxPayment = c.getColumnIndex(CustomerDB.FORMA_PAGAMENTO);
         int idxLimiteCredito = c.getColumnIndex(CustomerDB.LIMITE_CREDITO);
+        int idxIdClienteMobile = c.getColumnIndex(CustomerDB.ID_MOBILE);
         int idxSincronizado = c.getColumnIndex(CustomerDB.SYNC_PENDENTE);
 
         Customer customer = new Customer();
@@ -206,6 +208,7 @@ public class CustomerDAO {
         customer.setExcluded(c.getInt(idxExcluded) == 1);
         customer.setSyncPending(c.getInt( idxSincronizado ) == 1);
         customer.setCreditLimit(c.getDouble( idxLimiteCredito ));
+        customer.setIdMobile(c.getString(idxIdClienteMobile));
 
         customer.setPictureUrl(c.getString(idxPicture));
         customer.setPriceTable(c.getInt(idxPriceTable));

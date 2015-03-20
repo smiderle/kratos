@@ -1,7 +1,5 @@
 package br.com.doubletouch.vendasup.data.entity;
 
-import android.os.Parcelable;
-
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
@@ -43,6 +41,11 @@ public class Customer implements Serializable {
     private boolean syncPending;
     private Installment installment;
     private Integer installmentId;
+
+    /**
+     * Código que é gravado quando um cliente é inserido pelo mobile. Para poder fazer um update, posteriormente, quando for inserido no banco de dados postgresql com um novo id.
+     */
+    private String idMobile;
 
     public Integer getID() {
         return ID;
@@ -292,16 +295,16 @@ public class Customer implements Serializable {
         this.installmentId = installmentId;
     }
 
+    public String getIdMobile() {
+        return idMobile;
+    }
+
+    public void setIdMobile(String idMobile) {
+        this.idMobile = idMobile;
+    }
+
     public String getCustomerIdAndName(){
-        if(this.customerID != null && this.name != null){
-            return customerID+" - "+ name;
-        }
-
-        if(this.customerID == null && this.name != null){
-            return name;
-        }
-
-        return "";
+        return getID()+" - "+ name;
     }
 
 

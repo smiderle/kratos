@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -6,6 +8,7 @@
     android:paddingLeft="@dimen/activity_padding_left"
     android:paddingRight="@dimen/activity_padding_right">
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,44 +16,139 @@
         android:paddingBottom="@dimen/lv_row_padding_botton">
 
         <ImageView
-            android:id="@+id/imageName"
+            android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_person_grey600_36dp"
+            android:src="@drawable/ic_label"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
         <TextView
-            android:id="@+id/tv_customer_name_title"
-            android:text="@string/tv_customer_name"
+            android:id="@+id/tv_product_id"
+            android:text="@string/tv_product_id"
             style="@style/AppTheme.TextViewPrimary"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/imageName"
-            android:layout_toEndOf="@+id/imageName"
+            android:layout_toRightOf="@+id/imageView"
+            android:layout_toEndOf="@+id/imageView"
+            android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
+            android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
+
+
+
+            <TextView
+                android:id="@+id/tv_product_code"
+                style="@style/AppTheme.TextViewSecundary"
+                android:text="@string/tv_default_product_code"
+                android:layout_below="@+id/tv_product_id"
+                android:layout_alignLeft="@+id/tv_product_id"
+                android:layout_alignStart="@+id/tv_product_id" />
+
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/lv_row_padding_top"
+        android:paddingBottom="@dimen/lv_row_padding_botton">
+        <ImageView
+            android:id="@+id/imageDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_cube_outline"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/tv_product_description_title"
+            android:text="@string/tv_product_description"
+            style="@style/AppTheme.TextViewPrimary"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/imageDescription"
+            android:layout_toEndOf="@+id/imageDescription"
             android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
             android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
 
         <ViewSwitcher
-            android:id="@+id/vs_customer_name"
+            android:id="@+id/vs_product_description"
             style="@style/AppTheme.TextViewSecundary"
-            android:layout_below="@+id/tv_customer_name_title"
-            android:layout_alignLeft="@+id/tv_customer_name_title"
-            android:layout_alignStart="@+id/tv_customer_name_title" >
+            android:layout_below="@+id/tv_product_description_title"
+            android:layout_alignLeft="@+id/tv_product_description_title"
+            android:layout_alignStart="@+id/tv_product_description_title" >
 
             <TextView
-                android:id="@+id/tv_customer_name"
+                android:id="@+id/tv_product_description"
                 style="@style/AppTheme.TextViewSecundary"
-                android:text="@string/tv_default_customer_name"/>
+                android:text="@string/tv_default_product_description"/>
+
 
             <EditText
-                android:id="@+id/et_customer_name"
+                android:id="@+id/et_product_description"
+                style="@style/AppTheme.TextViewSecundary"/>
+
+
+        </ViewSwitcher>
+
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/lv_row_padding_top"
+        android:paddingBottom="@dimen/lv_row_padding_botton">
+
+        <ImageView
+            android:id="@+id/imageReference"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_file_document_box"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/tv_product_reference_title"
+            style="@style/AppTheme.TextViewPrimary"
+            android:text="@string/tv_product_reference"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/imageReference"
+            android:layout_toEndOf="@+id/imageReference"
+            android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
+            android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
+
+
+        <ViewSwitcher
+            android:id="@+id/vs_product_reference"
+            style="@style/AppTheme.TextViewSecundary"
+            android:layout_below="@+id/tv_product_reference_title"
+            android:layout_alignLeft="@+id/tv_product_reference_title"
+            android:layout_alignStart="@+id/tv_product_reference_title">
+
+
+            <TextView
+                android:id="@+id/tv_product_reference"
+                style="@style/AppTheme.TextViewSecundary"
+                android:text="@string/tv_default_product_reference"/>
+
+
+            <EditText
+                android:id="@+id/et_product_reference"
                 style="@style/AppTheme.TextViewSecundary"/>
 
         </ViewSwitcher>
 
 
 
+
+
+
     </RelativeLayout>
 
     <RelativeLayout
@@ -60,45 +158,47 @@
         android:paddingBottom="@dimen/lv_row_padding_botton">
 
         <ImageView
-            android:id="@+id/imageNickname"
+            android:id="@+id/imagePackage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_mood_grey600_36dp"
+            android:src="@drawable/ic_package"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
         <TextView
-            android:id="@+id/tv_customer_nickname_title"
-            android:text="@string/tv_customer_nickname"
+            android:id="@+id/tv_product_package_title"
             style="@style/AppTheme.TextViewPrimary"
+            android:text="@string/tv_product_package"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/imageNickname"
-            android:layout_toEndOf="@+id/imageNickname"
+            android:layout_toRightOf="@+id/imagePackage"
+            android:layout_toEndOf="@+id/imagePackage"
             android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
             android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
 
+
         <ViewSwitcher
-            android:id="@+id/vs_customer_nickname"
+            android:id="@+id/vs_product_package"
             style="@style/AppTheme.TextViewSecundary"
-            android:layout_below="@+id/tv_customer_nickname_title"
-            android:layout_alignLeft="@+id/tv_customer_nickname_title"
-            android:layout_alignStart="@+id/tv_customer_nickname_title" >
+            android:layout_below="@+id/tv_product_package_title"
+            android:layout_alignLeft="@+id/tv_product_package_title"
+            android:layout_alignStart="@+id/tv_product_package_title">
+
+
 
             <TextView
-                android:id="@+id/tv_customer_nickname"
+                android:id="@+id/tv_product_package"
                 style="@style/AppTheme.TextViewSecundary"
-                android:text="@string/tv_default_customer_nickname"/>
+                android:text="@string/tv_default_product_package"/>
+
 
             <EditText
-                android:id="@+id/et_customer_nickname"
+                android:id="@+id/et_product_package"
                 style="@style/AppTheme.TextViewSecundary"/>
 
         </ViewSwitcher>
 
 
-
-
     </RelativeLayout>
 
     <RelativeLayout
@@ -108,140 +208,43 @@
         android:paddingBottom="@dimen/lv_row_padding_botton">
 
         <ImageView
-            android:id="@+id/imagePersonType"
+            android:id="@+id/imageBarcode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_arrange_send_backward"
+            android:src="@drawable/ic_barcode"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
         <TextView
-            android:id="@+id/tv_customer_persontype_title"
-            android:text="@string/tv_customer_person_type"
+            android:id="@+id/tv_product_barcode_title"
             style="@style/AppTheme.TextViewPrimary"
+            android:text="@string/tv_product_barcode"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/imagePersonType"
-            android:layout_toEndOf="@+id/imagePersonType"
+            android:layout_toRightOf="@+id/imageBarcode"
+            android:layout_toEndOf="@+id/imageBarcode"
             android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
             android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
 
-        <ViewSwitcher
-            android:id="@+id/vs_customer_persontype"
-            style="@style/AppTheme.TextViewSecundary"
-            android:layout_below="@+id/tv_customer_persontype_title"
-            android:layout_alignLeft="@+id/tv_customer_persontype_title"
-            android:layout_alignStart="@+id/tv_customer_persontype_title">
-
-            <TextView
-                android:id="@+id/tv_customer_persontype_"
-                style="@style/AppTheme.TextViewSecundary"
-                android:text="@string/tv_default_customer_person_type" />
-
-            <Spinner
-                android:id="@+id/sp_customer_persontype"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:entries="@array/customer_type_array"
-                android:spinnerMode="dialog"
-                android:prompt="@string/sp_title_customer_type">
-            </Spinner>
-
-        </ViewSwitcher>
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/lv_row_padding_top"
-        android:paddingBottom="@dimen/lv_row_padding_botton">
-
-        <ImageView
-            android:id="@+id/imageCpfCnpj"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_credit_card_grey600_36dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:id="@+id/tv_customer_cpfcnpj_title"
-            android:text="@string/tv_customer_cpf"
-            style="@style/AppTheme.TextViewPrimary"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/imageCpfCnpj"
-            android:layout_toEndOf="@+id/imageCpfCnpj"
-            android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
-            android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
 
         <ViewSwitcher
-            android:id="@+id/vs_customer_cpfcnpj"
+            android:id="@+id/vs_product_barcode"
             style="@style/AppTheme.TextViewSecundary"
-            android:layout_below="@+id/tv_customer_cpfcnpj_title"
-            android:layout_alignLeft="@+id/tv_customer_cpfcnpj_title"
-            android:layout_alignStart="@+id/tv_customer_cpfcnpj_title" >
+            android:layout_below="@+id/tv_product_barcode_title"
+            android:layout_alignLeft="@+id/tv_product_barcode_title"
+            android:layout_alignStart="@+id/tv_product_barcode_title">
+
 
             <TextView
-                android:id="@+id/tv_customer_cpfcnpj"
+                android:id="@+id/tv_product_barcode"
                 style="@style/AppTheme.TextViewSecundary"
-                android:text="@string/tv_default_customer_cpfcnpj"/>
+                android:text="@string/tv_default_product_barcode"/>
+
 
             <EditText
-                android:id="@+id/et_customer_cpfcnpj"
-                style="@style/AppTheme.TextViewSecundary"
-                android:maxLength="15"/>
+                android:id="@+id/et_product_barcode"
+                style="@style/AppTheme.TextViewSecundary"/>
 
-        </ViewSwitcher>
-
-
-
-    </RelativeLayout>
-
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/lv_row_padding_top"
-        android:paddingBottom="@dimen/lv_row_padding_botton">
-
-        <ImageView
-            android:id="@+id/iv_rg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_clipboard_account"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:id="@+id/tv_customer_inscricao_title"
-            android:text="@string/tv_customer_rg"
-            style="@style/AppTheme.TextViewPrimary"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/iv_rg"
-            android:layout_toEndOf="@+id/iv_rg"
-            android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
-            android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
-
-        <ViewSwitcher
-            android:id="@+id/vs_customer_inscricao"
-            style="@style/AppTheme.TextViewSecundary"
-            android:layout_below="@+id/tv_customer_inscricao_title"
-            android:layout_alignLeft="@+id/tv_customer_inscricao_title"
-            android:layout_alignStart="@+id/tv_customer_inscricao_title" >
-
-
-            <TextView
-                android:id="@+id/tv_customer_inscricao"
-                style="@style/AppTheme.TextViewSecundary"
-                android:text="@string/tv_default_customer_inscricao" />
-
-            <EditText
-                android:id="@+id/et_customer_inscricao"
-                style="@style/AppTheme.TextViewSecundary"
-                android:maxLength="15"/>
 
         </ViewSwitcher>
 
@@ -255,44 +258,47 @@
         android:paddingBottom="@dimen/lv_row_padding_botton">
 
         <ImageView
-            android:id="@+id/iv_customer_birthday"
+            android:id="@+id/imageStock"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_cake_grey600_36dp"
+            android:src="@drawable/ic_checkbox_multiple_blank_outline"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
         <TextView
-            android:id="@+id/tv_customer_birthday_title"
-            android:text="@string/tv_customer_birthday"
+            android:id="@+id/tv_product_stock_title"
             style="@style/AppTheme.TextViewPrimary"
+            android:text="@string/tv_product_stock"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/iv_customer_birthday"
-            android:layout_toEndOf="@+id/iv_customer_birthday"
+            android:layout_toRightOf="@+id/imageStock"
+            android:layout_toEndOf="@+id/imageStock"
             android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
             android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
 
+
         <ViewSwitcher
-            android:id="@+id/vs_customer_birthday"
+            android:id="@+id/vs_product_stock"
             style="@style/AppTheme.TextViewSecundary"
-            android:layout_below="@+id/tv_customer_birthday_title"
-            android:layout_alignLeft="@+id/tv_customer_birthday_title"
-            android:layout_alignStart="@+id/tv_customer_birthday_title" >
+            android:layout_below="@+id/tv_product_stock_title"
+            android:layout_alignLeft="@+id/tv_product_stock_title"
+            android:layout_alignStart="@+id/tv_product_stock_title">
 
 
             <TextView
-                android:id="@+id/tv_customer_birthday"
+                android:id="@+id/tv_product_stock"
                 style="@style/AppTheme.TextViewSecundary"
-                android:text="@string/tv_default_customer_birthday"/>
+                android:text="@string/tv_default_product_stock"/>
+
+
 
             <EditText
-                android:id="@+id/et_customer_birthday"
+                android:id="@+id/et_product_stock"
                 style="@style/AppTheme.TextViewSecundary"
-                android:maxLength="500"
-                android:inputType="date"/>
+                android:inputType="numberDecimal"/>
 
         </ViewSwitcher>
+
 
 
     </RelativeLayout>
@@ -304,43 +310,48 @@
         android:paddingBottom="@dimen/lv_row_padding_botton">
 
         <ImageView
-            android:id="@+id/iv_customer_observation"
+            android:id="@+id/imagePrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_comment_text_outline"
+            android:src="@drawable/ic_currency_usd"
             android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
         <TextView
-            android:id="@+id/tv_customer_observation_title"
-            android:text="@string/tv_customer_observation"
+            android:id="@+id/tv_product_price_title"
             style="@style/AppTheme.TextViewPrimary"
+            android:text="@string/tv_product_price"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/iv_customer_observation"
-            android:layout_toEndOf="@+id/iv_customer_observation"
+            android:layout_toRightOf="@+id/imagePrice"
+            android:layout_toEndOf="@+id/imagePrice"
             android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
             android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
 
+
+
         <ViewSwitcher
-            android:id="@+id/vs_customer_observation"
+            android:id="@+id/vs_product_price"
             style="@style/AppTheme.TextViewSecundary"
-            android:layout_below="@+id/tv_customer_observation_title"
-            android:layout_alignLeft="@+id/tv_customer_observation_title"
-            android:layout_alignStart="@+id/tv_customer_observation_title"  >
+            android:layout_below="@+id/tv_product_price_title"
+            android:layout_alignLeft="@+id/tv_product_price_title"
+            android:layout_alignStart="@+id/tv_product_price_title">
 
 
             <TextView
-                android:id="@+id/tv_customer_observation"
+                android:id="@+id/tv_product_price"
                 style="@style/AppTheme.TextViewSecundary"
-                android:text="@string/tv_default_customer_observation"/>
+                android:text="@string/tv_default_product_price"/>
+
 
             <EditText
-                android:id="@+id/et_customer_observation"
-                style="@style/AppTheme.TextViewSecundary" />
+                android:id="@+id/et_product_price"
+                style="@style/AppTheme.TextViewSecundary"
+                android:inputType="numberDecimal"/>
 
-            </ViewSwitcher>
+        </ViewSwitcher>
 
 
     </RelativeLayout>
+
 </LinearLayout>

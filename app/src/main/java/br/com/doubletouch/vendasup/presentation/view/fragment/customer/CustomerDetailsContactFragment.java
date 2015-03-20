@@ -17,8 +17,8 @@ import android.widget.ViewSwitcher;
 
 import br.com.doubletouch.vendasup.R;
 import br.com.doubletouch.vendasup.data.entity.Customer;
-import br.com.doubletouch.vendasup.data.entity.enumeration.PersonType;
-import br.com.doubletouch.vendasup.presentation.view.adapter.CustomerDetailsBaseAdapter;
+import br.com.doubletouch.vendasup.data.entity.enumeration.ViewMode;
+import br.com.doubletouch.vendasup.presentation.view.adapter.DetailsBaseAdapter;
 import br.com.doubletouch.vendasup.presentation.view.components.parallax.ScrollTabHolderFragment;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -73,17 +73,18 @@ public class CustomerDetailsContactFragment extends ScrollTabHolderFragment {
 
     public static final String ARGS = "position";
     public static final String ARGS_CUSTOMER = "customer";
-    public static final String ARGS_STATE_EDITION = "state_edition";
+    public static final String ARGS_VIEW_MODE = "state_edition";
     private int position;
-    private boolean isEdition;
 
     private Customer customer;
 
-    public static Fragment newInstance(int position,boolean isEdition,  Customer customer) {
+    private ViewMode viewMode;
+
+    public static Fragment newInstance(int position,ViewMode viewMode, Customer customer) {
         CustomerDetailsContactFragment fragment = new CustomerDetailsContactFragment();
         Bundle bundle = new Bundle();
         bundle.putInt(ARGS, position);
-        bundle.putBoolean(ARGS_STATE_EDITION, isEdition);
+        bundle.putSerializable(ARGS_VIEW_MODE, viewMode);
         bundle.putSerializable(ARGS_CUSTOMER, customer);
         fragment.setArguments(bundle);
         return fragment;
@@ -93,7 +94,7 @@ public class CustomerDetailsContactFragment extends ScrollTabHolderFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         position = getArguments().getInt(ARGS);
-        isEdition = getArguments().getBoolean(ARGS_STATE_EDITION);
+        viewMode = (ViewMode) getArguments().getSerializable(ARGS_VIEW_MODE);
         customer = (Customer) getArguments().getSerializable(ARGS_CUSTOMER);
     }
 
@@ -108,7 +109,7 @@ public class CustomerDetailsContactFragment extends ScrollTabHolderFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        if(isEdition){
+        if( ViewMode.EDICAO.equals(viewMode) || ViewMode.INCLUSAO.equals(viewMode)){
             sv_content = new ScrollView(activity);
             sv_content.setLayoutParams(new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.MATCH_PARENT));
             sv_content.setPadding(0,(int) getResources().getDimension(R.dimen.parallax_tab_height),0,0);
@@ -134,7 +135,7 @@ public class CustomerDetailsContactFragment extends ScrollTabHolderFragment {
 
         ButterKnife.inject(this, view);
 
-        if(isEdition) {
+        if( ViewMode.EDICAO.equals(viewMode) || ViewMode.INCLUSAO.equals(viewMode)){
             ((ViewSwitcher) view.findViewById(R.id.vs_customer_phone_home)).showNext();
             ((ViewSwitcher) view.findViewById(R.id.vs_customer_phone_comercial)).showNext();
             ((ViewSwitcher) view.findViewById(R.id.vs_customer_phone_cell)).showNext();
@@ -159,9 +160,9 @@ public class CustomerDetailsContactFragment extends ScrollTabHolderFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        if(!isEdition){
+        if( ViewMode.VISUALIZACAO.equals(viewMode)){
             lv_content.setOnScrollListener(new OnScrollListner());
-            lv_content.setAdapter(new CustomerDetailsPersonalAdapter(activity));
+            lv_content.setAdapter(new DetailsPersonalAdapter(activity));
         }
 
 
@@ -179,7 +180,8 @@ public class CustomerDetailsContactFragment extends ScrollTabHolderFragment {
     }
 
     @Override
-    public void setAtributes(Customer customer) {
+    public void setAtributes(Object object) {
+        Customer customer = (Customer) object;
         customer.setEmail(et_customer_email.getText().toString());
         customer.setCellPhone(et_customer_phone_cell.getText().toString());
         customer.setCommercialPhone(et_customer_phone_commercial.getText().toString());
@@ -205,11 +207,11 @@ public class CustomerDetailsContactFragment extends ScrollTabHolderFragment {
     /**
      * Adapter para o listview(somente com uma linha) com os dados pessoais
      */
-    public class CustomerDetailsPersonalAdapter extends CustomerDetailsBaseAdapter {
+    public class DetailsPersonalAdapter extends DetailsBaseAdapter {
 
         private Context context;
 
-        public CustomerDetailsPersonalAdapter(Context context) {
+        public DetailsPersonalAdapter(Context context) {
             this.context = context;
         }
 

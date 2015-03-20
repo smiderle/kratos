@@ -1,8 +1,12 @@
 package br.com.doubletouch.vendasup.presentation.presenter;
 
+import java.util.UUID;
+
+import br.com.doubletouch.vendasup.VendasUp;
 import br.com.doubletouch.vendasup.data.entity.Product;
 import br.com.doubletouch.vendasup.domain.exception.ErrorBundle;
 import br.com.doubletouch.vendasup.domain.interactor.product.GetProductDetailsUseCase;
+import br.com.doubletouch.vendasup.domain.interactor.product.SaveProductUseCase;
 import br.com.doubletouch.vendasup.presentation.exception.ErrorMessageFactory;
 import br.com.doubletouch.vendasup.presentation.view.ProductDetailsView;
 
@@ -18,12 +22,14 @@ public class ProductDetailsPresenter implements Presenter {
 
     private final ProductDetailsView productDetailsView;
     private final GetProductDetailsUseCase getProductDetailsUseCase;
+    private final SaveProductUseCase saveProductUseCase;
 
-    public ProductDetailsPresenter(ProductDetailsView productDetailsView, GetProductDetailsUseCase getProductDetailsUseCase) {
-        if (productDetailsView == null || getProductDetailsUseCase == null) {
+    public ProductDetailsPresenter(ProductDetailsView productDetailsView, GetProductDetailsUseCase getProductDetailsUseCase, SaveProductUseCase saveProductUseCase) {
+        if (productDetailsView == null || getProductDetailsUseCase == null || saveProductUseCase== null) {
             throw new IllegalArgumentException("Parametros do construtor não podem ser nulos.");
         }
 
+        this.saveProductUseCase = saveProductUseCase;
         this.productDetailsView = productDetailsView;
         this.getProductDetailsUseCase = getProductDetailsUseCase;
     }
@@ -31,6 +37,27 @@ public class ProductDetailsPresenter implements Presenter {
     public void initialize(Integer productId){
         this.productId = productId;
         this.loadProductDetails();
+    }
+
+    public void createNewProduct(){
+        Product product = new Product();
+
+        product.setIdMobile(UUID.randomUUID().toString());
+        product.setBranchID(VendasUp.getUsuarioLogado().getBranchID());
+        product.setOrganizationID(VendasUp.getUsuarioLogado().getOrganizationID());
+        product.setExcluded(false);
+
+        showProductDetailsInView(product);
+    }
+
+    public void saveProduct(Product product){
+        this.showViewLoading();
+        this.saveProductExecutor(product);
+    }
+
+
+    private void saveProductExecutor(Product product){
+        this.saveProductUseCase.execute(product, this.saveProductCallback);
     }
 
     @Override
@@ -92,6 +119,25 @@ public class ProductDetailsPresenter implements Presenter {
             ProductDetailsPresenter.this.hideViewLoading();
             ProductDetailsPresenter.this.showErrorMessage(errorBundle);
             ProductDetailsPresenter.this.showViewRetry();
+        }
+    };
+
+    private void productSaved(){
+        this.productDetailsView.productSaved();
+    }
+
+
+    private final SaveProductUseCase.Callback saveProductCallback = new SaveProductUseCase.Callback() {
+        @Override
+        public void onProductSaved(Product product) {
+            ProductDetailsPresenter.this.productSaved();
+            ProductDetailsPresenter.this.hideViewLoading();
+        }
+
+        @Override
+        public void onError(ErrorBundle errorBundle) {
+            ProductDetailsPresenter.this.hideViewLoading();
+            ProductDetailsPresenter.this.showErrorMessage(errorBundle);
         }
     };
 }

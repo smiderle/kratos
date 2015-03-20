@@ -6,7 +6,7 @@ import android.widget.BaseAdapter;
  * Adapter base para ser utilizado pelos adapters que estão dentro dos fragments do detalhes do cliente.
  * Created by LADAIR on 21/02/2015.
  */
-public abstract class CustomerDetailsBaseAdapter extends BaseAdapter {
+public abstract class DetailsBaseAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {

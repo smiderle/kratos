@@ -14,6 +14,7 @@ public final class CustomerDB {
         String SQL = "CREATE TABLE IF NOT EXISTS "+ TABELA+" (" +
                 ID + " INTEGER NOT NULL , " +
                 IDCLIENTE + " TEXT , " +
+                ID_MOBILE + " TEXT , " +
                 IDEMPRESA+ " INTEGER NOT NULL , "+
                 IDFILIAL+ " INTEGER NOT NULL , " +
                 NOME + " TEXT, " +
@@ -49,6 +50,7 @@ public final class CustomerDB {
     public static final String TABELA = "CLIENTE";
     public static final String ID = "_id";
     public static final String IDCLIENTE = "IDCLIENTE";
+    public static final String ID_MOBILE = "ID_MOBILE";
     public static final String IDEMPRESA = "IDEMPRESA";
     public static final String IDFILIAL = "IDFILIAL";
     public static final String NOME = "NOME";
@@ -79,7 +81,7 @@ public final class CustomerDB {
     public static final String SYNC_PENDENTE= "SYNC_PENDENTE";
 
     public static final String[] COLUNAS = new String[]{ID, IDEMPRESA,IDFILIAL,IDCLIENTE, NOME, APELIDO, TIPO_PESSOA, CPF_CNPJ, INSCRICAO, FONE_COMERCIAL,FONE_RESIDENCIAL,FONE_CELULAR, CEP, COMPLEMENTO,
-            OBSERVACAO,FAX,RUA,BAIRRO,NUMERO,EMAIL,DESCONTO_PADRAO,ATIVO, EXCLUIDO, TABELA_PRECO, PARCELAMENTO, FORMA_PAGAMENTO,LIMITE_CREDITO, URL_IMAGEM, SYNC_PENDENTE};
+            OBSERVACAO,FAX,RUA,BAIRRO,NUMERO,EMAIL,DESCONTO_PADRAO,ATIVO, EXCLUIDO, TABELA_PRECO, PARCELAMENTO, FORMA_PAGAMENTO,LIMITE_CREDITO,ID_MOBILE, URL_IMAGEM, SYNC_PENDENTE};
 
 
 }

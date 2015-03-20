@@ -65,4 +65,17 @@ public class ProductServiceImpl implements ProductService {
         productDAO.insert(produtos);
 
     }
+
+
+    @Override
+    public void save(Product product,final ProductSaveCallback productSaveCallback) {
+
+        try{
+            productDAO.insert(product);
+            productSaveCallback.onProductSaved(product);
+        }catch (Exception e) {
+            productSaveCallback.onError(new RepositoryErrorBundle(e));
+
+        }
+    }
 }
