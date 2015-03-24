@@ -47,12 +47,12 @@ public class ProductApi {
     }*/
 
 
-    public  ApiResponse<ServiceResponse<List<Product>>> getAllByChangeGreaterThan(Long ultimaSincronizacao, Integer offset, ProductEntityJsonMaper productEntityJsonMaper) throws IOException, SyncronizationException {
+    public  ApiResponse<ServiceResponse<List<Product>>> getAllByChangeGreaterThan(Long ultimaSincronizacao, Integer organizationId, Integer offset,ProductEntityJsonMaper productEntityJsonMaper) throws IOException, SyncronizationException {
         List<Product> products = null;
 
         RestClient restClient = new RestClient(Endpoints.ENDPOINT_PRODUTO, Methods.PRODUTO_GET_ALL_BY_CHANGE_GREATER_THAN );
         restClient.setParameter("date", ultimaSincronizacao);
-        restClient.setParameter("organizationID", VendasUp.getUsuarioLogado().getOrganizationID());
+        restClient.setParameter("organizationID", organizationId);
         restClient.setParameter("offset", offset);
 
         RESTResponse response = restClient.get();

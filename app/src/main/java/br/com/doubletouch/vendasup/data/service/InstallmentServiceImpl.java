@@ -6,7 +6,6 @@ import br.com.doubletouch.vendasup.VendasUp;
 import br.com.doubletouch.vendasup.data.database.dao.InstallmentDAO;
 import br.com.doubletouch.vendasup.data.entity.Installment;
 import br.com.doubletouch.vendasup.data.exception.RepositoryErrorBundle;
-import br.com.doubletouch.vendasup.domain.repository.InstallmentService;
 
 /**
  * Created by LADAIR on 16/03/2015.

@@ -1,4 +1,4 @@
-package br.com.doubletouch.vendasup.domain.repository;
+package br.com.doubletouch.vendasup.data.service;
 
 import java.util.Collection;
 import java.util.List;

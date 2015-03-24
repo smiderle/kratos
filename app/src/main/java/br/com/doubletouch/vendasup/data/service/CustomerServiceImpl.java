@@ -7,7 +7,6 @@ import br.com.doubletouch.vendasup.data.database.dao.CustomerDAO;
 import br.com.doubletouch.vendasup.data.entity.Customer;
 import br.com.doubletouch.vendasup.data.exception.CustomerNotFoundException;
 import br.com.doubletouch.vendasup.data.exception.RepositoryErrorBundle;
-import br.com.doubletouch.vendasup.domain.repository.CustomerService;
 
 /**
  * Created by LADAIR on 18/02/2015.

@@ -7,7 +7,7 @@ import br.com.doubletouch.vendasup.data.service.PriceTableServiceImpl;
 import br.com.doubletouch.vendasup.domain.exception.ErrorBundle;
 import br.com.doubletouch.vendasup.domain.executor.PostExecutionThread;
 import br.com.doubletouch.vendasup.domain.executor.ThreadExecutor;
-import br.com.doubletouch.vendasup.domain.repository.PriceTableService;
+import br.com.doubletouch.vendasup.data.service.PriceTableService;
 
 /**
  * Created by LADAIR on 10/03/2015.

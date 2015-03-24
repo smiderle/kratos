@@ -20,13 +20,13 @@ import br.com.doubletouch.vendasup.exception.SyncronizationException;
  */
 public class InstallmentApi extends AbstractApi {
 
-    public ApiResponse<ServiceResponse<List<Installment>>> getAllByChangeGreaterThan(Long ultimaSincronizacao, Integer offset, InstallmentEntityJsonMaper installmentEntityJsonMaper) throws IOException, SyncronizationException {
+    public ApiResponse<ServiceResponse<List<Installment>>> getAllByChangeGreaterThan(Long ultimaSincronizacao, Integer organizationId, Integer offset,InstallmentEntityJsonMaper installmentEntityJsonMaper) throws IOException, SyncronizationException {
 
             List<Customer> products = null;
 
             RestClient restClient = new RestClient(Endpoints.ENDPOINT_INSTALLMENT, Methods.INSTALLMENT_GET_ALL_BY_CHANGE_GREATER_THAN);
             restClient.setParameter("date", ultimaSincronizacao);
-            restClient.setParameter("organizationID", VendasUp.getUsuarioLogado().getOrganizationID());
+            restClient.setParameter("organizationID", organizationId);
             restClient.setParameter("offset", offset);
 
             RESTResponse response = restClient.get();

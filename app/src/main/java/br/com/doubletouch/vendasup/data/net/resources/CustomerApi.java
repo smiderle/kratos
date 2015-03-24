@@ -22,13 +22,13 @@ import br.com.doubletouch.vendasup.util.GsonUtil;
  */
 public class CustomerApi extends AbstractApi {
 
-    public ApiResponse<ServiceResponse<List<Customer>>> getAllByChangeGreaterThan(Long ultimaSincronizacao, Integer offset, CustomerEntityJsonMaper customerEntityJsonMaper) throws IOException, SyncronizationException {
+    public ApiResponse<ServiceResponse<List<Customer>>> getAllByChangeGreaterThan(Long ultimaSincronizacao,Integer organizationId, Integer offset, CustomerEntityJsonMaper customerEntityJsonMaper) throws IOException, SyncronizationException {
 
             List<Customer> products = null;
 
             RestClient restClient = new RestClient(Endpoints.ENDPOINT_CUSTOMER, Methods.CUSTOMER_GET_ALL_BY_CHANGE_GREATER_THAN);
             restClient.setParameter("date", ultimaSincronizacao);
-            restClient.setParameter("organizationID", VendasUp.getUsuarioLogado().getOrganizationID());
+            restClient.setParameter("organizationID",organizationId);
             restClient.setParameter("offset", offset);
 
             RESTResponse response = restClient.get();

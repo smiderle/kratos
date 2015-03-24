@@ -85,16 +85,28 @@ public class CargaInicialActivity extends ActionBarActivity {
 
     @OnClick(R.id.btnCargaInicial)
     void onInitLoadClick(){
+
         try {
+
             Integracao integracao = new Integracao();
 
-            integracao.receberParcelamentos();
+            integracao.receberParcelamentos(VendasUp.getUsuarioLogado().getOrganizationID());
 
-            integracao.receberProdutos();
+            integracao.receberProdutos(VendasUp.getUsuarioLogado().getOrganizationID());
 
-            integracao.receberClientes();
+            integracao.receberClientes(VendasUp.getUsuarioLogado().getOrganizationID());
 
-            integracao.receberTabelasPrecos();
+            integracao.receberTabelasPrecos(VendasUp.getUsuarioLogado().getOrganizationID());
+
+            integracao.receberUsuarios(VendasUp.getUsuarioLogado().getOrganizationID());
+
+            integracao.receberEmpresa(VendasUp.getUsuarioLogado().getOrganizationID());
+
+            integracao.receberFilial(VendasUp.getUsuarioLogado().getOrganizationID());
+
+            integracao.receberPromocoes(VendasUp.getUsuarioLogado().getOrganizationID());
+
+            integracao.receberMetas(VendasUp.getUsuarioLogado().getOrganizationID());
 
 
         } catch (Exception e) {

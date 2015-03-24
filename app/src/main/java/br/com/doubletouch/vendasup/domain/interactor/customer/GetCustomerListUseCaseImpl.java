@@ -7,7 +7,7 @@ import br.com.doubletouch.vendasup.data.service.CustomerServiceImpl;
 import br.com.doubletouch.vendasup.domain.exception.ErrorBundle;
 import br.com.doubletouch.vendasup.domain.executor.PostExecutionThread;
 import br.com.doubletouch.vendasup.domain.executor.ThreadExecutor;
-import br.com.doubletouch.vendasup.domain.repository.CustomerService;
+import br.com.doubletouch.vendasup.data.service.CustomerService;
 
 /**
  * Essa classe é a implementação de {@link GetCustomerListUseCase}

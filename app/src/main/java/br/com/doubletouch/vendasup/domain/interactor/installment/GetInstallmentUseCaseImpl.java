@@ -5,7 +5,7 @@ import br.com.doubletouch.vendasup.data.service.InstallmentServiceImpl;
 import br.com.doubletouch.vendasup.domain.exception.ErrorBundle;
 import br.com.doubletouch.vendasup.domain.executor.PostExecutionThread;
 import br.com.doubletouch.vendasup.domain.executor.ThreadExecutor;
-import br.com.doubletouch.vendasup.domain.repository.InstallmentService;
+import br.com.doubletouch.vendasup.data.service.InstallmentService;
 
 /**
  * Created by LADAIR on 10/03/2015.

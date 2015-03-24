@@ -7,7 +7,6 @@ import br.com.doubletouch.vendasup.data.database.dao.ProductDAO;
 import br.com.doubletouch.vendasup.data.entity.Product;
 import br.com.doubletouch.vendasup.data.exception.ProductNotFoundException;
 import br.com.doubletouch.vendasup.data.exception.RepositoryErrorBundle;
-import br.com.doubletouch.vendasup.domain.repository.ProductService;
 
 /**
  *

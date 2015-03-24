@@ -6,7 +6,6 @@ import br.com.doubletouch.vendasup.VendasUp;
 import br.com.doubletouch.vendasup.data.database.dao.PriceTableDAO;
 import br.com.doubletouch.vendasup.data.entity.PriceTable;
 import br.com.doubletouch.vendasup.data.exception.RepositoryErrorBundle;
-import br.com.doubletouch.vendasup.domain.repository.PriceTableService;
 
 /**
  * Created by LADAIR on 10/03/2015.

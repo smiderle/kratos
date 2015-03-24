@@ -20,13 +20,13 @@ import br.com.doubletouch.vendasup.exception.SyncronizationException;
  */
 public class PriceTableApi extends AbstractApi {
 
-    public ApiResponse<ServiceResponse<List<PriceTable>>> getAllByChangeGreaterThan(Long ultimaSincronizacao, Integer offset, PriceTableEntityJsonMaper priceTableEntityJsonMaper) throws IOException, SyncronizationException {
+    public ApiResponse<ServiceResponse<List<PriceTable>>> getAllByChangeGreaterThan(Long ultimaSincronizacao, Integer organizationId, Integer offset,PriceTableEntityJsonMaper priceTableEntityJsonMaper) throws IOException, SyncronizationException {
 
             List<Customer> products = null;
 
             RestClient restClient = new RestClient(Endpoints.ENDPOINT_PRICE_TABLE, Methods.PRICE_TABLE_GET_ALL_BY_CHANGE_GREATER_THAN);
             restClient.setParameter("date", ultimaSincronizacao);
-            restClient.setParameter("organizationID", VendasUp.getUsuarioLogado().getOrganizationID());
+            restClient.setParameter("organizationID", organizationId);
             restClient.setParameter("offset", offset);
 
             RESTResponse response = restClient.get();

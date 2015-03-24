@@ -9,4 +9,11 @@ public interface Methods {
     public static final String CUSTOMER_GET_ALL_BY_CHANGE_GREATER_THAN = "getAllByChangeGreaterThan";
     public static final String PRICE_TABLE_GET_ALL_BY_CHANGE_GREATER_THAN = "getAllByChangeGreaterThan";
     public static final String INSTALLMENT_GET_ALL_BY_CHANGE_GREATER_THAN = "getAllByChangeGreaterThan";
+    public static final String USER_GET_ALL_BY_CHANGE_GREATER_THAN = "getAllByChangeGreaterThan";
+    public static final String BRANCH_GET_ALL_BY_CHANGE_GREATER_THAN = "getAllByChangeGreaterThan";
+    public static final String PRODUCT_PROMOTION_GET_ALL_BY_CHANGE_GREATER_THAN = "getAllByChangeGreaterThan";
+    public static final String GOAL_GET_ALL_BY_CHANGE_GREATER_THAN = "getAllByChangeGreaterThan";
+
+    public static final String ORGANIZATION_GET_BY_ID = "getByOrganizationId";
+
 }
