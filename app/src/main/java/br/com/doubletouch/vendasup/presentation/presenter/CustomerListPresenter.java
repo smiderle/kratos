@@ -36,7 +36,6 @@ public class CustomerListPresenter implements Presenter {
     }
 
     private void loadUserList() {
-        this.hideViewRetry();
         this.showViewLoading();
         this.getCustomerList();
     }
@@ -47,14 +46,6 @@ public class CustomerListPresenter implements Presenter {
 
     private void hideViewLoading() {
         this.customerListView.hideLoading();
-    }
-
-    private void hideViewRetry() {
-        this.customerListView.hideRetry();
-    }
-
-    private void showViewRetry() {
-        this.customerListView.showRetry();
     }
 
     private void showErrorMessage(ErrorBundle errorBundle) {
@@ -105,7 +96,6 @@ public class CustomerListPresenter implements Presenter {
         public void onError(ErrorBundle errorBundle) {
             CustomerListPresenter.this.hideViewLoading();
             CustomerListPresenter.this.showErrorMessage(errorBundle);
-            CustomerListPresenter.this.showViewRetry();
 
 
         }
@@ -122,8 +112,6 @@ public class CustomerListPresenter implements Presenter {
         public void onError(ErrorBundle errorBundle) {
             CustomerListPresenter.this.hideViewLoading();
             CustomerListPresenter.this.showErrorMessage(errorBundle);
-            CustomerListPresenter.this.showViewRetry();
-
 
         }
     };

@@ -16,13 +16,20 @@ public class OauthController {
     public static OauthAccess getAccessToken() throws IOException, SyncronizationException {
 
         if( VendasUp.getOauthAccess() == null ) {
-            Credenciais credenciais = new Credenciais( VendasUp.getUsuarioLogado().getEmail(), VendasUp.getUsuarioLogado().getEmail() );
+            Credenciais credenciais = new Credenciais( VendasUp.getUser().getEmail(), VendasUp.getUser().getEmail() );
             OauthApi oauthApi = new OauthApi();
             OauthAccess oauthAccess = oauthApi.getAccessToken(credenciais);
             VendasUp.setOauthAccess(oauthAccess);
         }
 
         return VendasUp.getOauthAccess();
+
+    }
+
+    public static  OauthAccess refreshToken() throws IOException, SyncronizationException {
+
+        VendasUp.setOauthAccess(null);
+        return getAccessToken();
 
     }
 

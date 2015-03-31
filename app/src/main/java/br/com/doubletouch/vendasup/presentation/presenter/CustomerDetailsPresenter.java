@@ -10,6 +10,8 @@ import br.com.doubletouch.vendasup.VendasUp;
 import br.com.doubletouch.vendasup.data.entity.Customer;
 import br.com.doubletouch.vendasup.data.entity.PriceTable;
 import br.com.doubletouch.vendasup.data.entity.enumeration.PersonType;
+import br.com.doubletouch.vendasup.data.service.CustomerService;
+import br.com.doubletouch.vendasup.data.service.CustomerServiceImpl;
 import br.com.doubletouch.vendasup.domain.exception.ErrorBundle;
 import br.com.doubletouch.vendasup.domain.interactor.customer.GetCustomerDetailsUseCase;
 import br.com.doubletouch.vendasup.domain.interactor.customer.SaveCustomerUseCase;
@@ -66,7 +68,6 @@ public class CustomerDetailsPresenter implements Presenter {
     }
 
     private void loadCustomerDetails(){
-        this.hideViewRetry();
         this.showViewLoading();
         this.getCustomerDetails();
     }
@@ -78,14 +79,6 @@ public class CustomerDetailsPresenter implements Presenter {
 
     private void hideViewLoading() {
         this.customerDetailsView.hideLoading();
-    }
-
-    private void showViewRetry() {
-        this.customerDetailsView.showRetry();
-    }
-
-    private void hideViewRetry() {
-        this.customerDetailsView.hideRetry();
     }
 
 
@@ -104,15 +97,20 @@ public class CustomerDetailsPresenter implements Presenter {
 
 
     public void createNewCustomer() {
+
+        CustomerService customerService = new CustomerServiceImpl();
+        Integer nextId = customerService.getNextId();
+
         Customer customer = new Customer();
         customer.setCreditLimit(1000.00);
         customer.setFormPayment(1);
         customer.setPersonType(PersonType.FISICA.ordinal());
-        customer.setBranchID(VendasUp.getUsuarioLogado().getBranchID());
-        customer.setOrganizationID(VendasUp.getUsuarioLogado().getOrganizationID());
+        customer.setBranchID(VendasUp.getBranchOffice().getBranchOfficeID());
+        customer.setOrganizationID(VendasUp.getBranchOffice().getOrganization().getOrganizationID());
         customer.setActive(true);
         customer.setExcluded(false);
-        customer.setIdMobile(UUID.randomUUID().toString());
+        customer.setIdMobile(nextId);
+        customer.setID(nextId);
 
         showCustomerDetailsInView(customer);
     }
@@ -161,7 +159,6 @@ public class CustomerDetailsPresenter implements Presenter {
         public void onError(ErrorBundle errorBundle) {
             CustomerDetailsPresenter.this.hideViewLoading();
             CustomerDetailsPresenter.this.showErrorMessage(errorBundle);
-            CustomerDetailsPresenter.this.showViewRetry();
         }
     };
 
@@ -176,7 +173,6 @@ public class CustomerDetailsPresenter implements Presenter {
         public void onError(ErrorBundle errorBundle) {
             CustomerDetailsPresenter.this.hideViewLoading();
             CustomerDetailsPresenter.this.showErrorMessage(errorBundle);
-            CustomerDetailsPresenter.this.showViewRetry();
         }
     };
 

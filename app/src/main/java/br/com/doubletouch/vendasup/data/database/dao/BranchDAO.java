@@ -40,6 +40,23 @@ public class BranchDAO {
     }
 
 
+    public List<BranchOffice> getAll() {
+        {
+
+            ArrayList<BranchOffice> branches = new ArrayList<>();
+            Cursor c = db.query(BranchDB.TABELA, BranchDB.COLUNAS, null,null , null, null, null, LIMIT);
+
+            if(c.moveToFirst()){
+                do {
+                    branches.add(getByCursor(c));
+                } while (c.moveToNext());
+            }
+            c.close();
+            return  branches;
+        }
+    }
+
+
 
     public void insert(List<BranchOffice> branches) {
         db.beginTransaction();

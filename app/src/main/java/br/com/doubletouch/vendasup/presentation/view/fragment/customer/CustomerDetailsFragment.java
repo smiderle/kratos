@@ -38,6 +38,7 @@ import br.com.doubletouch.vendasup.presentation.presenter.CustomerDetailsPresent
 import br.com.doubletouch.vendasup.presentation.view.CustomerDetailsView;
 import br.com.doubletouch.vendasup.presentation.view.ViewHelper;
 import br.com.doubletouch.vendasup.presentation.view.activity.BaseParallacxFragment;
+import br.com.doubletouch.vendasup.presentation.view.activity.CustomerDetailsActivity;
 import br.com.doubletouch.vendasup.presentation.view.components.PagerSlidingTabStrip;
 import br.com.doubletouch.vendasup.presentation.view.components.parallax.ScrollTabHolder;
 import br.com.doubletouch.vendasup.presentation.view.components.parallax.ScrollTabHolderFragment;
@@ -158,9 +159,6 @@ public class CustomerDetailsFragment  extends BaseParallacxFragment implements C
                 break;
         }
 
-
-
-
         setHasOptionsMenu(true);
 
     }
@@ -181,8 +179,6 @@ public class CustomerDetailsFragment  extends BaseParallacxFragment implements C
             menuEdit = menu.findItem(R.id.it_edit).setVisible(true);
             menu.findItem(R.id.it_done).setVisible(false);
         }
-
-
     }
 
     /**
@@ -219,7 +215,9 @@ public class CustomerDetailsFragment  extends BaseParallacxFragment implements C
                 navigator.previousActivity(activity);
                 break;
             case R.id.it_edit:
-                navigator.navigateToCustomerDetailsForResult(activity, customerId, ViewMode.EDICAO);
+                Intent intentToLaunch = CustomerDetailsActivity.getCallingIntent(activity, customerId, ViewMode.EDICAO);
+                startActivityForResult (intentToLaunch, 1);
+                navigator.transitionGo(activity);
                 break;
             case R.id.it_done:
                 saveCustomer();
@@ -287,15 +285,6 @@ public class CustomerDetailsFragment  extends BaseParallacxFragment implements C
 
     }
 
-    @Override
-    public void showRetry() {
-
-    }
-
-    @Override
-    public void hideRetry() {
-
-    }
 
     @Override
     public void showError(String message) {

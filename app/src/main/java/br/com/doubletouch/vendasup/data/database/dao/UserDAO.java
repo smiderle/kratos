@@ -39,6 +39,19 @@ public class UserDAO {
         return user;
     }
 
+    public User getByLoginAndPassword( String login, String password ) {
+        User user = null;
+        String where = UserDB.EMAIL+" = ? AND " + UserDB.SENHA +" = ?";
+        Cursor c = db.query(UserDB.TABELA, UserDB.COLUNAS, where, new String[]{login, password}, null, null, null, null);
+
+        if(c.moveToFirst()){
+            user = getByCursor(c);
+        }
+
+        c.close();
+        return user;
+    }
+
     public List<User> getAll() {
         {
 

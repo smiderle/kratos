@@ -202,12 +202,27 @@ public class CustomerDetailsFinancialFragment extends ScrollTabHolderFragment im
     public void setAtributes(Object object) {
         Customer customer = (Customer) object;
         PriceTable priceTable = (PriceTable) sp_customer_price_table.getSelectedItem();
-        customer.setPriceTable(priceTable.getID());
+
+        if(priceTable != null){
+
+            customer.setPriceTable(priceTable.getID());
+
+        }
+
 
         Installment installment = (Installment) sp_customer_installment.getSelectedItem();
-        customer.setInstallmentId( installment.getID() );
+
+        if(installment  != null){
+
+            customer.setInstallmentId( installment.getID() );
+
+        }
+
+
 
         int formPayment = sp_customer_payment.getSelectedItemPosition();
+
+
         customer.setFormPayment( formPayment + 1);
 
          customer.setCreditLimit( DoubleUtil.toDouble( et_customer_credit_limit.getText().toString() ) );

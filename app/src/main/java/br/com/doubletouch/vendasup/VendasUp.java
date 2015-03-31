@@ -3,6 +3,8 @@ package br.com.doubletouch.vendasup;
 import android.app.Application;
 import android.content.Context;
 
+import br.com.doubletouch.vendasup.data.entity.BranchOffice;
+import br.com.doubletouch.vendasup.data.entity.User;
 import br.com.doubletouch.vendasup.data.entity.Usuario;
 import br.com.doubletouch.vendasup.domain.OauthAccess;
 
@@ -31,7 +33,13 @@ public class VendasUp extends Application {
 
     private static OauthAccess oauthAccess;
 
-    private static Usuario usuarioLogado;
+    private static User user;
+
+    private static BranchOffice branchOffice;
+
+
+
+    //private static Usuario usuarioLogado;
 
     public static OauthAccess getOauthAccess() {
         return oauthAccess;
@@ -40,12 +48,28 @@ public class VendasUp extends Application {
     public static void setOauthAccess(OauthAccess oauthAccess) {
         VendasUp.oauthAccess = oauthAccess;
     }
-
+/*
     public static Usuario getUsuarioLogado() {
         return usuarioLogado;
     }
 
     public static void setUsuarioLogado(Usuario usuarioLogado) {
         VendasUp.usuarioLogado = usuarioLogado;
+    }
+*/
+    public static User getUser() {
+        return user;
+    }
+
+    public static void setUser(User user) {
+        VendasUp.user = user;
+    }
+
+    public static BranchOffice getBranchOffice() {
+        return branchOffice;
+    }
+
+    public static void setBranchOffice(BranchOffice branchOffice) {
+        VendasUp.branchOffice = branchOffice;
     }
 }

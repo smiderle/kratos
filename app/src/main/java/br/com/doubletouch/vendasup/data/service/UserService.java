@@ -15,6 +15,16 @@ import br.com.doubletouch.vendasup.domain.exception.ErrorBundle;
  */
 public interface UserService {
 
+    interface UserLoginCallback {
+
+        void onUserLoaded(User user);
+
+        void onError(ErrorBundle errorBundle);
+    }
+
+
 
     public void saveOrUpdateSynchronous(List<User> users) ;
+
+    void getUserByLoginAndPassword(String login, String password,UserLoginCallback userLoginCallback);
 }

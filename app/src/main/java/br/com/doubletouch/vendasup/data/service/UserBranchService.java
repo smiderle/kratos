@@ -2,8 +2,10 @@ package br.com.doubletouch.vendasup.data.service;
 
 import java.util.List;
 
+import br.com.doubletouch.vendasup.data.entity.BranchOffice;
 import br.com.doubletouch.vendasup.data.entity.User;
 import br.com.doubletouch.vendasup.data.entity.UserBranchOffice;
+import br.com.doubletouch.vendasup.domain.exception.ErrorBundle;
 
 /**
  *
@@ -13,6 +15,16 @@ import br.com.doubletouch.vendasup.data.entity.UserBranchOffice;
  */
 public interface UserBranchService {
 
+    interface UserBranchCallback {
 
-    public void saveOrUpdateSynchronous(List<UserBranchOffice> usersBranches) ;
+        void onUserBranchLoaded( UserBranchOffice userBranchOffice );
+
+        void onError(ErrorBundle errorBundle);
+
+    }
+
+    public void saveOrUpdateSynchronous( List<UserBranchOffice> usersBranches ) ;
+
+    public void get(Integer branchID, Integer organizationID, Integer userID, UserBranchCallback userBranchCallback) ;
+
 }

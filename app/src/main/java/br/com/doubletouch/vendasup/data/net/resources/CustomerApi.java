@@ -1,5 +1,7 @@
 package br.com.doubletouch.vendasup.data.net.resources;
 
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -24,26 +26,56 @@ public class CustomerApi extends AbstractApi {
 
     public ApiResponse<ServiceResponse<List<Customer>>> getAllByChangeGreaterThan(Long ultimaSincronizacao,Integer organizationId, Integer offset, CustomerEntityJsonMaper customerEntityJsonMaper) throws IOException, SyncronizationException {
 
-            List<Customer> products = null;
+        List<Customer> products = null;
 
-            RestClient restClient = new RestClient(Endpoints.ENDPOINT_CUSTOMER, Methods.CUSTOMER_GET_ALL_BY_CHANGE_GREATER_THAN);
-            restClient.setParameter("date", ultimaSincronizacao);
-            restClient.setParameter("organizationID",organizationId);
-            restClient.setParameter("offset", offset);
+        RestClient restClient = new RestClient(Endpoints.ENDPOINT_CUSTOMER, Methods.CUSTOMER_GET_ALL_BY_CHANGE_GREATER_THAN);
+        restClient.setParameter("date", ultimaSincronizacao);
+        restClient.setParameter("organizationID",organizationId);
+        restClient.setParameter("offset", offset);
 
-            RESTResponse response = restClient.get();
+        RESTResponse response = restClient.get();
 
-            if (response.getCode() == 200) {
-                ApiResponse<ServiceResponse<List<Customer>>> apiResponse = customerEntityJsonMaper.transformCustomerCollection(response.getJson());
+        if (response.getCode() == 200) {
+            ApiResponse<ServiceResponse<List<Customer>>> apiResponse = customerEntityJsonMaper.transformCustomerCollection(response.getJson());
 
-                if (apiResponse.getCode().equals(ApiResponse.CODE_SUCESS)) {
-                    return apiResponse;
-                } else {
-                    throw new SyncronizationException(apiResponse.getMessage());
-                }
+            if (apiResponse.getCode().equals(ApiResponse.CODE_SUCESS)) {
+                return apiResponse;
             } else {
-                throw new SyncronizationException(response.getMessage());
+                throw new SyncronizationException(apiResponse.getMessage());
             }
+        } else {
+            throw new SyncronizationException(response.getMessage());
+        }
+    }
+
+    public  ApiResponse<ServiceResponse<List<Customer>>> add( List<Customer> customers ) throws IOException, SyncronizationException {
+
+        CustomerEntityJsonMaper customerEntityJsonMaper = new CustomerEntityJsonMaper();
+        RestClient restClient = new RestClient(Endpoints.ENDPOINT_CUSTOMER, Methods.PRODUTO_CUSTOMER_LIST);
+
+        Gson gson = new Gson();
+        String customerJson = gson.toJson(customers);
+
+        RESTResponse response = restClient.post(customerJson);
+
+        if( response.getCode() == 200 ) {
+
+            String json = response.getJson();
+
+            ApiResponse<ServiceResponse<List<Customer>>> apiResponse =  customerEntityJsonMaper.transformCustomerCollection(json);
+
+            if( apiResponse.getCode().equals( ApiResponse.CODE_SUCESS ) ) {
+
+                return apiResponse;
+
+            } else {
+
+                throw new SyncronizationException( apiResponse.getMessage() );
+
+            }
+        } else {
+            throw new SyncronizationException( response.getMessage() );
+        }
 
     }
 }

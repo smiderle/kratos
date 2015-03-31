@@ -2,6 +2,7 @@ package br.com.doubletouch.vendasup.presentation.view.fragment.customer;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -31,6 +32,8 @@ import br.com.doubletouch.vendasup.presentation.UIThread;
 import br.com.doubletouch.vendasup.presentation.navigation.Navigator;
 import br.com.doubletouch.vendasup.presentation.presenter.CustomerListPresenter;
 import br.com.doubletouch.vendasup.presentation.view.CustomerListView;
+import br.com.doubletouch.vendasup.presentation.view.activity.CustomerDetailsActivity;
+import br.com.doubletouch.vendasup.presentation.view.activity.ProductDetailsActivity;
 import br.com.doubletouch.vendasup.presentation.view.adapter.KratosLayoutManager;
 import br.com.doubletouch.vendasup.presentation.view.adapter.CustomersAdapter;
 import br.com.doubletouch.vendasup.presentation.view.fragment.BaseFragment;
@@ -42,12 +45,6 @@ import butterknife.InjectView;
  */
 public class CustomerListFragment extends BaseFragment implements CustomerListView {
 
-    /**
-     * Interface para "ouvir" os eventos da lista de clientes.
-     */
-    public interface CustomerListListener {
-        void onCustomerClicked(final Customer customer);
-    }
 
 
     private CustomerListPresenter customerListPresenter;
@@ -60,12 +57,6 @@ public class CustomerListFragment extends BaseFragment implements CustomerListVi
 
     @InjectView(R.id.rl_progress)
     RelativeLayout rl_progress;
-
-    @InjectView(R.id.rl_retry)
-    RelativeLayout rl_retry;
-
-    @InjectView(R.id.bt_retry)
-    Button bt_retry;
 
     public CustomerListFragment() {
         super();
@@ -142,8 +133,9 @@ public class CustomerListFragment extends BaseFragment implements CustomerListVi
                 navigator.previousActivity(activity);
                 break;
             case R.id.add:
-                navigator.navigateToCustomerDetails(activity, 0, ViewMode.INCLUSAO);
-
+                Intent intentToLaunch = CustomerDetailsActivity.getCallingIntent(activity, 0, ViewMode.INCLUSAO);
+                startActivityForResult (intentToLaunch, 1);
+                navigator.transitionGo(activity);
                 break;
             default:
                 super.onOptionsItemSelected(item);
@@ -177,8 +169,10 @@ public class CustomerListFragment extends BaseFragment implements CustomerListVi
 
     @Override
     public void viewCustomer(Customer customer) {
-        if(this.customerListListener != null){
-            this.customerListListener.onCustomerClicked(customer);
+        if(this.customerListListener != null) {
+            Intent intentToLaunch = CustomerDetailsActivity.getCallingIntent(activity, customer.getID(), ViewMode.VISUALIZACAO);
+            startActivityForResult (intentToLaunch, 1);
+            navigator.transitionGo(activity);
         }
     }
 
@@ -194,15 +188,6 @@ public class CustomerListFragment extends BaseFragment implements CustomerListVi
         this.getActivity().setProgressBarIndeterminateVisibility(false);
     }
 
-    @Override
-    public void showRetry() {
-        this.rl_retry.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void hideRetry() {
-        this.rl_retry.setVisibility(View.GONE);
-    }
 
     @Override
     public void showError(String message) {
@@ -233,5 +218,14 @@ public class CustomerListFragment extends BaseFragment implements CustomerListVi
      */
     private void loadCustomerList(){
         this.customerListPresenter.initialize();
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        this.customerListPresenter.initialize();
+
     }
 }

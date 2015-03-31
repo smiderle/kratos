@@ -10,9 +10,12 @@ import br.com.doubletouch.vendasup.data.entity.Product;
 public interface ProductListView extends  LoadDataView {
 
 
+    /**
+     * Interface para "ouvir" os eventos da lista de produtos.
+     */
     public interface ProductListListener {
-        void onProductClicked(Product product);
     }
+
 
     /**
      * Renderiza a lista de produtos na tela.

@@ -37,7 +37,6 @@ public class ProductListPresenter implements Presenter {
     }
 
     private void loadUserList() {
-        this.hideViewRetry();
         this.showViewLoading();
         this.getProductList();
     }
@@ -50,13 +49,6 @@ public class ProductListPresenter implements Presenter {
         this.productListView.hideLoading();
     }
 
-    private void hideViewRetry() {
-        this.productListView.hideRetry();
-    }
-
-    private void showViewRetry() {
-        this.productListView.showRetry();
-    }
 
     private void showErrorMessage(ErrorBundle errorBundle) {
         String errorMessage = ErrorMessageFactory.create(this.productListView.getContext(),
@@ -106,7 +98,6 @@ public class ProductListPresenter implements Presenter {
         public void onError(ErrorBundle errorBundle) {
             ProductListPresenter.this.hideViewLoading();
             ProductListPresenter.this.showErrorMessage(errorBundle);
-            ProductListPresenter.this.showViewRetry();
 
 
         }
@@ -123,8 +114,6 @@ public class ProductListPresenter implements Presenter {
         public void onError(ErrorBundle errorBundle) {
             ProductListPresenter.this.hideViewLoading();
             ProductListPresenter.this.showErrorMessage(errorBundle);
-            ProductListPresenter.this.showViewRetry();
-
 
         }
     };

@@ -65,7 +65,14 @@ public interface ProductService {
     void getProductById(final int productId, ProductDetailsCallback productDetailsCallback);
 
 
-    public void saveOrUpdateSynchronous(List<Product> produtos) ;
+    void saveOrUpdateSynchronous(List<Product> produtos) ;
 
-    public void save(Product product,final ProductSaveCallback productSaveCallback);
+    void save(Product product,final ProductSaveCallback productSaveCallback);
+
+
+    List<Product> getAllSyncPending(Integer branchId);
+
+    Integer getNextId();
+
+    void updateByIdMobile(List<Product> products);
 }

@@ -16,7 +16,7 @@ public final class ProductDB {
     public static String create(){
         String SQL = "CREATE TABLE IF NOT EXISTS "+ TABELA+" (" +
                 ID + " INTEGER NOT NULL , " +
-                ID_MOBILE + " TEXT , " +
+                ID_MOBILE + " INTEGER , " +
                 IDEMPRESA+ " INTEGER NOT NULL , "+
                 IDFILIAL+ " INTEGER NOT NULL , " +
                 DESCRICAO + " TEXT NOT NULL,"+

@@ -50,4 +50,6 @@
     <!-- Espaço a esquerda dos textos que estão após as imagens dos EditTexts de detalhes do produto por exemplo-->
     <dimen name="tv_title_marginleft_of_image">22dp</dimen>
 
+    <dimen name="activity_login_padding_top">30dp</dimen>
+
 </resources>

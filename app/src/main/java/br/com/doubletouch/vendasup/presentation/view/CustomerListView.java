@@ -11,7 +11,7 @@ public interface CustomerListView extends  LoadDataView {
 
 
     public interface CustomerListListener {
-        void onCustomerClicked(Customer customer);
+
     }
 
     /**

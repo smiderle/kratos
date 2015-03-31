@@ -2,6 +2,7 @@ package br.com.doubletouch.vendasup.presentation.view.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -31,6 +32,7 @@ import br.com.doubletouch.vendasup.presentation.UIThread;
 import br.com.doubletouch.vendasup.presentation.navigation.Navigator;
 import br.com.doubletouch.vendasup.presentation.presenter.ProductListPresenter;
 import br.com.doubletouch.vendasup.presentation.view.ProductListView;
+import br.com.doubletouch.vendasup.presentation.view.activity.ProductDetailsActivity;
 import br.com.doubletouch.vendasup.presentation.view.adapter.KratosLayoutManager;
 import br.com.doubletouch.vendasup.presentation.view.adapter.ProductsAdapter;
 import butterknife.ButterKnife;
@@ -41,12 +43,6 @@ import butterknife.InjectView;
  */
 public class ProductListFragment extends BaseFragment implements ProductListView {
 
-    /**
-     * Interface para "ouvir" os eventos da lista de produtos.
-     */
-    public interface ProductListListener {
-        void onProductClicked(final Product product);
-    }
 
 
     private ProductListPresenter productListPresenter;
@@ -60,11 +56,6 @@ public class ProductListFragment extends BaseFragment implements ProductListView
     @InjectView(R.id.rl_progress)
     RelativeLayout rl_progress;
 
-    @InjectView(R.id.rl_retry)
-    RelativeLayout rl_retry;
-
-    @InjectView(R.id.bt_retry)
-    Button bt_retry;
 
     private Navigator navigator;
 
@@ -159,7 +150,9 @@ public class ProductListFragment extends BaseFragment implements ProductListView
     @Override
     public void viewProduct(Product product) {
         if(this.productListListener != null){
-            this.productListListener.onProductClicked(product);
+            Intent intentToLaunch = ProductDetailsActivity.getCallingIntent(activity, product.getID(), ViewMode.VISUALIZACAO);
+            startActivityForResult(intentToLaunch,1);
+            navigator.transitionGo(activity);
         }
     }
 
@@ -173,16 +166,6 @@ public class ProductListFragment extends BaseFragment implements ProductListView
     public void hideLoading() {
         this.rl_progress.setVisibility(View.GONE);
         this.getActivity().setProgressBarIndeterminateVisibility(false);
-    }
-
-    @Override
-    public void showRetry() {
-        this.rl_retry.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void hideRetry() {
-        this.rl_retry.setVisibility(View.GONE);
     }
 
     @Override
@@ -225,10 +208,20 @@ public class ProductListFragment extends BaseFragment implements ProductListView
                 navigator.previousActivity(activity);
                 break;
             case R.id.add:
-                navigator.navigateToProductDetails(activity, 0, ViewMode.INCLUSAO);
+                Intent intentToLaunch = ProductDetailsActivity.getCallingIntent(activity, 0, ViewMode.INCLUSAO);
+                startActivityForResult(intentToLaunch,1);
                 break;
-
+            default:
+                super.onOptionsItemSelected(item);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        this.productListPresenter.initialize();
+
     }
 }

@@ -8,6 +8,7 @@ import br.com.doubletouch.vendasup.R;
 import br.com.doubletouch.vendasup.data.entity.enumeration.ViewMode;
 import br.com.doubletouch.vendasup.presentation.view.activity.BaseActivity;
 import br.com.doubletouch.vendasup.presentation.view.activity.CustomerDetailsActivity;
+import br.com.doubletouch.vendasup.presentation.view.activity.LoginActivity;
 import br.com.doubletouch.vendasup.presentation.view.activity.MenuActivity;
 import br.com.doubletouch.vendasup.presentation.view.activity.ProductDetailsActivity;
 import br.com.doubletouch.vendasup.presentation.view.activity.ProductListActivity;
@@ -24,6 +25,14 @@ public class Navigator {
     public void navigateToProductList(Context context){
         if(context != null){
             Intent it = ProductListActivity.getCallingIntent(context);
+            context.startActivity(it);
+            transitionGo( (Activity) context );
+        }
+    }
+
+    public void navigateToLogin(Context context){
+        if(context != null){
+            Intent it = LoginActivity.getCallingIntent(context);
             context.startActivity(it);
             transitionGo( (Activity) context );
         }
@@ -63,14 +72,16 @@ public class Navigator {
         }
     }
 
-
+/*
     public void navigateToCustomerDetailsForResult(Activity activity, Integer customerId, ViewMode viewMode){
-        Intent intentToLaunch = CustomerDetailsActivity.getCallingIntent(activity, customerId, viewMode);
-        activity.startActivityForResult(intentToLaunch, 1);
+
+        Intent intentToLaunch = CustomerDetailsActivity.getCallingIntent(activity, customerId, ViewMode.INCLUSAO);
+
+        activity.startActivityForResult (intentToLaunch, 1);
 
         transitionGo(activity);
     }
-
+*/
 
     /**
      * Navega para a activity (.class) passada por parametro
@@ -95,13 +106,13 @@ public class Navigator {
         }
     }
 
-    private void transitionGo(Activity activity){
+    public void transitionGo(Activity activity){
 
         activity.overridePendingTransition(R.anim.slide_right_in, R.anim.slide_left_out);
 
     }
 
-    private void transitionBack(Activity activity){
+    public void transitionBack(Activity activity){
 
         activity.overridePendingTransition(R.anim.slide_left_in, R.anim.slide_right_out);
     }

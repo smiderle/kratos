@@ -244,4 +244,9 @@ public class BranchOffice {
     public void setActionCreditLimit(String actionCreditLimit) {
         this.actionCreditLimit = actionCreditLimit;
     }
+
+    @Override
+    public String toString() {
+        return getBranchOfficeID() +" - " + getFancyName();
+    }
 }

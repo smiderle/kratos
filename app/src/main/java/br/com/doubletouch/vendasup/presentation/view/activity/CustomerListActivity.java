@@ -36,9 +36,5 @@ public class CustomerListActivity extends BaseActivity implements CustomerListFr
     }
 
 
-    @Override
-    public void onCustomerClicked(Customer customer) {
-        this.navigator.navigateToCustomerDetails(this, customer.getID(), ViewMode.VISUALIZACAO);
-    }
 
 }

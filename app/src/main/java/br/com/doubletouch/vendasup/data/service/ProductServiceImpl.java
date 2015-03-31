@@ -24,7 +24,7 @@ public class ProductServiceImpl implements ProductService {
     public void getProductList( final ProductListCallback productListCallback) {
 
         try{
-            List<Product> products = productDAO.getAll(VendasUp.getUsuarioLogado().getBranchID());
+            List<Product> products = productDAO.getAll(VendasUp.getBranchOffice().getBranchOfficeID());
             productListCallback.onProductListLoaded(products);
         }catch ( Exception e){
             productListCallback.onError(new RepositoryErrorBundle(e));
@@ -35,7 +35,7 @@ public class ProductServiceImpl implements ProductService {
     public void getProductListByFilter(String description, String productId,  final ProductListFilterCallback productListFilterCallback) {
 
         try {
-            List<Product> products = productDAO.getByDescriptionOrProductId(description, productId, VendasUp.getUsuarioLogado().getBranchID());
+            List<Product> products = productDAO.getByDescriptionOrProductId(description, productId, VendasUp.getBranchOffice().getBranchOfficeID());
             productListFilterCallback.onProductListFilterLoaded(products);
         }catch ( Exception e){
             productListFilterCallback.onError(new RepositoryErrorBundle(e));
@@ -74,6 +74,39 @@ public class ProductServiceImpl implements ProductService {
             productSaveCallback.onProductSaved(product);
         }catch (Exception e) {
             productSaveCallback.onError(new RepositoryErrorBundle(e));
+
+        }
+    }
+
+    @Override
+    public List<Product> getAllSyncPending(Integer branchId) {
+
+        return productDAO.getAllSyncPending(branchId);
+
+    }
+
+    @Override
+    public Integer getNextId() {
+
+        Integer max = productDAO.max();
+
+        if(max == null){
+            max = 1;
+        }
+
+        max += 1000;
+
+        return max;
+
+    }
+
+    @Override
+    public void updateByIdMobile(List<Product> products) {
+
+        for(Product product : products) {
+
+            product.setSyncPending(false);
+            productDAO.updateByIdMobile(product);
 
         }
     }

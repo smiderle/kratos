@@ -45,7 +45,7 @@ public class Customer implements Serializable {
     /**
      * Código que é gravado quando um cliente é inserido pelo mobile. Para poder fazer um update, posteriormente, quando for inserido no banco de dados postgresql com um novo id.
      */
-    private String idMobile;
+    private Integer idMobile;
 
     public Integer getID() {
         return ID;
@@ -295,11 +295,11 @@ public class Customer implements Serializable {
         this.installmentId = installmentId;
     }
 
-    public String getIdMobile() {
+    public Integer getIdMobile() {
         return idMobile;
     }
 
-    public void setIdMobile(String idMobile) {
+    public void setIdMobile(Integer idMobile) {
         this.idMobile = idMobile;
     }
 

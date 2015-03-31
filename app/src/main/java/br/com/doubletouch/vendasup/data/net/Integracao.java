@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import br.com.doubletouch.vendasup.VendasUp;
 import br.com.doubletouch.vendasup.controller.SincronizacaoController;
 import br.com.doubletouch.vendasup.data.database.script.BranchDB;
 import br.com.doubletouch.vendasup.data.database.script.GoalDB;
@@ -267,5 +268,37 @@ public class Integracao {
 
         sincronizacaoController.updateLastSync(apiResponse.getHour(), GoalDB.TABELA);
 
+    }
+
+
+
+
+
+
+    public void enviarProdutos(Integer branchID) throws IOException, SyncronizationException {
+
+        ProductService productService = new ProductServiceImpl();
+
+        List<Product> products = productService.getAllSyncPending(branchID);
+
+        ApiResponse<ServiceResponse<List<Product>>> apiResponse = new ProductApi().add(products);
+
+        List<Product> produtsSaved = apiResponse.getPayload().getValue();
+
+        productService.updateByIdMobile(produtsSaved);
+
+    }
+
+    public void enviarClientes(Integer branchID) throws  IOException, SyncronizationException {
+
+        CustomerService customerService = new CustomerServiceImpl();
+
+        List<Customer> customers = customerService.getAllSyncPending(branchID);
+
+        ApiResponse<ServiceResponse<List<Customer>>> apiResponse = new CustomerApi().add(customers);
+
+        List<Customer> customersSaved = apiResponse.getPayload().getValue();
+
+        customerService.updateByIdMobile(customersSaved);
     }
 }

@@ -83,4 +83,10 @@ public interface CustomerService {
 
 
     public void saveOrUpdateSynchronous(List<Customer> customers) ;
+
+    Integer getNextId();
+
+    void updateByIdMobile(List<Customer> customers);
+
+    List<Customer> getAllSyncPending(Integer branchId);
 }

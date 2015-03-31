@@ -186,12 +186,24 @@ public class ProductDetailsMainFragment extends ScrollTabHolderFragment {
             ((ViewSwitcher) view.findViewById(R.id.vs_product_stock)).showNext();
 
             this.et_product_description.setText(product.getDescription());
-            this.tv_product_code.setText(product.getID().toString());
             this.et_product_barcode.setText(product.getBarcode());
             this.et_product_reference.setText(product.getReference());
             this.et_product_package.setText(product.getPackaging());
-            this.et_product_stock.setText(  product.getStockAmount().toString()  );
-            this.et_product_price.setText( product.getSalePrice().toString() );
+
+            if(product.getStockAmount() != null){
+                this.et_product_stock.setText(  product.getStockAmount().toString()  );
+            }
+
+            if(product.getSalePrice() != null){
+
+                this.et_product_price.setText( product.getSalePrice().toString() );
+
+            }
+
+            if(product.getID() != null){
+                this.tv_product_code.setText( product.getID().toString());
+            }
+
 
 
         } else {

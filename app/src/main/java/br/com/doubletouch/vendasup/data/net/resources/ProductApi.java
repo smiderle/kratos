@@ -1,5 +1,7 @@
 package br.com.doubletouch.vendasup.data.net.resources;
 
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -47,6 +49,37 @@ public class ProductApi {
     }*/
 
 
+    public  ApiResponse<ServiceResponse<List<Product>>> add( List<Product> products ) throws IOException, SyncronizationException {
+
+        ProductEntityJsonMaper productEntityJsonMaper = new ProductEntityJsonMaper();
+        RestClient restClient = new RestClient(Endpoints.ENDPOINT_PRODUTO, Methods.PRODUTO_SAVE_LIST);
+
+        Gson gson = new Gson();
+        String productsJson = gson.toJson(products);
+
+        RESTResponse response = restClient.post(productsJson);
+
+        if( response.getCode() == 200 ) {
+
+            String json = response.getJson();
+
+            ApiResponse<ServiceResponse<List<Product>>> apiResponse =  productEntityJsonMaper.transformProductCollection(json);
+
+            if( apiResponse.getCode().equals( ApiResponse.CODE_SUCESS ) ){
+
+                return apiResponse;
+
+            } else {
+
+                throw new SyncronizationException( apiResponse.getMessage() );
+
+            }
+        } else {
+            throw new SyncronizationException( response.getMessage() );
+        }
+
+    }
+
     public  ApiResponse<ServiceResponse<List<Product>>> getAllByChangeGreaterThan(Long ultimaSincronizacao, Integer organizationId, Integer offset,ProductEntityJsonMaper productEntityJsonMaper) throws IOException, SyncronizationException {
         List<Product> products = null;
 
@@ -68,4 +101,5 @@ public class ProductApi {
             throw new SyncronizationException( response.getMessage() );
         }
     }
+
 }

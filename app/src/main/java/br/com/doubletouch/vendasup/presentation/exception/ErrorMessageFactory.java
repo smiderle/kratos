@@ -24,10 +24,13 @@ public class ErrorMessageFactory {
      * @return
      */
     public static String create(Context context, Exception exception){
-        String message = context.getString(R.string.exception_message_generic);
+
+        String message = exception.getMessage();
+
+
 
         if(exception instanceof SyncronizationException){
-            message = context.getString(R.string.exception_message_syncronization);
+            context.getString(R.string.exception_message_syncronization);
         }
 
         Log.e(VendasUp.APP_TAG, exception.getMessage(), exception);

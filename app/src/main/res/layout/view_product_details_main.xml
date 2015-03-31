@@ -88,7 +88,8 @@
 
             <EditText
                 android:id="@+id/et_product_description"
-                style="@style/AppTheme.TextViewSecundary"/>
+                style="@style/AppTheme.TextViewSecundary"
+                android:maxLength="100"/>
 
 
         </ViewSwitcher>
@@ -194,7 +195,8 @@
 
             <EditText
                 android:id="@+id/et_product_package"
-                style="@style/AppTheme.TextViewSecundary"/>
+                style="@style/AppTheme.TextViewSecundary"
+                android:maxLength="10"/>
 
         </ViewSwitcher>
 
@@ -243,6 +245,7 @@
 
             <EditText
                 android:id="@+id/et_product_barcode"
+                android:maxLength="20"
                 style="@style/AppTheme.TextViewSecundary"/>
 
 

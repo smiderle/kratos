@@ -14,7 +14,10 @@ import java.util.List;
 import br.com.doubletouch.vendasup.R;
 import br.com.doubletouch.vendasup.VendasUp;
 import br.com.doubletouch.vendasup.data.entity.Product;
+import br.com.doubletouch.vendasup.data.entity.User;
 import br.com.doubletouch.vendasup.data.entity.Usuario;
+import br.com.doubletouch.vendasup.data.service.ProductService;
+import br.com.doubletouch.vendasup.data.service.ProductServiceImpl;
 import br.com.doubletouch.vendasup.presentation.navigation.Navigator;
 import br.com.doubletouch.vendasup.data.net.Integracao;
 import butterknife.ButterKnife;
@@ -29,6 +32,9 @@ public class CargaInicialActivity extends ActionBarActivity {
 
     @InjectView((R.id.btnProdutos))
     Button btnProdutos;
+
+    @InjectView((R.id.btnAtualizar))
+    Button btnAtualizar;
 
     @InjectView(R.id.txtEmail)
     EditText txtEmail;
@@ -47,8 +53,11 @@ public class CargaInicialActivity extends ActionBarActivity {
 
 
         //TODO PROVISÒRIO
-        Usuario usuarioLogado = new Usuario();
-        VendasUp.setUsuarioLogado(usuarioLogado);
+        User user = new User();
+        user.setEmail("junior@gmail.com");
+        user.setOrganizationID(116);
+
+        VendasUp.setUser(user);
 
         ButterKnife.inject(this);
 
@@ -83,6 +92,29 @@ public class CargaInicialActivity extends ActionBarActivity {
 
     }
 
+    @OnClick(R.id.btnAtualizar)
+    void onRefreshClick(){
+
+        Integracao integracao = new Integracao();
+
+
+        try{
+
+            integracao.enviarProdutos(1);
+
+            integracao.enviarClientes(1);
+
+        } catch (Exception e) {
+
+            Log.e(VendasUp.APP_TAG, e.getMessage(),e);
+
+        }
+
+
+
+    }
+
+
     @OnClick(R.id.btnCargaInicial)
     void onInitLoadClick(){
 
@@ -90,32 +122,34 @@ public class CargaInicialActivity extends ActionBarActivity {
 
             Integracao integracao = new Integracao();
 
-            integracao.receberParcelamentos(VendasUp.getUsuarioLogado().getOrganizationID());
+            integracao.receberParcelamentos(VendasUp.getUser().getOrganizationID());
 
-            integracao.receberProdutos(VendasUp.getUsuarioLogado().getOrganizationID());
+            integracao.receberProdutos(VendasUp.getUser().getOrganizationID());
 
-            integracao.receberClientes(VendasUp.getUsuarioLogado().getOrganizationID());
+            integracao.receberClientes(VendasUp.getUser().getOrganizationID());
 
-            integracao.receberTabelasPrecos(VendasUp.getUsuarioLogado().getOrganizationID());
+            integracao.receberTabelasPrecos(VendasUp.getUser().getOrganizationID());
 
-            integracao.receberUsuarios(VendasUp.getUsuarioLogado().getOrganizationID());
+            integracao.receberUsuarios(VendasUp.getUser().getOrganizationID());
 
-            integracao.receberEmpresa(VendasUp.getUsuarioLogado().getOrganizationID());
+            integracao.receberEmpresa(VendasUp.getUser().getOrganizationID());
 
-            integracao.receberFilial(VendasUp.getUsuarioLogado().getOrganizationID());
+            integracao.receberFilial(VendasUp.getUser().getOrganizationID());
 
-            integracao.receberPromocoes(VendasUp.getUsuarioLogado().getOrganizationID());
+            integracao.receberPromocoes(VendasUp.getUser().getOrganizationID());
 
-            integracao.receberMetas(VendasUp.getUsuarioLogado().getOrganizationID());
+            integracao.receberMetas(VendasUp.getUser().getOrganizationID());
 
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+
     @OnClick(R.id.btnProdutos)
     void onButtonNavigateToProductListClick(){
-        new Navigator().navigateToMenu(CargaInicialActivity.this);
+        new Navigator().navigateToLogin(CargaInicialActivity.this);
     }
 
 

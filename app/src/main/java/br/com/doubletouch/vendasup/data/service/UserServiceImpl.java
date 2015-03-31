@@ -38,4 +38,21 @@ public class UserServiceImpl implements UserService {
 
         }
     }
+
+    @Override
+    public void getUserByLoginAndPassword(String login, String password, UserLoginCallback userLoginCallback) {
+
+        User user = userDAO.getByLoginAndPassword(login, password);
+
+        if(user != null){
+
+            userLoginCallback.onUserLoaded(user);
+
+        } else {
+
+            userLoginCallback.onError(new RepositoryErrorBundle( new Exception("Usuário ou senha inválidos.") ));
+
+        }
+
+    }
 }

@@ -197,6 +197,7 @@ public class ProductDetailsFragment  extends BaseParallacxFragment implements Pr
             case R.id.it_edit:
                 Intent it = ProductDetailsActivity.getCallingIntent(activity, productId, ViewMode.EDICAO);
                 startActivityForResult (it, 1 );
+                navigator.transitionGo(activity);
                 break;
             case R.id.it_done:
                 saveProduct();
@@ -303,12 +304,6 @@ public class ProductDetailsFragment  extends BaseParallacxFragment implements Pr
 
 
 
-    @Override public void showRetry() {
-    }
-
-    @Override public void hideRetry() {
-
-    }
 
     @Override public void showError(String message) {
         this.showToastMessage(message);

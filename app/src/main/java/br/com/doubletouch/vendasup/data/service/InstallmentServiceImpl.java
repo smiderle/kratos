@@ -22,7 +22,7 @@ public class InstallmentServiceImpl implements InstallmentService {
     public void getInstallmentList(InstallmentListCallback installmentListCallback) {
 
         try {
-            List<Installment> all = installmentDAO.getAll(VendasUp.getUsuarioLogado().getBranchID());
+            List<Installment> all = installmentDAO.getAll(VendasUp.getBranchOffice().getBranchOfficeID());
 
             installmentListCallback.onInstallmentListLoaded(all);
         }catch (Exception e){

@@ -52,6 +52,38 @@ public class ProductDAO {
         return  products;
     }
 
+    public Integer max() {
+
+        Integer max = 0;
+
+        String sql = "SELECT MAX("+ ProductDB.ID +") AS max_id FROM " + ProductDB.TABELA;
+
+        Cursor cursor = db.rawQuery( sql, null );
+
+        if(cursor.moveToFirst()){
+            max = cursor.getInt( 0 );
+        }
+
+        return max;
+
+
+    }
+
+    public List<Product> getAllSyncPending(Integer branchId) {
+        ArrayList<Product> products = new ArrayList<>();
+
+        String where = ProductDB.IDFILIAL+" = ? AND  " +ProductDB.SYNC_PENDENTE +" = 1 " ;
+        Cursor c = db.query(ProductDB.TABELA, ProductDB.COLUNAS, where, new String[]{String.valueOf(branchId)}, null, null, null, null);
+
+        if(c.moveToFirst()){
+            do {
+                products.add(getByCursor(c));
+            } while (c.moveToNext());
+        }
+        c.close();
+        return  products;
+    }
+
     public void insert( Product product){
         db.insertWithOnConflict(ProductDB.TABELA, null, getContentValues(product), SQLiteDatabase.CONFLICT_REPLACE);
     }
@@ -65,9 +97,12 @@ public class ProductDAO {
         db.endTransaction();
     }
 
-    public void update( Product product){
-        String where = ProductDB.ID +" = ? ";
-        db.update(ProductDB.TABELA, getContentValues(product), where, new String[]{ String.valueOf(product.getID()) });
+    public void updateByIdMobile( Product product) {
+
+        String sql = "UPDATE " + ProductDB.TABELA + " SET " + ProductDB.ID +" = " + product.getID()+","+ ProductDB.ID_MOBILE+" = "+ product.getID() +"," + ProductDB.SYNC_PENDENTE+" = 0 "+
+                "WHERE "+ ProductDB.ID_MOBILE +" = " + product.getIdMobile();
+
+        db.execSQL(sql);
     }
 
 
@@ -157,7 +192,7 @@ public class ProductDAO {
         product.setDescription(c.getString(idxDescricao));
         product.setActive( c.getInt(idxAtivo) == 1 );
         product.setPackaging(c.getString(idxEmbalagem));
-        product.setIdMobile(c.getString(idxIdMobile));
+        product.setIdMobile(c.getInt(idxIdMobile));
         product.setSyncPending(c.getInt( idxSyncPendente ) == 1);
 
         return product;

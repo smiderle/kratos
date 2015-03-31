@@ -56,6 +56,32 @@ public class CustomerDAO {
     }
 
 
+    public Integer max() {
+
+        Integer max = 0;
+
+        String sql = "SELECT MAX("+ CustomerDB.ID +") AS max_id FROM " + CustomerDB.TABELA;
+
+        Cursor cursor = db.rawQuery( sql, null );
+
+        if(cursor.moveToFirst()){
+            max = cursor.getInt( 0 );
+        }
+
+        return max;
+
+
+    }
+
+    public void updateByIdMobile( Customer customer) {
+
+        String sql = "UPDATE " + CustomerDB.TABELA + " SET " + CustomerDB.ID +" = " + customer.getID()+","+ CustomerDB.ID_MOBILE+" = "+ customer.getID() +"," + CustomerDB.SYNC_PENDENTE+" = 0 "+
+                "WHERE "+ CustomerDB.ID_MOBILE +" = " + customer.getIdMobile();
+
+        db.execSQL(sql);
+    }
+
+
 
     public void insert(Customer customer) {
         db.insertWithOnConflict(CustomerDB.TABELA, null, getContentValues(customer), SQLiteDatabase.CONFLICT_REPLACE);
@@ -104,6 +130,22 @@ public class CustomerDAO {
         c.close();
 
         return products;
+    }
+
+
+    public List<Customer> getAllSyncPending(Integer branchId) {
+        ArrayList<Customer> customers = new ArrayList<>();
+
+        String where = CustomerDB.IDFILIAL+" = ? AND  " +CustomerDB.SYNC_PENDENTE +" = 1 " ;
+        Cursor c = db.query(CustomerDB.TABELA, CustomerDB.COLUNAS, where, new String[]{String.valueOf(branchId)}, null, null, null, null);
+
+        if(c.moveToFirst()){
+            do {
+                customers.add(getByCursor(c));
+            } while (c.moveToNext());
+        }
+        c.close();
+        return  customers;
     }
 
     private ContentValues getContentValues( Customer customer) {
@@ -208,7 +250,7 @@ public class CustomerDAO {
         customer.setExcluded(c.getInt(idxExcluded) == 1);
         customer.setSyncPending(c.getInt( idxSincronizado ) == 1);
         customer.setCreditLimit(c.getDouble( idxLimiteCredito ));
-        customer.setIdMobile(c.getString(idxIdClienteMobile));
+        customer.setIdMobile(c.getInt(idxIdClienteMobile));
 
         customer.setPictureUrl(c.getString(idxPicture));
         customer.setPriceTable(c.getInt(idxPriceTable));

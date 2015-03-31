@@ -41,6 +41,8 @@ public class UserBranchDAO {
         return user;
     }
 
+
+
     public List<UserBranchOffice> getAll() {
         {
 

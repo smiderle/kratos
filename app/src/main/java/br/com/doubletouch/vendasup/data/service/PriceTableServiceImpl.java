@@ -22,7 +22,7 @@ public class PriceTableServiceImpl implements PriceTableService {
 
         try{
 
-            List<PriceTable> all = priceTableDAO.getAll( VendasUp.getUsuarioLogado().getBranchID() );
+            List<PriceTable> all = priceTableDAO.getAll( VendasUp.getBranchOffice().getBranchOfficeID() );
             priceTableListCallback.onPriceTableListLoaded(all);
 
         } catch (Exception e){

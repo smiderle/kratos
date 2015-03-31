@@ -24,7 +24,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         try{
 
-            List<Customer> customers = customerDAO.getAll(VendasUp.getUsuarioLogado().getBranchID());
+            List<Customer> customers = customerDAO.getAll(VendasUp.getBranchOffice().getBranchOfficeID());
             customerListCallback.onCustomerListLoaded(customers);
 
         } catch (Exception e){
@@ -36,7 +36,7 @@ public class CustomerServiceImpl implements CustomerService {
 
         try{
 
-            List<Customer> customers = customerDAO.getByNameOrCustomerId(description, customerId, VendasUp.getUsuarioLogado().getBranchID());
+            List<Customer> customers = customerDAO.getByNameOrCustomerId(description, customerId, VendasUp.getBranchOffice().getBranchOfficeID());
             customerListFilterCallback.onCustomerListFilterLoaded(customers);
 
         } catch (Exception e){
@@ -80,4 +80,38 @@ public class CustomerServiceImpl implements CustomerService {
     public void saveOrUpdateSynchronous(List<Customer> customers) {
         customerDAO.insert(customers);
     }
+
+    @Override
+    public Integer getNextId() {
+
+        Integer max = customerDAO.max();
+
+        if(max == null){
+            max = 1;
+        }
+
+        max += 1000;
+
+        return max;
+
+    }
+
+    @Override
+    public void updateByIdMobile(List<Customer> customers) {
+
+        for(Customer customer : customers) {
+
+            customer.setSyncPending(false);
+            customerDAO.updateByIdMobile(customer);
+
+        }
+    }
+
+    @Override
+    public List<Customer> getAllSyncPending(Integer branchId) {
+
+        return customerDAO.getAllSyncPending(branchId);
+
+    }
+
 }

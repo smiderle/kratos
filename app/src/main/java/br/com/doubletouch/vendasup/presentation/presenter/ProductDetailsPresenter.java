@@ -4,6 +4,8 @@ import java.util.UUID;
 
 import br.com.doubletouch.vendasup.VendasUp;
 import br.com.doubletouch.vendasup.data.entity.Product;
+import br.com.doubletouch.vendasup.data.service.ProductService;
+import br.com.doubletouch.vendasup.data.service.ProductServiceImpl;
 import br.com.doubletouch.vendasup.domain.exception.ErrorBundle;
 import br.com.doubletouch.vendasup.domain.interactor.product.GetProductDetailsUseCase;
 import br.com.doubletouch.vendasup.domain.interactor.product.SaveProductUseCase;
@@ -42,9 +44,13 @@ public class ProductDetailsPresenter implements Presenter {
     public void createNewProduct(){
         Product product = new Product();
 
-        product.setIdMobile(UUID.randomUUID().toString());
-        product.setBranchID(VendasUp.getUsuarioLogado().getBranchID());
-        product.setOrganizationID(VendasUp.getUsuarioLogado().getOrganizationID());
+        ProductService productService = new ProductServiceImpl();
+        Integer id = productService.getNextId();
+
+        product.setIdMobile(id);
+        product.setID(id);
+        product.setBranchID(VendasUp.getBranchOffice().getBranchOfficeID());
+        product.setOrganizationID(VendasUp.getBranchOffice().getOrganization().getOrganizationID());
         product.setExcluded(false);
 
         showProductDetailsInView(product);
@@ -71,7 +77,6 @@ public class ProductDetailsPresenter implements Presenter {
     }
 
     private void loadProductDetails(){
-        this.hideViewRetry();
         this.showViewLoading();
         this.getProductDetails();
     }
@@ -88,13 +93,6 @@ public class ProductDetailsPresenter implements Presenter {
         this.productDetailsView.hideLoading();
     }
 
-    private void showViewRetry() {
-        this.productDetailsView.showRetry();
-    }
-
-    private void hideViewRetry() {
-        this.productDetailsView.hideRetry();
-    }
 
     private void showErrorMessage(ErrorBundle errorBundle) {
         String errorMessage = ErrorMessageFactory.create(this.productDetailsView.getContext(),
@@ -118,7 +116,6 @@ public class ProductDetailsPresenter implements Presenter {
         public void onError(ErrorBundle errorBundle) {
             ProductDetailsPresenter.this.hideViewLoading();
             ProductDetailsPresenter.this.showErrorMessage(errorBundle);
-            ProductDetailsPresenter.this.showViewRetry();
         }
     };
 
