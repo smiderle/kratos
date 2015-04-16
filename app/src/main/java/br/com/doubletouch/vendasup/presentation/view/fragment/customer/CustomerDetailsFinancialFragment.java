@@ -230,6 +230,11 @@ public class CustomerDetailsFinancialFragment extends ScrollTabHolderFragment im
     }
 
     @Override
+    public void tabSelected() {
+
+    }
+
+    @Override
     public void loadPriceTableList(final List<PriceTable> tabelas) {
 
         ArrayAdapter<PriceTable> adapter = new ArrayAdapter<PriceTable>(activity, android.R.layout.simple_spinner_dropdown_item, tabelas);

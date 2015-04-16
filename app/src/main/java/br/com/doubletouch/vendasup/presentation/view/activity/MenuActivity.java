@@ -9,7 +9,6 @@ import br.com.doubletouch.vendasup.R;
 import br.com.doubletouch.vendasup.presentation.MenuModel;
 import br.com.doubletouch.vendasup.presentation.navigation.Navigator;
 import br.com.doubletouch.vendasup.presentation.view.fragment.MenuFragment;
-import br.com.doubletouch.vendasup.presentation.view.fragment.ProductDetailsFragment;
 
 /**
  * Created by LADAIR on 17/02/2015.

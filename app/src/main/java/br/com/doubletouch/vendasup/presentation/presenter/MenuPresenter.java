@@ -8,6 +8,7 @@ import br.com.doubletouch.vendasup.presentation.MenuModel;
 import br.com.doubletouch.vendasup.presentation.view.MenuView;
 import br.com.doubletouch.vendasup.presentation.view.activity.CustomerDetailsActivity;
 import br.com.doubletouch.vendasup.presentation.view.activity.CustomerListActivity;
+import br.com.doubletouch.vendasup.presentation.view.activity.order.OrderActivity;
 import br.com.doubletouch.vendasup.presentation.view.activity.ProductListActivity;
 
 /**
@@ -42,7 +43,7 @@ public class MenuPresenter implements Presenter {
 
     public List<MenuModel>  createMenuModel(){
         List<MenuModel> menus = new ArrayList<>(5);
-        menus.add(new MenuModel(CustomerListActivity.class, "Novo Pedido", R.drawable.ic_cube_outline,0));
+        menus.add(new MenuModel(OrderActivity.class, "Novo Pedido", R.drawable.ic_cube_outline,0));
         menus.add(new MenuModel(ProductListActivity.class, "Produtos", R.drawable.ic_cube_outline,1));
         menus.add(new MenuModel(CustomerListActivity.class, "Clientes", R.drawable.ic_cube_outline,2));
         menus.add(new MenuModel(CustomerDetailsActivity.class, "Histórico", R.drawable.ic_cube_outline,3));

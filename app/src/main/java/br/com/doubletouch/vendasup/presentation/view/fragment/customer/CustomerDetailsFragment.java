@@ -401,6 +401,11 @@ public class CustomerDetailsFragment  extends BaseParallacxFragment implements C
 
 
         }
+
+        @Override
+        public void tabSelected() {
+
+        }
     }
 
     /**

@@ -8,6 +8,8 @@
     <string name="title_activity_customer_list">Clientes</string>
     <string name="title_activity_customer_details">Detalhes do Cliente</string>
     <string name="title_activity_login">Login</string>
+    <string name="title_activity_order">Pedido</string>
+    <string name="title_activity_order_products">Produtos do Pedido</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_carga_inicial">CargaInicialActivity</string>
@@ -30,6 +32,7 @@
     <string name="tv_product_stock_whit_colon">Estoque:</string>
     <string name="tv_product_price_whit_colon">Preço:</string>
 
+
     <string name="tv_customer_name">Nome</string>
     <string name="tv_customer_real_name">Razão Social</string>
     <string name="tv_customer_nickname">Apelido</string>
@@ -45,6 +48,10 @@
     <string name="tv_customer_phone_cell_title">Telefone Celular</string>
     <string name="tv_customer_email_title">Email</string>
 
+    <string name="tv_customer_title">Cliente</string>
+    <string name="tv_cart_title">Carrinho</string>
+    <string name="tv_form_payment_title">Pagamento</string>
+
     <string name="tv_customer_price_table_title">Tabela de Preço Padrão</string>
     <string name="tv_customer_payment_title">Forma de Pagamento Padrão</string>
     <string name="tv_customer_installment_title">Forma de Parcelamento</string>
@@ -55,6 +62,8 @@
     <string name="tv_address_district_title">Bairro</string>
     <string name="tv_address_street_title">Rua</string>
     <string name="tv_address_number_title">Numero</string>
+
+    <string name="tv_order_product_amount">Quantidade:</string>
 
 
     <string name="tv_customer_phone_whit_colon">Fone:</string>
@@ -93,9 +102,17 @@
 
     <string name="sp_title_customer_type">Tipo de pessoa</string>
     <string name="sp_title_price_table">Tabela de Preço</string>
+    <string name="tv_title_price_table_whit_colon">Tabela de Preço:</string>
     <string name="sp_title_installment">Forma de Parcelamento</string>
     <string name="sp_title_payment">Forma de Pagamento</string>
     <string name="btn_entrar">Entrar</string>
+    <string name="tv_order_customer">Selecione algum cliente</string>
+    <string name="tv_order_product_stock">Estoque:</string>
+    <string name="tv_price">Preço:</string>
+    <string name="tv_order_discount">Desconto %:</string>
+    <string name="tv_order_increase">Acréscimo %:</string>
+    <string name="tv_order_discount_money">Desconto R$:</string>
+    <string name="tv_order_increase_money">Acréscimo R$:</string>
 
     <string-array name="customer_type_array">
         <item>Física</item>

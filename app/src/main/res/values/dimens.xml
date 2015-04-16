@@ -19,6 +19,25 @@
     <dimen name="font_size_h8">30sp</dimen>
     <dimen name="font_size_h9">32sp</dimen>
     <dimen name="font_size_h10">34sp</dimen>
+    <dimen name="font_size_h11">36sp</dimen>
+    <dimen name="font_size_h12">38sp</dimen>
+    <dimen name="font_size_h13">40sp</dimen>
+    <dimen name="font_size_h14">42sp</dimen>
+    <dimen name="font_size_h15">44sp</dimen>
+    <dimen name="font_size_h16">46sp</dimen>
+    <dimen name="font_size_h17">48sp</dimen>
+    <dimen name="font_size_h18">50sp</dimen>
+    <dimen name="font_size_h19">52sp</dimen>
+    <dimen name="font_size_h20">54sp</dimen>
+    <dimen name="font_size_h21">56sp</dimen>
+    <dimen name="font_size_h22">58sp</dimen>
+    <dimen name="font_size_h23">60sp</dimen>
+    <dimen name="font_size_h24">62sp</dimen>
+    <dimen name="font_size_h25">64sp</dimen>
+    <dimen name="font_size_h26">66sp</dimen>
+    <dimen name="font_size_h27">68sp</dimen>
+
+
 
     <!--User Header stuff-->
     <dimen name="header_text_size">40sp</dimen>
@@ -37,6 +56,10 @@
 
     <!-- Altura da imagem principal que parace nos detalhes -->
     <dimen name="iv_height_main">210dp</dimen>
+
+    <!-- Largura da imagem que parace no menu -->
+    <dimen name="iv_width_menu">130dp</dimen>
+
     <!-- Altura e largura da imagem nos listview -->
     <dimen name="lv_iv_height">75dp</dimen>
     <dimen name="lv_iv_width">75dp</dimen>
@@ -51,5 +74,6 @@
     <dimen name="tv_title_marginleft_of_image">22dp</dimen>
 
     <dimen name="activity_login_padding_top">30dp</dimen>
+
 
 </resources>

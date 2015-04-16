@@ -1,4 +1,4 @@
-package br.com.doubletouch.vendasup.presentation.view.fragment;
+package br.com.doubletouch.vendasup.presentation.view.fragment.product;
 
 import android.app.Activity;
 import android.content.Context;
@@ -40,8 +40,6 @@ import br.com.doubletouch.vendasup.presentation.view.activity.ProductDetailsActi
 import br.com.doubletouch.vendasup.presentation.view.components.PagerSlidingTabStrip;
 import br.com.doubletouch.vendasup.presentation.view.components.parallax.ScrollTabHolder;
 import br.com.doubletouch.vendasup.presentation.view.components.parallax.ScrollTabHolderFragment;
-import br.com.doubletouch.vendasup.presentation.view.fragment.product.ProductDetailsPriceTableFragment;
-import br.com.doubletouch.vendasup.presentation.view.fragment.product.ProductDetailsMainFragment;
 import br.com.doubletouch.vendasup.util.image.ImageLoader;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -209,14 +207,9 @@ public class ProductDetailsFragment  extends BaseParallacxFragment implements Pr
     }
 
     /**
-     * Salva o cliente.
+     * Salva o produto.
      */
     private void saveProduct() {
-
-
-
-
-
 
         //Retorna o usuário salvo para atualizar a activity com os dados alterados.
         Intent returnIntent = new Intent();
@@ -238,13 +231,6 @@ public class ProductDetailsFragment  extends BaseParallacxFragment implements Pr
         ProductDetailsFragment.this.productDetailsPresenter.saveProduct(product);
 
         navigator.previousActivity(activity);
-
-
-
-
-
-
-
 
 
         //Retorna para a view anterior.
@@ -406,6 +392,11 @@ public class ProductDetailsFragment  extends BaseParallacxFragment implements Pr
 
         @Override
         public void setAtributes(Object object) {
+
+        }
+
+        @Override
+        public void tabSelected() {
 
         }
     }

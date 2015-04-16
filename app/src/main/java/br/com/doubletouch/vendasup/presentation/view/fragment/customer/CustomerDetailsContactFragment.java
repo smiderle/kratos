@@ -188,6 +188,11 @@ public class CustomerDetailsContactFragment extends ScrollTabHolderFragment {
         customer.setHomePhone(et_customer_phone_home.getText().toString());
     }
 
+    @Override
+    public void tabSelected() {
+
+    }
+
 
     private class OnScrollListner implements  AbsListView.OnScrollListener {
 

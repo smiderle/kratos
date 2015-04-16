@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 
+import br.com.doubletouch.vendasup.R;
+
 /**
  * Base {@link android.app.Activity} class for every Activity in this application.
  * Created by LADAIR on 11/02/2015.
@@ -22,5 +24,17 @@ public abstract class BaseActivity extends ActionBarActivity {
         FragmentTransaction fragmentTransaction = this.getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(containerViewId, fragment);
         fragmentTransaction.commit();
+    }
+
+
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        finish();
+        overridePendingTransition(R.anim.slide_left_in, R.anim.slide_right_out);
+
+
     }
 }

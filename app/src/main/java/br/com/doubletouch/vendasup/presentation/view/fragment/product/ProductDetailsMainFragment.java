@@ -242,6 +242,11 @@ public class ProductDetailsMainFragment extends ScrollTabHolderFragment {
 
     }
 
+    @Override
+    public void tabSelected() {
+
+    }
+
 
     private class OnScrollListner implements  AbsListView.OnScrollListener {
 

@@ -101,7 +101,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         @InjectView(R.id.lblProdutoDescricao)
         TextView lblProdutoDescricao;
 
-        @InjectView(R.id.lblProdutoEstoque)
+        @InjectView(R.id.tv_stock)
         TextView lblProdutoEstoque;
 
         @InjectView(R.id.lblProdutoPreco)

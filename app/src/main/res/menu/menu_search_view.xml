@@ -15,4 +15,13 @@
         android:title="@string/add_title"
         app:showAsAction="always"/>
 
+
+    <item
+        android:id="@+id/it_done"
+        android:icon="@drawable/ic_done_white_24dp"
+        android:title="@string/save_title"
+        android:visible="false"
+        app:showAsAction="always"/>
+
+
 </menu>

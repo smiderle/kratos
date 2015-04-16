@@ -66,7 +66,7 @@ public class CustomerDetailsAddressFragment extends ScrollTabHolderFragment {
     @Optional
     EditText et_customer_number;
 
-    @InjectView(R.id.tv_customer_postalcode)
+    @InjectView(R.id.tv_order_customer)
     @Optional
     TextView tv_customer_postalcode;
 
@@ -171,6 +171,11 @@ public class CustomerDetailsAddressFragment extends ScrollTabHolderFragment {
         customer.setNumber(et_customer_number.getText().toString());
         customer.setPostalCode(et_customer_postalcode.getText().toString());
         customer.setStreet(et_customer_street.getText().toString());
+    }
+
+    @Override
+    public void tabSelected() {
+
     }
 
 

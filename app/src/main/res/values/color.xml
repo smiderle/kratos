@@ -325,6 +325,7 @@
     <!-- White -->
 
     <!-- Cor principal do sistema -->
-    <color name="primary_color">@color/indigo_500</color>
+    <color name="primary_color">@color/blue_700</color>
+    <color name="green_primary_color">@color/green_700</color>
 
 </resources>

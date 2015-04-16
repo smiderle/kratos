@@ -105,4 +105,21 @@ public class PriceTable implements Serializable {
     public String toString() {
         return getID() + " - " + getDescription();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PriceTable that = (PriceTable) o;
+
+        if (ID != null ? !ID.equals(that.ID) : that.ID != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return ID != null ? ID.hashCode() : 0;
+    }
 }

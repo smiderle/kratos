@@ -3,13 +3,54 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/iv_height_main"
-        android:background="@color/primary_color">
+        android:orientation="horizontal"
+        android:background="@color/primary_color"
+        android:paddingLeft="@dimen/activity_padding_left"
+        android:paddingRight="@dimen/activity_padding_right">
+
+        <LinearLayout
+            android:layout_width="@dimen/iv_width_menu"
+            android:layout_height="match_parent">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img_user_picture"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/iv_width_menu"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_launcher" />
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/activity_padding_left">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hoje foi vendido:"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_h3"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="R$: 85,00"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_h18"/>
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_menu"

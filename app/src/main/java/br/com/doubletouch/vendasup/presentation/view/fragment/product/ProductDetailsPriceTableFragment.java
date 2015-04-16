@@ -118,11 +118,6 @@ public class ProductDetailsPriceTableFragment extends ScrollTabHolderFragment im
             lv_content.addHeaderView(placeHolderView);
         }
 
-
-
-
-
-
         return lv_content;
 
     }
@@ -173,6 +168,11 @@ public class ProductDetailsPriceTableFragment extends ScrollTabHolderFragment im
 
     @Override
     public void setAtributes(Object object) {
+
+    }
+
+    @Override
+    public void tabSelected() {
 
     }
 

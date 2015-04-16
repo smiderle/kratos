@@ -198,6 +198,11 @@ public class CustomerDetailsPersonalFragment extends ScrollTabHolderFragment  {
         customer.setObservation(et_customer_observation.getText().toString());
     }
 
+    @Override
+    public void tabSelected() {
+
+    }
+
     private class OnScrollListner implements  AbsListView.OnScrollListener {
 
         @Override

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="UseCompoundDrawables"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingTop="@dimen/lv_row_padding_top"
+    android:paddingBottom="@dimen/lv_row_padding_botton"
+    android:paddingLeft="@dimen/activity_padding_left"
+    android:paddingRight="@dimen/activity_padding_right"
+    android:background="@drawable/selector_listview"
+    android:descendantFocusability="blocksDescendants" >
+
+    <LinearLayout
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="6">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/lblProdutoDescricao"
+                android:text="Descricao"
+                android:layout_marginLeft="@dimen/lv_tv_margin_left"
+                android:layout_marginStart="@dimen/lv_tv_margin_left"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                style="@style/AppTheme.TextViewInListViewPrimary" />
+
+            <TextView
+                android:text="@string/tv_product_stock_whit_colon"
+                android:id="@+id/tv_stock_title"
+                android:layout_below="@+id/lblProdutoDescricao"
+                android:layout_alignLeft="@+id/lblProdutoDescricao"
+                android:layout_alignStart="@+id/lblProdutoDescricao"
+                style="@style/AppTheme.TextViewInListViewSecundory"/>
+
+            <TextView
+                android:text="10,00"
+                android:id="@+id/tv_stock"
+                android:layout_alignTop="@+id/tv_stock_title"
+                android:layout_toRightOf="@+id/tv_stock_title"
+                android:layout_toEndOf="@+id/tv_stock_title"
+                style="@style/AppTheme.TextViewInListViewSecundory"/>
+
+            <TextView
+                android:text="@string/tv_product_price_whit_colon"
+                android:id="@+id/tv_order_product_price"
+                style="@style/AppTheme.TextViewInListViewSecundory"
+                android:layout_below="@+id/tv_stock_title"
+                android:layout_alignLeft="@+id/tv_stock_title"
+                android:layout_alignStart="@+id/tv_stock_title" />
+
+            <TextView
+                android:text="1"
+                android:id="@+id/lblProdutoPreco"
+                style="@style/AppTheme.TextViewInListViewSecundory"
+                android:layout_alignTop="@+id/tv_order_product_price"
+                android:layout_toRightOf="@+id/tv_order_product_price"
+                android:layout_toEndOf="@+id/tv_order_product_price" />
+
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="@dimen/lv_iv_width"
+                android:layout_height="@dimen/lv_iv_height"
+                android:id="@+id/imgImagemProduto"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_launcher" />
+
+            <TextView
+                android:id="@+id/lbl_order_product_amount"
+                style="@style/AppTheme.TextViewInListViewSecundory"
+                android:text="0"
+                android:textSize="@dimen/font_size_h18"
+                android:textColor="@color/green_primary_color"
+                android:visibility="invisible"
+                android:layout_alignBottom="@+id/lblProdutoPreco"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <!--TextView
+                android:id="@+id/lbl_order_product_amount_title"
+                style="@style/AppTheme.TextViewInListViewSecundory"
+                android:text="@string/tv_order_product_amount"
+                android:layout_below="@+id/lblProdutoEstoque"
+                android:layout_toLeftOf="@+id/lbl_order_product_amount"
+                android:layout_toStartOf="@+id/lbl_order_product_amount"
+                android:textColor="@color/green_700"/-->
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/btn_order_product_add"
+            android:layout_width="@dimen/font_size_h27"
+            android:layout_height="@dimen/font_size_h18"
+            android:src="@drawable/ic_add_white_36dp"
+            android:background="@android:color/transparent"/>
+
+        <ImageButton
+            android:id="@+id/btn_order_product_remove"
+            android:layout_width="@dimen/font_size_h27"
+            android:layout_height="@dimen/font_size_h18"
+            android:src="@drawable/ic_remove_white_36dp"
+            android:background="@android:color/transparent"
+            android:layout_marginTop="5dp"/>
+
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
+
+

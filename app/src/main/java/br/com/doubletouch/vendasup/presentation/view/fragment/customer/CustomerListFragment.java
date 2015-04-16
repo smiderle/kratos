@@ -45,7 +45,15 @@ import butterknife.InjectView;
  */
 public class CustomerListFragment extends BaseFragment implements CustomerListView {
 
+    /**
+     * Chave utilizada para identificar qual activity esta invocando  alista de clientes.
+     */
+    public static final String FROM_ACTIVITY = "FROM_CUSTOMER";
 
+    /**
+     * Código que reperesenta quando o pedido chamou a tela de clientes.
+     */
+    public static final int FROM_ORDER_ACTIVITY_CODE = 1;
 
     private CustomerListPresenter customerListPresenter;
     private KratosLayoutManager kratosLayoutManager;
@@ -84,6 +92,7 @@ public class CustomerListFragment extends BaseFragment implements CustomerListVi
 
         View fragmentView = inflater.inflate(R.layout.fragment_customer_list, container, true);
         ButterKnife.inject(this, fragmentView);
+
         setupUI();
 
         navigator = new Navigator();
@@ -177,6 +186,18 @@ public class CustomerListFragment extends BaseFragment implements CustomerListVi
     }
 
     @Override
+    public void selectCustomerToOrder(Customer customer) {
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(FROM_ACTIVITY, customer);
+        Intent intent = activity.getIntent().putExtras(bundle);
+        activity.setResult(activity.RESULT_OK, intent);
+
+        navigator.previousActivity(activity);
+
+    }
+
+    @Override
     public void showLoading() {
         this.rl_progress.setVisibility(View.VISIBLE);
         this.getActivity().setProgressBarIndeterminateVisibility(true);
@@ -207,8 +228,20 @@ public class CustomerListFragment extends BaseFragment implements CustomerListVi
     private CustomersAdapter.OnItemClickListener onItemClickListener = new CustomersAdapter.OnItemClickListener() {
         @Override
         public void onCustomerItemClicked(Customer customer) {
+
             if(CustomerListFragment.this.customerListPresenter != null && customer != null){
-                   CustomerListFragment.this.customerListPresenter.onCustomerClicked(customer);
+                int intExtra = activity.getIntent().getIntExtra(FROM_ACTIVITY, 0);
+
+                if(intExtra == FROM_ORDER_ACTIVITY_CODE) {
+
+                    CustomerListFragment.this.customerListPresenter.selectCustomerToOrder(customer);
+
+                } else {
+
+                    CustomerListFragment.this.customerListPresenter.onCustomerClicked(customer);
+
+                }
+
             }
         }
     };
@@ -228,4 +261,5 @@ public class CustomerListFragment extends BaseFragment implements CustomerListVi
         this.customerListPresenter.initialize();
 
     }
+
 }

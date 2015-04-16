@@ -20,6 +20,16 @@ public class DoubleUtil {
         return comCifrao ? "R$ " + df.format(value) : df.format(value);
     }
 
+    public static String formatToCurrency(Double value, boolean comCifrao, String decimalSeparator){
+
+        String retorno = formatToCurrency(value, comCifrao);
+
+        retorno = retorno.replace(".", "");
+
+        return retorno.replace(",", decimalSeparator);
+
+    }
+
     /**
      * Converte uma string em double, caso seja uma string inválida, retorna 0.00.
      * @param value

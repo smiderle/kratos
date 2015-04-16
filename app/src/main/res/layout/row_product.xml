@@ -31,7 +31,7 @@
 
         <TextView
             android:text="@string/tv_product_stock_whit_colon"
-            android:id="@+id/txtView"
+            android:id="@+id/tv_stock_title"
             android:layout_below="@+id/lblProdutoDescricao"
             android:layout_alignLeft="@+id/lblProdutoDescricao"
             android:layout_alignStart="@+id/lblProdutoDescricao"
@@ -39,15 +39,15 @@
 
         <TextView
             android:text="10,00"
-            android:id="@+id/lblProdutoEstoque"
-            android:layout_alignTop="@+id/txtView"
-            android:layout_toRightOf="@+id/txtView"
-            android:layout_toEndOf="@+id/txtView"
+            android:id="@+id/tv_stock"
+            android:layout_alignTop="@+id/tv_stock_title"
+            android:layout_toRightOf="@+id/tv_stock_title"
+            android:layout_toEndOf="@+id/tv_stock_title"
             style="@style/AppTheme.TextViewInListViewSecundory"/>
 
         <TextView
             android:text="@string/tv_product_price_whit_colon"
-            android:id="@+id/textView"
+            android:id="@+id/tv_order_product_price"
             android:layout_below="@+id/lblProdutoDescricao"
             android:layout_toLeftOf="@+id/lblProdutoPreco"
             android:layout_toStartOf="@+id/lblProdutoPreco"

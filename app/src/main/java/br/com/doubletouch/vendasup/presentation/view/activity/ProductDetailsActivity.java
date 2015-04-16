@@ -8,7 +8,7 @@ import android.view.Window;
 import br.com.doubletouch.vendasup.R;
 import br.com.doubletouch.vendasup.data.entity.enumeration.ViewMode;
 import br.com.doubletouch.vendasup.presentation.navigation.Navigator;
-import br.com.doubletouch.vendasup.presentation.view.fragment.ProductDetailsFragment;
+import br.com.doubletouch.vendasup.presentation.view.fragment.product.ProductDetailsFragment;
 
 /**
  * Activity que mostra os detalhes do produto.

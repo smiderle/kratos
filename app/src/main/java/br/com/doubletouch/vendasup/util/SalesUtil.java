@@ -41,4 +41,34 @@ public class SalesUtil {
 
 
     }
+
+    public static Double getPercentual(Double valorTotal, Double valorFinal){
+
+        double resultado = 0.00;
+
+        BigDecimal vtotal = new BigDecimal(String.valueOf(valorTotal));
+        BigDecimal vfinal = new BigDecimal(String.valueOf(valorFinal));
+        BigDecimal vporcento = new BigDecimal("100");
+
+
+        BigDecimal multiply = vfinal.multiply(vporcento);
+        BigDecimal vresult = multiply.divide(vtotal, RoundingMode.HALF_UP);
+
+
+        resultado = vporcento.subtract(vresult).setScale(2, RoundingMode.CEILING).doubleValue();
+
+        if( valorTotal > valorFinal ){
+
+            resultado = vporcento.subtract(vresult).setScale(2, RoundingMode.CEILING).doubleValue();
+
+        } else {
+
+            resultado = vresult.subtract(vporcento).setScale(2, RoundingMode.CEILING).doubleValue();
+
+
+        }
+
+        return resultado;
+
+    }
 }

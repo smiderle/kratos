@@ -10,4 +10,6 @@ public interface ScrollTabHolder {
     void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount, int pagePosition);
 
     void setAtributes(Object object);
+
+    void tabSelected();
 }

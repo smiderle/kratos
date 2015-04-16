@@ -6,6 +6,9 @@ package br.com.doubletouch.vendasup.util;
  */
 public class StringUtil {
 
+    public static String DECIMAL_REGEX = "^\\-?(\\d{0,7}|\\d{0,7}\\.\\d{0,2})$";
+
+
     /**
      * Retorna uma String vazia, caso o texto seja nulo.
      * @param text

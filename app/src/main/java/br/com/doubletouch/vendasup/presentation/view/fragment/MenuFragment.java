@@ -6,15 +6,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import java.util.List;
 
 import br.com.doubletouch.vendasup.R;
+import br.com.doubletouch.vendasup.VendasUp;
 import br.com.doubletouch.vendasup.presentation.MenuModel;
 import br.com.doubletouch.vendasup.presentation.presenter.MenuPresenter;
 import br.com.doubletouch.vendasup.presentation.view.MenuView;
 import br.com.doubletouch.vendasup.presentation.view.adapter.KratosLayoutManager;
 import br.com.doubletouch.vendasup.presentation.view.adapter.MenusAdapter;
+import br.com.doubletouch.vendasup.util.image.ImageLoader;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -37,6 +40,11 @@ public class MenuFragment extends BaseFragment implements MenuView {
     @InjectView(R.id.rv_menu)
     RecyclerView rv_menus;
 
+    @InjectView(R.id.img_user_picture)
+    ImageView img_user_picture;
+
+    private ImageLoader imageLoader;
+
     public MenuFragment() {
         super();
     }
@@ -51,6 +59,7 @@ public class MenuFragment extends BaseFragment implements MenuView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View fragmentView = inflater.inflate(R.layout.fragment_menu, container, false);
         ButterKnife.inject(this, fragmentView);
+
         setupUI();
         return fragmentView;
     }
@@ -66,6 +75,7 @@ public class MenuFragment extends BaseFragment implements MenuView {
         if(activity instanceof MenuListListener){
             this.menuListListener = (MenuListListener) activity;
         }
+        imageLoader = new ImageLoader(activity);
     }
 
     @Override
@@ -81,13 +91,21 @@ public class MenuFragment extends BaseFragment implements MenuView {
 
     @Override
     public void renderMenuView(List<MenuModel> menus) {
+
         if(this.menuApdater == null){
+
             this.menuApdater = new MenusAdapter(getActivity(), menus);
+
         } else {
+
             this.menuApdater.setMenusCollection(menus);
+
         }
+
         this.menuApdater.setOnItemClickListener(onItemClickListener);
+
         this.rv_menus.setAdapter(this.menuApdater);
+
     }
 
     @Override
@@ -107,5 +125,7 @@ public class MenuFragment extends BaseFragment implements MenuView {
     private void setupUI(){
         this.kratosLayoutManager = new KratosLayoutManager(getActivity());
         this.rv_menus.setLayoutManager(kratosLayoutManager);
+
+        imageLoader.displayImage(VendasUp.getUser().getPictureUrl(), img_user_picture);
     }
 }

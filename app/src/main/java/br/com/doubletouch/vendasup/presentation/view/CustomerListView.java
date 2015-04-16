@@ -25,4 +25,7 @@ public interface CustomerListView extends  LoadDataView {
      * @param customer
      */
     void viewCustomer(Customer customer);
+
+
+    void selectCustomerToOrder(Customer customer);
 }

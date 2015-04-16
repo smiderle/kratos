@@ -80,6 +80,14 @@ public class CustomerListPresenter implements Presenter {
         this.customerListView.viewCustomer(customer);
     }
 
+
+    public void selectCustomerToOrder(Customer customer){
+
+        this.customerListView.selectCustomerToOrder(customer);
+
+    }
+
+
     public void onCustomerFilterChange(String filter){
         this.getCustomerListFilter(filter);
     }
