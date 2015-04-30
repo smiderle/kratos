@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/activity_padding_left"
+    android:paddingRight="@dimen/activity_padding_right">
+
+
+    <TextView
+        android:id="@+id/tv_order_numero_parcela"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="1/1"
+        style="@style/AppTheme.TextViewInListViewSecundory"/>
+
+    <TextView
+        android:id="@+id/tv_sifrao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tv_order_numero_parcela"
+        android:layout_marginLeft="@dimen/font_size_h11"
+        android:layout_toRightOf="@+id/tv_order_numero_parcela"
+        android:text="R$: "
+        style="@style/AppTheme.TextViewInListViewSecundory" />
+
+    <TextView
+        android:id="@+id/tv_order_valor_parcela"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tv_sifrao"
+        android:layout_alignBottom="@+id/tv_sifrao"
+        android:layout_toRightOf="@+id/tv_sifrao"
+        android:text="0,00"
+        style="@style/AppTheme.TextViewInListViewSecundory"/>
+
+    <TextView
+        android:id="@+id/tv_order_vencimento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tv_order_valor_parcela"
+        android:layout_alignBottom="@+id/tv_order_valor_parcela"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/font_size_h2"
+        android:text="01/01/2001"
+        style="@style/AppTheme.TextViewInListViewSecundory"/>
+
+    <TextView
+        android:id="@+id/tv_order_vencimento_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tv_order_vencimento"
+        android:layout_alignBottom="@+id/tv_order_vencimento"
+        android:layout_toLeftOf="@+id/tv_order_vencimento"
+        android:text="Vcto: "
+        style="@style/AppTheme.TextViewInListViewSecundory"/>
+
+</RelativeLayout>

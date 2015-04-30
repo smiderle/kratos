@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import br.com.doubletouch.vendasup.R;
+import br.com.doubletouch.vendasup.VendasUp;
 import br.com.doubletouch.vendasup.data.entity.OrderItem;
 import br.com.doubletouch.vendasup.data.entity.PriceTable;
 import br.com.doubletouch.vendasup.data.entity.Product;
@@ -72,6 +73,8 @@ public class OrderItemDrialog extends DialogFragment {
 
 
     private PriceTable priceTableSelected = null;
+
+    private List<PriceTable> tabelas = null;
 
     private OrderItemDialogPresenter orderItemDialogPresenter;
 
@@ -125,12 +128,14 @@ public class OrderItemDrialog extends DialogFragment {
         addListners();
 
 
+        String labelButton = tabPosition == 0 ? "Adicionar ao carrinho" : "Confirmar Edição";
+
         AlertDialog.Builder builder = new AlertDialog.Builder( context )
                 .setView(view)
                 .setTitle("Editar/Remover Produtos do Carrinho");
 
 
-        builder.setPositiveButton("Confirma Edição", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(labelButton, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
@@ -278,6 +283,11 @@ public class OrderItemDrialog extends DialogFragment {
             orderItem.setPrice(product.getSalePrice());
             orderItem.setProduct(product);
             orderItem.setQuantity(1.0);
+            orderItem.setBranchID( VendasUp.getBranchOffice().getBranchOfficeID() );
+            orderItem.setOrganizationID( VendasUp.getBranchOffice().getOrganization().getOrganizationID() );
+            orderItem.setSequence(OrderFragment.order.getOrdersItens().size() + 1);
+
+
 
         }
 
@@ -323,27 +333,26 @@ public class OrderItemDrialog extends DialogFragment {
 
     public void loadPriceTableList(final List<PriceTable> tabelas) {
 
+        this.tabelas = tabelas;
+
         ArrayAdapter<PriceTable> adapter = new ArrayAdapter<PriceTable>( context, android.R.layout.simple_spinner_dropdown_item, tabelas );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_order_price_table.setAdapter(adapter);
 
         if( orderItem.getPriceTable() != null ) {
 
-            for (int i = 0 ; i <  tabelas.size(); i++) {
 
-                PriceTable priceTable = tabelas.get(i);
-                if( priceTable.equals(orderItem.getPriceTable()) ) {
-                    sp_order_price_table.setSelection(i);
-                }
-
-            }
+            PriceTable priceTable1 = getPriceTable(orderItem.getPriceTable().getID());
+            sp_order_price_table.setSelection( tabelas.indexOf( priceTable1 ) );
 
         } else {
 
-            priceTableSelected = tabelas.get( 0 );
+            priceTableSelected = getDefaultPriceTable();
+            orderItem.setPriceTable(priceTableSelected);
+            sp_order_price_table.setSelection( tabelas.indexOf( priceTableSelected ) );
+
 
         }
-
 
         sp_order_price_table.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -361,6 +370,7 @@ public class OrderItemDrialog extends DialogFragment {
                     ed_order_price_sales.setText( DoubleUtil.formatToCurrency(orderItem.getPrice(), false, ".")  );
                 }
 
+                OrderFragment.lastPriceTableSelected = priceTableSelected;
 
             }
 
@@ -441,4 +451,58 @@ public class OrderItemDrialog extends DialogFragment {
     }
 
 
+    private PriceTable getPriceTable( Integer priceTableId ) {
+
+        PriceTable retorno = null;
+
+        if( tabelas != null ) {
+
+            for (int i = 0 ; i <  tabelas.size(); i++) {
+
+                PriceTable priceTable = tabelas.get(i);
+
+                if( priceTable.getID().equals(priceTableId) ) {
+
+                    retorno = priceTable;
+                    break;
+
+                }
+
+            }
+
+        }
+
+        return  retorno;
+
+    }
+
+
+    private PriceTable getDefaultPriceTable() {
+
+        PriceTable defaultPriceTable = null;
+
+        if(OrderFragment.lastPriceTableSelected != null) {
+
+            defaultPriceTable = getPriceTable(OrderFragment.lastPriceTableSelected.getID());;
+
+        } else if( OrderFragment.order.getCustomer() != null ){
+
+            Integer priceTableCustomer =  OrderFragment.order.getCustomer().getPriceTable();
+
+            if( priceTableCustomer != null ){
+
+                defaultPriceTable = getPriceTable(priceTableCustomer);;
+
+            }
+
+        } else {
+
+            defaultPriceTable =   tabelas.get( 0 );
+
+        }
+
+        return  defaultPriceTable;
+    }
+
 }
+

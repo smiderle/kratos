@@ -49,7 +49,8 @@
         android:layout_below="@+id/tv_order_stock"
         android:layout_toRightOf="@+id/tv_price_table_title"
         android:layout_toEndOf="@+id/tv_price_table_title"
-        android:layout_marginTop="@dimen/lv_row_padding_top">
+        android:layout_marginTop="@dimen/lv_row_padding_top"
+        android:prompt="@string/sp_price_table_empty">
 
     </Spinner>
 

@@ -1,175 +1,294 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
 
 
-    <RelativeLayout
-        android:id="@+id/rl_order_customer"
+
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/lv_row_padding_top"
-        android:paddingBottom="@dimen/lv_row_padding_botton"
-        android:paddingLeft="@dimen/activity_padding_left"
-        android:paddingRight="@dimen/activity_padding_right">
+        android:layout_height="match_parent"
+        android:background="@color/backgrount_primary">
 
-        <ImageView
-            android:id="@+id/iv_customer"
-            android:layout_width="wrap_content"
+
+        <RelativeLayout
+            android:id="@+id/rl_order_customer"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_person_grey600_36dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:paddingTop="@dimen/lv_row_padding_top"
+            android:paddingBottom="@dimen/lv_row_padding_botton"
+            android:paddingLeft="@dimen/activity_padding_left"
+            android:paddingRight="@dimen/activity_padding_right">
 
-        <TextView
-            android:id="@+id/tv_customer_title"
-            android:text="@string/tv_customer_title"
-            style="@style/AppTheme.TextViewPrimary"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/iv_customer"
-            android:layout_toEndOf="@+id/iv_customer"
-            android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
-            android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
 
-        <ViewSwitcher
-            android:id="@+id/vs_customer_postalcode"
-            style="@style/AppTheme.TextViewSecundary"
-            android:layout_below="@+id/tv_customer_title"
-            android:layout_alignLeft="@+id/tv_customer_title"
-            android:layout_alignStart="@+id/tv_customer_title" >
+            <ImageView
+                android:id="@+id/iv_customer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_person_grey600_36dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:id="@+id/tv_customer_title"
+                android:text="@string/tv_customer_title"
+                style="@style/AppTheme.TextViewPrimary"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/iv_customer"
+                android:layout_toEndOf="@+id/iv_customer"
+                android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
+                android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
+
+            <ViewSwitcher
+                android:id="@+id/vs_customer_postalcode"
+                style="@style/AppTheme.TextViewSecundary"
+                android:layout_below="@+id/tv_customer_title"
+                android:layout_alignLeft="@+id/tv_customer_title"
+                android:layout_alignStart="@+id/tv_customer_title" >
+
+
+                <TextView
+                    android:id="@+id/tv_order_customer"
+                    style="@style/AppTheme.TextViewSecundary"
+                    android:text="@string/tv_order_customer"/>
+
+
+                <EditText
+                    android:id="@+id/et_customer_postalcode"
+                    style="@style/AppTheme.TextViewSecundary"
+                    android:maxLength="10"/>
+
+            </ViewSwitcher>
+
+
+            <ImageView
+                android:id="@+id/iv_row_customer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_keyboard_arrow_right_grey600_36dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_order_cart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/lv_row_padding_top"
+            android:paddingBottom="@dimen/lv_row_padding_botton"
+            android:paddingLeft="@dimen/activity_padding_left"
+            android:paddingRight="@dimen/activity_padding_right">
+
+            <ImageView
+                android:id="@+id/iv_cart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_shopping_cart_grey600_36dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:id="@+id/tv_cart_title"
+                android:text="@string/tv_cart_title"
+                style="@style/AppTheme.TextViewPrimary"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/iv_cart"
+                android:layout_toEndOf="@+id/iv_cart"
+                android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
+                android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
 
 
             <TextView
-                android:id="@+id/tv_order_customer"
+                android:id="@+id/tv_cart"
                 style="@style/AppTheme.TextViewSecundary"
-                android:text="@string/tv_order_customer"/>
+                android:layout_below="@+id/tv_cart_title"
+                android:layout_alignLeft="@+id/tv_cart_title"
+                android:layout_alignStart="@+id/tv_cart_title"
+                android:text="Selecione algum produto"/>
 
 
-            <EditText
-                android:id="@+id/et_customer_postalcode"
+            <ImageView
+                android:id="@+id/iv_row_cart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_keyboard_arrow_right_grey600_36dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_order_payment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/lv_row_padding_top"
+            android:paddingBottom="@dimen/lv_row_padding_botton"
+            android:paddingLeft="@dimen/activity_padding_left"
+            android:paddingRight="@dimen/activity_padding_right">
+
+            <ImageView
+                android:id="@+id/iv_pyment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_currency_usd"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:id="@+id/tv_payment_title"
+                android:text="@string/tv_form_payment_title"
+                style="@style/AppTheme.TextViewPrimary"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/iv_pyment"
+                android:layout_toEndOf="@+id/iv_pyment"
+                android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
+                android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
+
+
+            <TextView
+                android:id="@+id/tv_payment"
                 style="@style/AppTheme.TextViewSecundary"
-                android:maxLength="10"/>
-
-        </ViewSwitcher>
-
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_keyboard_arrow_right_grey600_36dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+                android:layout_below="@+id/tv_payment_title"
+                android:layout_alignLeft="@+id/tv_payment_title"
+                android:layout_alignStart="@+id/tv_payment_title"
+                android:text="Selecione a forma de pagamento"/>
 
 
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/rl_order_cart"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/lv_row_padding_top"
-        android:paddingBottom="@dimen/lv_row_padding_botton"
-        android:paddingLeft="@dimen/activity_padding_left"
-        android:paddingRight="@dimen/activity_padding_right">
-
-        <ImageView
-            android:id="@+id/iv_cart"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_shopping_cart_grey600_36dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:id="@+id/tv_cart_title"
-            android:text="@string/tv_cart_title"
-            style="@style/AppTheme.TextViewPrimary"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/iv_cart"
-            android:layout_toEndOf="@+id/iv_cart"
-            android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
-            android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
-
-
-        <TextView
-            android:id="@+id/tv_cart"
-            style="@style/AppTheme.TextViewSecundary"
-            android:layout_below="@+id/tv_cart_title"
-            android:layout_alignLeft="@+id/tv_cart_title"
-            android:layout_alignStart="@+id/tv_cart_title"
-            android:text="Selecione algum produto"/>
-
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_keyboard_arrow_right_grey600_36dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            <ImageView
+                android:id="@+id/iv_row_payment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_keyboard_arrow_right_grey600_36dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
 
 
 
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:id="@+id/rl_order_payment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/lv_row_padding_top"
-        android:paddingBottom="@dimen/lv_row_padding_botton"
-        android:paddingLeft="@dimen/activity_padding_left"
-        android:paddingRight="@dimen/activity_padding_right">
-
-        <ImageView
-            android:id="@+id/iv_pyment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_currency_usd"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:id="@+id/tv_payment_title"
-            android:text="@string/tv_form_payment_title"
-            style="@style/AppTheme.TextViewPrimary"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/iv_pyment"
-            android:layout_toEndOf="@+id/iv_pyment"
-            android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
-            android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
+        </RelativeLayout>
 
 
-        <TextView
-            android:id="@+id/tv_payment"
-            style="@style/AppTheme.TextViewSecundary"
-            android:layout_below="@+id/tv_payment_title"
-            android:layout_alignLeft="@+id/tv_payment_title"
-            android:layout_alignStart="@+id/tv_payment_title"
-            android:text="Selecione a forma de pagamento"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1"
+            android:background="@color/blue_500"
+            android:paddingLeft="@dimen/activity_padding_left"
+            android:paddingRight="@dimen/activity_padding_right">
+
+            <TextView
+                android:id="@+id/tv_order_number_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pedido Nº "
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_h7"
+                android:layout_marginTop="@dimen/font_size_h1"
+                android:visibility="invisible"/>
+
+            <TextView
+                android:id="@+id/tv_order_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_h7"
+                android:layout_alignTop="@+id/tv_order_number_title"
+                android:layout_toRightOf="@+id/tv_order_number_title"
+                android:layout_toEndOf="@+id/tv_order_number_title"
+                android:visibility="invisible"/>
+
+            <TextView
+                android:id="@+id/tv_order_total_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total R$:"
+                android:textColor="@color/white"
+                android:layout_above="@+id/tv_order_total"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:id="@+id/tv_order_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00,00"
+                android:layout_gravity="center"
+                android:textSize="@dimen/font_size_h44"
+                android:textColor="@color/white"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/tv_order_total_title"
+                android:layout_toEndOf="@+id/tv_order_total_title" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_alignParentBottom="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/btn_menu"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:visibility="invisible"
+                        android:text="Menu"
+                        android:layout_marginRight="5dp"/>
+
+                    <Button
+                        android:id="@+id/btn_new_order"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:visibility="invisible"
+                        android:text="Novo Pedido"
+                        android:layout_marginLeft="5dp"/>
 
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_keyboard_arrow_right_grey600_36dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btn_order_save"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Concluir Venda"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignLeft="@+id/tv_order_total_title"
+                    android:layout_alignStart="@+id/tv_order_total_title"
+                    android:layout_marginBottom="46dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:background="@color/white"/>
+
+            </LinearLayout>
 
 
 
-    </RelativeLayout>
 
 
-    <RelativeLayout
+
+        </RelativeLayout>
+
+        <!--RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="1"
@@ -177,109 +296,61 @@
         android:paddingLeft="@dimen/activity_padding_left"
         android:paddingRight="@dimen/activity_padding_right">
 
+
+
         <TextView
-            android:id="@+id/tv_order_number_title"
+            android:id="@+id/tv_order_customer_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pedido Nº "
+            android:text="@string/tv_customer_title_whit_colon"
             android:textColor="@color/white"/>
 
         <TextView
-            android:id="@+id/tv_order_number"
+            android:id="@+id/tv_order_customer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="20"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/tv_order_number_title"
-            android:layout_toEndOf="@+id/tv_order_number_title"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/tv_order_total_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Total R$:"
-            android:textColor="@color/white"
-            android:layout_above="@+id/tv_order_total"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:id="@+id/tv_order_total"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="54,83"
-            android:layout_gravity="center"
-            android:textSize="100dp"
+            android:text="Nome do Cliente "
             android:textColor="@color/white"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/tv_order_total_title"
-            android:layout_toEndOf="@+id/tv_order_total_title" />
+            android:layout_toRightOf="@+id/img_order_customer"
+            android:layout_toEndOf="@+id/img_order_customer"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Concluir Venda"
-            android:id="@+id/button"
-            android:layout_alignParentBottom="true"
-            android:layout_alignLeft="@+id/tv_order_total_title"
-            android:layout_alignStart="@+id/tv_order_total_title"
-            android:layout_marginBottom="46dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:background="@color/white"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_order_customer"
+            android:layout_width="@dimen/lv_iv_width"
+            android:layout_height="@dimen/iv_width_menu"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher"
+            android:layout_alignParentRight="@+id/tv_order_customer_title"
+            android:layout_below="@+id/tv_order_customer_title"/>
 
 
-    </RelativeLayout>
-
-    <!--RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="0dip"
-    android:layout_weight="1"
-    android:background="@color/blue_500"
-    android:paddingLeft="@dimen/activity_padding_left"
-    android:paddingRight="@dimen/activity_padding_right">
+    </RelativeLayout-->
 
 
 
-    <TextView
-        android:id="@+id/tv_order_customer_title"
-        android:layout_width="wrap_content"
+
+
+    </LinearLayout>
+
+
+
+    <Button
+        android:id="@+id/btn_notification"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/notification_initial_position"
         android:layout_height="wrap_content"
-        android:text="@string/tv_customer_title_whit_colon"
-        android:textColor="@color/white"/>
-
-    <TextView
-        android:id="@+id/tv_order_customer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nome do Cliente "
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/notification_warning"
         android:textColor="@color/white"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/img_order_customer"
-        android:layout_toEndOf="@+id/img_order_customer"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp" />
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/img_order_customer"
-        android:layout_width="@dimen/lv_iv_width"
-        android:layout_height="@dimen/iv_width_menu"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_launcher"
-        android:layout_alignParentRight="@+id/tv_order_customer_title"
-        android:layout_below="@+id/tv_order_customer_title"/>
+        android:text="" />
 
 
-</RelativeLayout-->
-
-
-
-
-
-</LinearLayout>
-
-
+</RelativeLayout>
 
 
 

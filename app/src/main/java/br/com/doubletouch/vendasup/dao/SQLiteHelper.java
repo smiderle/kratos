@@ -9,6 +9,9 @@ import br.com.doubletouch.vendasup.data.database.dao.UserDAO;
 import br.com.doubletouch.vendasup.data.database.script.BranchDB;
 import br.com.doubletouch.vendasup.data.database.script.GoalDB;
 import br.com.doubletouch.vendasup.data.database.script.InstallmentDB;
+import br.com.doubletouch.vendasup.data.database.script.OrderDB;
+import br.com.doubletouch.vendasup.data.database.script.OrderItemDB;
+import br.com.doubletouch.vendasup.data.database.script.OrderPaymentDB;
 import br.com.doubletouch.vendasup.data.database.script.OrganizationDB;
 import br.com.doubletouch.vendasup.data.database.script.ProductPromotionDB;
 import br.com.doubletouch.vendasup.data.database.script.SincronizacaoDB;
@@ -17,6 +20,7 @@ import br.com.doubletouch.vendasup.data.database.script.PriceTableDB;
 import br.com.doubletouch.vendasup.data.database.script.CustomerDB;
 import br.com.doubletouch.vendasup.data.database.script.UserBranchDB;
 import br.com.doubletouch.vendasup.data.database.script.UserDB;
+import br.com.doubletouch.vendasup.data.entity.OrderPayment;
 
 /**
  * Created by LADAIR on 26/01/2015.
@@ -56,7 +60,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     }
 
-    private String[] scripts(){
+    private String[] scripts() {
         return new String[]{
                 ProductDB.create(),
                 SincronizacaoDB.create(),
@@ -68,7 +72,10 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 OrganizationDB.create(),
                 BranchDB.create(),
                 ProductPromotionDB.create(),
-                GoalDB.create()
+                GoalDB.create(),
+                OrderDB.create(),
+                OrderItemDB.create(),
+                OrderPaymentDB.create()
         };
 
     }

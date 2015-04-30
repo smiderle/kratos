@@ -9,6 +9,12 @@ import java.io.Serializable;
  */
 public class Installment implements Serializable {
 
+    public Installment() {
+    }
+
+    public Installment(Integer ID) {
+        this.ID = ID;
+    }
 
     @SerializedName("id")
     private Integer ID;
@@ -105,5 +111,22 @@ public class Installment implements Serializable {
     @Override
     public String toString() {
         return getID() +" - " + getDescription();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Installment that = (Installment) o;
+
+        if (ID != null ? !ID.equals(that.ID) : that.ID != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return ID != null ? ID.hashCode() : 0;
     }
 }

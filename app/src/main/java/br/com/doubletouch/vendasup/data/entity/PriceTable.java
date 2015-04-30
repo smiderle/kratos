@@ -9,6 +9,13 @@ import java.io.Serializable;
  */
 public class PriceTable implements Serializable {
 
+    public PriceTable() {
+    }
+
+    public PriceTable(Integer ID) {
+        this.ID = ID;
+    }
+
     @SerializedName("id")
     private Integer ID;
 

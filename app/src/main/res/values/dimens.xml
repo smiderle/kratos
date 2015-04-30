@@ -36,6 +36,15 @@
     <dimen name="font_size_h25">64sp</dimen>
     <dimen name="font_size_h26">66sp</dimen>
     <dimen name="font_size_h27">68sp</dimen>
+    <dimen name="font_size_h28">70sp</dimen>
+    <dimen name="font_size_h30">74sp</dimen>
+    <dimen name="font_size_h32">78sp</dimen>
+    <dimen name="font_size_h34">82sp</dimen>
+    <dimen name="font_size_h36">86sp</dimen>
+    <dimen name="font_size_h38">90sp</dimen>
+    <dimen name="font_size_h40">94sp</dimen>
+    <dimen name="font_size_h42">96sp</dimen>
+    <dimen name="font_size_h44">100sp</dimen>
 
 
 
@@ -57,6 +66,9 @@
     <!-- Altura da imagem principal que parace nos detalhes -->
     <dimen name="iv_height_main">210dp</dimen>
 
+    <!-- Altura da imagem principal que parace no login -->
+    <dimen name="iv_height_login">310dp</dimen>
+
     <!-- Largura da imagem que parace no menu -->
     <dimen name="iv_width_menu">130dp</dimen>
 
@@ -74,6 +86,8 @@
     <dimen name="tv_title_marginleft_of_image">22dp</dimen>
 
     <dimen name="activity_login_padding_top">30dp</dimen>
+
+    <dimen name="notification_initial_position">-50dp</dimen>
 
 
 </resources>

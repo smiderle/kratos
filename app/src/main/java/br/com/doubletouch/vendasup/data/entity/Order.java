@@ -1,5 +1,7 @@
 package br.com.doubletouch.vendasup.data.entity;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,6 +12,14 @@ import java.util.List;
  */
 public class Order implements Serializable{
 
+    public Order() {
+    }
+
+    public Order(Long ID) {
+        this.ID = ID;
+    }
+
+    @SerializedName("id")
     private Long ID;
 
     private Integer organizationID;
@@ -36,11 +46,12 @@ public class Order implements Serializable{
 
     private List<OrderItem> ordersItens = new ArrayList<>();
 
-    //private Set<OrderPayment> ordersPayments = new HashSet<>(0);
+    private List<OrderPayment> ordersPayments = new ArrayList<>();
 
     private Integer formPayment;
 
     private boolean excluded;
+
 
     public OrderItem containsProduct(Product product){
 
@@ -174,4 +185,13 @@ public class Order implements Serializable{
     public void setOrdersItens(List<OrderItem> ordersItens) {
         this.ordersItens = ordersItens;
     }
+
+    public List<OrderPayment> getOrdersPayments() {
+        return ordersPayments;
+    }
+
+    public void setOrdersPayments(List<OrderPayment> ordersPayments) {
+        this.ordersPayments = ordersPayments;
+    }
+
 }

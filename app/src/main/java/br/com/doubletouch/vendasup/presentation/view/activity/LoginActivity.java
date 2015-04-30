@@ -3,7 +3,10 @@ package br.com.doubletouch.vendasup.presentation.view.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import br.com.doubletouch.vendasup.R;
 import br.com.doubletouch.vendasup.presentation.MenuModel;
@@ -31,7 +34,12 @@ public class LoginActivity extends BaseActivity  {
 
 
     private void initialize(){
+
         navigator =  new Navigator();
+
+
+
+
     }
 
 

@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="@dimen/activity_padding_left"
-    android:paddingRight="@dimen/activity_padding_right">
+    android:paddingRight="@dimen/activity_padding_right"
+    android:background="@color/backgrount_primary">
 
 
     <RelativeLayout

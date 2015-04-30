@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -38,8 +41,6 @@ public class CargaInicialActivity extends ActionBarActivity {
 
     @InjectView(R.id.txtEmail)
     EditText txtEmail;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

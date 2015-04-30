@@ -9,6 +9,13 @@ import java.io.Serializable;
  */
 public class Customer implements Serializable {
 
+    public Customer() {
+    }
+
+    public Customer(Integer ID) {
+        this.ID = ID;
+    }
+
     @SerializedName("id")
     private Integer ID;
     private Integer organizationID;

@@ -9,7 +9,7 @@
     android:paddingBottom="@dimen/lv_row_padding_botton"
     android:paddingLeft="@dimen/activity_padding_left"
     android:paddingRight="@dimen/activity_padding_right"
-    android:background="@drawable/selector_listview"
+    android:background="@color/backgrount_primary"
     android:descendantFocusability="blocksDescendants" >
 
     <LinearLayout

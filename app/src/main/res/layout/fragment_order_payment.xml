@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgrount_primary">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/iv_height_main"
+        android:orientation="horizontal"
+        android:background="@color/primary_color"
+        android:paddingLeft="@dimen/activity_padding_left"
+        android:paddingRight="@dimen/activity_padding_right">
+
+
+
+        <TextView
+            android:id="@+id/tv_order_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00,00"
+            android:layout_gravity="center"
+            android:textSize="@dimen/font_size_h44"
+            android:textColor="@color/white"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/tv_order_total_title"
+            android:layout_toEndOf="@+id/tv_order_total_title" />
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/activity_padding_left"
+        android:paddingRight="@dimen/activity_padding_right"
+        android:paddingTop="@dimen/activity_login_padding_top">
+
+
+
+
+        <TextView
+            android:id="@+id/textView"
+            style="@style/AppTheme.TextViewPrimary"
+            android:text="@string/sp_title_payment"/>
+
+        <Spinner
+            android:id="@+id/sp_customer_payment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dialog"
+            android:entries="@array/form_payment"
+            android:prompt="@string/sp_title_payment"
+            android:layout_marginTop="@dimen/lv_row_padding_top">
+        </Spinner>
+
+
+        <TextView
+            android:id="@+id/tv_customer_installment"
+            style="@style/AppTheme.TextViewPrimary"
+            android:text="@string/sp_title_installment"
+            android:layout_marginTop="@dimen/lv_row_padding_top" />
+
+        <Spinner
+            android:id="@+id/sp_customer_installment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:spinnerMode="dialog"
+            android:prompt="@string/sp_title_installment"
+            android:layout_marginTop="@dimen/lv_row_padding_top">
+
+
+        </Spinner>
+
+        <ListView
+            android:id="@+id/lv_order_installment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></ListView>
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+</LinearLayout>

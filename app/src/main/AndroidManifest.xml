@@ -39,6 +39,7 @@
 
         <activity
             android:name="br.com.doubletouch.vendasup.presentation.view.activity.LoginActivity"
+            android:windowSoftInputMode="stateHidden"
             android:label="@string/title_activity_login" >
         </activity>
 
@@ -51,6 +52,13 @@
             android:name=".presentation.view.activity.order.OrderProductActivity"
             android:label="@string/title_activity_order_products" >
         </activity>
+
+        <activity
+            android:name=".presentation.view.activity.order.OrderPaymentActivity"
+            android:label="@string/title_activity_order_payments" >
+        </activity>
+
+
 
 
 

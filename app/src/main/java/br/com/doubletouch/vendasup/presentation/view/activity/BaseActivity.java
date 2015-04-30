@@ -2,9 +2,14 @@ package br.com.doubletouch.vendasup.presentation.view.activity;
 
 
 
+import android.content.Context;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
+import android.util.AttributeSet;
+import android.view.View;
+import android.widget.Button;
 
 import br.com.doubletouch.vendasup.R;
 
@@ -13,6 +18,8 @@ import br.com.doubletouch.vendasup.R;
  * Created by LADAIR on 11/02/2015.
  */
 public abstract class BaseActivity extends ActionBarActivity {
+
+    private Button button;
 
     /**
      * Adds a {@link Fragment} to this activity's layout.

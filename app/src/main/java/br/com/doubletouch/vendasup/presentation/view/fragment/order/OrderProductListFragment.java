@@ -23,8 +23,10 @@ import android.widget.TextView;
 import java.util.List;
 
 import br.com.doubletouch.vendasup.R;
+import br.com.doubletouch.vendasup.VendasUp;
 import br.com.doubletouch.vendasup.data.entity.Order;
 import br.com.doubletouch.vendasup.data.entity.OrderItem;
+import br.com.doubletouch.vendasup.data.entity.PriceTable;
 import br.com.doubletouch.vendasup.data.entity.Product;
 import br.com.doubletouch.vendasup.data.executor.JobExecutor;
 import br.com.doubletouch.vendasup.domain.executor.PostExecutionThread;
@@ -433,18 +435,23 @@ public class OrderProductListFragment  extends ScrollTabHolderFragment implement
 
         }
 
-        private OrderItem createOrderItem(Product product){
-
-            OrderItem orderItem = new OrderItem();
-            orderItem.setProduct(product);
-            orderItem.setQuantity(1.0);
-            orderItem.setPrice(product.getSalePrice());
-
-            return  orderItem;
-        }
 
 
     }
+
+    private OrderItem createOrderItem(Product product){
+
+        OrderItem orderItem = new OrderItem();
+        orderItem.setProduct(product);
+        orderItem.setQuantity(1.0);
+        orderItem.setPrice(product.getSalePrice());
+        orderItem.setBranchID( VendasUp.getBranchOffice().getBranchOfficeID() );
+        orderItem.setOrganizationID( VendasUp.getBranchOffice().getOrganization().getOrganizationID() );
+        orderItem.setSequence(OrderFragment.order.getOrdersItens().size() + 1);
+
+        return  orderItem;
+    }
+
 
 
 
@@ -591,16 +598,17 @@ public class OrderProductListFragment  extends ScrollTabHolderFragment implement
 
         }
 
-        private OrderItem createOrderItem(Product product){
+        /*private OrderItem createOrderItem(Product product){
 
             OrderItem orderItem = new OrderItem();
             orderItem.setProduct(product);
             orderItem.setQuantity(1.0);
 
             return  orderItem;
-        }
+        }*/
 
 
     }
+
 
 }

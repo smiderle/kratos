@@ -2,14 +2,18 @@ package br.com.doubletouch.vendasup.presentation.view.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -39,6 +43,9 @@ public class LoginFragment extends BaseFragment implements LoginView {
 
     @InjectView(R.id.sp_login_branches)
     Spinner sp_login_branches;
+
+    @InjectView(R.id.btn_notification)
+    Button btn_notification;
 
     private LoginPresenter loginPresenter;
 
@@ -95,7 +102,18 @@ public class LoginFragment extends BaseFragment implements LoginView {
 
     @Override
     public void showError(String message) {
-        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+
+        mostrarNotificacao(message);
+        //Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+    }
+
+    private void mostrarNotificacao( final String msg ){
+
+        btn_notification.setText(msg);
+        btn_notification.setVisibility(View.VISIBLE);
+        Animation animBounce = AnimationUtils.loadAnimation(activity, R.anim.move_in_move_out);
+        btn_notification.startAnimation( animBounce );
+
     }
 
     @Override
@@ -109,7 +127,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
     public void renderBranches( List<BranchOffice> branches ) {
 
         ArrayAdapter<BranchOffice> adapter = new ArrayAdapter<BranchOffice>(activity, android.R.layout.simple_spinner_dropdown_item, branches);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item );
         sp_login_branches.setAdapter(adapter);
 
     }

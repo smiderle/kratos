@@ -7,9 +7,11 @@ import br.com.doubletouch.vendasup.presentation.MenuModel;
 /**
  * Created by LADAIR on 17/02/2015.
  */
-public interface MenuView {
+public interface MenuView  extends  LoadDataView  {
 
     void renderMenuView(List<MenuModel> menus);
 
     void goTo(MenuModel menuModel);
+
+    void loadTotalDailySales(Double value);
 }

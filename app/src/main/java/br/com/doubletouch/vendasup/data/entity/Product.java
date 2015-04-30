@@ -10,6 +10,13 @@ import java.io.Serializable;
  */
 public class Product implements Serializable{
 
+    public Product() {
+    }
+
+    public Product(Integer ID) {
+        this.ID = ID;
+    }
+
     @SerializedName("id")
     private Integer ID;
     private Integer organizationID;

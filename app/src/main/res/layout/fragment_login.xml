@@ -1,48 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/iv_height_main"
-        android:background="@color/primary_color"
-        android:paddingLeft="@dimen/activity_padding_left"
-        android:paddingRight="@dimen/activity_padding_right">
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@color/white"
-        android:paddingLeft="@dimen/activity_padding_left"
-        android:paddingRight="@dimen/activity_padding_right"
-        android:paddingTop="@dimen/activity_login_padding_top">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <Spinner
-            android:id="@+id/sp_login_branches"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></Spinner>
 
-        <EditText
-            android:id="@+id/et_login_user"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="@dimen/iv_height_login"
+            android:background="@color/white">
 
-        <EditText
-            android:id="@+id/et_login_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"/>
-        <Button
-            android:id="@+id/bt_login_login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/btn_entrar"/>
+        </RelativeLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/activity_padding_left"
+            android:paddingRight="@dimen/activity_padding_right"
+            android:paddingTop="@dimen/activity_login_padding_top"
+            android:background="@color/primary_color">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tv_organization_whit_colon"
+                style="@style/AppTheme.TextViewInListViewPrimary"
+                android:textColor="@color/white">
+
+            </TextView>
+
+            <Spinner
+                android:id="@+id/sp_login_branches"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/SpinerLogin"
+                android:spinnerMode="dialog"
+                android:prompt="@string/tv_organization"></Spinner>
+
+
+            <EditText
+                android:id="@+id/et_login_user"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/font_size_h16"
+                android:textColor="@color/white"
+                android:background="@drawable/textview_corners"
+                android:layout_marginTop="@dimen/font_size_h3"
+                android:textColorHint="@color/white"
+                android:hint="@string/tv_user"/>
+
+
+            <EditText
+                android:id="@+id/et_login_password"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/font_size_h16"
+                android:inputType="textPassword"
+                android:textColor="@color/white"
+                android:background="@drawable/textview_corners"
+                android:layout_marginTop="@dimen/font_size_h3"
+                android:textColorHint="@color/white"
+                android:hint="@string/tv_password"/>
+            <Button
+                android:id="@+id/bt_login_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_entrar"
+                android:background="@drawable/button_corners"
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/font_size_h3"/>
+
+
+        </LinearLayout>
 
     </LinearLayout>
 
-</LinearLayout>
+
+
+    <Button
+        android:id="@+id/btn_notification"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/notification_initial_position"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/notification_warning"
+        android:textColor="@color/white"
+        android:text="" />
+
+
+</RelativeLayout>

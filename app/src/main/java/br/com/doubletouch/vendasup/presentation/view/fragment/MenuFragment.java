@@ -1,22 +1,34 @@
 package br.com.doubletouch.vendasup.presentation.view.fragment;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.List;
 
 import br.com.doubletouch.vendasup.R;
 import br.com.doubletouch.vendasup.VendasUp;
+import br.com.doubletouch.vendasup.data.executor.JobExecutor;
+import br.com.doubletouch.vendasup.domain.executor.PostExecutionThread;
+import br.com.doubletouch.vendasup.domain.executor.ThreadExecutor;
+import br.com.doubletouch.vendasup.domain.interactor.target.GetTotalDailySalesUseCase;
+import br.com.doubletouch.vendasup.domain.interactor.target.GetTotalDailySalesUseCaseImpl;
 import br.com.doubletouch.vendasup.presentation.MenuModel;
+import br.com.doubletouch.vendasup.presentation.UIThread;
+import br.com.doubletouch.vendasup.presentation.navigation.Navigator;
 import br.com.doubletouch.vendasup.presentation.presenter.MenuPresenter;
 import br.com.doubletouch.vendasup.presentation.view.MenuView;
+import br.com.doubletouch.vendasup.presentation.view.activity.order.OrderActivity;
 import br.com.doubletouch.vendasup.presentation.view.adapter.KratosLayoutManager;
 import br.com.doubletouch.vendasup.presentation.view.adapter.MenusAdapter;
+import br.com.doubletouch.vendasup.util.DoubleUtil;
 import br.com.doubletouch.vendasup.util.image.ImageLoader;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -27,6 +39,7 @@ import butterknife.InjectView;
  * Created by LADAIR on 17/02/2015.
  */
 public class MenuFragment extends BaseFragment implements MenuView {
+
 
     public interface MenuListListener {
         void onMenuClicked(final MenuModel menuModel);
@@ -43,7 +56,16 @@ public class MenuFragment extends BaseFragment implements MenuView {
     @InjectView(R.id.img_user_picture)
     ImageView img_user_picture;
 
+    @InjectView(R.id.tv_menu_daily_sales)
+    TextView tv_menu_daily_sales;
+
     private ImageLoader imageLoader;
+
+    private Navigator navigator;
+
+    private Activity activity;
+
+    private static final int RESULT_MENU = 0;
 
     public MenuFragment() {
         super();
@@ -51,7 +73,12 @@ public class MenuFragment extends BaseFragment implements MenuView {
 
     @Override
     public void initializePresenter() {
-        menuPresenter = new MenuPresenter(this);
+
+        ThreadExecutor threadExecutor = JobExecutor.getInstance();
+        PostExecutionThread postExecutionThread = UIThread.getInstance();
+        GetTotalDailySalesUseCase getTotalDailySalesUseCase = new GetTotalDailySalesUseCaseImpl(threadExecutor, postExecutionThread);
+
+        menuPresenter = new MenuPresenter(this, getTotalDailySalesUseCase);
     }
 
 
@@ -67,7 +94,11 @@ public class MenuFragment extends BaseFragment implements MenuView {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        navigator = new Navigator();
     }
+
+
 
     @Override
     public void onAttach(Activity activity) {
@@ -76,6 +107,8 @@ public class MenuFragment extends BaseFragment implements MenuView {
             this.menuListListener = (MenuListListener) activity;
         }
         imageLoader = new ImageLoader(activity);
+
+        this.activity = activity;
     }
 
     @Override
@@ -109,9 +142,37 @@ public class MenuFragment extends BaseFragment implements MenuView {
     }
 
     @Override
-    public void goTo(MenuModel menuModel) {
-        menuListListener.onMenuClicked(menuModel);
+    public void goTo( MenuModel menuModel ) {
+
+        if( menuModel.getTo().equals( OrderActivity.class) ){
+
+            Intent it = OrderActivity.getCallingIntent(activity);
+            startActivityForResult( it, RESULT_MENU);
+            navigator.transitionGo(activity);
+
+        } else {
+
+            this.navigator.navigateTo( activity , menuModel.getTo() );
+
+        }
+
+        //menuListListener.onMenuClicked(menuModel);
     }
+
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == RESULT_MENU) {
+
+
+            menuPresenter.initialize();
+        }
+
+    }
+
 
     private MenusAdapter.OnItemClickListener onItemClickListener = new MenusAdapter.OnItemClickListener() {
         @Override
@@ -128,4 +189,34 @@ public class MenuFragment extends BaseFragment implements MenuView {
 
         imageLoader.displayImage(VendasUp.getUser().getPictureUrl(), img_user_picture);
     }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showError(String message) {
+
+    }
+
+    @Override
+    public Context getContext() {
+        return getActivity().getApplicationContext();
+    }
+
+
+    @Override
+    public void loadTotalDailySales(Double value) {
+
+        tv_menu_daily_sales.setText( DoubleUtil.formatToCurrency(value, true) );
+
+    }
+
+
 }

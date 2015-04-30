@@ -7,6 +7,13 @@ import java.util.List;
  */
 public class User {
 
+    public User() {
+    }
+
+    public User(Integer userID) {
+        this.userID = userID;
+    }
+
     private Integer userID;
 
     private Integer organizationID;

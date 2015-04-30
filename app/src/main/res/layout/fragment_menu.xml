@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/backgrount_primary">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,9 +40,10 @@
                 android:textSize="@dimen/font_size_h3"/>
 
             <TextView
+                android:id="@+id/tv_menu_daily_sales"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="R$: 85,00"
+                android:text="R$: 00,00"
                 android:textColor="@color/white"
                 android:textSize="@dimen/font_size_h18"/>
 
