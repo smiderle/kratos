@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+
+    <Button
+        android:id="@+id/btn_sync"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:background="@drawable/button_corners"
+        android:text="@string/tv_sincronizar"
+        android:textColor="@color/white" />
+
+    <ListView
+        android:id="@+id/lv_orders"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btn_sync"/>
+
+
+    <Button
+        android:id="@+id/btn_notification"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/notification_initial_position"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/notification_warning"
+        android:textColor="@color/white"
+        android:text="" />
+
+    <include
+        layout="@layout/view_progress"/>
+
+
+
+</RelativeLayout>

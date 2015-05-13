@@ -75,8 +75,6 @@
     <!-- Altura e largura da imagem nos listview -->
     <dimen name="lv_iv_height">75dp</dimen>
     <dimen name="lv_iv_width">75dp</dimen>
-    <!-- Margem que o TextView dentro do ListView tera da borda-->
-    <dimen name="lv_tv_margin_left">90dp</dimen>
 
     <dimen name="parallax_min_header_height">212dp</dimen>
     <dimen name="parallax_height">258dp</dimen>
@@ -87,7 +85,13 @@
 
     <dimen name="activity_login_padding_top">30dp</dimen>
 
+    <!-- Posição inicial do botão de notificação -->
     <dimen name="notification_initial_position">-50dp</dimen>
+
+    <!-- Espaço entre duas views, por exemlo "Nome: Ladair" -->
+    <dimen name="space_textview_to_textview">5dp</dimen>
+    <!-- Espaço entre uma imagem e um textview -->
+    <dimen name="space_imageview_to_textview">15dp</dimen>
 
 
 </resources>

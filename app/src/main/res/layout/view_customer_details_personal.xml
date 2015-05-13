@@ -128,7 +128,7 @@
             android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
 
         <ViewSwitcher
-            android:id="@+id/vs_customer_persontype"
+            android:id="@+id/vs_order_observation"
             style="@style/AppTheme.TextViewSecundary"
             android:layout_below="@+id/tv_customer_persontype_title"
             android:layout_alignLeft="@+id/tv_customer_persontype_title"

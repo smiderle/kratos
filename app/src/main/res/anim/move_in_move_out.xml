@@ -3,10 +3,6 @@
     android:fillAfter="true"
     android:interpolator="@android:anim/bounce_interpolator" >
 
-    <!-- Use startOffset to give delay between animations -->
-
-
-    <!-- Move -->
     <translate
         android:duration="400"
         android:fillAfter="true"
@@ -20,16 +16,4 @@
         android:startOffset="5100"
         android:toYDelta="-10%p"/>
 
-    <!--translate
-        android:duration="400"
-        android:fillAfter="true"
-        android:fromYDelta="-25%p"
-        android:startOffset="1"
-        android:toYDelta="14%p" />
-    <translate
-        android:duration="400"
-        android:fillAfter="true"
-        android:fromYDelta="1%p"
-        android:startOffset="5100"
-        android:toYDelta="-55%p" /-->
 </set>

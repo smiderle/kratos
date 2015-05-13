@@ -21,11 +21,14 @@
             android:paddingTop="@dimen/lv_row_padding_top"
             android:paddingBottom="@dimen/lv_row_padding_botton"
             android:paddingLeft="@dimen/activity_padding_left"
-            android:paddingRight="@dimen/activity_padding_right">
+            android:paddingRight="@dimen/activity_padding_right"
+
+            android:descendantFocusability="beforeDescendants"
+            android:focusableInTouchMode="true" >
 
 
             <ImageView
-                android:id="@+id/iv_customer"
+                android:id="@+id/iv_order_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_person_grey600_36dp"
@@ -34,21 +37,21 @@
                 android:layout_alignParentStart="true" />
 
             <TextView
-                android:id="@+id/tv_customer_title"
+                android:id="@+id/tv_order_customer_title"
                 android:text="@string/tv_customer_title"
                 style="@style/AppTheme.TextViewPrimary"
                 android:layout_alignParentTop="true"
-                android:layout_toRightOf="@+id/iv_customer"
-                android:layout_toEndOf="@+id/iv_customer"
+                android:layout_toRightOf="@+id/iv_order_status"
+                android:layout_toEndOf="@+id/iv_order_status"
                 android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
                 android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
 
             <ViewSwitcher
                 android:id="@+id/vs_customer_postalcode"
                 style="@style/AppTheme.TextViewSecundary"
-                android:layout_below="@+id/tv_customer_title"
-                android:layout_alignLeft="@+id/tv_customer_title"
-                android:layout_alignStart="@+id/tv_customer_title" >
+                android:layout_below="@+id/tv_order_customer_title"
+                android:layout_alignLeft="@+id/tv_order_customer_title"
+                android:layout_alignStart="@+id/tv_order_customer_title" >
 
 
                 <TextView
@@ -182,6 +185,82 @@
 
 
         <RelativeLayout
+            android:id="@+id/rl_more"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/lv_row_padding_top"
+            android:paddingBottom="@dimen/lv_row_padding_botton"
+            android:paddingLeft="@dimen/activity_padding_left"
+            android:paddingRight="@dimen/activity_padding_right">
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/grey_300"/>
+
+
+            <ImageView
+                android:id="@+id/iv_observation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_speaker_notes_grey600_36dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="@dimen/lv_row_padding_top"/>
+
+
+            <TextView
+                android:id="@+id/tv_order_observation_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Observação"
+                android:layout_marginLeft="22dp"
+                style="@style/AppTheme.TextViewPrimary"
+                android:layout_alignTop="@+id/iv_observation"
+                android:layout_toRightOf="@+id/iv_observation"
+                android:layout_toEndOf="@+id/iv_observation"/>
+
+
+
+            <ViewSwitcher
+                android:id="@+id/vs_order_observation"
+                style="@style/AppTheme.TextViewSecundary"
+                android:layout_below="@+id/tv_order_observation_title"
+                android:layout_alignLeft="@+id/tv_order_observation_title"
+                android:layout_alignStart="@+id/tv_order_observation_title">
+
+                <EditText
+                    android:id="@+id/et_order_observation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_order_observation_title"/>
+
+
+                <TextView
+                    android:id="@+id/tv_order_observation"
+                    style="@style/AppTheme.TextViewSecundary"
+                    android:layout_below="@+id/tv_order_observation_title"
+                    />
+
+
+            </ViewSwitcher>
+
+
+
+
+
+
+
+
+
+
+
+        </RelativeLayout>
+
+
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dip"
             android:layout_weight="1"
@@ -248,20 +327,22 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@color/white"
                         android:visibility="invisible"
                         android:text="Menu"
-                        android:layout_marginRight="5dp"/>
+                        android:layout_marginRight="@dimen/space_textview_to_textview"
+                        android:background="@drawable/button_corners"
+                        android:textColor="@color/white"/>
 
                     <Button
                         android:id="@+id/btn_new_order"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@color/white"
                         android:visibility="invisible"
                         android:text="Novo Pedido"
-                        android:layout_marginLeft="5dp"/>
+                        android:layout_marginLeft="@dimen/space_textview_to_textview"
+                        android:background="@drawable/button_corners"
+                        android:textColor="@color/white"/>
 
 
                 </LinearLayout>
@@ -277,61 +358,12 @@
                     android:layout_marginBottom="46dp"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true"
-                    android:background="@color/white"/>
+                    android:background="@drawable/button_corners"
+                    android:textColor="@color/white"/>
 
             </LinearLayout>
 
-
-
-
-
-
         </RelativeLayout>
-
-        <!--RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="1"
-        android:background="@color/blue_500"
-        android:paddingLeft="@dimen/activity_padding_left"
-        android:paddingRight="@dimen/activity_padding_right">
-
-
-
-        <TextView
-            android:id="@+id/tv_order_customer_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/tv_customer_title_whit_colon"
-            android:textColor="@color/white"/>
-
-        <TextView
-            android:id="@+id/tv_order_customer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nome do Cliente "
-            android:textColor="@color/white"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/img_order_customer"
-            android:layout_toEndOf="@+id/img_order_customer"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp" />
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/img_order_customer"
-            android:layout_width="@dimen/lv_iv_width"
-            android:layout_height="@dimen/iv_width_menu"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher"
-            android:layout_alignParentRight="@+id/tv_order_customer_title"
-            android:layout_below="@+id/tv_order_customer_title"/>
-
-
-    </RelativeLayout-->
-
-
-
-
 
     </LinearLayout>
 

@@ -17,17 +17,13 @@
 
         <TextView
             android:id="@+id/tv_customer_name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/tv_customer_name"
-            android:layout_marginLeft="@dimen/lv_tv_margin_left"
-            android:layout_marginStart="@dimen/lv_tv_margin_left"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
+            android:layout_toRightOf="@+id/iv_order_status"
+            android:layout_marginLeft="@dimen/space_imageview_to_textview"
             style="@style/AppTheme.TextViewInListViewPrimary" />
+
 
         <TextView
             android:id="@+id/tv_customer_phone_title"
@@ -47,7 +43,7 @@
             style="@style/AppTheme.TextViewInListViewSecundory"/>
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/img_customer_picture"
+            android:id="@+id/iv_order_status"
             android:layout_width="@dimen/lv_iv_width"
             android:layout_height="@dimen/lv_iv_height"
             android:scaleType="centerCrop"

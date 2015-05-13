@@ -11,6 +11,8 @@
     <string name="title_activity_order">Pedido</string>
     <string name="title_activity_order_products">Produtos do Pedido</string>
     <string name="title_activity_order_payments">Parcelamento</string>
+    <string name="title_activity_synchronization">Sincronização</string>
+    <string name="title_activity_historic">Histórico</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_carga_inicial">CargaInicialActivity</string>
@@ -50,6 +52,7 @@
     <string name="tv_customer_email_title">Email</string>
 
     <string name="tv_customer_title">Cliente</string>
+    <string name="tv_customer_whit_colon">Cliente:</string>
     <string name="tv_cart_title">Carrinho</string>
     <string name="tv_form_payment_title">Pagamento</string>
 
@@ -99,7 +102,7 @@
     <string name="tv_default_address_district">Bairro não cadastrado</string>
     <string name="tv_default_address_street">Rua não cadastrado</string>
     <string name="tv_default_address_number">Numero não cadastrado</string>
-
+    <string name="tv_order_number_with_colon">Pedido:</string>
 
     <string name="sp_title_customer_type">Tipo de pessoa</string>
     <string name="sp_title_price_table">Tabela de Preço</string>
@@ -118,6 +121,8 @@
     <string name="tv_organization_whit_colon">Empresa:</string>
     <string name="tv_organization">Empresa</string>
 
+    <string name="tv_sincronizar">Sincronizar</string>
+
     <string name="msg_order_error_customer">Selecione um cliente</string>
     <string name="msg_order_error_product">Selecione algum produto</string>
     <string name="msg_order_error_payment">Selecione uma forma de pagamento</string>
@@ -126,6 +131,9 @@
 
     <string name="tv_user">Usuário</string>
     <string name="tv_password">Senha</string>
+    <string name="tv_money">R$:</string>
+    <string name="tv_date_with_colun">Data:</string>
+    <string name="tv_emissao_with_colun">Emissão:</string>
 
     <string-array name="customer_type_array">
         <item>Física</item>

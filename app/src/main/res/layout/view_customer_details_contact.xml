@@ -14,7 +14,7 @@
         android:paddingBottom="@dimen/lv_row_padding_botton">
 
         <ImageView
-            android:id="@+id/iv_customer"
+            android:id="@+id/iv_order_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_phone"
@@ -23,21 +23,21 @@
             android:layout_alignParentStart="true" />
 
         <TextView
-            android:id="@+id/tv_customer_title"
+            android:id="@+id/tv_order_number_title"
             android:text="@string/tv_customer_phone_home_title"
             style="@style/AppTheme.TextViewPrimary"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/iv_customer"
-            android:layout_toEndOf="@+id/iv_customer"
+            android:layout_toRightOf="@+id/iv_order_status"
+            android:layout_toEndOf="@+id/iv_order_status"
             android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
             android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
 
         <ViewSwitcher
             android:id="@+id/vs_customer_phone_home"
             style="@style/AppTheme.TextViewSecundary"
-            android:layout_below="@+id/tv_customer_title"
-            android:layout_alignLeft="@+id/tv_customer_title"
-            android:layout_alignStart="@+id/tv_customer_title" >
+            android:layout_below="@+id/tv_order_number_title"
+            android:layout_alignLeft="@+id/tv_order_number_title"
+            android:layout_alignStart="@+id/tv_order_number_title" >
 
             <TextView
                 android:id="@+id/tv_customer_phone_home"

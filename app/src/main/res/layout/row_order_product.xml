@@ -23,17 +23,12 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/lblProdutoDescricao"
                 android:text="Descricao"
-                android:layout_marginLeft="@dimen/lv_tv_margin_left"
-                android:layout_marginStart="@dimen/lv_tv_margin_left"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
+                android:layout_toRightOf="@+id/iv_product"
+                android:layout_marginLeft="@dimen/space_imageview_to_textview"
                 style="@style/AppTheme.TextViewInListViewPrimary" />
 
             <TextView
@@ -71,9 +66,9 @@
 
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_product"
                 android:layout_width="@dimen/lv_iv_width"
                 android:layout_height="@dimen/lv_iv_height"
-                android:id="@+id/imgImagemProduto"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_launcher" />
 
@@ -88,14 +83,6 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
 
-            <!--TextView
-                android:id="@+id/lbl_order_product_amount_title"
-                style="@style/AppTheme.TextViewInListViewSecundory"
-                android:text="@string/tv_order_product_amount"
-                android:layout_below="@+id/lblProdutoEstoque"
-                android:layout_toLeftOf="@+id/lbl_order_product_amount"
-                android:layout_toStartOf="@+id/lbl_order_product_amount"
-                android:textColor="@color/green_700"/-->
 
         </RelativeLayout>
 

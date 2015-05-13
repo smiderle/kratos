@@ -28,12 +28,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Descricao"
-            android:layout_marginLeft="@dimen/lv_tv_margin_left"
-            android:layout_marginStart="@dimen/lv_tv_margin_left"
-            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/iv_menu_icon"
+            android:layout_marginLeft="@dimen/space_imageview_to_textview"
             style="@style/AppTheme.TextViewInListViewPrimary"
 
             />
+
+
+        <ImageView
+            android:id="@+id/iv_row_customer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_keyboard_arrow_right_grey600_36dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
     </RelativeLayout>
 
