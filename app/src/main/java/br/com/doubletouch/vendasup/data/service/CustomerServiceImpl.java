@@ -114,4 +114,11 @@ public class CustomerServiceImpl implements CustomerService {
 
     }
 
+    @Override
+    public Customer get(Integer id) {
+
+        return customerDAO.get(id);
+
+    }
+
 }

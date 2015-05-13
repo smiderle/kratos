@@ -22,6 +22,7 @@ import br.com.doubletouch.vendasup.data.entity.BranchOffice;
 import br.com.doubletouch.vendasup.data.entity.Customer;
 import br.com.doubletouch.vendasup.data.entity.Goal;
 import br.com.doubletouch.vendasup.data.entity.Installment;
+import br.com.doubletouch.vendasup.data.entity.Order;
 import br.com.doubletouch.vendasup.data.entity.Organization;
 import br.com.doubletouch.vendasup.data.entity.PriceTable;
 import br.com.doubletouch.vendasup.data.entity.Product;
@@ -40,6 +41,7 @@ import br.com.doubletouch.vendasup.data.net.resources.BranchApi;
 import br.com.doubletouch.vendasup.data.net.resources.CustomerApi;
 import br.com.doubletouch.vendasup.data.net.resources.GoalApi;
 import br.com.doubletouch.vendasup.data.net.resources.InstallmentApi;
+import br.com.doubletouch.vendasup.data.net.resources.OrderApi;
 import br.com.doubletouch.vendasup.data.net.resources.OrganizationApi;
 import br.com.doubletouch.vendasup.data.net.resources.PriceTableApi;
 import br.com.doubletouch.vendasup.data.net.resources.ProductApi;
@@ -51,6 +53,8 @@ import br.com.doubletouch.vendasup.data.service.CustomerServiceImpl;
 import br.com.doubletouch.vendasup.data.service.GoalService;
 import br.com.doubletouch.vendasup.data.service.GoalServiceImpl;
 import br.com.doubletouch.vendasup.data.service.InstallmentServiceImpl;
+import br.com.doubletouch.vendasup.data.service.OrderService;
+import br.com.doubletouch.vendasup.data.service.OrderServiceImpl;
 import br.com.doubletouch.vendasup.data.service.OrganizationService;
 import br.com.doubletouch.vendasup.data.service.OrganizationServiceImpl;
 import br.com.doubletouch.vendasup.data.service.PriceTableServiceImpl;
@@ -70,6 +74,29 @@ import br.com.doubletouch.vendasup.exception.SyncronizationException;
  * Created by LADAIR on 09/02/2015.
  */
 public class Integracao {
+
+    public void enviarDados( Integer branchID ) throws IOException, SyncronizationException {
+
+        enviarClientes( branchID );
+        enviarProdutos( branchID );
+        enviarPedidos( branchID );
+
+    }
+
+    public void receberDados( Integer organizationId ) throws Exception {
+
+        receberProdutos( organizationId );
+        receberClientes( organizationId );
+        receberPromocoes( organizationId );
+        receberFilial( organizationId );
+        receberEmpresa( organizationId );
+        receberUsuarios( organizationId );
+        receberEmpresa(organizationId);
+        receberMetas( organizationId );
+        receberTabelasPrecos( organizationId );
+        receberParcelamentos( organizationId );
+
+    }
 
 
     public void receberProdutos(Integer organizationId ) throws Exception {
@@ -192,7 +219,7 @@ public class Integracao {
         OrganizationEntityJsonMaper organizationEntityJsonMaper = new OrganizationEntityJsonMaper();
         OrganizationService service = new OrganizationServiceImpl();
 
-        apiResponse =  new OrganizationApi().getAllByChangeGreaterThan(lastSync, organizationID, organizationEntityJsonMaper);
+        apiResponse =  new OrganizationApi().getOrganizationById(lastSync, organizationID, organizationEntityJsonMaper);
         Organization organization =  apiResponse.getPayload().getValue();
         service.saveOrUpdateSynchronous(organization);
 
@@ -300,5 +327,19 @@ public class Integracao {
         List<Customer> customersSaved = apiResponse.getPayload().getValue();
 
         customerService.updateByIdMobile(customersSaved);
+    }
+
+    public void enviarPedidos(Integer branchID) throws  IOException, SyncronizationException {
+
+        OrderService orderService = new OrderServiceImpl();
+
+        List<Order> orders = orderService.getAllSyncPending(branchID);
+
+        ApiResponse<ServiceResponse<List<Order>>> apiResponse = new OrderApi().add(orders);
+
+        List<Order> ordersSaved = apiResponse.getPayload().getValue();
+
+        orderService.updateSync(ordersSaved);
+
     }
 }

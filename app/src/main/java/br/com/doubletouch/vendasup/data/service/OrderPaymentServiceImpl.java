@@ -24,4 +24,23 @@ public class OrderPaymentServiceImpl implements OrderPaymentService {
         orderPaymentDAO.insert(orderPayments);
 
     }
+
+    @Override
+    public List<OrderPayment> findByOrderID(Long orderItemID) {
+
+        return orderPaymentDAO.findByOrderID(orderItemID);
+
+    }
+
+    @Override
+    public void updateNewOrder(Long oldOrderID, Long newOrderId) {
+        orderPaymentDAO.updateNewOrder(oldOrderID, newOrderId);
+    }
+
+    @Override
+    public void deleteByOrderId(Long orderItemID) {
+
+        orderPaymentDAO.deleteByOrderId( orderItemID );
+
+    }
 }

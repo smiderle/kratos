@@ -110,4 +110,9 @@ public class ProductServiceImpl implements ProductService {
 
         }
     }
+
+    @Override
+    public Product get(Integer id) {
+        return productDAO.get(id);
+    }
 }

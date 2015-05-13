@@ -9,9 +9,10 @@ import java.io.InputStream;
  */
 public class RESTResponse {
 
-    public RESTResponse(Integer code, String message) {
+    public RESTResponse(Integer code, Exception exception) {
         this.code = code;
-        this.message = message;
+        this.exception = exception;
+
     }
 
     public RESTResponse(Integer code, InputStream content) throws IOException {
@@ -32,7 +33,7 @@ public class RESTResponse {
     /**
      *
      */
-    private String message;
+    private Exception exception;
 
     /**
      * Conteudo que foi retornado
@@ -54,12 +55,12 @@ public class RESTResponse {
         return this.code;
     }
 
-    public String getMessage() {
-        return message;
+    public Exception getException() {
+        return exception;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setException(Exception exception) {
+        this.exception = exception;
     }
 
     private String toString(InputStream is) throws IOException {

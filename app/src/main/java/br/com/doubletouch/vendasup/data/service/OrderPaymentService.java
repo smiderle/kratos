@@ -10,4 +10,10 @@ import br.com.doubletouch.vendasup.data.entity.OrderPayment;
 public interface OrderPaymentService {
 
     void save(List<OrderPayment> orderPayments);
+
+    List<OrderPayment> findByOrderID( Long orderItemID ) ;
+
+    void updateNewOrder( Long oldOrderID, Long newOrderId);
+
+    void deleteByOrderId(Long orderItemID);
 }

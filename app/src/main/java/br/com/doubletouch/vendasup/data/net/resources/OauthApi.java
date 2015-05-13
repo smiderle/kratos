@@ -42,7 +42,7 @@ public class OauthApi {
         if( response.getCode() == 200 ){
             return GsonUtil.parse( response.getJson(), OauthAccess.class );
         } else {
-            throw new SyncronizationException( response.getMessage() );
+            throw new SyncronizationException( response.getException() );
         }
 
 

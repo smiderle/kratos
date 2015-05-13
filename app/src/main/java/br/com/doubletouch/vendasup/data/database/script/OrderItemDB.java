@@ -19,7 +19,7 @@ public class OrderItemDB {
 
 
 
-    public static final String[] COLUNAS = new String[]{ID, IDEMPRESA,IDFILIAL,SEQUENCE,IDPEDIDO, IDPRODUTO, QUANTIDADE, PRECO, TABELA_PRECO };
+    public static final String[] COLUNAS = new String[]{ID, IDEMPRESA,IDFILIAL,SEQUENCE,IDPEDIDO, IDPRODUTO, QUANTIDADE, PRECO, TABELA_PRECO, OBSERVACAO };
 
 
     public static String create() {

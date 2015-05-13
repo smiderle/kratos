@@ -30,5 +30,9 @@ public interface InstallmentService {
      *
      * @param installment
      */
-    public void saveOrUpdateSynchronous(List<Installment> installment);
+    void saveOrUpdateSynchronous(List<Installment> installment);
+
+    Installment get(Integer id);
+
+
 }

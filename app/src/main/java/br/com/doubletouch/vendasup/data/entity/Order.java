@@ -4,7 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -42,7 +41,8 @@ public class Order implements Serializable{
 
     private String observation;
 
-    private Date issuanceTime;
+
+    private Long issuanceTime;
 
     private List<OrderItem> ordersItens = new ArrayList<>();
 
@@ -51,6 +51,13 @@ public class Order implements Serializable{
     private Integer formPayment;
 
     private boolean excluded;
+
+    private boolean syncPending;
+
+    private Long idMobile;
+
+    private Integer type;
+
 
 
     public OrderItem containsProduct(Product product){
@@ -154,14 +161,6 @@ public class Order implements Serializable{
         this.observation = observation;
     }
 
-    public Date getIssuanceTime() {
-        return issuanceTime;
-    }
-
-    public void setIssuanceTime(Date issuanceTime) {
-        this.issuanceTime = issuanceTime;
-    }
-
     public Integer getFormPayment() {
         return formPayment;
     }
@@ -194,4 +193,35 @@ public class Order implements Serializable{
         this.ordersPayments = ordersPayments;
     }
 
+    public boolean isSyncPending() {
+        return syncPending;
+    }
+
+    public void setSyncPending(boolean syncPending) {
+        this.syncPending = syncPending;
+    }
+
+    public Long getIdMobile() {
+        return idMobile;
+    }
+
+    public void setIdMobile(Long idMobile) {
+        this.idMobile = idMobile;
+    }
+
+    public Long getIssuanceTime() {
+        return issuanceTime;
+    }
+
+    public void setIssuanceTime(Long issuanceTime) {
+        this.issuanceTime = issuanceTime;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
 }

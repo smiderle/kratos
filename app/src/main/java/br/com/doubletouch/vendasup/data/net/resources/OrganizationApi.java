@@ -21,7 +21,7 @@ import br.com.doubletouch.vendasup.exception.SyncronizationException;
 public class OrganizationApi extends  AbstractApi {
 
 
-    public ApiResponse<ServiceResponse<Organization>> getAllByChangeGreaterThan(Long ultimaSincronizacao, Integer organizationID,  OrganizationEntityJsonMaper organizationEntityJsonMaper) throws IOException, SyncronizationException {
+    public ApiResponse<ServiceResponse<Organization>> getOrganizationById(Long ultimaSincronizacao, Integer organizationID,  OrganizationEntityJsonMaper organizationEntityJsonMaper) throws IOException, SyncronizationException {
 
         List<Customer> products = null;
 
@@ -40,7 +40,7 @@ public class OrganizationApi extends  AbstractApi {
                 throw new SyncronizationException(apiResponse.getMessage());
             }
         } else {
-            throw new SyncronizationException(response.getMessage());
+            throw new SyncronizationException(response.getException());
         }
 
     }

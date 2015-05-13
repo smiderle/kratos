@@ -23,9 +23,9 @@ public class OrderPayment {
 
     private Integer sequence;
 
-    private Date expirationDate;
+    private Long expirationDate;
 
-    private Date paymentDate;
+    private Long paymentDate;
 
     private Double installmentValue;
 
@@ -33,7 +33,7 @@ public class OrderPayment {
 
     private String documentNumber;
 
-    private Date registrationDate;
+    private Long registrationDate;
 
     public Long getID() {
         return ID;
@@ -75,19 +75,19 @@ public class OrderPayment {
         this.sequence = sequence;
     }
 
-    public Date getExpirationDate() {
+    public Long getExpirationDate() {
         return expirationDate;
     }
 
-    public void setExpirationDate(Date expirationDate) {
+    public void setExpirationDate(Long expirationDate) {
         this.expirationDate = expirationDate;
     }
 
-    public Date getPaymentDate() {
+    public Long getPaymentDate() {
         return paymentDate;
     }
 
-    public void setPaymentDate(Date paymentDate) {
+    public void setPaymentDate(Long paymentDate) {
         this.paymentDate = paymentDate;
     }
 
@@ -115,11 +115,11 @@ public class OrderPayment {
         this.documentNumber = documentNumber;
     }
 
-    public Date getRegistrationDate() {
+    public Long getRegistrationDate() {
         return registrationDate;
     }
 
-    public void setRegistrationDate(Date registrationDate) {
+    public void setRegistrationDate(Long registrationDate) {
         this.registrationDate = registrationDate;
     }
 }

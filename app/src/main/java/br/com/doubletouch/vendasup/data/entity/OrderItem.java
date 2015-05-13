@@ -1,5 +1,7 @@
 package br.com.doubletouch.vendasup.data.entity;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Created by LADAIR on 06/04/2015.
  */
@@ -8,6 +10,7 @@ public class OrderItem {
     public OrderItem() {
     }
 
+    @SerializedName("id")
     private Long ID;
 
     private Integer organizationID;
@@ -27,8 +30,6 @@ public class OrderItem {
     private Product product;
 
     private Double quantity;
-
-    private Double price;
 
     private PriceTable priceTable;
 
@@ -63,14 +64,6 @@ public class OrderItem {
 
     public void setQuantity(Double quantity) {
         this.quantity = quantity;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
     }
 
     public PriceTable getPriceTable() {

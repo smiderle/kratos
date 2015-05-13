@@ -8,6 +8,7 @@ public interface Methods {
     public static final String PRODUTO_GET_ALL_BY_CHANGE_GREATER_THAN = "getAllByChangeGreaterThan";
     public static final String PRODUTO_SAVE_LIST = "saveList";
     public static final String PRODUTO_CUSTOMER_LIST = "saveList";
+    public static final String PRODUTO_ORDER_LIST = "saveList";
     public static final String CUSTOMER_GET_ALL_BY_CHANGE_GREATER_THAN = "getAllByChangeGreaterThan";
     public static final String PRICE_TABLE_GET_ALL_BY_CHANGE_GREATER_THAN = "getAllByChangeGreaterThan";
     public static final String INSTALLMENT_GET_ALL_BY_CHANGE_GREATER_THAN = "getAllByChangeGreaterThan";

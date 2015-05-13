@@ -50,4 +50,11 @@ public class InstallmentServiceImpl implements InstallmentService {
         installmentDAO.insert(installment);
 
     }
+
+    @Override
+    public Installment get(Integer id) {
+
+        return installmentDAO.get(id);
+
+    }
 }

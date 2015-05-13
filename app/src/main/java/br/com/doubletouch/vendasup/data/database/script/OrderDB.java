@@ -18,10 +18,13 @@ public class OrderDB {
     public static final String DATA_EMISSAO = "DATA_EMISSAO";
     public static final String FORMA_PAGAMENTO = "FORMA_PAGAMENTO";
     public static final String EXCLUIDO = "EXCLUIDO";
+    public static final String SYNC_PENDENTE= "SYNC_PENDENTE";
+    public static final String ID_MOBILE = "ID_MOBILE";
+    public static final String TIPO = "TIPO";
 
 
 
-    public static final String[] COLUNAS = new String[]{ID, IDEMPRESA,IDFILIAL,IDCLIENTE,IDUSUARIO, IDPARCELAMENTO, VALOR_LIQUIDO, VALOR_BRUTO, DESCONTO_TOTAL, DATA_EMISSAO,FORMA_PAGAMENTO, OBSERVACAO };
+    public static final String[] COLUNAS = new String[]{ID, IDEMPRESA,IDFILIAL,IDCLIENTE,IDUSUARIO, IDPARCELAMENTO, VALOR_LIQUIDO, VALOR_BRUTO, DESCONTO_TOTAL, DATA_EMISSAO,FORMA_PAGAMENTO, OBSERVACAO, EXCLUIDO, SYNC_PENDENTE, ID_MOBILE, TIPO };
 
 
     public static String create() {
@@ -36,9 +39,12 @@ public class OrderDB {
                 VALOR_BRUTO + " DOUBLE, "+
                 DESCONTO_TOTAL + " DOUBLE, "+
                 DATA_EMISSAO+ " LONG, "+
-                FORMA_PAGAMENTO+ " INTEGER, "+
+                FORMA_PAGAMENTO + " INTEGER, "+
                 OBSERVACAO + " TEXT,"+
+                ID_MOBILE + " INTEGER,"+
                 EXCLUIDO + " BOOLEAN,"+
+                SYNC_PENDENTE + " BOOLEAN,"+
+                TIPO + " INTEGER, "+
                 "PRIMARY KEY( "+ ID+" )  );";
         return SQL;
     }

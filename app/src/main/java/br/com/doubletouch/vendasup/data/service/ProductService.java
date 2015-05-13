@@ -75,4 +75,6 @@ public interface ProductService {
     Integer getNextId();
 
     void updateByIdMobile(List<Product> products);
+
+    Product get( Integer id );
 }

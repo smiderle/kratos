@@ -1,5 +1,7 @@
 package br.com.doubletouch.vendasup.data.service;
 
+import java.util.List;
+
 import br.com.doubletouch.vendasup.data.entity.Order;
 import br.com.doubletouch.vendasup.domain.exception.ErrorBundle;
 
@@ -21,9 +23,48 @@ public interface OrderService {
         void onError(ErrorBundle errorBundle);
     }
 
+    /**
+     * Lista os pedidos que não foram sincronizados.
+     */
+    interface OrderListSyncCallback {
+
+        void onOrderListLoaded( List<Order> orders);
+
+        void onError(ErrorBundle errorBundle);
+    }
+
+    /**
+     * Lista todos os pedidos.
+     */
+    interface OrderListCallback {
+
+        void onOrderListLoaded( List<Order> orders);
+
+        void onError(ErrorBundle errorBundle);
+    }
+
+    interface  OrderDetailsCallback {
+
+        void onOrderDetailsLoaded( Order order );
+
+        void onError( ErrorBundle errorBundle );
+    }
+
     void save(Order order, OrderSaveCallback orderSaveCallback);
 
     void getTotalDailySales(Integer userID, Integer organizationID, Integer branchID, Long dtInicio, Long dtFim, TotalDailySalesCallback totalDailySalesCallback);
 
+    void getAllSyncPending( Integer branchID, OrderListSyncCallback orderListSyncCallback );
+
+    List<Order> getAllSyncPending( Integer branchID );
+
+    void getAll( Integer branchID, OrderListCallback orderListCallback );
+
+
+    Integer getNextId();
+
+    void updateSync( List<Order> orders );
+
+    void getOrderDatails(Long orderID, OrderDetailsCallback orderDetailsCallback);
 
 }

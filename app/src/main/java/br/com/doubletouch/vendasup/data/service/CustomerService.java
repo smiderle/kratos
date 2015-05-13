@@ -89,4 +89,6 @@ public interface CustomerService {
     void updateByIdMobile(List<Customer> customers);
 
     List<Customer> getAllSyncPending(Integer branchId);
+
+    Customer get(Integer id);
 }

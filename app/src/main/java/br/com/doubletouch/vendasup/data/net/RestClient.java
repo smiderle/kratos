@@ -161,7 +161,7 @@ public class RestClient {
 
         } catch (Exception e) {
             Log.e("KRATOS", "Falha ao acessar Web service com o metodo POST", e);
-            restResponse = new RESTResponse(0, e.getMessage());
+            restResponse = new RESTResponse(0, e);
         }
         return restResponse;
     }
@@ -184,7 +184,7 @@ public class RestClient {
 
         } catch (Exception e) {
             Log.e("KRATOS", "Falha ao acessar Web service com o metodo POST", e);
-            restResponse = new RESTResponse(0, "Ocorreu algum problema. Tente novamente em alguns instantes.");
+            restResponse = new RESTResponse(0, e);
         }
 
         return restResponse;

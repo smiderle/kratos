@@ -40,7 +40,7 @@ public class PriceTableApi extends AbstractApi {
                     throw new SyncronizationException(apiResponse.getMessage());
                 }
             } else {
-                throw new SyncronizationException(response.getMessage());
+                throw new SyncronizationException(response.getException());
             }
 
     }
