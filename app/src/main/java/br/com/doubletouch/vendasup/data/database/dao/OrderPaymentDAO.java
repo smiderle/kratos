@@ -9,8 +9,11 @@ import java.util.Date;
 import java.util.List;
 
 import br.com.doubletouch.vendasup.dao.SQLiteHelper;
+import br.com.doubletouch.vendasup.data.database.script.OrderDB;
+import br.com.doubletouch.vendasup.data.database.script.OrderItemDB;
 import br.com.doubletouch.vendasup.data.database.script.OrderPaymentDB;
 import br.com.doubletouch.vendasup.data.entity.Order;
+import br.com.doubletouch.vendasup.data.entity.OrderItem;
 import br.com.doubletouch.vendasup.data.entity.OrderPayment;
 
 /**
@@ -71,6 +74,39 @@ public class OrderPaymentDAO {
         return  ordersPayments;
     }
 
+    public List<OrderPayment> findByOrderID( Long orderItemID ) {
+
+        ArrayList<OrderPayment> ordersPayments = new ArrayList<>();
+
+        String where = OrderPaymentDB.IDPEDIDO+" = ? ";
+        Cursor c = db.query(OrderPaymentDB.TABELA, OrderPaymentDB.COLUNAS, where, new String[]{String.valueOf(orderItemID)}, null, null, null, LIMIT);
+
+        if(c.moveToFirst()){
+            do {
+                ordersPayments.add(getByCursor(c));
+            } while (c.moveToNext());
+        }
+        c.close();
+        return  ordersPayments;
+
+    }
+
+    public void deleteByOrderId( Long orderItemID  ){
+
+        String where = OrderPaymentDB.IDPEDIDO + " = " + orderItemID;
+        db.delete(OrderPaymentDB.TABELA,where, null );
+
+    }
+
+
+    public void updateNewOrder( Long oldOrderID, Long newOrderId) {
+
+        String sql = "UPDATE " + OrderPaymentDB.TABELA + " SET " + OrderPaymentDB.IDPEDIDO +" = " + newOrderId +
+                " WHERE "+ OrderPaymentDB.IDPEDIDO +" = " + oldOrderID;
+
+        db.execSQL(sql);
+    }
+
 
 
     private OrderPayment getByCursor(Cursor c) {
@@ -92,8 +128,8 @@ public class OrderPaymentDAO {
         orderPayment.setBranchID(c.getInt(idxIdFilial));
         orderPayment.setOrder(new Order(c.getLong(idxPedido)));
         orderPayment.setSequence(c.getInt(idxSequencia));
-        orderPayment.setExpirationDate(new Date(c.getLong(idxDataVencimento)));
-        orderPayment.setPaymentDate(new Date(c.getLong(idxDataPagamento)));
+        orderPayment.setExpirationDate( c.getLong(idxDataVencimento));
+        orderPayment.setPaymentDate( c.getLong(idxDataPagamento ));
         orderPayment.setInstallmentValue(c.getDouble(idxValor));
         orderPayment.setDocumentNumber(c.getString(idxNumeroDocumento));
         orderPayment.setObservation(c.getString(idxObservacao));
@@ -113,18 +149,14 @@ public class OrderPaymentDAO {
         cv.put(OrderPaymentDB.VALOR, orderPayment.getSequence());
         cv.put(OrderPaymentDB.NUMERO_DOCUMENTO, orderPayment.getDocumentNumber());
         cv.put(OrderPaymentDB.OBSERVACAO, orderPayment.getObservation());
+        cv.put(OrderPaymentDB.DATA_VENCIMENTO, orderPayment.getExpirationDate());
+        cv.put(OrderPaymentDB.DATA_PAGAMENTO, orderPayment.getPaymentDate());
 
         if( orderPayment.getOrder() != null ){
             cv.put(OrderPaymentDB.IDPEDIDO, orderPayment.getOrder().getID());
         }
 
-        if( orderPayment.getExpirationDate() != null){
-            cv.put(OrderPaymentDB.DATA_VENCIMENTO, orderPayment.getExpirationDate().getTime());
-        }
 
-        if( orderPayment.getPaymentDate() != null){
-            cv.put(OrderPaymentDB.DATA_PAGAMENTO, orderPayment.getPaymentDate().getTime());
-        }
 
         return cv;
     }

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.doubletouch.vendasup.dao.SQLiteHelper;
+import br.com.doubletouch.vendasup.data.database.script.OrderDB;
 import br.com.doubletouch.vendasup.data.database.script.OrderItemDB;
 import br.com.doubletouch.vendasup.data.entity.Order;
 import br.com.doubletouch.vendasup.data.entity.OrderItem;
@@ -72,6 +73,37 @@ public class OrderItemDAO {
         return  ordersItem;
     }
 
+    public List<OrderItem> findByOrderID(Long orderID){
+        ArrayList<OrderItem> ordersItem = new ArrayList<>();
+
+        String where = OrderItemDB.IDPEDIDO+" = ? ";
+        Cursor c = db.query(OrderItemDB.TABELA, OrderItemDB.COLUNAS, where, new String[]{String.valueOf(orderID)}, null, null, null, null);
+
+        if(c.moveToFirst()){
+            do {
+                ordersItem.add(getByCursor(c));
+            } while (c.moveToNext());
+        }
+        c.close();
+        return  ordersItem;
+    }
+
+
+    public void deleteByOrderId( Long orderItemID  ){
+
+        String where = OrderItemDB.IDPEDIDO + " = " + orderItemID;
+        db.delete(OrderItemDB.TABELA,where, null );
+
+    }
+
+    public void updateNewOrder( Long oldOrderID, Long newOrderId) {
+
+        String sql = "UPDATE " + OrderItemDB.TABELA + " SET " + OrderItemDB.IDPEDIDO +" = " + newOrderId +
+                " WHERE "+ OrderItemDB.IDPEDIDO +" = " + oldOrderID;
+
+        db.execSQL(sql);
+    }
+
 
 
     private OrderItem getByCursor(Cursor c) {
@@ -95,9 +127,15 @@ public class OrderItemDAO {
         orderItem.setSequence(c.getInt(idxSequencia));
         orderItem.setProduct(new Product( c.getInt(idxIdProduto) ));
         orderItem.setQuantity(c.getDouble(idxQuantidade));
-        orderItem.setPrice(c.getDouble(idxPreco));
-        orderItem.setObservation(c.getString(idxObservacao));
-        orderItem.setPriceTable(new PriceTable( c.getInt(idxTabelaPreco) ));
+        orderItem.setSalePrice(c.getDouble(idxPreco));
+        orderItem.setObservation(c.getString( idxObservacao ));
+
+
+        if( !c.isNull(idxTabelaPreco) ){
+
+            orderItem.setPriceTable(new PriceTable( c.getInt(idxTabelaPreco) ));
+
+        }
 
         return orderItem;
     }
@@ -112,7 +150,7 @@ public class OrderItemDAO {
         cv.put(OrderItemDB.IDFILIAL, orderItem.getBranchID());
         cv.put(OrderItemDB.SEQUENCE, orderItem.getSequence());
         cv.put(OrderItemDB.QUANTIDADE, orderItem.getQuantity());
-        cv.put(OrderItemDB.PRECO, orderItem.getPrice());
+        cv.put(OrderItemDB.PRECO, orderItem.getSalePrice());
         cv.put(OrderItemDB.OBSERVACAO, orderItem.getObservation());
 
 
