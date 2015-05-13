@@ -1,5 +1,6 @@
 package br.com.doubletouch.vendasup.util;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -9,12 +10,17 @@ import java.util.GregorianCalendar;
  */
 public class DateUtil {
 
+    public static final String DATE_FORMAT = "dd/MM/yyyy";
+    public static final String DATETIME_FORMAT = "dd/MM/yyyy HH:mm:ss";
+
     /**
      * Retorna a data com a ultimahora, minuto e segundo do dia.
      * @param date
      * @return
      */
     public static Calendar getMaximunDate(Date date){
+
+
 
 
         Calendar dtFim = new GregorianCalendar();
@@ -44,4 +50,31 @@ public class DateUtil {
 
         return dtInicio;
     }
+
+
+
+    public static String formatDateTime(Long dataLong) {
+
+        return formatDateTime(new Date(dataLong));
+
+    }
+
+    public static String formatDateTime(Date date) {
+
+        return new SimpleDateFormat(DATETIME_FORMAT).format(date);
+
+    }
+
+    public static String formatDate(Long dataLong) {
+
+        return formatDate(new Date(dataLong));
+
+    }
+
+    public static String formatDate(Date date) {
+
+        return new SimpleDateFormat(DATE_FORMAT).format(date);
+
+    }
+
 }

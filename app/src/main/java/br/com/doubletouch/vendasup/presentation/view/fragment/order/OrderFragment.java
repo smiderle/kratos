@@ -12,9 +12,11 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.ViewSwitcher;
 
 import java.util.Date;
 import java.util.List;
@@ -26,9 +28,13 @@ import br.com.doubletouch.vendasup.data.entity.Order;
 import br.com.doubletouch.vendasup.data.entity.OrderItem;
 import br.com.doubletouch.vendasup.data.entity.OrderPayment;
 import br.com.doubletouch.vendasup.data.entity.PriceTable;
+import br.com.doubletouch.vendasup.data.entity.enumeration.OrderType;
+import br.com.doubletouch.vendasup.data.entity.enumeration.ViewMode;
 import br.com.doubletouch.vendasup.data.executor.JobExecutor;
 import br.com.doubletouch.vendasup.domain.executor.PostExecutionThread;
 import br.com.doubletouch.vendasup.domain.executor.ThreadExecutor;
+import br.com.doubletouch.vendasup.domain.interactor.order.GetOrderDetailsUseCase;
+import br.com.doubletouch.vendasup.domain.interactor.order.GetOrderDetailsUseCaseImpl;
 import br.com.doubletouch.vendasup.domain.interactor.order.SaveOrderUseCase;
 import br.com.doubletouch.vendasup.domain.interactor.order.SaveOrderUseCaseImpl;
 import br.com.doubletouch.vendasup.presentation.UIThread;
@@ -45,6 +51,7 @@ import br.com.doubletouch.vendasup.util.OrderPaymentUtil;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import butterknife.Optional;
 
 /**
  * Created by LADAIR on 01/04/2015.
@@ -84,7 +91,7 @@ public class OrderFragment extends BaseFragment implements OrderView {
     @InjectView(R.id.iv_cart)
     ImageView iv_cart;
 
-    @InjectView(R.id.iv_customer)
+    @InjectView(R.id.iv_order_status)
     ImageView iv_customer;
 
     @InjectView(R.id.iv_pyment)
@@ -122,16 +129,32 @@ public class OrderFragment extends BaseFragment implements OrderView {
     @InjectView(R.id.btn_notification)
     Button btn_notification;
 
+    @InjectView(R.id.et_order_observation)
+    @Optional
+    EditText et_order_observation;
+
+    @InjectView(R.id.tv_order_observation)
+    @Optional
+    TextView tv_order_observation;
 
     private OrderPresenter orderPresenter;
 
-    public static OrderFragment newInstance() {
+    private long orderId;
+
+    private static final String ARGUMENT_KEY_ORDER_ID = "kratos.ARGUMENT_ORDER_ID";
+    private static final String ARGUMENT_KEY_VIEW_MODE = "kratos.ARGUMENT_VIEW_MODE";
+
+    private ViewMode viewMode;
+
+    public static OrderFragment newInstance(long orderId, ViewMode viewMode) {
         OrderFragment orderFragment = new OrderFragment();
         Bundle argumentsBundle = new Bundle();
+        argumentsBundle.putLong(ARGUMENT_KEY_ORDER_ID, orderId);
+        argumentsBundle.putSerializable(ARGUMENT_KEY_VIEW_MODE, viewMode);
+
         orderFragment.setArguments(argumentsBundle);
         return orderFragment;
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -146,13 +169,14 @@ public class OrderFragment extends BaseFragment implements OrderView {
         return super.onOptionsItemSelected(item);
     }
 
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        createOrder();
+        this.orderId = getArguments().getLong(ARGUMENT_KEY_ORDER_ID);
+        this.viewMode = (ViewMode) getArguments().getSerializable(ARGUMENT_KEY_VIEW_MODE);
+
+        orderPresenter.createOrLoad(orderId);
 
         navigator = new Navigator();
     }
@@ -201,8 +225,9 @@ public class OrderFragment extends BaseFragment implements OrderView {
         ThreadExecutor threadExecutor = JobExecutor.getInstance();
         PostExecutionThread postExecutionThread = UIThread.getInstance();
         SaveOrderUseCase saveOrderUseCase = new SaveOrderUseCaseImpl( threadExecutor, postExecutionThread );
+        GetOrderDetailsUseCase getOrderDetailsUseCase = new GetOrderDetailsUseCaseImpl(  threadExecutor, postExecutionThread  );
 
-        orderPresenter = new OrderPresenter( this, saveOrderUseCase);
+        orderPresenter = new OrderPresenter( this, saveOrderUseCase, getOrderDetailsUseCase);
 
     }
 
@@ -213,14 +238,31 @@ public class OrderFragment extends BaseFragment implements OrderView {
         btn_menu.setVisibility(View.VISIBLE);
         btn_new_order.setVisibility(View.VISIBLE);
 
-        tv_order_number_title.setVisibility(View.VISIBLE);
-        tv_order_number.setVisibility(View.VISIBLE);
-
-        tv_order_number.setText( String.valueOf( order.getID() ) );
+        setOrderNumber();
 
         mostrarNotificacaoSucess("Pedido salvo com sucesso");
 
         removeAllListner();
+        switchObservation();
+
+
+    }
+
+    @Override
+    public void orderLoaded() {
+        setOrderItens();
+        setCustomer(order.getCustomer());
+        setPayment();
+        setOrderNumber();
+
+        if(!order.isSyncPending()){
+
+            setViewMode();
+
+        } else {
+
+            setObservation();
+        }
 
     }
 
@@ -265,7 +307,7 @@ public class OrderFragment extends BaseFragment implements OrderView {
         @Override
         public void onClick(View v) {
 
-            Intent it = OrderProductActivity.getCallingIntent(activity);
+            Intent it = OrderProductActivity.getCallingIntent(activity, viewMode);
             startActivityForResult(it, RESULT_PRODUCTS);
             navigator.transitionGo(activity);
 
@@ -278,9 +320,20 @@ public class OrderFragment extends BaseFragment implements OrderView {
         @Override
         public void onClick(View v) {
 
-            Intent it = OrderPaymentActivity.getCallingIntent(activity);
-            startActivityForResult(it, RESULT_PAYMENT);
-            navigator.transitionGo(activity);
+
+            if( order.getCustomer() != null && order.getOrdersItens() != null && !order.getOrdersItens().isEmpty() ) {
+
+                Intent it = OrderPaymentActivity.getCallingIntent(activity, viewMode);
+                startActivityForResult(it, RESULT_PAYMENT);
+                navigator.transitionGo(activity);
+
+            } else {
+
+                mostrarNotificacaoWarning("Selecione um cliente e os produtos.");
+
+            }
+
+
 
         }
     }
@@ -332,11 +385,11 @@ public class OrderFragment extends BaseFragment implements OrderView {
 
         for (OrderItem orderItem : ordersItens){
 
-            if(orderItem.getPrice() == null){
-                orderItem.setPrice(orderItem.getProduct().getSalePrice());
+            if(orderItem.getSalePrice() == null){
+                orderItem.setSalePrice(orderItem.getProduct().getSalePrice());
             }
 
-            total += ( orderItem.getPrice() * orderItem.getQuantity() );
+            total += ( orderItem.getSalePrice() * orderItem.getQuantity() );
             order.setNetValue(total);
 
             quantidade += orderItem.getQuantity();
@@ -382,6 +435,15 @@ public class OrderFragment extends BaseFragment implements OrderView {
     }
 
 
+    private void setOrderNumber(){
+        tv_order_number_title.setVisibility(View.VISIBLE);
+        tv_order_number.setVisibility(View.VISIBLE);
+
+        tv_order_number.setText( String.valueOf( order.getID() ) );
+    }
+
+
+
     private void calculaParcelas() {
 
         if( order.getInstallment() != null && order.getOrdersItens() != null && order.getOrdersItens().size() > 0 ){
@@ -394,23 +456,12 @@ public class OrderFragment extends BaseFragment implements OrderView {
         }
     }
 
-    private void createOrder(){
-
-        order = new Order();
-        order.setBranchID( VendasUp.getBranchOffice().getBranchOfficeID() );
-        order.setOrganizationID( VendasUp.getBranchOffice().getOrganization().getOrganizationID() );
-        order.setExcluded( false );
-        order.setIssuanceTime( new Date() );
-        order.setUser( VendasUp.getUser() );
-        order.setUserID( VendasUp.getUser().getUserID() );
-
-        lastPriceTableSelected = null;
-    }
 
 
     @OnClick(R.id.btn_order_save)
     public void saveOrder(){
 
+        order.setObservation( et_order_observation.getText().toString() );
         orderPresenter.saveOrder(order);
 
     }
@@ -469,6 +520,34 @@ public class OrderFragment extends BaseFragment implements OrderView {
         iv_row_cart.setVisibility(View.INVISIBLE);
         iv_row_customer.setVisibility(View.INVISIBLE);
         iv_row_payment.setVisibility(View.INVISIBLE);
+
+
+    }
+
+    private void switchObservation(){
+
+        ((ViewSwitcher) activity.findViewById(R.id.vs_order_observation)).showNext();
+
+        setObservation();
+
+
+    }
+
+    private void setObservation(){
+
+        String observation = order.getObservation() != null ? order.getObservation() : "";
+        tv_order_observation.setText( observation );
+        et_order_observation.setText( observation );
+
+    }
+
+
+    private void setViewMode(){
+        switchObservation();
+        btn_order_save.setVisibility(View.INVISIBLE);
+        rl_order_customer.setOnClickListener(null);
+        iv_row_customer.setVisibility(View.INVISIBLE);
+
     }
 
 

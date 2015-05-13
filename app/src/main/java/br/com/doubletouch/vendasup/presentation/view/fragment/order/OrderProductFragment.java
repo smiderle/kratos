@@ -1,12 +1,15 @@
 package br.com.doubletouch.vendasup.presentation.view.fragment.order;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.util.SparseArrayCompat;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -15,6 +18,7 @@ import br.com.doubletouch.vendasup.R;
 import br.com.doubletouch.vendasup.data.entity.Order;
 import br.com.doubletouch.vendasup.data.entity.Product;
 import br.com.doubletouch.vendasup.data.entity.enumeration.ViewMode;
+import br.com.doubletouch.vendasup.presentation.navigation.Navigator;
 import br.com.doubletouch.vendasup.presentation.view.ViewHelper;
 import br.com.doubletouch.vendasup.presentation.view.activity.BaseParallacxFragment;
 import br.com.doubletouch.vendasup.presentation.view.components.PagerSlidingTabStrip;
@@ -34,6 +38,8 @@ public class OrderProductFragment extends BaseParallacxFragment  {
 
     private final int PAGES_NUMER = 2;
 
+    private static final String ARGUMENT_KEY_VIEW_MODE = "kratos.INTENT_EXTRA_PARAM_EDITION";
+
 
     private PageAdaper pageAdaper;
 
@@ -45,22 +51,36 @@ public class OrderProductFragment extends BaseParallacxFragment  {
     @InjectView(R.id.fl_header)
     public View fl_header;
 
+    private Navigator navigator;
+    private Activity activity;
+
     @InjectView(R.id.tabs)
     public PagerSlidingTabStrip mPagerSlidingTabStrip;
 
-    public static OrderProductFragment newInstance(){
+    private ViewMode viewMode;
+
+    public static OrderProductFragment newInstance(ViewMode viewMode){
         OrderProductFragment orderProductFragment = new OrderProductFragment();
         Bundle bundle = new Bundle();
         orderProductFragment.setArguments(bundle);
+        bundle.putSerializable(ARGUMENT_KEY_VIEW_MODE, viewMode);
         return orderProductFragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        navigator = new Navigator();
+        this.viewMode = (ViewMode) getArguments().getSerializable(ARGUMENT_KEY_VIEW_MODE);
         //order = (Order) getArguments().getSerializable(ARGS_ORDER);
     }
 
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        this.activity = activity;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -84,6 +104,34 @@ public class OrderProductFragment extends BaseParallacxFragment  {
 
         return fragmentView;
     }
+
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        setHasOptionsMenu(true);
+
+    }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+
+            case android.R.id.home:
+                navigator.previousActivity(activity);
+                break;
+            default:
+                super.onOptionsItemSelected(item);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+
+
 
     @Override
     public void initializePresenter() {
@@ -123,7 +171,10 @@ public class OrderProductFragment extends BaseParallacxFragment  {
         private SparseArrayCompat<ScrollTabHolder> scrollTabHolder;
         private ScrollTabHolder listener;
 
-        private final String[] TITLES = {"Produtos", "Carrinho"};
+
+
+
+        private final String[] TITLES;
 
         public void setTabHolderScrollingContent(ScrollTabHolder listener){
             this.listener = listener;
@@ -133,32 +184,53 @@ public class OrderProductFragment extends BaseParallacxFragment  {
             super(fm);
             this.scrollTabHolder = new SparseArrayCompat<>();
 
+            if( ViewMode.VISUALIZACAO.equals( viewMode ) ){
+                TITLES = new String[]{"Carrinho"};
+            } else {
+                TITLES = new String[]{"Produtos", "Carrinho"};
+            }
+
         }
 
         @Override
-        public int getItemPosition(Object object){
+        public int getItemPosition( Object object ) {
+
             return POSITION_NONE;
+
         }
 
         @Override
         public Fragment getItem(int position) {
+
             ScrollTabHolderFragment fragment = null;
 
-            switch (position){
-                case 0:
-                    fragment = (ScrollTabHolderFragment) OrderProductListFragment.newInstance(position, OrderFragment.order);
-                    break;
-                case 1:
-                    fragment = (ScrollTabHolderFragment) OrderProductListFragment.newInstance(position, OrderFragment.order);
-                    break;
-                default:
-            }
+            fragment = (ScrollTabHolderFragment) OrderProductListFragment.newInstance(position, OrderFragment.order, viewMode);
+            /*if( ViewMode.VISUALIZACAO.equals( viewMode ) ){
+
+                if(position == 0){
+
+                    fragment = (ScrollTabHolderFragment) OrderProductListFragment.newInstance(position, OrderFragment.order, viewMode);
+
+                } else if(position == 1){
+
+                    fragment = (ScrollTabHolderFragment) OrderProductListFragment.newInstance(position, OrderFragment.order, viewMode);
+
+                }
+
+            } else {
+
+                fragment = (ScrollTabHolderFragment) OrderProductListFragment.newInstance(position, OrderFragment.order, viewMode);
+
+            }*/
 
             scrollTabHolder.put(position, fragment);
 
             if(listener != null){
+
                 fragment.setScrollTabHolder(listener);
+
             }
+
             return fragment;
         }
 

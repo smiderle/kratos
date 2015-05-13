@@ -30,7 +30,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private static  SQLiteHelper sInstance;
 
     public static final String DATABASE_NAME = "KRATOS";
-    public static final Integer VERSION = 1;
+    public static final Integer VERSION = 4;
 
     public SQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, VERSION);
@@ -57,6 +57,19 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+        switch (newVersion){
+            case 4:
+
+                String sql2 = "ALTER TABLE " + OrderDB.TABELA+" ADD COLUMN "+ OrderDB.TIPO+ " INTEGER ";
+                db.execSQL(sql2);
+
+                break;
+
+        }
+
+
+
 
     }
 

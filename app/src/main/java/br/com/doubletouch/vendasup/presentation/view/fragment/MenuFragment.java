@@ -15,6 +15,7 @@ import java.util.List;
 
 import br.com.doubletouch.vendasup.R;
 import br.com.doubletouch.vendasup.VendasUp;
+import br.com.doubletouch.vendasup.data.entity.enumeration.ViewMode;
 import br.com.doubletouch.vendasup.data.executor.JobExecutor;
 import br.com.doubletouch.vendasup.domain.executor.PostExecutionThread;
 import br.com.doubletouch.vendasup.domain.executor.ThreadExecutor;
@@ -25,6 +26,7 @@ import br.com.doubletouch.vendasup.presentation.UIThread;
 import br.com.doubletouch.vendasup.presentation.navigation.Navigator;
 import br.com.doubletouch.vendasup.presentation.presenter.MenuPresenter;
 import br.com.doubletouch.vendasup.presentation.view.MenuView;
+import br.com.doubletouch.vendasup.presentation.view.activity.LoginActivity;
 import br.com.doubletouch.vendasup.presentation.view.activity.order.OrderActivity;
 import br.com.doubletouch.vendasup.presentation.view.adapter.KratosLayoutManager;
 import br.com.doubletouch.vendasup.presentation.view.adapter.MenusAdapter;
@@ -146,9 +148,13 @@ public class MenuFragment extends BaseFragment implements MenuView {
 
         if( menuModel.getTo().equals( OrderActivity.class) ){
 
-            Intent it = OrderActivity.getCallingIntent(activity);
+            Intent it = OrderActivity.getCallingIntent( activity, -1, ViewMode.INCLUSAO );
             startActivityForResult( it, RESULT_MENU);
             navigator.transitionGo(activity);
+
+        } else if(menuModel.getTo().equals(LoginActivity.class)) {
+
+            navigator.previousActivity(activity);
 
         } else {
 

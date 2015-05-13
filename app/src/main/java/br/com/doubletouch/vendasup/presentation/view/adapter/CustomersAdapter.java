@@ -13,7 +13,6 @@ import java.util.List;
 
 import br.com.doubletouch.vendasup.R;
 import br.com.doubletouch.vendasup.data.entity.Customer;
-import br.com.doubletouch.vendasup.util.DoubleUtil;
 import br.com.doubletouch.vendasup.util.image.ImageLoader;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -116,7 +115,7 @@ public class CustomersAdapter extends RecyclerView.Adapter<CustomersAdapter.Cust
         @InjectView(R.id.tv_customer_phone)
         TextView tv_customer_phone;
 
-        @InjectView(R.id.img_customer_picture)
+        @InjectView(R.id.iv_order_status)
         ImageView img_customer_picture;
 
         CustomerViewHolder(View itemView) {

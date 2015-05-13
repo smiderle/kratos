@@ -27,7 +27,7 @@ public class ProductDetailsActivity extends BaseActivity {
 
     private ViewMode viewMode;
 
-    public static Intent getCallingIntent(Context context, int productId, ViewMode viewMode){
+    public static Intent getCallingIntent( Context context, int productId, ViewMode viewMode ){
         Intent callingIntent = new Intent(context, ProductDetailsActivity.class);
         callingIntent.putExtra(INTENT_EXTRA_PARAM_PRODUCT_ID, productId);
         callingIntent.putExtra(INTENT_EXTRA_PARAM_PRODUCT_EDITION_MODE, viewMode);

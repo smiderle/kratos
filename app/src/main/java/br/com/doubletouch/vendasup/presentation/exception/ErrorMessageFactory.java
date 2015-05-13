@@ -25,16 +25,32 @@ public class ErrorMessageFactory {
      */
     public static String create(Context context, Exception exception){
 
-        String message = exception.getMessage();
+        String message = getHumanMessage( exception.getMessage() );
 
 
 
-        if(exception instanceof SyncronizationException){
-            context.getString(R.string.exception_message_syncronization);
+        if( message == null ){
+
+            //context.getString(R.string.exception_message_syncronization);
+
         }
 
         Log.e(VendasUp.APP_TAG, exception.getMessage(), exception);
 
         return message;
+    }
+
+
+
+    private static String getHumanMessage(String message){
+        String retorno = message;
+
+        if( message.contains("timed out")){
+
+            retorno = "Opss. Não foi possivel conectar no servido. Tente novamente em alguns instantes.";
+
+        }
+
+        return retorno;
     }
 }

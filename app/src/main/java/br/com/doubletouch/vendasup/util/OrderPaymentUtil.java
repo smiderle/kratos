@@ -45,11 +45,11 @@ public class OrderPaymentUtil {
     }
 
 
-    private Date getExpirationDate(Integer day){
+    private Long getExpirationDate(Integer day){
 
         Calendar calendar = new GregorianCalendar();
         calendar.add(Calendar.DAY_OF_MONTH, day);
-        return calendar.getTime();
+        return calendar.getTimeInMillis();
     }
 
 

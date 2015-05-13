@@ -23,6 +23,7 @@ import br.com.doubletouch.vendasup.data.entity.Installment;
 import br.com.doubletouch.vendasup.data.entity.Order;
 import br.com.doubletouch.vendasup.data.entity.OrderPayment;
 import br.com.doubletouch.vendasup.data.entity.enumeration.Payment;
+import br.com.doubletouch.vendasup.data.entity.enumeration.ViewMode;
 import br.com.doubletouch.vendasup.data.executor.JobExecutor;
 import br.com.doubletouch.vendasup.domain.executor.PostExecutionThread;
 import br.com.doubletouch.vendasup.domain.executor.ThreadExecutor;
@@ -45,6 +46,8 @@ public class OrderPaymentFragment extends BaseFragment implements OrderPaymentVi
 
     private Navigator navigator;
 
+    private static final String ARGUMENT_KEY_VIEW_MODE = "kratos.INTENT_EXTRA_PARAM_EDITION";
+
     private Activity activity;
 
     @InjectView(R.id.sp_customer_installment)
@@ -65,10 +68,13 @@ public class OrderPaymentFragment extends BaseFragment implements OrderPaymentVi
 
     private List<Installment> installments;
 
-    public static OrderPaymentFragment newInstance() {
+    private ViewMode viewMode;
+
+    public static OrderPaymentFragment newInstance(ViewMode viewMode) {
         OrderPaymentFragment orderPaymentFragment = new OrderPaymentFragment();
         Bundle argumentsBundle = new Bundle();
         orderPaymentFragment.setArguments(argumentsBundle);
+        argumentsBundle.putSerializable(ARGUMENT_KEY_VIEW_MODE, viewMode);
         return orderPaymentFragment;
     }
 
@@ -77,6 +83,7 @@ public class OrderPaymentFragment extends BaseFragment implements OrderPaymentVi
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.viewMode = (ViewMode) getArguments().getSerializable(ARGUMENT_KEY_VIEW_MODE);
 
         navigator = new Navigator();
 
@@ -116,9 +123,15 @@ public class OrderPaymentFragment extends BaseFragment implements OrderPaymentVi
         //Carrega o arquivo de menu.
         inflater.inflate(R.menu.menu_search_view, menu);
 
-        menu.findItem(R.id.it_done).setVisible(true);
+        if(!ViewMode.VISUALIZACAO.equals(viewMode)){
+            menu.findItem(R.id.it_done).setVisible(true);
+        }
+
         menu.findItem(R.id.add).setVisible(false);
         menu.findItem(R.id.search).setVisible(false);
+
+
+
 
     }
 

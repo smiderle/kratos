@@ -228,7 +228,7 @@ public class CustomerDetailsPersonalFragment extends ScrollTabHolderFragment  {
             ((ViewSwitcher) view.findViewById(R.id.vs_customer_inscricao)).showNext();
             ((ViewSwitcher) view.findViewById(R.id.vs_customer_nickname)).showNext();
             ((ViewSwitcher) view.findViewById(R.id.vs_customer_observation)).showNext();
-            ((ViewSwitcher) view.findViewById(R.id.vs_customer_persontype)).showNext();
+            ((ViewSwitcher) view.findViewById(R.id.vs_order_observation)).showNext();
 
             et_customer_name.setText(customer.getName());
             et_customer_cpfcnpj.setText(customer.getCpfCnpj());

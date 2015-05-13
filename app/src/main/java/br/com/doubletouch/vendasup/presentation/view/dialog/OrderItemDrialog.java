@@ -120,9 +120,9 @@ public class OrderItemDrialog extends DialogFragment {
 
         tv_order_product_description.setText(orderItem.getProduct().getDescription());
         tv_order_product_stock.setText(DoubleUtil.formatToCurrency(orderItem.getProduct().getStockAmount(), false));
-        tv_order_product_price.setText(DoubleUtil.formatToCurrency(orderItem.getPrice(), true));
+        tv_order_product_price.setText(DoubleUtil.formatToCurrency(orderItem.getSalePrice(), true));
         ed_order_quantity.setText(String.valueOf( orderItem.getQuantity() ));
-        ed_order_price_sales.setText(String.valueOf( orderItem.getPrice() ));
+        ed_order_price_sales.setText(String.valueOf( orderItem.getSalePrice() ));
 
 
         addListners();
@@ -139,7 +139,7 @@ public class OrderItemDrialog extends DialogFragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                orderItem.setPrice( getPrice() );
+                orderItem.setSalePrice( getPrice() );
                 orderItem.setQuantity(getQuantity());
                 orderItem.setPriceTable(priceTableSelected);
                 addSeNaoExiste();
@@ -280,7 +280,7 @@ public class OrderItemDrialog extends DialogFragment {
         if(orderItem == null){
 
             orderItem = new OrderItem();
-            orderItem.setPrice(product.getSalePrice());
+            orderItem.setSalePrice(product.getSalePrice());
             orderItem.setProduct(product);
             orderItem.setQuantity(1.0);
             orderItem.setBranchID( VendasUp.getBranchOffice().getBranchOfficeID() );
@@ -367,7 +367,7 @@ public class OrderItemDrialog extends DialogFragment {
 
                 if(tabPosition == 1){
 
-                    ed_order_price_sales.setText( DoubleUtil.formatToCurrency(orderItem.getPrice(), false, ".")  );
+                    ed_order_price_sales.setText( DoubleUtil.formatToCurrency(orderItem.getSalePrice(), false, ".")  );
                 }
 
                 OrderFragment.lastPriceTableSelected = priceTableSelected;

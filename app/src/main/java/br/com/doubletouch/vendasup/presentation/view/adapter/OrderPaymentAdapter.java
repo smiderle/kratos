@@ -12,6 +12,7 @@ import java.util.List;
 
 import br.com.doubletouch.vendasup.R;
 import br.com.doubletouch.vendasup.data.entity.OrderPayment;
+import br.com.doubletouch.vendasup.util.DateUtil;
 import br.com.doubletouch.vendasup.util.DoubleUtil;
 
 
@@ -51,9 +52,9 @@ public class OrderPaymentAdapter extends BaseAdapter {
 
 
         String seq = (position +1) +"/"+ getCount();
-        String vencimento = new SimpleDateFormat("dd/MM/yyyy").format(orderPayment.getExpirationDate());
+        String vencimento = DateUtil.formatDate(orderPayment.getExpirationDate());
 
-        ((TextView) view.findViewById(R.id.tv_order_numero_parcela)).setText( seq );
+                ((TextView) view.findViewById(R.id.tv_order_numero_parcela)).setText(seq);
         ((TextView) view.findViewById(R.id.tv_order_valor_parcela)).setText(DoubleUtil.formatToCurrency(orderPayment.getInstallmentValue(), false));
         ((TextView) view.findViewById(R.id.tv_order_vencimento)).setText( vencimento );
 

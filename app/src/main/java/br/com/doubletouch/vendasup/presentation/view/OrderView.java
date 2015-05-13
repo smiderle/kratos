@@ -8,4 +8,6 @@ import br.com.doubletouch.vendasup.data.entity.Order;
 public interface OrderView extends  LoadDataView {
 
     void orderSaved(Order order);
+
+    void orderLoaded();
 }

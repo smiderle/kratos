@@ -16,8 +16,11 @@ import br.com.doubletouch.vendasup.presentation.exception.ErrorMessageFactory;
 import br.com.doubletouch.vendasup.presentation.view.MenuView;
 import br.com.doubletouch.vendasup.presentation.view.activity.CustomerDetailsActivity;
 import br.com.doubletouch.vendasup.presentation.view.activity.CustomerListActivity;
+import br.com.doubletouch.vendasup.presentation.view.activity.LoginActivity;
+import br.com.doubletouch.vendasup.presentation.view.activity.SynchronizationActivity;
 import br.com.doubletouch.vendasup.presentation.view.activity.order.OrderActivity;
 import br.com.doubletouch.vendasup.presentation.view.activity.ProductListActivity;
+import br.com.doubletouch.vendasup.presentation.view.activity.order.OrderListActivity;
 import br.com.doubletouch.vendasup.util.DateUtil;
 
 /**
@@ -65,10 +68,12 @@ public class MenuPresenter implements Presenter {
 
     public List<MenuModel>  createMenuModel(){
         List<MenuModel> menus = new ArrayList<>(5);
-        menus.add(new MenuModel(OrderActivity.class, "Novo Pedido", R.drawable.ic_cube_outline,0));
+        menus.add(new MenuModel(OrderActivity.class, "Novo Pedido", R.drawable.ic_shopping_cart_grey600_36dp,0));
         menus.add(new MenuModel(ProductListActivity.class, "Produtos", R.drawable.ic_cube_outline,1));
-        menus.add(new MenuModel(CustomerListActivity.class, "Clientes", R.drawable.ic_cube_outline,2));
-        menus.add(new MenuModel(CustomerDetailsActivity.class, "Histórico", R.drawable.ic_cube_outline,3));
+        menus.add(new MenuModel(CustomerListActivity.class, "Clientes", R.drawable.ic_person_grey600_36dp,2));
+        menus.add(new MenuModel(OrderListActivity.class, "Histórico", R.drawable.ic_history_grey600_36dp,3));
+        menus.add(new MenuModel(SynchronizationActivity.class, "Sincronização", R.drawable.ic_import_export_grey600_36dp,4));
+        menus.add(new MenuModel(LoginActivity.class, "Sair", R.drawable.ic_exit_to_app_grey600_36dp,4));
         //menus.add(new MenuModel(TFCustomerDetails.class, "TFCustomerDetails", R.drawable.ic_cube_outline,3));
 
         return menus;

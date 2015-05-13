@@ -13,7 +13,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import java.util.List;
@@ -33,7 +32,6 @@ import br.com.doubletouch.vendasup.presentation.navigation.Navigator;
 import br.com.doubletouch.vendasup.presentation.presenter.CustomerListPresenter;
 import br.com.doubletouch.vendasup.presentation.view.CustomerListView;
 import br.com.doubletouch.vendasup.presentation.view.activity.CustomerDetailsActivity;
-import br.com.doubletouch.vendasup.presentation.view.activity.ProductDetailsActivity;
 import br.com.doubletouch.vendasup.presentation.view.adapter.KratosLayoutManager;
 import br.com.doubletouch.vendasup.presentation.view.adapter.CustomersAdapter;
 import br.com.doubletouch.vendasup.presentation.view.fragment.BaseFragment;
@@ -90,7 +88,7 @@ public class CustomerListFragment extends BaseFragment implements CustomerListVi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View fragmentView = inflater.inflate(R.layout.fragment_customer_list, container, true);
+        View fragmentView = inflater.inflate(R.layout.fragment_list, container, true);
         ButterKnife.inject(this, fragmentView);
 
         setupUI();
@@ -164,7 +162,7 @@ public class CustomerListFragment extends BaseFragment implements CustomerListVi
 
     @Override
     public void renderCustomerList(List<Customer> customersCollection) {
-        if(customersCollection != null){
+        if(customersCollection != null && !customersCollection.isEmpty()){
             if(customerAdapter == null){
                 this.customerAdapter = new CustomersAdapter(getActivity(), customersCollection);
             } else {

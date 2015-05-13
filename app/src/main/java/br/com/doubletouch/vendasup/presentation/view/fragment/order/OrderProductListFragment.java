@@ -26,8 +26,8 @@ import br.com.doubletouch.vendasup.R;
 import br.com.doubletouch.vendasup.VendasUp;
 import br.com.doubletouch.vendasup.data.entity.Order;
 import br.com.doubletouch.vendasup.data.entity.OrderItem;
-import br.com.doubletouch.vendasup.data.entity.PriceTable;
 import br.com.doubletouch.vendasup.data.entity.Product;
+import br.com.doubletouch.vendasup.data.entity.enumeration.ViewMode;
 import br.com.doubletouch.vendasup.data.executor.JobExecutor;
 import br.com.doubletouch.vendasup.domain.executor.PostExecutionThread;
 import br.com.doubletouch.vendasup.domain.executor.ThreadExecutor;
@@ -53,6 +53,7 @@ public class OrderProductListFragment  extends ScrollTabHolderFragment implement
 
     public static final String ARGS = "position";
     public static final String ARGS_ORDER = "order";
+    private static final String ARGUMENT_KEY_VIEW_MODE = "kratos.INTENT_EXTRA_PARAM_EDITION";
 
     private ListView lv_content;
 
@@ -62,12 +63,14 @@ public class OrderProductListFragment  extends ScrollTabHolderFragment implement
 
     private Navigator navigator = new Navigator();
 
+    private ViewMode viewMode;
 
-    public static OrderProductListFragment newInstance(int position, Order order){
+    public static OrderProductListFragment newInstance(int position, Order order, ViewMode viewMode){
         OrderProductListFragment orderProductListFragment = new OrderProductListFragment();
         Bundle bundle = new Bundle();
         bundle.putInt(ARGS, position);
         bundle.putSerializable(ARGS_ORDER, order);
+        bundle.putSerializable(ARGUMENT_KEY_VIEW_MODE, viewMode);
         orderProductListFragment.setArguments(bundle);
         return orderProductListFragment;
     }
@@ -76,6 +79,7 @@ public class OrderProductListFragment  extends ScrollTabHolderFragment implement
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         tabPosition = getArguments().getInt(ARGS);
+        this.viewMode = (ViewMode) getArguments().getSerializable(ARGUMENT_KEY_VIEW_MODE);
         //order = (Order) getArguments().getSerializable(ARGS_ORDER);
 
         initializePresenter();
@@ -120,16 +124,25 @@ public class OrderProductListFragment  extends ScrollTabHolderFragment implement
         //Carrega o arquivo de menu.
         inflater.inflate(R.menu.menu_search_view, menu);
 
-        menu.findItem(R.id.it_done).setVisible(true);
 
-        if(tabPosition == 1){
 
-            menu.findItem(R.id.search).setVisible(false);
-            menu.findItem(R.id.search).getActionView().setVisibility(View.INVISIBLE);
+        if(ViewMode.VISUALIZACAO.equals(viewMode)){
+            menu.findItem(R.id.it_done).setVisible(false);
+        } else {
+            menu.findItem(R.id.it_done).setVisible(true);
+
+            if( tabPosition == 1 ) {
+
+                menu.findItem(R.id.search).setVisible(false);
+                menu.findItem(R.id.search).getActionView().setVisibility(View.INVISIBLE);
+
+            }
 
         }
 
-         menu.findItem(R.id.add).setVisible(false);
+
+
+        menu.findItem(R.id.add).setVisible(false);
         //Pega o Componente.
         SearchView mSearchView = (SearchView) menu.findItem(R.id.search).getActionView();
         //Define um texto de ajuda:
@@ -186,7 +199,25 @@ public class OrderProductListFragment  extends ScrollTabHolderFragment implement
     }
 
     @Override
-    public void renderProductList(final List<Product> products) {
+    public void renderProductList( final List<Product> products ) {
+
+        if(ViewMode.VISUALIZACAO.equals(viewMode)){
+            viewMode();
+        } else {
+            editMode(products);
+        }
+
+
+
+
+    }
+
+    private void viewMode(){
+        lv_content.setAdapter( new ProductsCartListAdapter( activity ) );
+
+    }
+
+    private void editMode(final List<Product> products) {
 
 
         if(tabPosition == 0){
@@ -194,7 +225,9 @@ public class OrderProductListFragment  extends ScrollTabHolderFragment implement
             lv_content.setAdapter( new ProductsListAdapter( activity, products ) );
 
         } else {
+
             lv_content.setAdapter( new ProductsCartListAdapter( activity ) );
+
         }
 
 
@@ -227,7 +260,6 @@ public class OrderProductListFragment  extends ScrollTabHolderFragment implement
                 //Toast.makeText(activity, "aaaaaaa", Toast.LENGTH_LONG).show();
             }
         });
-
 
     }
 
@@ -333,7 +365,7 @@ public class OrderProductListFragment  extends ScrollTabHolderFragment implement
             TextView lblProdutoDescricao = (TextView) view.findViewById(R.id.lblProdutoDescricao);
             TextView lblProdutoEstoque = (TextView) view.findViewById(R.id.tv_stock);
             TextView lblProdutoPreco = (TextView) view.findViewById(R.id.lblProdutoPreco);
-            ImageView iv_product = (ImageView) view.findViewById(R.id.imgImagemProduto);
+            ImageView iv_product = (ImageView) view.findViewById(R.id.iv_product);
 
 
             final TextView lbl_order_product_amount = (TextView) view.findViewById(R.id.lbl_order_product_amount);
@@ -444,7 +476,7 @@ public class OrderProductListFragment  extends ScrollTabHolderFragment implement
         OrderItem orderItem = new OrderItem();
         orderItem.setProduct(product);
         orderItem.setQuantity(1.0);
-        orderItem.setPrice(product.getSalePrice());
+        orderItem.setSalePrice(product.getSalePrice());
         orderItem.setBranchID( VendasUp.getBranchOffice().getBranchOfficeID() );
         orderItem.setOrganizationID( VendasUp.getBranchOffice().getOrganization().getOrganizationID() );
         orderItem.setSequence(OrderFragment.order.getOrdersItens().size() + 1);
@@ -495,7 +527,7 @@ public class OrderProductListFragment  extends ScrollTabHolderFragment implement
             TextView tv_stock = (TextView) view.findViewById(R.id.tv_stock);
 
 
-            ImageView iv_product = (ImageView) view.findViewById(R.id.imgImagemProduto);
+            ImageView iv_product = (ImageView) view.findViewById(R.id.iv_product);
 
             tv_stock_title.setVisibility(View.INVISIBLE);
             tv_stock.setVisibility(View.INVISIBLE);
@@ -522,60 +554,71 @@ public class OrderProductListFragment  extends ScrollTabHolderFragment implement
             ImageButton btnAdd = (ImageButton) view.findViewById(R.id.btn_order_product_add);
             ImageButton btnRemove = (ImageButton) view.findViewById(R.id.btn_order_product_remove);
 
-            btnRemove.setColorFilter(getResources().getColor(R.color.primary_color));
-            btnAdd.setColorFilter(getResources().getColor(R.color.primary_color));
-            btnAdd.setBackgroundColor(Color.TRANSPARENT);
-            btnRemove.setBackgroundColor(Color.TRANSPARENT);
-
-            btnAdd.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
 
-                    if(order != null && order.getOrdersItens() != null ) {
-
-                        OrderItem orderItem = order.containsProduct(product);
-
-                        if(orderItem != null){
-                            orderItem.addQuantity(1.0);
-                            changeValue(lbl_order_product_amount,  orderItem.getQuantity());
-
-                        } else {
-                            OrderItem orderCriado = createOrderItem(product);
-                            order.getOrdersItens().add(orderCriado);
-                            changeValue(lbl_order_product_amount, orderCriado.getQuantity());
-                        }
-                    }
+            if(ViewMode.VISUALIZACAO.equals(viewMode)){
+                btnAdd.setVisibility(View.INVISIBLE);
+                btnRemove.setVisibility(View.INVISIBLE);
+            } else {
 
 
-                }
-            });
+                btnRemove.setColorFilter(getResources().getColor(R.color.primary_color));
+                btnAdd.setColorFilter(getResources().getColor(R.color.primary_color));
+                btnAdd.setBackgroundColor(Color.TRANSPARENT);
+                btnRemove.setBackgroundColor(Color.TRANSPARENT);
 
-            btnRemove.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
+                btnAdd.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
 
-                    if(order != null && order.getOrdersItens() != null ) {
 
-                        OrderItem orderItem = order.containsProduct(product);
+                        if(order != null && order.getOrdersItens() != null ) {
 
-                        if(orderItem != null){
-                            orderItem.removeQuantity(1.0);
-                            changeValue(lbl_order_product_amount, orderItem.getQuantity());
+                            OrderItem orderItem = order.containsProduct(product);
 
-                            if(orderItem.getQuantity() <= 0){
-                                order.getOrdersItens().remove(orderItem);
+                            if(orderItem != null){
+                                orderItem.addQuantity(1.0);
+                                changeValue(lbl_order_product_amount,  orderItem.getQuantity());
+
+                            } else {
+                                OrderItem orderCriado = createOrderItem(product);
+                                order.getOrdersItens().add(orderCriado);
+                                changeValue(lbl_order_product_amount, orderCriado.getQuantity());
                             }
-
                         }
-                    }
 
-                }
-            });
+
+                    }
+                });
+
+                btnRemove.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        if(order != null && order.getOrdersItens() != null ) {
+
+                            OrderItem orderItem = order.containsProduct(product);
+
+                            if(orderItem != null){
+                                orderItem.removeQuantity(1.0);
+                                changeValue(lbl_order_product_amount, orderItem.getQuantity());
+
+                                if(orderItem.getQuantity() <= 0){
+                                    order.getOrdersItens().remove(orderItem);
+                                }
+
+                            }
+                        }
+
+                    }
+                });
+
+            }
+
 
 
             lblProdutoDescricao.setText( orderItem.getProduct().getDescription());
-            lblProdutoPreco.setText( DoubleUtil.formatToCurrency( orderItem.getPrice(), true) );
+            lblProdutoPreco.setText( DoubleUtil.formatToCurrency( orderItem.getSalePrice(), true) );
             //lblProdutoEstoque.setText( String.valueOf( orderItem.getQuantity() ));
 
             return view;
