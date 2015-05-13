@@ -45,6 +45,7 @@
 
         <activity
             android:name=".presentation.view.activity.order.OrderActivity"
+            android:windowSoftInputMode="stateHidden"
             android:label="@string/title_activity_order" >
         </activity>
 
@@ -57,6 +58,18 @@
             android:name=".presentation.view.activity.order.OrderPaymentActivity"
             android:label="@string/title_activity_order_payments" >
         </activity>
+
+
+        <activity
+            android:name=".presentation.view.activity.SynchronizationActivity"
+            android:label="@string/title_activity_synchronization" >
+        </activity>
+
+        <activity
+            android:name=".presentation.view.activity.order.OrderListActivity"
+            android:label="@string/title_activity_historic" >
+        </activity>
+
 
 
 
