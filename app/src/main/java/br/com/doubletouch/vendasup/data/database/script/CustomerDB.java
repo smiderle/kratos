@@ -34,6 +34,7 @@ public final class CustomerDB {
                 NUMERO + " TEXT,"+
                 EMAIL + " TEXT,"+
                 DESCONTO_PADRAO + " TEXT,"+
+                VENDEDOR_PADRAO+ " INTEGER , " +
                 ATIVO + " BOOLEAN,"+
                 EXCLUIDO + " BOOLEAN,"+
                 TABELA_PRECO + " INTEGER,"+
@@ -70,6 +71,8 @@ public final class CustomerDB {
     public static final String NUMERO = "NUMERO";
     public static final String EMAIL = "EMAIL";
     public static final String LIMITE_CREDITO = "LIMITE_CREDITO";
+    public static final String VENDEDOR_PADRAO = "VENDEDOR_PADRAO";
+
 
     public static final String DESCONTO_PADRAO = "DESCONTO_PADRAO";
     public static final String ATIVO = "ATIVO";
@@ -81,7 +84,7 @@ public final class CustomerDB {
     public static final String SYNC_PENDENTE= "SYNC_PENDENTE";
 
     public static final String[] COLUNAS = new String[]{ID, IDEMPRESA,IDFILIAL,IDCLIENTE, NOME, APELIDO, TIPO_PESSOA, CPF_CNPJ, INSCRICAO, FONE_COMERCIAL,FONE_RESIDENCIAL,FONE_CELULAR, CEP, COMPLEMENTO,
-            OBSERVACAO,FAX,RUA,BAIRRO,NUMERO,EMAIL,DESCONTO_PADRAO,ATIVO, EXCLUIDO, TABELA_PRECO, PARCELAMENTO, FORMA_PAGAMENTO,LIMITE_CREDITO,ID_MOBILE, URL_IMAGEM, SYNC_PENDENTE};
+            OBSERVACAO,FAX,RUA,BAIRRO,NUMERO,EMAIL,DESCONTO_PADRAO,ATIVO, EXCLUIDO, TABELA_PRECO, PARCELAMENTO, FORMA_PAGAMENTO,LIMITE_CREDITO,VENDEDOR_PADRAO,ID_MOBILE, URL_IMAGEM, SYNC_PENDENTE};
 
 
 }

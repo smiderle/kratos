@@ -13,6 +13,7 @@
     <string name="title_activity_order_payments">Parcelamento</string>
     <string name="title_activity_synchronization">Sincronização</string>
     <string name="title_activity_historic">Histórico</string>
+    <string name="title_activity_welcome">Bem Vindo</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_carga_inicial">CargaInicialActivity</string>
@@ -130,10 +131,15 @@
 
 
     <string name="tv_user">Usuário</string>
+    <string name="tv_email">Email</string>
+    <string name="tv_name">Nome</string>
     <string name="tv_password">Senha</string>
+    <string name="tv_password_re">Repita a Senha</string>
     <string name="tv_money">R$:</string>
     <string name="tv_date_with_colun">Data:</string>
     <string name="tv_emissao_with_colun">Emissão:</string>
+    <string name="btn_signin">Continuar</string>
+    <string name="btn_singup">Cadastrar</string>
 
     <string-array name="customer_type_array">
         <item>Física</item>

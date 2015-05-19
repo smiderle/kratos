@@ -46,6 +46,7 @@ import br.com.doubletouch.vendasup.data.net.resources.OrganizationApi;
 import br.com.doubletouch.vendasup.data.net.resources.PriceTableApi;
 import br.com.doubletouch.vendasup.data.net.resources.ProductApi;
 import br.com.doubletouch.vendasup.data.net.resources.ProductPromotionApi;
+import br.com.doubletouch.vendasup.data.net.resources.PublicApi;
 import br.com.doubletouch.vendasup.data.net.resources.UserApi;
 import br.com.doubletouch.vendasup.data.service.BranchService;
 import br.com.doubletouch.vendasup.data.service.BranchServiceImpl;
@@ -298,21 +299,22 @@ public class Integracao {
     }
 
 
-
-
-
-
     public void enviarProdutos(Integer branchID) throws IOException, SyncronizationException {
 
         ProductService productService = new ProductServiceImpl();
 
         List<Product> products = productService.getAllSyncPending(branchID);
 
-        ApiResponse<ServiceResponse<List<Product>>> apiResponse = new ProductApi().add(products);
+        if( products.size() > 0 ){
 
-        List<Product> produtsSaved = apiResponse.getPayload().getValue();
+            ApiResponse<ServiceResponse<List<Product>>> apiResponse = new ProductApi().add(products);
 
-        productService.updateByIdMobile(produtsSaved);
+            List<Product> produtsSaved = apiResponse.getPayload().getValue();
+
+            productService.updateByIdMobile(produtsSaved);
+
+        }
+
 
     }
 
@@ -322,11 +324,16 @@ public class Integracao {
 
         List<Customer> customers = customerService.getAllSyncPending(branchID);
 
-        ApiResponse<ServiceResponse<List<Customer>>> apiResponse = new CustomerApi().add(customers);
+        if(customers.size() > 0){
 
-        List<Customer> customersSaved = apiResponse.getPayload().getValue();
+            ApiResponse<ServiceResponse<List<Customer>>> apiResponse = new CustomerApi().add(customers);
 
-        customerService.updateByIdMobile(customersSaved);
+            List<Customer> customersSaved = apiResponse.getPayload().getValue();
+
+            customerService.updateByIdMobile(customersSaved);
+
+        }
+
     }
 
     public void enviarPedidos(Integer branchID) throws  IOException, SyncronizationException {
@@ -335,11 +342,35 @@ public class Integracao {
 
         List<Order> orders = orderService.getAllSyncPending(branchID);
 
-        ApiResponse<ServiceResponse<List<Order>>> apiResponse = new OrderApi().add(orders);
+        if(orders.size() > 0){
 
-        List<Order> ordersSaved = apiResponse.getPayload().getValue();
+            ApiResponse<ServiceResponse<List<Order>>> apiResponse = new OrderApi().add(orders);
 
-        orderService.updateSync(ordersSaved);
+            List<Order> ordersSaved = apiResponse.getPayload().getValue();
+
+            orderService.updateSync(ordersSaved);
+
+        }
+
+    }
+
+    public User getUserByEmail(String email, String password)  throws  IOException, SyncronizationException {
+
+        UserEntityJsonMaper userEntityJsonMaper = new UserEntityJsonMaper();
+
+        ApiResponse<ServiceResponse<User>> apiResponse = new PublicApi().getUserByEmailAndPassword(email, password, userEntityJsonMaper);
+
+        return apiResponse.getPayload().getValue();
+
+    }
+
+    public User generateNewUser(String organizationName, String userName, String email, String password)  throws  IOException, SyncronizationException {
+
+        UserEntityJsonMaper userEntityJsonMaper = new UserEntityJsonMaper();
+
+        ApiResponse<ServiceResponse<User>> apiResponse = new PublicApi().generateNewUser(organizationName, userName, email, password, userEntityJsonMaper);
+
+        return apiResponse.getPayload().getValue();
 
     }
 }

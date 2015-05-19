@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/backgrount_primary"
+        android:paddingTop="@dimen/lv_row_padding_top"
+        android:paddingBottom="@dimen/lv_row_padding_botton"
+        android:paddingLeft="@dimen/activity_padding_left"
+        android:paddingRight="@dimen/activity_padding_right">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- Imagem -->
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_wellcome_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cadastre-se"
+                style="@style/AppTheme.TextViewPrimary"
+                android:textColor="@color/primary_color"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:id="@+id/tv_wellcome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Experimente Grátis por 20 Dias"
+                style="@style/AppTheme.TextViewSecundary"
+                android:textSize="@dimen/font_size_h1"
+                android:layout_gravity="center_horizontal" />
+
+            <EditText
+                android:id="@+id/et_organization"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:hint="@string/tv_organization"
+                android:paddingTop="@dimen/font_size_h3"
+                android:text="empresa"/>
+
+
+            <EditText
+                android:id="@+id/et_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:hint="@string/tv_email"
+                android:paddingTop="@dimen/font_size_h3"
+                android:text="teste@gmail.com"/>
+
+            <EditText
+                android:id="@+id/et_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:hint="@string/tv_password"
+                android:paddingTop="@dimen/font_size_h3"
+                android:text="123"/>
+
+            <EditText
+                android:id="@+id/et_password_re"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:hint="@string/tv_password_re"
+                android:paddingTop="@dimen/font_size_h3"
+                android:text="123"/>
+
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_singup"
+                android:id="@+id/btn_signup"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/button_corners_green"
+                android:textColor="@color/white"
+                android:layout_marginTop="@dimen/font_size_h3" />
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+
+
+    <Button
+        android:id="@+id/btn_notification"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/notification_initial_position"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/notification_warning"
+        android:textColor="@color/white"
+        android:text="" />
+
+</RelativeLayout>

@@ -3,32 +3,27 @@ package br.com.doubletouch.vendasup.presentation.view.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Window;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 
 import br.com.doubletouch.vendasup.R;
-import br.com.doubletouch.vendasup.presentation.MenuModel;
 import br.com.doubletouch.vendasup.presentation.navigation.Navigator;
 
 /**
- * Created by LADAIR on 24/03/2015.
+ * Created by LADAIR on 13/05/2015.
  */
-public class LoginActivity extends BaseActivity  {
-
+public class SignupActivity extends  BaseActivity {
 
     private Navigator navigator;
 
     public static Intent getCallingIntent(Context context) {
-        return new Intent(context, LoginActivity.class);
+        return new Intent(context, SignupActivity.class);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_signup);
         initialize();
     }
 
@@ -38,6 +33,5 @@ public class LoginActivity extends BaseActivity  {
         navigator =  new Navigator();
 
     }
-
 
 }

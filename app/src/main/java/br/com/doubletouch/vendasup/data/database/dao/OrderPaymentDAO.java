@@ -129,10 +129,14 @@ public class OrderPaymentDAO {
         orderPayment.setOrder(new Order(c.getLong(idxPedido)));
         orderPayment.setSequence(c.getInt(idxSequencia));
         orderPayment.setExpirationDate( c.getLong(idxDataVencimento));
-        orderPayment.setPaymentDate( c.getLong(idxDataPagamento ));
         orderPayment.setInstallmentValue(c.getDouble(idxValor));
         orderPayment.setDocumentNumber(c.getString(idxNumeroDocumento));
         orderPayment.setObservation(c.getString(idxObservacao));
+
+        if( !c.isNull(idxDataPagamento) ){
+            orderPayment.setPaymentDate( c.getLong(idxDataPagamento ));
+        }
+
 
         return orderPayment;
     }
@@ -146,7 +150,7 @@ public class OrderPaymentDAO {
         cv.put(OrderPaymentDB.IDEMPRESA, orderPayment.getOrganizationID());
         cv.put(OrderPaymentDB.IDFILIAL, orderPayment.getBranchID());
         cv.put(OrderPaymentDB.SEQUENCE, orderPayment.getSequence());
-        cv.put(OrderPaymentDB.VALOR, orderPayment.getSequence());
+        cv.put(OrderPaymentDB.VALOR, orderPayment.getInstallmentValue());
         cv.put(OrderPaymentDB.NUMERO_DOCUMENTO, orderPayment.getDocumentNumber());
         cv.put(OrderPaymentDB.OBSERVACAO, orderPayment.getObservation());
         cv.put(OrderPaymentDB.DATA_VENCIMENTO, orderPayment.getExpirationDate());

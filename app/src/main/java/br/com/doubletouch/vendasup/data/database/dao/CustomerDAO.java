@@ -7,9 +7,11 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.doubletouch.vendasup.VendasUp;
 import br.com.doubletouch.vendasup.dao.SQLiteHelper;
 import br.com.doubletouch.vendasup.data.database.script.CustomerDB;
 import br.com.doubletouch.vendasup.data.entity.Customer;
+import br.com.doubletouch.vendasup.data.entity.Installment;
 
 
 /**
@@ -179,6 +181,8 @@ public class CustomerDAO {
         cv.put(CustomerDB.LIMITE_CREDITO, customer.getCreditLimit());
         cv.put(CustomerDB.ID_MOBILE, customer.getIdMobile());
         cv.put(CustomerDB.SYNC_PENDENTE, customer.isSyncPending());
+        cv.put(CustomerDB.VENDEDOR_PADRAO, customer.getDefaultSeller());
+
 
         if(customer.getInstallmentId() != null){
             cv.put(CustomerDB.PARCELAMENTO, customer.getInstallmentId());
@@ -223,6 +227,8 @@ public class CustomerDAO {
         int idxLimiteCredito = c.getColumnIndex(CustomerDB.LIMITE_CREDITO);
         int idxIdClienteMobile = c.getColumnIndex(CustomerDB.ID_MOBILE);
         int idxSincronizado = c.getColumnIndex(CustomerDB.SYNC_PENDENTE);
+        int idxVendedor = c.getColumnIndex(CustomerDB.VENDEDOR_PADRAO);
+
 
         Customer customer = new Customer();
         customer.setID(c.getInt(idxId));
@@ -254,8 +260,10 @@ public class CustomerDAO {
 
         customer.setPictureUrl(c.getString(idxPicture));
         customer.setPriceTable(c.getInt(idxPriceTable));
-        customer.setInstallmentId(c.getInt(idxInstallment));
+        customer.setInstallmentId( c.getInt(idxInstallment) );
+        customer.setInstallment( new Installment( c.getInt(idxInstallment) ) );
         customer.setFormPayment(c.getInt(idxPayment));
+        customer.setDefaultSeller( c.getInt( idxVendedor ) );
 
         return  customer;
     }

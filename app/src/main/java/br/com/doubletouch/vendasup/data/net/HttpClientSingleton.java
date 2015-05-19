@@ -13,8 +13,8 @@ import org.apache.http.params.HttpParams;
  */
 public class HttpClientSingleton {
 
-    private static final int JSON_CONNECTION_TIMEOUT = 5000;
-    private static final int JSON_SOCKET_TIMEOUT = 7000;
+    private static final int JSON_CONNECTION_TIMEOUT = 15000;
+    private static final int JSON_SOCKET_TIMEOUT = 30000;
     private static HttpClientSingleton instance;
     private DefaultHttpClient httpclient;
 

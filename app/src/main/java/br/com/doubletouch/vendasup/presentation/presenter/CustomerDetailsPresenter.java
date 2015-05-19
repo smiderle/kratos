@@ -111,6 +111,7 @@ public class CustomerDetailsPresenter implements Presenter {
         customer.setExcluded(false);
         customer.setIdMobile(nextId);
         customer.setID(nextId);
+        customer.setDefaultSeller( VendasUp.getUser().getUserID() );
 
         showCustomerDetailsInView(customer);
     }

@@ -45,9 +45,9 @@ public class ErrorMessageFactory {
     private static String getHumanMessage(String message){
         String retorno = message;
 
-        if( message.contains("timed out")){
+        if( message.toLowerCase().contains("timed out") || message.toLowerCase().contains("refused")){
 
-            retorno = "Opss. Não foi possivel conectar no servido. Tente novamente em alguns instantes.";
+            retorno = "Opss. O servidor não esta respondendo. Tente novamente em alguns instantes.";
 
         }
 

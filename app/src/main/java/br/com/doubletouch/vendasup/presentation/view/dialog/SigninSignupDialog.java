@@ -1,5 +1,6 @@
 package br.com.doubletouch.vendasup.presentation.view.dialog;
 
+
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -10,14 +11,17 @@ import android.support.v4.app.DialogFragment;
 import android.util.Log;
 
 import br.com.doubletouch.vendasup.VendasUp;
+import br.com.doubletouch.vendasup.data.entity.User;
+import br.com.doubletouch.vendasup.data.entity.enumeration.SignType;
 import br.com.doubletouch.vendasup.data.net.Integracao;
 import br.com.doubletouch.vendasup.presentation.exception.ErrorMessageFactory;
+import br.com.doubletouch.vendasup.presentation.view.SigninView;
 import br.com.doubletouch.vendasup.presentation.view.SynchronizationView;
 
 /**
  * Created by LADAIR on 06/05/2015.
  */
-public class SynchronizationProgressDialog extends DialogFragment {
+public class SigninSignupDialog extends DialogFragment {
 
     public static final int STATUS_ERROR = 0;
     private static final int STATUS_SUCESS = 1;
@@ -29,13 +33,19 @@ public class SynchronizationProgressDialog extends DialogFragment {
 
     private static final String PROGRESS_MESSAGE = "Sincronizando...";
 
-    private SynchronizationView synchronizationView;
+    private SigninView signinView;
 
     private String errorMessage = "";
 
+    private String email;
 
-    public SynchronizationProgressDialog() {
-    }
+    private String password;
+
+    private String organizationName;
+
+    private String userName;
+
+    private SignType signType;
 
 
 
@@ -98,10 +108,10 @@ public class SynchronizationProgressDialog extends DialogFragment {
 
             switch (status){
                 case STATUS_ERROR:
-                    synchronizationView.onErrorSynchronization(errorMessage);
+                    signinView.showError(errorMessage);
                     break;
                 case STATUS_SUCESS:
-                    synchronizationView.onSuccessSynchronization();
+                    signinView.onSuccessSynchronization();
                     break;
 
             }
@@ -112,36 +122,58 @@ public class SynchronizationProgressDialog extends DialogFragment {
         @Override
         protected Integer doInBackground(Void... params) {
 
+            Integer status = STATUS_SUCESS;
 
             Integracao integracao = new Integracao();
 
             try {
 
-                Integer organizationId = VendasUp.getBranchOffice().getOrganization().getOrganizationID();
+                User user = null;
 
-                integracao.enviarDados( VendasUp.getBranchOffice().getBranchOfficeID() );
-                publishProgress(20);
-                //integracao.receberDados(VendasUp.getBranchOffice().getOrganization().getOrganizationID());
-                integracao.receberProdutos(organizationId);
-                publishProgress(30);
-                integracao.receberClientes(organizationId);
-                publishProgress(40);
-                integracao.receberPromocoes(organizationId);
-                publishProgress(50);
-                integracao.receberFilial(organizationId);
-                publishProgress(60);
-                integracao.receberEmpresa(organizationId);
-                publishProgress(70);
-                integracao.receberUsuarios(organizationId);
-                publishProgress(80);
-                integracao.receberEmpresa(organizationId);
-                publishProgress(85);
-                integracao.receberMetas(organizationId);
-                publishProgress(90);
-                integracao.receberTabelasPrecos(organizationId);
-                publishProgress(95);
-                integracao.receberParcelamentos(organizationId);
-                publishProgress(100);
+                if( SignType.SIGNIN.equals( signType ) ){
+
+                    user = integracao.getUserByEmail(email, password);
+
+                } else {
+
+                   user = integracao.generateNewUser(organizationName, userName, email, password);
+
+                }
+
+
+
+                if( user != null ) {
+
+                    Integer organizationId = user.getOrganizationID();
+                    publishProgress(10);
+                    integracao.receberProdutos(organizationId);
+                    publishProgress(30);
+                    integracao.receberClientes(organizationId);
+                    publishProgress(40);
+                    integracao.receberPromocoes(organizationId);
+                    publishProgress(50);
+                    integracao.receberFilial(organizationId);
+                    publishProgress(60);
+                    integracao.receberEmpresa(organizationId);
+                    publishProgress(70);
+                    integracao.receberUsuarios(organizationId);
+                    publishProgress(80);
+                    integracao.receberEmpresa(organizationId);
+                    publishProgress(85);
+                    integracao.receberMetas(organizationId);
+                    publishProgress(90);
+                    integracao.receberTabelasPrecos(organizationId);
+                    publishProgress(95);
+                    integracao.receberParcelamentos(organizationId);
+                    publishProgress(100);
+
+                    status =  STATUS_SUCESS;
+
+                } else {
+
+                    status =  STATUS_ERROR;
+
+                }
 
                 mLastPosition = 0;
 
@@ -151,12 +183,15 @@ public class SynchronizationProgressDialog extends DialogFragment {
                 }
 
 
-                return STATUS_SUCESS;
+
+
+                return  status;
 
             } catch (Exception e) {
 
-                errorMessage = ErrorMessageFactory.create(synchronizationView.getContext(), e);
                 Log.e(VendasUp.APP_TAG, e.getMessage(), e);
+                errorMessage = ErrorMessageFactory.create( signinView.getContext(), e );
+
 
                 dismiss();
 
@@ -177,10 +212,18 @@ public class SynchronizationProgressDialog extends DialogFragment {
 
     }
 
-
-    public void setSynchronizationView( SynchronizationView synchronizationView ) {
-        this.synchronizationView = synchronizationView;
+    public void setSynchronizationView( SigninView signinView ) {
+        this.signinView = signinView;
     }
 
+    public void setSigninAttributes(String organizationName, String userName, String email, String password){
+        this.userName = userName;
+        this.organizationName = organizationName;
+        this.email = email;
+        this.password = password;
+    }
 
+    public void setSignType(SignType signType){
+        this.signType = signType;
+    }
 }

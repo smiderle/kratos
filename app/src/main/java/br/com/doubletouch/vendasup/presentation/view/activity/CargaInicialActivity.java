@@ -1,5 +1,6 @@
 package br.com.doubletouch.vendasup.presentation.view.activity;
 
+import android.content.Intent;
 import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -96,20 +97,8 @@ public class CargaInicialActivity extends ActionBarActivity {
     @OnClick(R.id.btnAtualizar)
     void onRefreshClick(){
 
-        Integracao integracao = new Integracao();
 
-
-        try{
-
-            integracao.enviarProdutos(1);
-
-            integracao.enviarClientes(1);
-
-        } catch (Exception e) {
-
-            Log.e(VendasUp.APP_TAG, e.getMessage(),e);
-
-        }
+        new Navigator().navigateTo(this, SigninActivity.class);
 
 
 

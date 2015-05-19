@@ -29,4 +29,12 @@ public class UserEntityJsonMaper {
         ApiResponse<ServiceResponse<List<User>>> apiResponse = new Gson().fromJson( userListJsonResponse, serviceType);
         return apiResponse;
     }
+
+
+
+    public ApiResponse<ServiceResponse<User>> transformUser(String organizationJsonResponse){
+        Type serviceType = new TypeToken<ApiResponse<ServiceResponse<User>>>() {}.getType();
+        ApiResponse<ServiceResponse<User>> apiResponse = new Gson().fromJson( organizationJsonResponse, serviceType);
+        return apiResponse;
+    }
 }

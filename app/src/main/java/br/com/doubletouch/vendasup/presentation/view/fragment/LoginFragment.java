@@ -126,7 +126,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
     @Override
     public void renderBranches( List<BranchOffice> branches ) {
 
-        ArrayAdapter<BranchOffice> adapter = new ArrayAdapter<BranchOffice>(activity, android.R.layout.simple_spinner_dropdown_item, branches);
+        ArrayAdapter<BranchOffice> adapter = new ArrayAdapter<BranchOffice>(activity, R.layout.spinner_text, branches);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item );
         sp_login_branches.setAdapter(adapter);
 
