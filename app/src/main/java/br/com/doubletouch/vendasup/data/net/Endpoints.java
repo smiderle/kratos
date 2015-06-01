@@ -21,6 +21,7 @@ public interface Endpoints {
     public static final String ENDPOINT_PRODUCT_PROMOTION = CONTEXT.concat(ENDPOINT_PRIVATE).concat(VERSION).concat("/productPromotion");
     public static final String ENDPOINT_GOAL = CONTEXT.concat(ENDPOINT_PRIVATE).concat(VERSION).concat("/goal");
     public static final String ENDPOINT_SIGNIN = CONTEXT.concat(ENDPOINT_PUBLIC).concat(VERSION).concat("/signin");
+    public static final String ENDPOINT_LICENSE = CONTEXT.concat(ENDPOINT_PRIVATE).concat(VERSION).concat("/license");
 
 
 

@@ -15,7 +15,7 @@ public class OauthController {
 
     public static OauthAccess getAccessToken() throws IOException, SyncronizationException {
 
-        if( VendasUp.getOauthAccess() == null ) {
+        if( VendasUp.getOauthAccess() == null && VendasUp.getUser() != null ) {
             Credenciais credenciais = new Credenciais( VendasUp.getUser().getEmail(), VendasUp.getUser().getEmail() );
             OauthApi oauthApi = new OauthApi();
             OauthAccess oauthAccess = oauthApi.getAccessToken(credenciais);

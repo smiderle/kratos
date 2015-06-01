@@ -119,9 +119,11 @@ public class SynchronizationProgressDialog extends DialogFragment {
 
                 Integer organizationId = VendasUp.getBranchOffice().getOrganization().getOrganizationID();
 
+
+                integracao.receberLicencaPorUsuario( VendasUp.getUser().getUserID() );
+                publishProgress(10);
                 integracao.enviarDados( VendasUp.getBranchOffice().getBranchOfficeID() );
                 publishProgress(20);
-                //integracao.receberDados(VendasUp.getBranchOffice().getOrganization().getOrganizationID());
                 integracao.receberProdutos(organizationId);
                 publishProgress(30);
                 integracao.receberClientes(organizationId);

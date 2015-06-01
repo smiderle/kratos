@@ -77,7 +77,7 @@ public class CustomerDAO {
 
     public void updateByIdMobile( Customer customer) {
 
-        String sql = "UPDATE " + CustomerDB.TABELA + " SET " + CustomerDB.ID +" = " + customer.getID()+","+ CustomerDB.ID_MOBILE+" = "+ customer.getID() +"," + CustomerDB.SYNC_PENDENTE+" = 0 "+
+        String sql = "UPDATE " + CustomerDB.TABELA + " SET " + CustomerDB.ID +" = " + customer.getID() +"," + CustomerDB.SYNC_PENDENTE+" = 0 "+
                 "WHERE "+ CustomerDB.ID_MOBILE +" = " + customer.getIdMobile();
 
         db.execSQL(sql);

@@ -19,4 +19,6 @@ public interface OrderItemService {
 
     void deleteByOrderId(Long orderItemID);
 
+    void updateProduct( Integer oldProductId, Integer newProductId );
+
 }

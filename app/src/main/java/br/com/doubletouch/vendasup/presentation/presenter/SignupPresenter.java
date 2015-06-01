@@ -14,9 +14,6 @@ public class SignupPresenter implements Presenter {
         this.signinView = signinView;
     }
 
-    public void signup(){
-        signinView.showDialogSynchronization();
-    }
 
     private void showViewLoading() {
         this.signinView.showLoading();

@@ -103,7 +103,12 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void updateByIdMobile(List<Product> products) {
 
+        OrderItemService orderService = new OrderItemServiceImpl();
+
+
         for(Product product : products) {
+
+            orderService.updateProduct( product.getIdMobile(), product.getID() );
 
             product.setSyncPending(false);
             productDAO.updateByIdMobile(product);

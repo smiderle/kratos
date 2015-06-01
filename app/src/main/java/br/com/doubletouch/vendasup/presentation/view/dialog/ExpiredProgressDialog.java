@@ -1,6 +1,5 @@
 package br.com.doubletouch.vendasup.presentation.view.dialog;
 
-
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -11,17 +10,15 @@ import android.support.v4.app.DialogFragment;
 import android.util.Log;
 
 import br.com.doubletouch.vendasup.VendasUp;
-import br.com.doubletouch.vendasup.data.entity.User;
-import br.com.doubletouch.vendasup.data.entity.enumeration.SignType;
 import br.com.doubletouch.vendasup.data.net.Integracao;
 import br.com.doubletouch.vendasup.presentation.exception.ErrorMessageFactory;
-import br.com.doubletouch.vendasup.presentation.view.SigninView;
+import br.com.doubletouch.vendasup.presentation.view.ExpiredView;
 import br.com.doubletouch.vendasup.presentation.view.SynchronizationView;
 
 /**
  * Created by LADAIR on 06/05/2015.
  */
-public class SigninSignupDialog extends DialogFragment {
+public class ExpiredProgressDialog extends DialogFragment {
 
     public static final int STATUS_ERROR = 0;
     private static final int STATUS_SUCESS = 1;
@@ -33,19 +30,13 @@ public class SigninSignupDialog extends DialogFragment {
 
     private static final String PROGRESS_MESSAGE = "Sincronizando...";
 
-    private SigninView signinView;
+    private ExpiredView expiredView;
 
     private String errorMessage = "";
 
-    private String email;
 
-    private String password;
-
-    private String organizationName;
-
-    private String userName;
-
-    private SignType signType;
+    public ExpiredProgressDialog() {
+    }
 
 
 
@@ -83,10 +74,7 @@ public class SigninSignupDialog extends DialogFragment {
         if (customTask != null) {
             customTask.cancel(false);
         }
-        /*if(msgErro != null &&  !msgErro.trim().equals(""))
-            mostrarNotificacao(msgErro);
-        else
-            atualizaStatusSincronizado();*/
+
 
         super.onDismiss(dialog);
     }
@@ -108,10 +96,10 @@ public class SigninSignupDialog extends DialogFragment {
 
             switch (status){
                 case STATUS_ERROR:
-                    signinView.showError(errorMessage);
+                    expiredView.onErrorSynchronization(errorMessage);
                     break;
                 case STATUS_SUCESS:
-                    signinView.onSuccessSynchronization();
+                    expiredView.onSuccessSynchronization();
                     break;
 
             }
@@ -122,62 +110,16 @@ public class SigninSignupDialog extends DialogFragment {
         @Override
         protected Integer doInBackground(Void... params) {
 
-            Integer status = STATUS_SUCESS;
 
             Integracao integracao = new Integracao();
 
             try {
 
-                User user = null;
+                Integer organizationId = VendasUp.getBranchOffice().getOrganization().getOrganizationID();
 
-                if( SignType.SIGNIN.equals( signType ) ){
-
-                    user = integracao.getUserByEmail(email, password);
-
-                } else {
-
-                   user = integracao.generateNewUser(organizationName, userName, email, password);
-                   VendasUp.setUser(user);
-
-                }
-
-
-
-                if( user != null ) {
-
-                    integracao.receberLicencaPorUsuario( user.getUserID() );
-                    publishProgress(5);
-                    Integer organizationId = user.getOrganizationID();
-                    publishProgress(10);
-                    integracao.receberProdutos(organizationId);
-                    publishProgress(30);
-                    integracao.receberClientes(organizationId);
-                    publishProgress(40);
-                    integracao.receberPromocoes(organizationId);
-                    publishProgress(50);
-                    integracao.receberFilial(organizationId);
-                    publishProgress(60);
-                    integracao.receberEmpresa(organizationId);
-                    publishProgress(70);
-                    integracao.receberUsuarios(organizationId);
-                    publishProgress(80);
-                    integracao.receberEmpresa(organizationId);
-                    publishProgress(85);
-                    integracao.receberMetas(organizationId);
-                    publishProgress(90);
-                    integracao.receberTabelasPrecos(organizationId);
-                    publishProgress(95);
-                    integracao.receberParcelamentos(organizationId);
-                    publishProgress(100);
-
-
-                    status =  STATUS_SUCESS;
-
-                } else {
-
-                    status =  STATUS_ERROR;
-
-                }
+                publishProgress(5);
+                integracao.receberLicencaPorUsuario(VendasUp.getUser().getUserID());
+                publishProgress(100);
 
                 mLastPosition = 0;
 
@@ -187,15 +129,12 @@ public class SigninSignupDialog extends DialogFragment {
                 }
 
 
-
-
-                return  status;
+                return STATUS_SUCESS;
 
             } catch (Exception e) {
 
+                errorMessage = ErrorMessageFactory.create(expiredView.getContext(), e);
                 Log.e(VendasUp.APP_TAG, e.getMessage(), e);
-                errorMessage = ErrorMessageFactory.create( signinView.getContext(), e );
-
 
                 dismiss();
 
@@ -216,18 +155,10 @@ public class SigninSignupDialog extends DialogFragment {
 
     }
 
-    public void setSynchronizationView( SigninView signinView ) {
-        this.signinView = signinView;
+
+    public void setExpiredView( ExpiredView expiredView ) {
+        this.expiredView = expiredView;
     }
 
-    public void setSigninAttributes(String organizationName, String userName, String email, String password){
-        this.userName = userName;
-        this.organizationName = organizationName;
-        this.email = email;
-        this.password = password;
-    }
 
-    public void setSignType(SignType signType){
-        this.signType = signType;
-    }
 }

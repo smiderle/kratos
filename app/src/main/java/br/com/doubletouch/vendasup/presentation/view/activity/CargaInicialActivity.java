@@ -130,6 +130,8 @@ public class CargaInicialActivity extends ActionBarActivity {
 
             integracao.receberMetas(VendasUp.getUser().getOrganizationID());
 
+            integracao.receberLicencaPorUsuario( VendasUp.getUser().getUserID() );
+
 
         } catch (Exception e) {
             e.printStackTrace();

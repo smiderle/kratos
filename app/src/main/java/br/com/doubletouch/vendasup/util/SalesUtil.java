@@ -46,27 +46,33 @@ public class SalesUtil {
 
         double resultado = 0.00;
 
-        BigDecimal vtotal = new BigDecimal(String.valueOf(valorTotal));
-        BigDecimal vfinal = new BigDecimal(String.valueOf(valorFinal));
-        BigDecimal vporcento = new BigDecimal("100");
+        if(valorTotal > 0){
 
 
-        BigDecimal multiply = vfinal.multiply(vporcento);
-        BigDecimal vresult = multiply.divide(vtotal, RoundingMode.HALF_UP);
+            BigDecimal vtotal = new BigDecimal(String.valueOf(valorTotal));
+            BigDecimal vfinal = new BigDecimal(String.valueOf(valorFinal));
+            BigDecimal vporcento = new BigDecimal("100");
 
 
-        resultado = vporcento.subtract(vresult).setScale(2, RoundingMode.CEILING).doubleValue();
+            BigDecimal multiply = vfinal.multiply(vporcento);
+            BigDecimal vresult = multiply.divide(vtotal, RoundingMode.HALF_UP);
 
-        if( valorTotal > valorFinal ){
 
             resultado = vporcento.subtract(vresult).setScale(2, RoundingMode.CEILING).doubleValue();
 
-        } else {
+            if( valorTotal > valorFinal ){
 
-            resultado = vresult.subtract(vporcento).setScale(2, RoundingMode.CEILING).doubleValue();
+                resultado = vporcento.subtract(vresult).setScale(2, RoundingMode.CEILING).doubleValue();
 
+            } else {
+
+                resultado = vresult.subtract(vporcento).setScale(2, RoundingMode.CEILING).doubleValue();
+
+
+            }
 
         }
+
 
         return resultado;
 

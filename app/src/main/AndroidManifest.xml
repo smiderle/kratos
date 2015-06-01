@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
 
     <application
         android:allowBackup="true"
@@ -74,20 +76,27 @@
 
         <activity
             android:name=".presentation.view.activity.SigninActivity"
+            android:windowSoftInputMode="stateHidden"
             android:label="@string/title_activity_welcome" >
         </activity>
 
 
         <activity
             android:name=".presentation.view.activity.SignupActivity"
+            android:windowSoftInputMode="stateHidden"
             android:label="@string/title_activity_welcome" >
+        </activity>
+
+        <activity
+            android:name=".presentation.view.activity.ExpiredActivity"
+            android:label="@string/title_activity_expired" >
         </activity>
 
 
 
 
         <activity
-            android:name="br.com.doubletouch.vendasup.presentation.view.activity.CargaInicialActivity"
+            android:name="br.com.doubletouch.vendasup.presentation.view.activity.SplashActivity"
             android:label="@string/title_activity_carga_inicial" >
 
             <intent-filter>

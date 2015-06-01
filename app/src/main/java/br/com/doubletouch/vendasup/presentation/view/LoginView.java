@@ -14,4 +14,6 @@ public interface LoginView extends LoadDataView {
     void loginSuccessful();
 
     void loadLastLogin(String login, String password);
+
+    void expiredVersion();
 }

@@ -67,4 +67,6 @@ public interface OrderService {
 
     void getOrderDatails(Long orderID, OrderDetailsCallback orderDetailsCallback);
 
+    void updateCustomer( Integer oldCustomerId, Integer newCustomerId );
+
 }

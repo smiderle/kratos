@@ -45,11 +45,18 @@ public class ErrorMessageFactory {
     private static String getHumanMessage(String message){
         String retorno = message;
 
-        if( message.toLowerCase().contains("timed out") || message.toLowerCase().contains("refused")){
+        if(message != null){
 
-            retorno = "Opss. O servidor não esta respondendo. Tente novamente em alguns instantes.";
+            if( message.toLowerCase().contains("timed out") || message.toLowerCase().contains("refused")){
 
+                retorno = "Opss. O servidor não esta respondendo. Tente novamente em alguns instantes.";
+
+            }
+
+        } else {
+            retorno = "Opss. Ocorreu algum erro.";
         }
+
 
         return retorno;
     }

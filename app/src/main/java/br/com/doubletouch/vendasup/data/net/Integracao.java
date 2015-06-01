@@ -22,6 +22,7 @@ import br.com.doubletouch.vendasup.data.entity.BranchOffice;
 import br.com.doubletouch.vendasup.data.entity.Customer;
 import br.com.doubletouch.vendasup.data.entity.Goal;
 import br.com.doubletouch.vendasup.data.entity.Installment;
+import br.com.doubletouch.vendasup.data.entity.License;
 import br.com.doubletouch.vendasup.data.entity.Order;
 import br.com.doubletouch.vendasup.data.entity.Organization;
 import br.com.doubletouch.vendasup.data.entity.PriceTable;
@@ -41,6 +42,7 @@ import br.com.doubletouch.vendasup.data.net.resources.BranchApi;
 import br.com.doubletouch.vendasup.data.net.resources.CustomerApi;
 import br.com.doubletouch.vendasup.data.net.resources.GoalApi;
 import br.com.doubletouch.vendasup.data.net.resources.InstallmentApi;
+import br.com.doubletouch.vendasup.data.net.resources.LicenseApi;
 import br.com.doubletouch.vendasup.data.net.resources.OrderApi;
 import br.com.doubletouch.vendasup.data.net.resources.OrganizationApi;
 import br.com.doubletouch.vendasup.data.net.resources.PriceTableApi;
@@ -54,6 +56,8 @@ import br.com.doubletouch.vendasup.data.service.CustomerServiceImpl;
 import br.com.doubletouch.vendasup.data.service.GoalService;
 import br.com.doubletouch.vendasup.data.service.GoalServiceImpl;
 import br.com.doubletouch.vendasup.data.service.InstallmentServiceImpl;
+import br.com.doubletouch.vendasup.data.service.LicenseService;
+import br.com.doubletouch.vendasup.data.service.LicenseServiceImpl;
 import br.com.doubletouch.vendasup.data.service.OrderService;
 import br.com.doubletouch.vendasup.data.service.OrderServiceImpl;
 import br.com.doubletouch.vendasup.data.service.OrganizationService;
@@ -84,20 +88,6 @@ public class Integracao {
 
     }
 
-    public void receberDados( Integer organizationId ) throws Exception {
-
-        receberProdutos( organizationId );
-        receberClientes( organizationId );
-        receberPromocoes( organizationId );
-        receberFilial( organizationId );
-        receberEmpresa( organizationId );
-        receberUsuarios( organizationId );
-        receberEmpresa(organizationId);
-        receberMetas( organizationId );
-        receberTabelasPrecos( organizationId );
-        receberParcelamentos( organizationId );
-
-    }
 
 
     public void receberProdutos(Integer organizationId ) throws Exception {
@@ -295,6 +285,16 @@ public class Integracao {
         } while (size > 0 );
 
         sincronizacaoController.updateLastSync(apiResponse.getHour(), GoalDB.TABELA);
+
+    }
+
+    public void receberLicencaPorUsuario(Integer userID) throws IOException, SyncronizationException {
+
+        LicenseService service = new LicenseServiceImpl();
+
+        ApiResponse<License> apiResponse = new LicenseApi().getByUserId(userID);
+
+        service.save( apiResponse.getPayload() );
 
     }
 

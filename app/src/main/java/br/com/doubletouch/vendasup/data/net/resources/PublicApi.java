@@ -1,5 +1,7 @@
 package br.com.doubletouch.vendasup.data.net.resources;
 
+import android.os.Build;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
@@ -16,6 +18,7 @@ import br.com.doubletouch.vendasup.data.net.RESTResponse;
 import br.com.doubletouch.vendasup.data.net.RestClient;
 import br.com.doubletouch.vendasup.data.net.ServiceResponse;
 import br.com.doubletouch.vendasup.exception.SyncronizationException;
+import br.com.doubletouch.vendasup.util.DeviceUtil;
 
 /**
  * Created by LADAIR on 13/05/2015.
@@ -77,6 +80,8 @@ public class PublicApi extends  AbstractApi {
         nameValuePairs.add( new BasicNameValuePair( "email", email ) );
         nameValuePairs.add( new BasicNameValuePair( "organizationName", organizationName ) );
         nameValuePairs.add( new BasicNameValuePair( "userName", userName ) );
+        nameValuePairs.add( new BasicNameValuePair( "serial", DeviceUtil.getDeviceId()) );
+
 
         RESTResponse response = restClient.post( Endpoints.ENDPOINT_SIGNIN.concat("/").concat( Methods.PUBLIC_GENERATE_NEW_USER ), nameValuePairs );
 

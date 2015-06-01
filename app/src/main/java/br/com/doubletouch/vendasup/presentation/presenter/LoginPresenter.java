@@ -1,13 +1,17 @@
 package br.com.doubletouch.vendasup.presentation.presenter;
 
+import java.util.Date;
 import java.util.List;
 
 import br.com.doubletouch.vendasup.VendasUp;
 import br.com.doubletouch.vendasup.data.SharedPreferencesUtil;
 import br.com.doubletouch.vendasup.data.entity.BranchOffice;
+import br.com.doubletouch.vendasup.data.entity.License;
 import br.com.doubletouch.vendasup.data.entity.User;
 import br.com.doubletouch.vendasup.data.entity.UserBranchOffice;
 import br.com.doubletouch.vendasup.data.executor.JobExecutor;
+import br.com.doubletouch.vendasup.data.service.LicenseService;
+import br.com.doubletouch.vendasup.data.service.LicenseServiceImpl;
 import br.com.doubletouch.vendasup.domain.exception.ErrorBundle;
 import br.com.doubletouch.vendasup.domain.executor.PostExecutionThread;
 import br.com.doubletouch.vendasup.domain.executor.ThreadExecutor;
@@ -66,7 +70,44 @@ public class LoginPresenter implements Presenter {
 
     private void userAndPasswordSuccess(User user) {
 
-        getUserBranchLoginUseCase.execute( branchOffice, user, getUserBranchLoginUseCaseCallback );
+        LicenseService licenseService = new LicenseServiceImpl();
+
+        License license = licenseService.findByUserId(user.getUserID());
+
+        if( isLicensaValida( user ) ){
+
+            getUserBranchLoginUseCase.execute( branchOffice, user, getUserBranchLoginUseCaseCallback );
+
+        } else {
+
+            VendasUp.setUser( user );
+            VendasUp.setBranchOffice( branchOffice );
+
+            this.loginView.expiredVersion();
+
+        }
+
+
+
+    }
+
+    private boolean isLicensaValida(User user){
+
+        boolean isValid = true;
+
+        LicenseService licenseService = new LicenseServiceImpl();
+
+        License license = licenseService.findByUserId(user.getUserID());
+
+        Date expirateDate = new Date( license.getExpirationDate() );
+
+        if( license.isExpired() ||  expirateDate.before( new Date() ) ){
+
+            isValid = false;
+
+        }
+
+        return isValid;
 
     }
 

@@ -99,9 +99,14 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void updateByIdMobile(List<Customer> customers) {
 
-        for(Customer customer : customers) {
+        OrderService orderService = new OrderServiceImpl();
+
+        for( Customer customer : customers ) {
 
             customer.setSyncPending(false);
+
+            orderService.updateCustomer(customer.getIdMobile(), customer.getID());
+
             customerDAO.updateByIdMobile(customer);
 
         }

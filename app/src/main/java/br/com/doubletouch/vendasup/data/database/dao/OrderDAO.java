@@ -119,6 +119,16 @@ public class OrderDAO {
         db.execSQL(sql);
     }
 
+
+    public void updateCustomer( Integer oldCustomerId, Integer newCustomerId ) {
+
+        String sql = "UPDATE " + OrderDB.TABELA + " SET " + OrderDB.IDCLIENTE +" = " + newCustomerId +
+                " WHERE "+ OrderDB.IDCLIENTE +" = " + oldCustomerId;
+
+        db.execSQL(sql);
+    }
+
+
     public List<Order> getAllSyncPending( Integer branchId ){
         ArrayList<Order> orders = new ArrayList<>();
 

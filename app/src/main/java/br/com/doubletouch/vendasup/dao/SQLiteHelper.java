@@ -9,6 +9,7 @@ import br.com.doubletouch.vendasup.data.database.dao.UserDAO;
 import br.com.doubletouch.vendasup.data.database.script.BranchDB;
 import br.com.doubletouch.vendasup.data.database.script.GoalDB;
 import br.com.doubletouch.vendasup.data.database.script.InstallmentDB;
+import br.com.doubletouch.vendasup.data.database.script.LicenseDB;
 import br.com.doubletouch.vendasup.data.database.script.OrderDB;
 import br.com.doubletouch.vendasup.data.database.script.OrderItemDB;
 import br.com.doubletouch.vendasup.data.database.script.OrderPaymentDB;
@@ -88,7 +89,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 GoalDB.create(),
                 OrderDB.create(),
                 OrderItemDB.create(),
-                OrderPaymentDB.create()
+                OrderPaymentDB.create(),
+                LicenseDB.create()
         };
 
     }

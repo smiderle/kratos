@@ -3,6 +3,7 @@ package br.com.doubletouch.vendasup.data.database.dao;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 
 import java.util.ArrayList;
 import java.util.Date;

@@ -105,6 +105,15 @@ public class OrderItemDAO {
     }
 
 
+    public void updateProduct( Integer oldProductId, Integer newProductId ) {
+
+        String sql = "UPDATE " + OrderItemDB.TABELA + " SET " + OrderItemDB.IDPRODUTO +" = " + newProductId +
+                " WHERE "+ OrderItemDB.IDPRODUTO +" = " + oldProductId;
+
+        db.execSQL(sql);
+    }
+
+
 
     private OrderItem getByCursor(Cursor c) {
 

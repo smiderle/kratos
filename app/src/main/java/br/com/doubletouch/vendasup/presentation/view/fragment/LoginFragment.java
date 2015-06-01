@@ -23,6 +23,7 @@ import br.com.doubletouch.vendasup.data.entity.BranchOffice;
 import br.com.doubletouch.vendasup.presentation.navigation.Navigator;
 import br.com.doubletouch.vendasup.presentation.presenter.LoginPresenter;
 import br.com.doubletouch.vendasup.presentation.view.LoginView;
+import br.com.doubletouch.vendasup.presentation.view.activity.ExpiredActivity;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -150,5 +151,10 @@ public class LoginFragment extends BaseFragment implements LoginView {
             et_login_user.setText(login);
         }
 
+    }
+
+    @Override
+    public void expiredVersion() {
+        navigator.navigateTo( activity, ExpiredActivity.class);
     }
 }

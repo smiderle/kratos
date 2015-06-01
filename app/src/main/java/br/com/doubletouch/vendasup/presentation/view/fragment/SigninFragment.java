@@ -19,6 +19,7 @@ import br.com.doubletouch.vendasup.VendasUp;
 import br.com.doubletouch.vendasup.data.SharedPreferencesUtil;
 import br.com.doubletouch.vendasup.data.entity.BranchOffice;
 import br.com.doubletouch.vendasup.data.entity.Order;
+import br.com.doubletouch.vendasup.data.entity.User;
 import br.com.doubletouch.vendasup.data.entity.enumeration.SignType;
 import br.com.doubletouch.vendasup.presentation.navigation.Navigator;
 import br.com.doubletouch.vendasup.presentation.presenter.SigninPresenter;
@@ -54,8 +55,6 @@ public class SigninFragment  extends BaseFragment implements SigninView {
     @InjectView(R.id.btn_signin)
     Button btn_signin;
 
-    @InjectView(R.id.btn_signup)
-    Button btn_signup;
 
     @InjectView(R.id.btn_notification)
     Button btn_notification;
@@ -101,16 +100,6 @@ public class SigninFragment  extends BaseFragment implements SigninView {
     }
 
 
-    @OnClick(R.id.btn_signup)
-    public void onClickSignUp(){
-
-        navigator.navigateTo(activity, SignupActivity.class);
-
-    }
-
-
-
-
     @Override
     public void showLoading() {
 
@@ -142,12 +131,42 @@ public class SigninFragment  extends BaseFragment implements SigninView {
         String email = et_email.getText().toString().trim();
         String password = et_password.getText().toString().trim();
 
-        SigninSignupDialog dialog = new SigninSignupDialog();
-        dialog.setSynchronizationView(this);
-        dialog.setSignType(SignType.SIGNIN);
-        dialog.setSigninAttributes(null,null, email, password );
+        if(isValidate(email, password)){
 
-        dialog.show(getFragmentManager(), "");
+            User user = new User();
+            user.setEmail(email);
+            user.setPassword(password);
+
+            VendasUp.setUser(user);
+
+
+            SigninSignupDialog dialog = new SigninSignupDialog();
+            dialog.setSynchronizationView(this);
+            dialog.setSignType(SignType.SIGNIN);
+            dialog.setSigninAttributes(null,null, email, password );
+
+            dialog.show(getFragmentManager(), "");
+
+        } else {
+            showError("Informe um email e senha válidos.");
+        }
+
+
+
+
+
+
+    }
+
+    private boolean isValidate(String email, String password){
+
+        if(email.trim().equals("") || password.trim().equals("") || !email.contains("@") ){
+
+            return false;
+
+        }
+
+        return true;
 
     }
 

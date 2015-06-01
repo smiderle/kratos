@@ -56,4 +56,9 @@ public class OrderItemServiceImpl implements  OrderItemService {
         orderItemDAO.deleteByOrderId( orderItemID );
 
     }
+
+    @Override
+    public void updateProduct(Integer oldProductId, Integer newProductId) {
+        orderItemDAO.updateProduct(oldProductId, newProductId);
+    }
 }

@@ -215,6 +215,13 @@ public class OrderServiceImpl implements  OrderService {
 
     }
 
+    @Override
+    public void updateCustomer(Integer oldCustomerId, Integer newCustomerId) {
+
+        orderDAO.updateCustomer( oldCustomerId, newCustomerId );
+
+    }
+
 
     @Override
     public Integer getNextId() {
