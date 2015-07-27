@@ -12,7 +12,7 @@
     <translate
         android:duration="400"
         android:fillAfter="true"
-        android:fromYDelta="1%p"
+        android:fromYDelta="4%p"
         android:startOffset="5100"
         android:toYDelta="-10%p"/>
 

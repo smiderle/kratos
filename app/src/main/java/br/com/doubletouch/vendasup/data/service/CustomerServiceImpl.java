@@ -96,6 +96,29 @@ public class CustomerServiceImpl implements CustomerService {
 
     }
 
+
+
+    /**
+     *Retorna o menor valor, negativo, dos ids, isso porque os pedidos serão salvos com id negativo, para não correr risco de já existir um id igual.
+     * O Código do pedido será salvo com valor negativo, pois pode ser que já exista um outro pedido com o mesmo código, quando for feito o update com o retorno do novo id.
+     * @return
+     */
+    @Override
+    public Integer getLessNegative() {
+
+        Integer min = customerDAO.min();
+
+        if(min <= 0){
+
+            min -= 1;
+
+        } else {
+            min = -1;
+        }
+
+        return min;
+    }
+
     @Override
     public void updateByIdMobile(List<Customer> customers) {
 

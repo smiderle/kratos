@@ -45,7 +45,7 @@ public class ProductDetailsPresenter implements Presenter {
         Product product = new Product();
 
         ProductService productService = new ProductServiceImpl();
-        Integer id = productService.getNextId();
+        Integer id = productService.getLessNegative();
 
         product.setIdMobile(id);
         product.setID(id);

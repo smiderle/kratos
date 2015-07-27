@@ -14,6 +14,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
@@ -137,6 +138,9 @@ public class OrderFragment extends BaseFragment implements OrderView {
     @Optional
     TextView tv_order_observation;
 
+    @InjectView(R.id.ll_order_details)
+    LinearLayout ll_order_details;
+
     private OrderPresenter orderPresenter;
 
     private long orderId;
@@ -234,9 +238,10 @@ public class OrderFragment extends BaseFragment implements OrderView {
     @Override
     public void orderSaved(Order order) {
 
-        btn_order_save.setVisibility(View.INVISIBLE);
         btn_menu.setVisibility(View.VISIBLE);
         btn_new_order.setVisibility(View.VISIBLE);
+
+        ll_order_details.removeView(btn_order_save);
 
         setOrderNumber();
 

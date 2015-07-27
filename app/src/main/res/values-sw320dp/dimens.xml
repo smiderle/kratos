@@ -1,0 +1,97 @@
+<resources>
+    <!-- Example customization of dimensions originally defined in res/values/dimens.xml
+         (such as screen margins) for screens with more than 820dp of available width. This
+         would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively). -->
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">32dp</dimen>
+    <dimen name="activity_vertical_margin">32dp</dimen>
+    <dimen name="activity_padding_left">16dp</dimen>
+    <dimen name="activity_padding_right">16dp</dimen>
+
+    <dimen name="font_size_h1">10sp</dimen>
+    <dimen name="font_size_h2">12sp</dimen>
+    <dimen name="font_size_h3">14sp</dimen>
+    <dimen name="font_size_h4">16sp</dimen>
+    <dimen name="font_size_h5">18sp</dimen>
+    <dimen name="font_size_h6">20sp</dimen>
+    <dimen name="font_size_h7">22sp</dimen>
+    <dimen name="font_size_h8">24sp</dimen>
+    <dimen name="font_size_h9">26sp</dimen>
+    <dimen name="font_size_h10">28sp</dimen>
+    <dimen name="font_size_h11">30sp</dimen>
+    <dimen name="font_size_h12">32sp</dimen>
+    <dimen name="font_size_h13">34sp</dimen>
+    <dimen name="font_size_h14">36sp</dimen>
+    <dimen name="font_size_h15">38sp</dimen>
+    <dimen name="font_size_h16">40sp</dimen>
+    <dimen name="font_size_h17">42sp</dimen>
+    <dimen name="font_size_h18">44sp</dimen>
+    <dimen name="font_size_h19">46sp</dimen>
+    <dimen name="font_size_h20">48sp</dimen>
+    <dimen name="font_size_h21">50sp</dimen>
+    <dimen name="font_size_h22">52sp</dimen>
+    <dimen name="font_size_h23">54sp</dimen>
+    <dimen name="font_size_h24">56sp</dimen>
+    <dimen name="font_size_h25">58sp</dimen>
+    <dimen name="font_size_h26">60sp</dimen>
+    <dimen name="font_size_h27">62sp</dimen>
+    <dimen name="font_size_h28">64sp</dimen>
+    <dimen name="font_size_h30">66sp</dimen>
+    <dimen name="font_size_h32">68sp</dimen>
+    <dimen name="font_size_h34">70sp</dimen>
+    <dimen name="font_size_h36">72sp</dimen>
+    <dimen name="font_size_h38">74sp</dimen>
+    <dimen name="font_size_h40">76sp</dimen>
+    <dimen name="font_size_h42">78sp</dimen>
+    <dimen name="font_size_h44">80sp</dimen>
+
+
+
+    <!--User Header stuff-->
+    <dimen name="header_text_size">20sp</dimen>
+    <dimen name="header_margin">3dp</dimen>
+
+
+    <!--Listview rows stuff-->
+    <dimen name="lv_row_padding_top">8dp</dimen>
+    <dimen name="lv_row_padding_botton">8dp</dimen>
+    <dimen name="lv_row_text_size">10sp</dimen>
+    <dimen name="lv_row_icon_width">25dp</dimen>
+    <dimen name="lv_row_icon_padding">3dp</dimen>
+
+    <dimen name="content_margin_left">8dp</dimen>
+    <dimen name="content_margin_right">8dp</dimen>
+
+    <!-- Altura da imagem principal que parace nos detalhes -->
+    <dimen name="iv_height_main">105dp</dimen>
+
+    <!-- Altura da imagem principal que parace no login -->
+    <dimen name="iv_height_login">155dp</dimen>
+
+    <!-- Largura da imagem que parace no menu -->
+    <dimen name="iv_width_menu">65dp</dimen>
+
+    <!-- Altura e largura da imagem nos listview -->
+    <dimen name="lv_iv_height">47dp</dimen>
+    <dimen name="lv_iv_width">47dp</dimen>
+
+    <dimen name="parallax_min_header_height">106dp</dimen>
+    <dimen name="parallax_height">129dp</dimen>
+    <dimen name="parallax_tab_height">24dp</dimen>
+
+    <!-- Espaço a esquerda dos textos que estão após as imagens dos EditTexts de detalhes do produto por exemplo-->
+    <dimen name="tv_title_marginleft_of_image">11dp</dimen>
+
+    <dimen name="activity_login_padding_top">15dp</dimen>
+
+    <!-- Posição inicial do botão de notificação -->
+    <dimen name="notification_initial_position">-50dp</dimen>
+
+    <!-- Espaço entre duas views, por exemlo "Nome: Ladair" -->
+    <dimen name="space_textview_to_textview">3dp</dimen>
+    <!-- Espaço entre uma imagem e um textview -->
+    <dimen name="space_imageview_to_textview">7dp</dimen>
+
+
+</resources>

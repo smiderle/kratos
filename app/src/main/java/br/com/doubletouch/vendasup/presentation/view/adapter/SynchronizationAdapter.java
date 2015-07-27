@@ -53,7 +53,6 @@ public class SynchronizationAdapter extends BaseAdapter {
         Order order = (Order) getItem(position);
         View view = layoutInflater.inflate(R.layout.row_sync, null);
 
-        ((TextView) view.findViewById( R.id.tv_order_customer)).setText( String.valueOf( order.getID() ) );
         ((TextView) view.findViewById( R.id.tv_order_emissao)).setText(DateUtil.formatDateTime( order.getIssuanceTime() ));
         ((TextView) view.findViewById( R.id.tv_order_total)).setText(DoubleUtil.formatToCurrency(order.getNetValue(), true));
 

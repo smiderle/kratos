@@ -62,7 +62,7 @@
             android:layout_width="@dimen/lv_iv_width"
             android:layout_height="@dimen/lv_iv_height"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher" />
+            android:src="@drawable/ic_account_circle_grey600_36dp" />
 
     </RelativeLayout>
 

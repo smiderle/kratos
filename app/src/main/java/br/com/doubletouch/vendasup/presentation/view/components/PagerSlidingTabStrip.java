@@ -74,7 +74,6 @@ public class PagerSlidingTabStrip  extends HorizontalScrollView {
     private int dividerPadding = 12;
     private int tabPadding = 24;
     private int dividerWidth = 1;
-
     private int tabTextSize = 12;
     private int tabTextColor = 0xFFFFFFFF;
     private Typeface tabTypeface = null;
@@ -122,29 +121,8 @@ public class PagerSlidingTabStrip  extends HorizontalScrollView {
         tabTextSize = a.getDimensionPixelSize(0, tabTextSize);
         tabTextColor = a.getColor(1, tabTextColor);
 
-        a.recycle();
 
-        // get custom attrs
-/*
-        a = context.obtainStyledAttributes(attrs, R.styleable.ActionBar);
 
-        tabBackgroundResId = a.getResourceId(R.styleable.ActionBar_background, tabBackgroundResId);
-
-        a = context.obtainStyledAttributes(attrs, R.styleable.PagerSlidingTabStrip);
-
-        indicatorColor = a.getColor(R.styleable.PagerSlidingTabStrip_pstsIndicatorColor, indicatorColor);
-        underlineColor = a.getColor(R.styleable.PagerSlidingTabStrip_pstsUnderlineColor, underlineColor);
-        dividerColor = a.getColor(R.styleable.PagerSlidingTabStrip_pstsDividerColor, dividerColor);
-        indicatorHeight = a.getDimensionPixelSize(R.styleable.PagerSlidingTabStrip_pstsIndicatorHeight, indicatorHeight);
-        underlineHeight = a.getDimensionPixelSize(R.styleable.PagerSlidingTabStrip_pstsUnderlineHeight, underlineHeight);
-        dividerPadding = a.getDimensionPixelSize(R.styleable.PagerSlidingTabStrip_pstsDividerPadding, dividerPadding);
-        tabPadding = a.getDimensionPixelSize(R.styleable.PagerSlidingTabStrip_pstsTabPaddingLeftRight, tabPadding);
-        tabBackgroundResId = a.getResourceId(R.styleable.PagerSlidingTabStrip_pstsTabBackground, tabBackgroundResId);
-        shouldExpand = a.getBoolean(R.styleable.PagerSlidingTabStrip_pstsShouldExpand, shouldExpand);
-        scrollOffset = a.getDimensionPixelSize(R.styleable.PagerSlidingTabStrip_pstsScrollOffset, scrollOffset);
-        textAllCaps = a.getBoolean(R.styleable.PagerSlidingTabStrip_pstsTextAllCaps, textAllCaps);
-*/
-        a.recycle();
 
         rectPaint = new Paint();
         rectPaint.setAntiAlias(true);
@@ -566,5 +544,5 @@ public class PagerSlidingTabStrip  extends HorizontalScrollView {
             }
         };
     }
-    
+
 }

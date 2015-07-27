@@ -86,6 +86,8 @@ public interface CustomerService {
 
     Integer getNextId();
 
+    Integer getLessNegative();
+
     void updateByIdMobile(List<Customer> customers);
 
     List<Customer> getAllSyncPending(Integer branchId);

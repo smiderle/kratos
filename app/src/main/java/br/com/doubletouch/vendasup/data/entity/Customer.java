@@ -311,7 +311,15 @@ public class Customer implements Serializable {
     }
 
     public String getCustomerIdAndName(){
-        return getID()+" - "+ name;
+
+        if( getID() > 0 ){
+
+            return getID()+" - "+ getName();
+
+        } else {
+            return getName();
+        }
+
     }
 
 

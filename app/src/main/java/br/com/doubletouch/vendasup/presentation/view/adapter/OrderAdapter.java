@@ -48,9 +48,12 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     public void onBindViewHolder(OrderViewHolder holder, int position) {
         final Order order = orders.get( position );
         holder.tv_order_customer.setText( order.getCustomer().getName() );
-        holder.tv_order_number.setText( String.valueOf( order.getID() ));
         holder.tv_order_total.setText(DoubleUtil.formatToCurrency( order.getNetValue(), false ) );
         holder.tv_order_emissao.setText(DateUtil.formatDateTime( order.getIssuanceTime() ));
+
+        if( order.getID() > 0 ){
+            holder.tv_order_number.setText( String.valueOf( order.getID() ));
+        }
 
         if(order.isSyncPending()){
             holder.iv_order_status.setBackgroundResource(R.drawable.status_pending);

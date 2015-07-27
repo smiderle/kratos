@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:text="00,00"
             android:layout_gravity="center"
-            android:textSize="@dimen/font_size_h44"
+            android:textSize="@dimen/font_size_h18"
             android:textColor="@color/white"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/tv_order_total_title"

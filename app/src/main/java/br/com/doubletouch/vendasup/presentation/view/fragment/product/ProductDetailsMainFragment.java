@@ -200,7 +200,7 @@ public class ProductDetailsMainFragment extends ScrollTabHolderFragment {
 
             }
 
-            if(product.getID() != null){
+            if(product.getID() != null && product.getID() > 0){
                 this.tv_product_code.setText( product.getID().toString());
             }
 
@@ -209,12 +209,17 @@ public class ProductDetailsMainFragment extends ScrollTabHolderFragment {
         } else {
 
             this.tv_product_description.setText(product.getDescription());
-            this.tv_product_code.setText(product.getID().toString());
             this.tv_product_barcode.setText(product.getBarcode());
             this.tv_product_reference.setText(product.getReference());
             this.tv_product_package.setText(product.getPackaging());
             this.tv_product_stock.setText(DoubleUtil.formatToCurrency(product.getStockAmount(), false));
             this.tv_product_price.setText(DoubleUtil.formatToCurrency(product.getSalePrice(), true));
+
+            if(product.getID() > 0){
+
+                this.tv_product_code.setText(product.getID().toString());
+
+            }
 
         }
     }

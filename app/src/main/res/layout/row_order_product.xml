@@ -79,7 +79,8 @@
                 android:textSize="@dimen/font_size_h18"
                 android:textColor="@color/green_primary_color"
                 android:visibility="invisible"
-                android:layout_alignBottom="@+id/lblProdutoPreco"
+                android:layout_below="@+id/lblProdutoDescricao"
+
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
 

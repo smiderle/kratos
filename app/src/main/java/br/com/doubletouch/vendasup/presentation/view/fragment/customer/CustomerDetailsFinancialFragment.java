@@ -343,7 +343,13 @@ public class CustomerDetailsFinancialFragment extends ScrollTabHolderFragment im
             ((ViewSwitcher) view.findViewById(R.id.vs_customer_payment)).showNext();
             ((ViewSwitcher) view.findViewById(R.id.vs_customer_credit_limit)).showNext();
 
-            sp_customer_payment.setSelection(customer.getFormPayment() -1);
+
+            if(customer.getFormPayment() != null && customer.getFormPayment() > 0 ){
+
+                sp_customer_payment.setSelection(customer.getFormPayment() -1);
+
+            }
+
             et_customer_credit_limit.setText(String.valueOf( customer.getCreditLimit() ));
 
             customerDetailsFinancialPresenter.initializeEditionMode(customer);
@@ -353,7 +359,7 @@ public class CustomerDetailsFinancialFragment extends ScrollTabHolderFragment im
 
             tv_customer_credit_limit.setText(DoubleUtil.formatToCurrency(customer.getCreditLimit(), true));
 
-            if(customer.getFormPayment() != null){
+            if(customer.getFormPayment() != null && customer.getFormPayment() > 0 ){
                 String[] formPayment = getResources().getStringArray(R.array.form_payment);
                 tv_customer_payment.setText( formPayment[customer.getFormPayment() -1] );
             }

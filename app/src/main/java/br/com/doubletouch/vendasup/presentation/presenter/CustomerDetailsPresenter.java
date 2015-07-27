@@ -99,7 +99,7 @@ public class CustomerDetailsPresenter implements Presenter {
     public void createNewCustomer() {
 
         CustomerService customerService = new CustomerServiceImpl();
-        Integer nextId = customerService.getNextId();
+        Integer nextId = customerService.getLessNegative();
 
         Customer customer = new Customer();
         customer.setCreditLimit(1000.00);

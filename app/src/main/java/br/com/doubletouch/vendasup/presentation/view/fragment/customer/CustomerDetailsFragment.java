@@ -21,6 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import br.com.doubletouch.vendasup.R;
+import br.com.doubletouch.vendasup.VendasUp;
 import br.com.doubletouch.vendasup.data.entity.Customer;
 import br.com.doubletouch.vendasup.data.entity.enumeration.ViewMode;
 import br.com.doubletouch.vendasup.data.executor.JobExecutor;
@@ -203,6 +204,7 @@ public class CustomerDetailsFragment  extends BaseParallacxFragment implements C
         }
 
         customer.setSyncPending(true);
+        customer.setDefaultSeller(VendasUp.getUser().getUserID());
         CustomerDetailsFragment.this.customerDetailsPresenter.saveCustomer(customer);
 
         navigator.previousActivity(activity);

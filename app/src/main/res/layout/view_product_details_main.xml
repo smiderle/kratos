@@ -40,7 +40,7 @@
             <TextView
                 android:id="@+id/tv_product_code"
                 style="@style/AppTheme.TextViewSecundary"
-                android:text="@string/tv_default_product_code"
+
                 android:layout_below="@+id/tv_product_id"
                 android:layout_alignLeft="@+id/tv_product_id"
                 android:layout_alignStart="@+id/tv_product_id" />

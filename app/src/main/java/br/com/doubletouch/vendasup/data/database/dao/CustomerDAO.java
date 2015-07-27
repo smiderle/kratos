@@ -75,6 +75,22 @@ public class CustomerDAO {
 
     }
 
+
+    public Integer min() {
+        Integer min = 0;
+
+        String sql = "SELECT MIN("+ CustomerDB.ID +") AS max_id FROM " + CustomerDB.TABELA;
+
+        Cursor cursor = db.rawQuery( sql, null );
+
+        if(cursor.moveToFirst()){
+            min = cursor.getInt( 0 );
+        }
+
+        return min;
+    }
+
+
     public void updateByIdMobile( Customer customer) {
 
         String sql = "UPDATE " + CustomerDB.TABELA + " SET " + CustomerDB.ID +" = " + customer.getID() +"," + CustomerDB.SYNC_PENDENTE+" = 0 "+
@@ -188,9 +204,6 @@ public class CustomerDAO {
             cv.put(CustomerDB.PARCELAMENTO, customer.getInstallmentId());
         }
 
-        if(customer.getInstallment() != null && customer.getInstallment().getID() != null){
-            cv.put(CustomerDB.PARCELAMENTO, customer.getInstallment().getID());
-        }
 
         return cv;
     }
@@ -260,10 +273,28 @@ public class CustomerDAO {
 
         customer.setPictureUrl(c.getString(idxPicture));
         customer.setPriceTable(c.getInt(idxPriceTable));
-        customer.setInstallmentId( c.getInt(idxInstallment) );
-        customer.setInstallment( new Installment( c.getInt(idxInstallment) ) );
-        customer.setFormPayment(c.getInt(idxPayment));
-        customer.setDefaultSeller( c.getInt( idxVendedor ) );
+
+        if( ! c.isNull(idxInstallment)){
+
+            customer.setInstallmentId( c.getInt(idxInstallment) );
+            customer.setInstallment( new Installment( c.getInt(idxInstallment) ) );
+
+        }
+
+        if( ! c.isNull(idxPayment)){
+
+            customer.setFormPayment(c.getInt(idxPayment));
+
+        }
+
+        if( ! c.isNull(idxVendedor)){
+
+            customer.setDefaultSeller( c.getInt( idxVendedor ) );
+
+        }
+
+
+
 
         return  customer;
     }

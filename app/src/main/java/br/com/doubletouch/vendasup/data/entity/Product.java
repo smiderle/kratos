@@ -152,7 +152,12 @@ public class Product implements Serializable{
 
     public String getProductIdAndDescription(){
 
-        return this.getID()+" - "+ this.description;
+        if(this.getID() > 0){
+            return this.getID()+" - "+ this.description;
+        } else {
+            return this.description;
+        }
+
 
     }
 

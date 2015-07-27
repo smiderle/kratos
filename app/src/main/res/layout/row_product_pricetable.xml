@@ -23,10 +23,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="R$ 25,00"
-        style="@style/AppTheme.TextViewInListViewPrimary"
-        android:layout_alignParentTop="true"
+        style="@style/AppTheme.TextViewInListViewSecundory"
+        android:layout_below="@+id/tv_price_table"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Valor:"
+        android:id="@+id/tv_product_price_title"
+        style="@style/AppTheme.TextViewInListViewSecundory"
+        android:layout_below="@+id/tv_price_table"
+        android:layout_toLeftOf="@+id/tv_product_price"
+        android:layout_toStartOf="@+id/tv_product_price" />
 
 
 </RelativeLayout>

@@ -63,6 +63,8 @@ public interface OrderService {
 
     Integer getNextId();
 
+    Integer getLessNegative();
+
     void updateSync( List<Order> orders );
 
     void getOrderDatails(Long orderID, OrderDetailsCallback orderDetailsCallback);

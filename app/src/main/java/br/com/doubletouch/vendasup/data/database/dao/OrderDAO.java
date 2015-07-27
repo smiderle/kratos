@@ -111,6 +111,21 @@ public class OrderDAO {
 
     }
 
+
+    public Integer min() {
+        Integer min = 0;
+
+        String sql = "SELECT MIN("+ OrderDB.ID +") AS max_id FROM " + OrderDB.TABELA;
+
+        Cursor cursor = db.rawQuery( sql, null );
+
+        if(cursor.moveToFirst()){
+            min = cursor.getInt( 0 );
+        }
+
+        return min;
+    }
+
     public void updateByIdMobile( Order order) {
 
         String sql = "UPDATE " + OrderDB.TABELA + " SET " + OrderDB.ID +" = " + order.getID()+","+ OrderDB.ID_MOBILE+" = "+ order.getID() +"," + OrderDB.SYNC_PENDENTE +" = 0 "+

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.doubletouch.vendasup.dao.SQLiteHelper;
+import br.com.doubletouch.vendasup.data.database.script.OrderDB;
 import br.com.doubletouch.vendasup.data.database.script.ProductDB;
 import br.com.doubletouch.vendasup.data.entity.Product;
 
@@ -67,6 +68,22 @@ public class ProductDAO {
         return max;
 
 
+    }
+
+
+
+    public Integer min() {
+        Integer min = 0;
+
+        String sql = "SELECT MIN("+ ProductDB.ID +") AS max_id FROM " + ProductDB.TABELA;
+
+        Cursor cursor = db.rawQuery( sql, null );
+
+        if(cursor.moveToFirst()){
+            min = cursor.getInt( 0 );
+        }
+
+        return min;
     }
 
     public List<Product> getAllSyncPending(Integer branchId) {

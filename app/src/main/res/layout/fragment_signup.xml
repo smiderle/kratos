@@ -18,22 +18,13 @@
         android:paddingRight="@dimen/activity_padding_right">
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <!-- Imagem -->
-
-
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
-            android:orientation="vertical">
+            android:layout_weight="4"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/font_size_h20">
 
             <TextView
                 android:id="@+id/tv_wellcome_title"
@@ -94,8 +85,8 @@
                 android:text="Já estou cadastrado"
                 android:id="@+id/btn_signin"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/button_corners"
-                android:textColor="@color/white"
+                android:background="@drawable/button_corners_white_blue"
+                android:textColor="@color/primary_color"
                 android:layout_marginTop="@dimen/font_size_h8" />
 
 
