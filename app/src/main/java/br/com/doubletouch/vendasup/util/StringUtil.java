@@ -18,4 +18,24 @@ public class StringUtil {
         return text == null ? "" : text;
     }
 
+    public static boolean isOnlyNumbers(String text){
+
+        boolean only = false;
+
+        if( text != null ){
+
+            text = text.replaceAll("\\s", "");
+
+            if( text.matches( "[0-9]*" ) ){
+
+                only = true;
+
+            }
+
+        }
+
+        return only;
+
+    }
+
 }

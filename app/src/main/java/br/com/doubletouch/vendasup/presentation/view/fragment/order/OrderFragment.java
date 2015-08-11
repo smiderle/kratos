@@ -143,17 +143,17 @@ public class OrderFragment extends BaseFragment implements OrderView {
 
     private OrderPresenter orderPresenter;
 
-    private long orderId;
+    private Long orderId;
 
     private static final String ARGUMENT_KEY_ORDER_ID = "kratos.ARGUMENT_ORDER_ID";
     private static final String ARGUMENT_KEY_VIEW_MODE = "kratos.ARGUMENT_VIEW_MODE";
 
     private ViewMode viewMode;
 
-    public static OrderFragment newInstance(long orderId, ViewMode viewMode) {
+    public static OrderFragment newInstance(Long orderId, ViewMode viewMode) {
         OrderFragment orderFragment = new OrderFragment();
         Bundle argumentsBundle = new Bundle();
-        argumentsBundle.putLong(ARGUMENT_KEY_ORDER_ID, orderId);
+        argumentsBundle.putSerializable(ARGUMENT_KEY_ORDER_ID, orderId);
         argumentsBundle.putSerializable(ARGUMENT_KEY_VIEW_MODE, viewMode);
 
         orderFragment.setArguments(argumentsBundle);
@@ -177,7 +177,7 @@ public class OrderFragment extends BaseFragment implements OrderView {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        this.orderId = getArguments().getLong(ARGUMENT_KEY_ORDER_ID);
+        this.orderId = (Long) getArguments().getSerializable(ARGUMENT_KEY_ORDER_ID);
         this.viewMode = (ViewMode) getArguments().getSerializable(ARGUMENT_KEY_VIEW_MODE);
 
         orderPresenter.createOrLoad(orderId);

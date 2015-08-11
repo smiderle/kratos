@@ -71,4 +71,7 @@ public interface OrderService {
 
     void updateCustomer( Integer oldCustomerId, Integer newCustomerId );
 
+
+    void updateInstallment(Integer oldCustomerId, Integer newCustomerId);
+
 }

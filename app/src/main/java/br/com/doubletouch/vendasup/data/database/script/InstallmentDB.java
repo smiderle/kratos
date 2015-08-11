@@ -15,11 +15,13 @@ public class InstallmentDB {
                 IDEMPRESA+ " INTEGER NOT NULL , "+
                 IDFILIAL+ " INTEGER NOT NULL , " +
                 IDPARCELAMENTO + " TEXT, " +
+                ID_MOBILE + " TEXT , " +
                 DESCRICAO + " TEXT,"+
                 DIAS + " TEXT,"+
                 JUROS + " DOUBLE,"+
                 ATIVO + " BOOLEAN,"+
                 EXCLUIDO + " BOOLEAN,"+
+                SYNC_PENDENTE + " BOOLEAN,"+
                 "PRIMARY KEY( "+ ID+" )  );";
         return SQL;
     }
@@ -36,8 +38,9 @@ public class InstallmentDB {
     public static final String JUROS = "JUROS";
     public static final String ATIVO = "ATIVO";
     public static final String EXCLUIDO = "EXCLUIDO";
+    public static final String SYNC_PENDENTE= "SYNC_PENDENTE";
+    public static final String ID_MOBILE = "ID_MOBILE";
 
-
-    public static final String[] COLUNAS = new String[]{ID, IDEMPRESA,IDFILIAL,ATIVO, EXCLUIDO, IDPARCELAMENTO, DESCRICAO, DIAS, JUROS};
+    public static final String[] COLUNAS = new String[]{ID, IDEMPRESA,IDFILIAL,ATIVO, EXCLUIDO, IDPARCELAMENTO, DESCRICAO, DIAS, JUROS, SYNC_PENDENTE, ID_MOBILE };
 
 }

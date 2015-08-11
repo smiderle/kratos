@@ -8,7 +8,7 @@ public interface Endpoints {
     public static final String VERSION = "/v1";
     public static final String ENDPOINT_PRIVATE = "/private";
     public static final String ENDPOINT_PUBLIC = "/public";
-    public static final String CONTEXT = "http://192.168.1.19/vendas-api";
+    public static final String CONTEXT = "http://192.168.1.20/vendas-api";
     //public static final String CONTEXT = "http://54.94.216.207/vendas-api";
 
     public static final String ENDPOINT_PRODUTO = CONTEXT.concat(ENDPOINT_PRIVATE).concat(VERSION).concat("/product");

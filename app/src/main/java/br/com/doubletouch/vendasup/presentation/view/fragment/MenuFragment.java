@@ -148,7 +148,7 @@ public class MenuFragment extends BaseFragment implements MenuView {
 
         if( menuModel.getTo().equals( OrderActivity.class) ){
 
-            Intent it = OrderActivity.getCallingIntent( activity, -1, ViewMode.INCLUSAO );
+            Intent it = OrderActivity.getCallingIntent( activity, null, ViewMode.INCLUSAO );
             startActivityForResult( it, RESULT_MENU);
             navigator.transitionGo(activity);
 

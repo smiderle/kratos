@@ -25,7 +25,7 @@ public class InstallmentActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order_list);
+        setContentView(R.layout.activity_installment_list);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         this.initialize();
     }

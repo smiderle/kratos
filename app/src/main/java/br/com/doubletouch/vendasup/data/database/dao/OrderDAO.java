@@ -144,6 +144,15 @@ public class OrderDAO {
     }
 
 
+    public void updateInstallment( Integer oldInstallment, Integer newInstallment ) {
+
+        String sql = "UPDATE " + OrderDB.TABELA + " SET " + OrderDB.IDPARCELAMENTO +" = " + newInstallment +
+                " WHERE "+ OrderDB.IDPARCELAMENTO +" = " + oldInstallment;
+
+        db.execSQL(sql);
+    }
+
+
     public List<Order> getAllSyncPending( Integer branchId ){
         ArrayList<Order> orders = new ArrayList<>();
 

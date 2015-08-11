@@ -59,7 +59,7 @@ public class OrderPresenter implements Presenter {
     public void createOrLoad(Long orderId){
 
         //Novo pedido
-        if( orderId == null || orderId <= 0 ){
+        if( orderId == null ){
 
             OrderFragment.order = new Order();
             OrderFragment.order.setBranchID( VendasUp.getBranchOffice().getBranchOfficeID() );

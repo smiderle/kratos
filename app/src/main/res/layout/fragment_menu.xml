@@ -21,6 +21,7 @@
                 android:id="@+id/img_user_picture"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/iv_width_menu"
+                android:layout_gravity="center_vertical"
                 android:scaleType="centerCrop"
                 android:src="@drawable/ic_launcher" />
 
@@ -30,6 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:gravity="center_vertical"
             android:paddingLeft="@dimen/activity_padding_left">
 
             <TextView
@@ -37,6 +39,7 @@
                 android:layout_height="wrap_content"
                 android:text="Hoje foi vendido:"
                 android:textColor="@color/white"
+
                 android:textSize="@dimen/font_size_h3"/>
 
             <TextView

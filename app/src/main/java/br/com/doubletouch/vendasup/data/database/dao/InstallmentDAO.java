@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.doubletouch.vendasup.dao.SQLiteHelper;
+import br.com.doubletouch.vendasup.data.database.script.CustomerDB;
 import br.com.doubletouch.vendasup.data.database.script.InstallmentDB;
+import br.com.doubletouch.vendasup.data.entity.Customer;
 import br.com.doubletouch.vendasup.data.entity.Installment;
 
 
@@ -72,6 +74,48 @@ public class InstallmentDAO {
         new UnsupportedOperationException("Não implementado");
     }
 
+
+    public Integer min() {
+        Integer min = 0;
+
+        String sql = "SELECT MIN("+ InstallmentDB.ID +") AS max_id FROM " + InstallmentDB.TABELA;
+
+        Cursor cursor = db.rawQuery( sql, null );
+
+        if(cursor.moveToFirst()){
+            min = cursor.getInt( 0 );
+        }
+
+        return min;
+    }
+
+
+    public void updateByIdMobile( Installment installment) {
+
+        String sql = "UPDATE " + InstallmentDB.TABELA + " SET " + InstallmentDB.ID +" = " + installment.getID() +"," + InstallmentDB.SYNC_PENDENTE+" = 0 "+
+                "WHERE "+ InstallmentDB.ID_MOBILE +" = " + installment.getIdMobile();
+
+        db.execSQL(sql);
+    }
+
+
+
+    public List<Installment> getAllSyncPending(Integer branchId) {
+        ArrayList<Installment> customers = new ArrayList<>();
+
+        String where = InstallmentDB.IDFILIAL+" = ? AND  " +InstallmentDB.SYNC_PENDENTE +" = 1 " ;
+        Cursor c = db.query(InstallmentDB.TABELA, InstallmentDB.COLUNAS, where, new String[]{String.valueOf(branchId)}, null, null, null, null);
+
+        if(c.moveToFirst()){
+            do {
+                customers.add(getByCursor(c));
+            } while (c.moveToNext());
+        }
+        c.close();
+        return  customers;
+    }
+
+
     private ContentValues getContentValues( Installment installment ){
         ContentValues cv = new ContentValues();
         cv.put(InstallmentDB.ATIVO,  installment.isActive());
@@ -82,7 +126,8 @@ public class InstallmentDAO {
         cv.put(InstallmentDB.IDEMPRESA, installment.getOrganizationID());
         cv.put(InstallmentDB.IDFILIAL, installment.getBranchID());
         cv.put(InstallmentDB.DIAS, installment.getInstallmentsDays());
-        cv.put(InstallmentDB.IDPARCELAMENTO, installment.getID());
+        cv.put(InstallmentDB.ID_MOBILE, installment.getIdMobile());
+        cv.put(InstallmentDB.SYNC_PENDENTE, installment.isSetSyncPending());
         return cv;
     }
 
@@ -96,11 +141,15 @@ public class InstallmentDAO {
         int idxIdDescricao = c.getColumnIndex(InstallmentDB.DESCRICAO);
         int idxIdDias = c.getColumnIndex(InstallmentDB.DIAS);
         int idxExcluido = c.getColumnIndex(InstallmentDB.EXCLUIDO);
+        int idxSync = c.getColumnIndex(InstallmentDB.SYNC_PENDENTE);
+        int idxIdMobile = c.getColumnIndex(InstallmentDB.ID_MOBILE);
 
         Installment installment = new Installment();
         installment.setActive( c.getInt( idxAtivo )== 1);
         installment.setExcluded(c.getInt(idxExcluido) == 1);
+        installment.setSetSyncPending(c.getInt(idxSync) == 1);
         installment.setID(c.getInt(idxId));
+        installment.setIdMobile(c.getInt(idxIdMobile));
         installment.setInstallmentID(c.getInt(idxIdParcelamento));
         installment.setOrganizationID(c.getInt(idxIdEmpresa));
         installment.setBranchID(c.getInt(idxIdFilial));

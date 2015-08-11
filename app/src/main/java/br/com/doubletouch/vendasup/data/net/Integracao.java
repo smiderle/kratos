@@ -84,6 +84,7 @@ public class Integracao {
 
         enviarClientes( branchID );
         enviarProdutos( branchID );
+        enviarParcelamentos(branchID);
         enviarPedidos( branchID );
 
     }
@@ -371,6 +372,25 @@ public class Integracao {
         ApiResponse<ServiceResponse<User>> apiResponse = new PublicApi().generateNewUser(organizationName, userName, email, password, userEntityJsonMaper);
 
         return apiResponse.getPayload().getValue();
+
+    }
+
+
+    public void enviarParcelamentos(Integer branchID) throws  IOException, SyncronizationException {
+
+        InstallmentService customerService = new InstallmentServiceImpl();
+
+        List<Installment> installments = customerService.getAllSyncPending(branchID);
+
+        if(installments.size() > 0){
+
+            ApiResponse<ServiceResponse<List<Installment>>> apiResponse = new InstallmentApi().add(installments);
+
+            List<Installment> installmentsSaved = apiResponse.getPayload().getValue();
+
+            customerService.updateByIdMobile(installmentsSaved);
+
+        }
 
     }
 }

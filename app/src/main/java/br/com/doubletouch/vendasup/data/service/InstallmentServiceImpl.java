@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.com.doubletouch.vendasup.VendasUp;
 import br.com.doubletouch.vendasup.data.database.dao.InstallmentDAO;
+import br.com.doubletouch.vendasup.data.entity.Customer;
 import br.com.doubletouch.vendasup.data.entity.Installment;
 import br.com.doubletouch.vendasup.data.exception.RepositoryErrorBundle;
 
@@ -51,10 +52,67 @@ public class InstallmentServiceImpl implements InstallmentService {
 
     }
 
+
+    @Override
+    public void save(Installment installment,final InstallmentSaveCallback installmentSaveCallback) {
+
+        try{
+            installmentDAO.insert(installment);
+            installmentSaveCallback.onInstallmentSaved(installment);
+        }catch (Exception e) {
+            installmentSaveCallback.onError(new RepositoryErrorBundle(e));
+
+        }
+    }
+
+    @Override
+    public Integer getLessNegative() {
+
+        Integer min = installmentDAO.min();
+
+        if(min <= 0){
+
+            min -= 1;
+
+        } else {
+            min = -1;
+        }
+
+        return min;
+    }
+
     @Override
     public Installment get(Integer id) {
 
         return installmentDAO.get(id);
 
     }
+
+
+    @Override
+    public void updateByIdMobile(List<Installment> installments) {
+
+        OrderService orderService = new OrderServiceImpl();
+
+        for( Installment installment : installments ) {
+
+            orderService.updateInstallment( installment.getIdMobile(), installment.getID() );
+
+            installment.setSetSyncPending(false);
+
+
+            installmentDAO.updateByIdMobile(installment);
+
+        }
+    }
+
+
+    @Override
+    public List<Installment> getAllSyncPending(Integer branchId) {
+
+        return installmentDAO.getAllSyncPending(branchId);
+
+    }
+
+
 }

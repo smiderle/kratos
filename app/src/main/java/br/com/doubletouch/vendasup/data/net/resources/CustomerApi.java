@@ -48,34 +48,34 @@ public class CustomerApi extends AbstractApi {
         }
     }
 
-    public  ApiResponse<ServiceResponse<List<Customer>>> add( List<Customer> customers ) throws IOException, SyncronizationException {
+        public  ApiResponse<ServiceResponse<List<Customer>>> add( List<Customer> customers ) throws IOException, SyncronizationException {
 
-        CustomerEntityJsonMaper customerEntityJsonMaper = new CustomerEntityJsonMaper();
-        RestClient restClient = new RestClient(Endpoints.ENDPOINT_CUSTOMER, Methods.PRODUTO_CUSTOMER_LIST);
+            CustomerEntityJsonMaper customerEntityJsonMaper = new CustomerEntityJsonMaper();
+            RestClient restClient = new RestClient(Endpoints.ENDPOINT_CUSTOMER, Methods.PRODUTO_CUSTOMER_LIST);
 
-        Gson gson = new Gson();
-        String customerJson = gson.toJson(customers);
+            Gson gson = new Gson();
+            String customerJson = gson.toJson(customers);
 
-        RESTResponse response = restClient.post(customerJson);
+            RESTResponse response = restClient.post(customerJson);
 
-        if( response.getCode() == 200 ) {
+            if( response.getCode() == 200 ) {
 
-            String json = response.getJson();
+                String json = response.getJson();
 
-            ApiResponse<ServiceResponse<List<Customer>>> apiResponse =  customerEntityJsonMaper.transformCustomerCollection(json);
+                ApiResponse<ServiceResponse<List<Customer>>> apiResponse =  customerEntityJsonMaper.transformCustomerCollection(json);
 
-            if( apiResponse.getCode().equals( ApiResponse.CODE_SUCESS ) ) {
+                if( apiResponse.getCode().equals( ApiResponse.CODE_SUCESS ) ) {
 
-                return apiResponse;
+                    return apiResponse;
 
+                } else {
+
+                    throw new SyncronizationException( apiResponse.getMessage() );
+
+                }
             } else {
-
-                throw new SyncronizationException( apiResponse.getMessage() );
-
+                throw new SyncronizationException( response.getException() );
             }
-        } else {
-            throw new SyncronizationException( response.getException() );
-        }
 
     }
 }

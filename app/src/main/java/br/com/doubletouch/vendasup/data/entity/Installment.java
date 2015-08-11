@@ -35,6 +35,10 @@ public class Installment implements Serializable {
 
     private boolean excluded;
 
+    private Integer idMobile;
+
+    private boolean setSyncPending;
+
     public Integer getID() {
         return ID;
     }
@@ -107,10 +111,25 @@ public class Installment implements Serializable {
         this.excluded = excluded;
     }
 
+    public Integer getIdMobile() {
+        return idMobile;
+    }
+
+    public void setIdMobile(Integer idMobile) {
+        this.idMobile = idMobile;
+    }
+
+    public boolean isSetSyncPending() {
+        return setSyncPending;
+    }
+
+    public void setSetSyncPending(boolean setSyncPending) {
+        this.setSyncPending = setSyncPending;
+    }
 
     @Override
     public String toString() {
-        return getID() +" - " + getDescription();
+        return getDescription();
     }
 
     @Override

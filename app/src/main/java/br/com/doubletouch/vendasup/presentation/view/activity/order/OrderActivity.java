@@ -14,7 +14,7 @@ import br.com.doubletouch.vendasup.presentation.view.fragment.order.OrderFragmen
  */
 public class OrderActivity extends BaseActivity {
 
-    private long orderId;
+    private Long orderId;
 
     private ViewMode viewMode;
 
@@ -22,7 +22,7 @@ public class OrderActivity extends BaseActivity {
     private static final String INTENT_EXTRA_PARAM_ORDER_EDITION_MODE = "kratos.INTENT_PARAM_ORDER_EDITION_MODE";
     private static final String INSTANCE_STATE_PARAM_ORDER_ID = "kratos.STATE_PARAM_ORDER_ID";
 
-    public static Intent getCallingIntent(Context context, long orderId, ViewMode viewMode) {
+    public static Intent getCallingIntent(Context context, Long orderId, ViewMode viewMode) {
 
         Intent callingIntent = new Intent(context, OrderActivity.class);
         callingIntent.putExtra(INTENT_EXTRA_PARAM_ORDER_ID, orderId);
@@ -43,10 +43,12 @@ public class OrderActivity extends BaseActivity {
     private void initializeActivity( Bundle savedInstanceState ) {
 
         if(savedInstanceState == null){
-            this.orderId = getIntent().getLongExtra(INTENT_EXTRA_PARAM_ORDER_ID, -1);
+            this.orderId = (Long) getIntent().getSerializableExtra( INTENT_EXTRA_PARAM_ORDER_ID );
+
             viewMode = (ViewMode) getIntent().getSerializableExtra(INTENT_EXTRA_PARAM_ORDER_EDITION_MODE);
 
             addFragment(R.id.fl_fragment, OrderFragment.newInstance(orderId,viewMode ));
+
         } else {
             this.orderId = savedInstanceState.getLong(INSTANCE_STATE_PARAM_ORDER_ID);
         }

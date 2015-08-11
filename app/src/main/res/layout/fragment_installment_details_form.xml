@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/lv_row_padding_top"
+    android:paddingBottom="@dimen/lv_row_padding_botton"
+    android:paddingLeft="@dimen/activity_padding_left"
+    android:paddingRight="@dimen/activity_padding_right">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.TextViewPrimary"
+        android:text="@string/tv_description"
+        android:id="@+id/textView2" />
+
+
+
+    <ViewSwitcher
+        android:id="@+id/vs_installment_description"
+        style="@style/AppTheme.TextViewSecundary">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_installment_description" />
+
+        <TextView
+            android:id="@+id/tv_installment_description"
+            style="@style/AppTheme.TextViewSecundary"/>
+
+    </ViewSwitcher>
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.TextViewPrimary"
+        android:text="Condições"
+        android:id="@+id/textView3" />
+
+    <ViewSwitcher
+        android:id="@+id/vs_installment_condition"
+        style="@style/AppTheme.TextViewSecundary">
+
+        <EditText
+            android:id="@+id/et_installment_condition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Exemplo: 30 60 90" />
+
+        <TextView
+            android:id="@+id/tv_installment_condition"
+            style="@style/AppTheme.TextViewSecundary"/>
+
+
+    </ViewSwitcher>
+
+
+
+
+</LinearLayout>

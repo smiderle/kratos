@@ -22,6 +22,16 @@ public interface InstallmentService {
         void onError(ErrorBundle errorBundle);
     }
 
+
+    /**
+     * Callback usado para notificar quando o {@link Installment} for salvo ou um erro ocorrer.
+     */
+    interface InstallmentSaveCallback {
+        void onInstallmentSaved(Installment installment);
+
+        void onError(ErrorBundle errorBundle);
+    }
+
     void getInstallmentList( InstallmentListCallback installmentListCallback);
 
     void getInstallment( Integer idInstallment, InstallmentCallback installmentCallback);
@@ -33,6 +43,14 @@ public interface InstallmentService {
     void saveOrUpdateSynchronous(List<Installment> installment);
 
     Installment get(Integer id);
+
+    void save(Installment installment,final InstallmentSaveCallback installmentSaveCallback);
+
+    Integer getLessNegative();
+
+    void updateByIdMobile(List<Installment> installments);
+
+    List<Installment> getAllSyncPending(Integer branchId);
 
 
 }
