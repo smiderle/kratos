@@ -201,4 +201,5 @@ public class OrderListFragment extends BaseFragment implements OrderListView {
         startActivityForResult(intentToLaunch,1);
         navigator.transitionGo(activity);
     }
+
 }

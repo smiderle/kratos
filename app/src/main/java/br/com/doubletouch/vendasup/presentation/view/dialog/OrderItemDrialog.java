@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -18,8 +17,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 import java.util.regex.Pattern;
@@ -56,8 +53,7 @@ public class OrderItemDrialog extends DialogFragment {
 
     private int tabPosition;
 
-    private TextView tv_order_product_description;
-    private TextView tv_order_product_stock;
+
     private TextView tv_order_product_price;
     private EditText ed_order_quantity;
     private EditText ed_order_price_sales;
@@ -85,6 +81,28 @@ public class OrderItemDrialog extends DialogFragment {
         this.context = context;
     }
 
+    private PositiveButtonListner produtoAdicionadoListener;
+
+    private NegativeButtonListner negativeButtonListener;
+
+
+    public void addPositiveButtonListener(PositiveButtonListner positiveButtonListener){
+        this.produtoAdicionadoListener = positiveButtonListener;
+
+    }
+
+    public void addNegativeButtonListener(NegativeButtonListner negativeButtonListener){
+        this.negativeButtonListener = negativeButtonListener;
+
+    }
+
+    public interface PositiveButtonListner {
+        void pressed();
+    }
+
+    public interface NegativeButtonListner {
+        void pressed();
+    }
 
     public void setProduct( Product product, int tabPosition ){
         this.product = product;
@@ -100,8 +118,7 @@ public class OrderItemDrialog extends DialogFragment {
 
         btnRemove = (ImageButton) view.findViewById(R.id.btn_order_dialog_remove);
         btnAdd = (ImageButton) view.findViewById(R.id.btn_order_dialog_add);
-        tv_order_product_description = (TextView)  view.findViewById(R.id.tv_order_product);
-        tv_order_product_stock = (TextView)  view.findViewById(R.id.tv_order_stock);
+
         tv_order_product_price = (TextView)  view.findViewById(R.id.tv_order_product_price);
         ed_order_quantity = (EditText)  view.findViewById(R.id.ed_order_quantity);
         ed_order_price_sales = (EditText)  view.findViewById(R.id.ed_order_price_sales);
@@ -118,8 +135,6 @@ public class OrderItemDrialog extends DialogFragment {
 
         orderItem = getOrCreate(product);
 
-        tv_order_product_description.setText(orderItem.getProduct().getDescription());
-        tv_order_product_stock.setText(DoubleUtil.formatToCurrency(orderItem.getProduct().getStockAmount(), false));
         tv_order_product_price.setText(DoubleUtil.formatToCurrency(orderItem.getSalePrice(), true));
         ed_order_quantity.setText(String.valueOf( orderItem.getQuantity() ));
         ed_order_price_sales.setText(String.valueOf( orderItem.getSalePrice() ));
@@ -127,22 +142,23 @@ public class OrderItemDrialog extends DialogFragment {
 
         addListners();
 
-
-        String labelButton = tabPosition == 0 ? "Adicionar ao carrinho" : "Confirmar Edição";
-
         AlertDialog.Builder builder = new AlertDialog.Builder( context )
-                .setView(view)
-                .setTitle("Editar/Remover Produtos do Carrinho");
+                .setView(view);
 
 
-        builder.setPositiveButton(labelButton, new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                orderItem.setSalePrice( getPrice() );
-                orderItem.setQuantity(getQuantity());
-                orderItem.setPriceTable(priceTableSelected);
-                addSeNaoExiste();
+                if(getQuantity() <= 0){
+                    remove(orderItem);
+                } else {
+                    orderItem.setSalePrice( getPrice() );
+                    orderItem.setQuantity(getQuantity());
+                    orderItem.setPriceTable(priceTableSelected);
+                    addSeNaoExiste();
+                }
+                produtoAdicionadoListener.pressed();
 
 
             }
@@ -150,11 +166,12 @@ public class OrderItemDrialog extends DialogFragment {
 
         if( tabPosition == 1 ) {
 
-            builder.setNegativeButton("Remover do carrinho", new DialogInterface.OnClickListener() {
+            builder.setNegativeButton("Remover", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
 
                     remove(orderItem);
+                    negativeButtonListener.pressed();
 
                 }
             });

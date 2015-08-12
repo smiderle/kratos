@@ -65,6 +65,10 @@ public class OrderProductListFragment  extends ScrollTabHolderFragment implement
 
     private ViewMode viewMode;
 
+    private ProductsListAdapter productsListAdapter;
+
+    private ProductsCartListAdapter  productsCartListAdapter;
+
     public static OrderProductListFragment newInstance(int position, Order order, ViewMode viewMode){
         OrderProductListFragment orderProductListFragment = new OrderProductListFragment();
         Bundle bundle = new Bundle();
@@ -222,11 +226,13 @@ public class OrderProductListFragment  extends ScrollTabHolderFragment implement
 
         if(tabPosition == 0){
 
-            lv_content.setAdapter( new ProductsListAdapter( activity, products ) );
+            productsListAdapter = new ProductsListAdapter( activity, products );
+            lv_content.setAdapter( productsListAdapter );
 
         } else {
 
-            lv_content.setAdapter( new ProductsCartListAdapter( activity ) );
+            productsCartListAdapter = new ProductsCartListAdapter( activity );
+            lv_content.setAdapter( productsCartListAdapter );
 
         }
 
@@ -240,7 +246,29 @@ public class OrderProductListFragment  extends ScrollTabHolderFragment implement
                 OrderItemDrialog dialog = new OrderItemDrialog();
 
                 dialog.setContext(activity);
+                dialog.addPositiveButtonListener(new OrderItemDrialog.PositiveButtonListner() {
+                    @Override
+                    public void pressed() {
 
+                        if (tabPosition == 0) {
+                            notifyDataSetChangeProductList();
+                        } else {
+                            notifyDataSetChangeProductCartList();
+                        }
+                    }
+                });
+
+                dialog.addNegativeButtonListener(new OrderItemDrialog.NegativeButtonListner() {
+                    @Override
+                    public void pressed() {
+
+                        if (tabPosition == 0) {
+                            notifyDataSetChangeProductList();
+                        } else {
+                            notifyDataSetChangeProductCartList();
+                        }
+                    }
+                });
 
                 if( tabPosition == 0 ){
 
@@ -652,6 +680,18 @@ public class OrderProductListFragment  extends ScrollTabHolderFragment implement
 
 
     }
+
+
+
+
+    public void notifyDataSetChangeProductList(){
+        this.productsListAdapter.notifyDataSetChanged();
+    }
+
+    public void notifyDataSetChangeProductCartList(){
+        this.productsCartListAdapter.notifyDataSetChanged();
+    }
+
 
 
 }

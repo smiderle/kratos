@@ -6,39 +6,11 @@
     android:paddingRight="@dimen/activity_padding_right" >
 
     <TextView
-        android:id="@+id/tv_order_product"
-        style="@style/AppTheme.TextViewSecundary"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:text="0"
-
-        android:layout_marginTop="@dimen/lv_row_padding_top"/>
-
-    <TextView
-        android:id="@+id/tvEstoque"
-        style="@style/AppTheme.TextViewPrimary"
-        android:layout_width="wrap_content"
-        android:layout_below="@+id/tv_order_product"
-        android:text="@string/tv_order_product_stock"
-        android:textStyle="bold"
-        android:layout_marginTop="@dimen/lv_row_padding_top"/>
-
-    <TextView
-        android:id="@+id/tv_order_stock"
-        style="@style/AppTheme.TextViewSecundary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/tvEstoque"
-        android:layout_alignBottom="@+id/tvEstoque"
-        android:layout_toRightOf="@+id/tvEstoque"
-        android:text="1.0" />
-
-    <TextView
         android:id="@+id/tv_price_table_title"
         style="@style/AppTheme.TextViewPrimary"
         android:layout_width="wrap_content"
+        android:paddingTop="@dimen/font_size_h2"
         android:text="@string/tv_title_price_table_whit_colon"
-        android:layout_below="@+id/tvEstoque"
         android:layout_marginTop="@dimen/lv_row_padding_top"/>
 
 
@@ -46,7 +18,6 @@
         android:id="@+id/sp_order_price_table"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_order_stock"
         android:layout_toRightOf="@+id/tv_price_table_title"
         android:layout_toEndOf="@+id/tv_price_table_title"
         android:layout_marginTop="@dimen/lv_row_padding_top"
@@ -61,7 +32,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_price_table_title"
         android:text="@string/tv_price"
-        android:layout_marginTop="@dimen/lv_row_padding_top"/>
+        android:layout_marginTop="@dimen/lv_row_padding_top"
+        android:paddingTop="@dimen/font_size_h2"/>
 
     <TextView
         android:id="@+id/tv_order_product_price"
@@ -80,7 +52,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/btn_order_dialog_remove"
         android:text="Preço:"
-        android:layout_marginTop="@dimen/lv_row_padding_top"/>
+        android:layout_marginTop="@dimen/lv_row_padding_top"
+        android:paddingTop="@dimen/font_size_h2"/>
 
     <EditText
         android:id="@+id/ed_order_price_sales"
@@ -116,7 +89,8 @@
         android:layout_alignLeft="@+id/ed_order_price_sales"
         android:layout_below="@+id/ed_order_price_sales"
         android:text="Desconto R$"
-        android:layout_marginTop="@dimen/lv_row_padding_top"/>
+        android:layout_marginTop="@dimen/lv_row_padding_top"
+        android:paddingTop="@dimen/font_size_h2"/>
 
     <TextView
         android:id="@+id/tv_order_discount_title"
@@ -126,7 +100,8 @@
         style="@style/AppTheme.TextViewPrimary"
         android:layout_alignTop="@+id/tv_order_discount_reais_title"
         android:layout_alignRight="@+id/tvQtd"
-        android:layout_alignEnd="@+id/tvQtd" />
+        android:layout_alignEnd="@+id/tvQtd"
+        android:paddingTop="@dimen/font_size_h2"/>
 
     <ImageButton
         android:id="@+id/btn_order_dialog_add"
@@ -160,13 +135,15 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:background="@drawable/selector_button"
-        android:layout_marginTop="@dimen/lv_row_padding_top"/>
+        android:layout_marginTop="@dimen/lv_row_padding_top"
+        android:paddingTop="@dimen/font_size_h2"/>
 
     <TextView
         android:id="@+id/tvQtd"
         style="@style/AppTheme.TextViewPrimary"
         android:layout_below="@+id/tvPreco"
         android:layout_marginTop="@dimen/lv_row_padding_top"
-        android:text="Quantidade:" />
+        android:text="Quantidade:"
+        android:paddingTop="@dimen/font_size_h2"/>
 
 </RelativeLayout>
