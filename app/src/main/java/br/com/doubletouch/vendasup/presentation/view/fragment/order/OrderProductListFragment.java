@@ -410,9 +410,19 @@ public class OrderProductListFragment  extends ScrollTabHolderFragment implement
 
                 if(orderItem != null ){
                     changeValue(lbl_order_product_amount, orderItem.getQuantity());
+                    lblProdutoPreco.setText( DoubleUtil.formatToCurrency( orderItem.getSalePrice(), true) );
 
+                } else {
+                    lblProdutoPreco.setText( DoubleUtil.formatToCurrency( product.getSalePrice(), true) );
                 }
+            } else {
+                lblProdutoPreco.setText( DoubleUtil.formatToCurrency( product.getSalePrice(), true) );
             }
+
+
+            lblProdutoDescricao.setText(product.getDescription());
+            lblProdutoEstoque.setText( String.valueOf(product.getStockAmount()));
+
 
             ImageButton btnAdd = (ImageButton) view.findViewById(R.id.btn_order_product_add);
             ImageButton btnRemove = (ImageButton) view.findViewById(R.id.btn_order_product_remove);
@@ -471,9 +481,6 @@ public class OrderProductListFragment  extends ScrollTabHolderFragment implement
             });
 
 
-            lblProdutoDescricao.setText(product.getDescription());
-            lblProdutoPreco.setText( DoubleUtil.formatToCurrency( product.getSalePrice(), true) );
-            lblProdutoEstoque.setText( String.valueOf(product.getStockAmount()));
 
             return view;
         }

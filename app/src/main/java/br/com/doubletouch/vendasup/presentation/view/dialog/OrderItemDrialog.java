@@ -53,11 +53,8 @@ public class OrderItemDrialog extends DialogFragment {
 
     private int tabPosition;
 
-
-    private TextView tv_order_product_price;
     private EditText ed_order_quantity;
     private EditText ed_order_price_sales;
-    private Spinner sp_order_price_table;
     private ImageButton btnRemove;
     private ImageButton btnAdd;
 
@@ -119,10 +116,8 @@ public class OrderItemDrialog extends DialogFragment {
         btnRemove = (ImageButton) view.findViewById(R.id.btn_order_dialog_remove);
         btnAdd = (ImageButton) view.findViewById(R.id.btn_order_dialog_add);
 
-        tv_order_product_price = (TextView)  view.findViewById(R.id.tv_order_product_price);
         ed_order_quantity = (EditText)  view.findViewById(R.id.ed_order_quantity);
         ed_order_price_sales = (EditText)  view.findViewById(R.id.ed_order_price_sales);
-        sp_order_price_table = (Spinner) view.findViewById(R.id.sp_order_price_table);
         tv_order_discount_title = (TextView) view.findViewById(R.id.tv_order_discount_title);
         et_order_discount = (TextView) view.findViewById(R.id.et_order_discount);
         et_order_discount_reais = (TextView) view.findViewById(R.id.et_order_discount_reais);
@@ -135,9 +130,9 @@ public class OrderItemDrialog extends DialogFragment {
 
         orderItem = getOrCreate(product);
 
-        tv_order_product_price.setText(DoubleUtil.formatToCurrency(orderItem.getSalePrice(), true));
         ed_order_quantity.setText(String.valueOf( orderItem.getQuantity() ));
         ed_order_price_sales.setText(String.valueOf( orderItem.getSalePrice() ));
+
 
 
         addListners();
@@ -155,7 +150,7 @@ public class OrderItemDrialog extends DialogFragment {
                 } else {
                     orderItem.setSalePrice( getPrice() );
                     orderItem.setQuantity(getQuantity());
-                    orderItem.setPriceTable(priceTableSelected);
+                    orderItem.setPriceTable( getDefaultPriceTable() );
                     addSeNaoExiste();
                 }
                 produtoAdicionadoListener.pressed();
@@ -181,7 +176,6 @@ public class OrderItemDrialog extends DialogFragment {
         alertDialog = builder.create();
 
         initializePresenter();
-
 
         return alertDialog;
 
@@ -304,8 +298,6 @@ public class OrderItemDrialog extends DialogFragment {
             orderItem.setOrganizationID( VendasUp.getBranchOffice().getOrganization().getOrganizationID() );
             orderItem.setSequence(OrderFragment.order.getOrdersItens().size() + 1);
 
-
-
         }
 
         return orderItem;
@@ -350,6 +342,14 @@ public class OrderItemDrialog extends DialogFragment {
 
     public void loadPriceTableList(final List<PriceTable> tabelas) {
 
+        priceTableSelected = tabelas.get(0);
+        this.tabelas = tabelas;
+
+        atualizaReajuste( String.valueOf( orderItem.getSalePrice() ) );
+
+
+
+/*
         this.tabelas = tabelas;
 
         ArrayAdapter<PriceTable> adapter = new ArrayAdapter<PriceTable>( context, android.R.layout.simple_spinner_dropdown_item, tabelas );
@@ -395,7 +395,7 @@ public class OrderItemDrialog extends DialogFragment {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
+        });*/
 
 
     }
@@ -468,7 +468,7 @@ public class OrderItemDrialog extends DialogFragment {
     }
 
 
-    private PriceTable getPriceTable( Integer priceTableId ) {
+    /*private PriceTable getPriceTable( Integer priceTableId ) {
 
         PriceTable retorno = null;
 
@@ -491,11 +491,13 @@ public class OrderItemDrialog extends DialogFragment {
 
         return  retorno;
 
-    }
+    }*/
 
 
     private PriceTable getDefaultPriceTable() {
 
+        return tabelas.get(0);
+        /*
         PriceTable defaultPriceTable = null;
 
         if(OrderFragment.lastPriceTableSelected != null) {
@@ -518,7 +520,7 @@ public class OrderItemDrialog extends DialogFragment {
 
         }
 
-        return  defaultPriceTable;
+        return  defaultPriceTable;*/
     }
 
 }

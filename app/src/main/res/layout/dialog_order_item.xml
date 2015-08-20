@@ -5,45 +5,6 @@
     android:paddingLeft="@dimen/activity_padding_left"
     android:paddingRight="@dimen/activity_padding_right" >
 
-    <TextView
-        android:id="@+id/tv_price_table_title"
-        style="@style/AppTheme.TextViewPrimary"
-        android:layout_width="wrap_content"
-        android:paddingTop="@dimen/font_size_h2"
-        android:text="@string/tv_title_price_table_whit_colon"
-        android:layout_marginTop="@dimen/lv_row_padding_top"/>
-
-
-    <Spinner
-        android:id="@+id/sp_order_price_table"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/tv_price_table_title"
-        android:layout_toEndOf="@+id/tv_price_table_title"
-        android:layout_marginTop="@dimen/lv_row_padding_top"
-        android:prompt="@string/sp_price_table_empty">
-
-    </Spinner>
-
-    <TextView
-        android:id="@+id/tvPreco"
-        style="@style/AppTheme.TextViewPrimary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_price_table_title"
-        android:text="@string/tv_price"
-        android:layout_marginTop="@dimen/lv_row_padding_top"
-        android:paddingTop="@dimen/font_size_h2"/>
-
-    <TextView
-        android:id="@+id/tv_order_product_price"
-        style="@style/AppTheme.TextViewSecundary"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/tvPreco"
-        android:layout_alignBottom="@+id/tvPreco"
-        android:layout_toRightOf="@+id/tvPreco"
-        android:text="0,0" />
 
     <TextView
         android:id="@+id/tvPrecoVenda"
@@ -135,8 +96,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:background="@drawable/selector_button"
-        android:layout_marginTop="@dimen/lv_row_padding_top"
-        android:paddingTop="@dimen/font_size_h2"/>
+        android:layout_marginTop="@dimen/font_size_h3"/>
 
     <TextView
         android:id="@+id/tvQtd"
