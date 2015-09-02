@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="br.com.doubletouch.vendasup" >
+    package="br.com.doubletouch.vendasup"
+    android:versionCode="2"
+    android:versionName="0.2">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -16,60 +18,71 @@
         android:name=".VendasUp">
         <activity
             android:name="br.com.doubletouch.vendasup.presentation.view.activity.ProductListActivity"
-            android:label="@string/title_activity_product_list" >
+            android:label="@string/title_activity_product_list"
+            android:screenOrientation="portrait">
         </activity>
 
         <activity
             android:name="br.com.doubletouch.vendasup.presentation.view.activity.ProductDetailsActivity"
-            android:label="@string/title_activity_product_details" >
+            android:label="@string/title_activity_product_details"
+            android:screenOrientation="portrait">
         </activity>
 
         <activity
             android:name="br.com.doubletouch.vendasup.presentation.view.activity.MenuActivity"
-            android:label="@string/title_activity_menu" >
+            android:label="@string/title_activity_menu"
+            android:screenOrientation="portrait">
         </activity>
 
         <activity
             android:name="br.com.doubletouch.vendasup.presentation.view.activity.CustomerListActivity"
-            android:label="@string/title_activity_customer_list">
+            android:label="@string/title_activity_customer_list"
+            android:screenOrientation="portrait">
         </activity>
 
         <activity
             android:name="br.com.doubletouch.vendasup.presentation.view.activity.CustomerDetailsActivity"
-            android:label="@string/title_activity_customer_details" >
+            android:label="@string/title_activity_customer_details"
+            android:screenOrientation="portrait" >
         </activity>
 
         <activity
             android:name="br.com.doubletouch.vendasup.presentation.view.activity.LoginActivity"
             android:windowSoftInputMode="stateHidden"
-            android:label="@string/title_activity_login" >
+            android:label="@string/title_activity_login"
+            android:screenOrientation="portrait">
         </activity>
 
         <activity
             android:name=".presentation.view.activity.order.OrderActivity"
             android:windowSoftInputMode="stateHidden"
-            android:label="@string/title_activity_order" >
+            android:label="@string/title_activity_order"
+            android:screenOrientation="portrait" >
         </activity>
 
         <activity
             android:name=".presentation.view.activity.order.OrderProductActivity"
-            android:label="@string/title_activity_order_products" >
+            android:label="@string/title_activity_order_products"
+            android:screenOrientation="portrait" >
         </activity>
 
         <activity
             android:name=".presentation.view.activity.order.OrderPaymentActivity"
-            android:label="@string/title_activity_order_payments" >
+            android:label="@string/title_activity_order_payments"
+            android:screenOrientation="portrait" >
         </activity>
 
 
         <activity
             android:name=".presentation.view.activity.SynchronizationActivity"
-            android:label="@string/title_activity_synchronization" >
+            android:label="@string/title_activity_synchronization"
+            android:screenOrientation="portrait">
         </activity>
 
         <activity
             android:name=".presentation.view.activity.order.OrderListActivity"
-            android:label="@string/title_activity_historic" >
+            android:label="@string/title_activity_historic"
+            android:screenOrientation="portrait" >
         </activity>
 
 
@@ -77,30 +90,35 @@
         <activity
             android:name=".presentation.view.activity.SigninActivity"
             android:windowSoftInputMode="stateHidden"
-            android:label="@string/title_activity_welcome" >
+            android:label="@string/title_activity_welcome"
+            android:screenOrientation="portrait">
         </activity>
 
 
         <activity
             android:name=".presentation.view.activity.SignupActivity"
             android:windowSoftInputMode="stateHidden"
-            android:label="@string/title_activity_welcome" >
+            android:label="@string/title_activity_welcome"
+            android:screenOrientation="portrait">
         </activity>
 
         <activity
             android:name=".presentation.view.activity.ExpiredActivity"
-            android:label="@string/title_activity_expired" >
+            android:label="@string/title_activity_expired"
+            android:screenOrientation="portrait" >
         </activity>
 
         <activity
             android:name=".presentation.view.activity.InstallmentActivity"
-            android:label="@string/title_activity_installment" >
+            android:label="@string/title_activity_installment"
+            android:screenOrientation="portrait" >
         </activity>
 
         <activity
             android:name=".presentation.view.activity.InstallmentDetailsActivity"
             android:windowSoftInputMode="stateHidden"
-            android:label="@string/title_activity_installment" >
+            android:label="@string/title_activity_installment"
+            android:screenOrientation="portrait" >
         </activity>
 
 
@@ -108,7 +126,8 @@
 
         <activity
             android:name="br.com.doubletouch.vendasup.presentation.view.activity.SplashActivity"
-            android:label="@string/title_activity_carga_inicial" >
+            android:label="@string/title_activity_carga_inicial"
+            android:screenOrientation="portrait">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

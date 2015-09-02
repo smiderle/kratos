@@ -39,11 +39,11 @@ public class ImageLoader {
         executorService=Executors.newFixedThreadPool(5);
     }
 
-    final int stub_id= R.drawable.ic_launcher;
+    final int stub_id= R.drawable.ic_account_circle_grey600_36dp;
 
     public void displayImage(String url, ImageView imageView)    {
         if( url == null ){
-            imageView.setImageResource(R.drawable.ic_launcher);
+            imageView.setImageResource(R.drawable.ic_account_circle_grey600_36dp);
         } else {
             imageViews.put(imageView, url);
             Bitmap bitmap=memoryCache.get(url);

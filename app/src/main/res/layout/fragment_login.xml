@@ -92,6 +92,18 @@
                     android:layout_marginTop="@dimen/font_size_h3"/>
 
 
+                <TextView
+                    android:id="@+id/tv_expired_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/AppTheme.TextViewPrimary"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_size_h3"
+                    android:layout_marginTop="@dimen/font_size_h5"
+                    android:visibility="invisible"
+                    android:layout_gravity="center_horizontal" />
+
+
             </LinearLayout>
 
         </LinearLayout>

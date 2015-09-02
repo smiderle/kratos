@@ -67,6 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:hint="@string/tv_password"
+                android:inputType="textVisiblePassword"
                 android:layout_marginTop="@dimen/font_size_h1"/>
 
             <Button

@@ -3,6 +3,7 @@ package br.com.doubletouch.vendasup.presentation.view;
 import java.util.List;
 
 import br.com.doubletouch.vendasup.data.entity.BranchOffice;
+import br.com.doubletouch.vendasup.data.entity.License;
 
 /**
  * Created by LADAIR on 24/03/2015.
@@ -16,4 +17,7 @@ public interface LoginView extends LoadDataView {
     void loadLastLogin(String login, String password);
 
     void expiredVersion();
+
+
+    void onMostraDiaExpiracao( License license);
 }

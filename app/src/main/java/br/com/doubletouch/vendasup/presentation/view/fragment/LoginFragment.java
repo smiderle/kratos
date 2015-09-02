@@ -20,10 +20,13 @@ import java.util.List;
 
 import br.com.doubletouch.vendasup.R;
 import br.com.doubletouch.vendasup.data.entity.BranchOffice;
+import br.com.doubletouch.vendasup.data.entity.License;
+import br.com.doubletouch.vendasup.data.entity.enumeration.VersionType;
 import br.com.doubletouch.vendasup.presentation.navigation.Navigator;
 import br.com.doubletouch.vendasup.presentation.presenter.LoginPresenter;
 import br.com.doubletouch.vendasup.presentation.view.LoginView;
 import br.com.doubletouch.vendasup.presentation.view.activity.ExpiredActivity;
+import br.com.doubletouch.vendasup.util.DateUtil;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -47,6 +50,10 @@ public class LoginFragment extends BaseFragment implements LoginView {
 
     @InjectView(R.id.btn_notification)
     Button btn_notification;
+
+
+    @InjectView(R.id.tv_expired_info)
+    TextView tv_expired_info;
 
     private LoginPresenter loginPresenter;
 
@@ -156,5 +163,14 @@ public class LoginFragment extends BaseFragment implements LoginView {
     @Override
     public void expiredVersion() {
         navigator.navigateTo( activity, ExpiredActivity.class);
+    }
+
+    @Override
+    public void onMostraDiaExpiracao(License license) {
+        if(license.getVersionType().equals(VersionType.DEMONSTRACAO)){
+            tv_expired_info.setVisibility(View.VISIBLE);
+            tv_expired_info.setText( "Versão demonstração valida até "+ DateUtil.formatDate( license.getExpirationDate() ) );
+        }
+
     }
 }

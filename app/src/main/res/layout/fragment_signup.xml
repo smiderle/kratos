@@ -57,6 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:inputType="textVisiblePassword"
                 android:hint="@string/tv_password"
                 android:paddingTop="@dimen/font_size_h8"/>
 
@@ -65,6 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:inputType="textVisiblePassword"
                 android:hint="@string/tv_password_re"
                 android:paddingTop="@dimen/font_size_h8"/>
 

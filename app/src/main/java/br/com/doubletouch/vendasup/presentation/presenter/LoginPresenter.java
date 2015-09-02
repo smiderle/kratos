@@ -9,6 +9,7 @@ import br.com.doubletouch.vendasup.data.entity.BranchOffice;
 import br.com.doubletouch.vendasup.data.entity.License;
 import br.com.doubletouch.vendasup.data.entity.User;
 import br.com.doubletouch.vendasup.data.entity.UserBranchOffice;
+import br.com.doubletouch.vendasup.data.entity.enumeration.VersionType;
 import br.com.doubletouch.vendasup.data.executor.JobExecutor;
 import br.com.doubletouch.vendasup.data.service.LicenseService;
 import br.com.doubletouch.vendasup.data.service.LicenseServiceImpl;
@@ -54,6 +55,7 @@ public class LoginPresenter implements Presenter {
     public void initialize(){
         loadLastLogin();
         loadBranches();
+        validaDataExpiracao();
     }
 
     public void login(String login, String senha, BranchOffice branchOffice){
@@ -108,6 +110,25 @@ public class LoginPresenter implements Presenter {
         }
 
         return isValid;
+
+    }
+
+
+    public void validaDataExpiracao() {
+
+
+        LicenseService licenseService = new LicenseServiceImpl();
+
+
+        int userId = new SharedPreferencesUtil(loginView.getContext()).getInteger( SharedPreferencesUtil.PREFERENCES_USER_ID );
+
+        License license = licenseService.findByUserId( userId );
+
+        if( license != null &&  license.getVersionType().equals( VersionType.DEMONSTRACAO ) ){
+
+            loginView.onMostraDiaExpiracao( license );
+
+        }
 
     }
 
@@ -201,6 +222,8 @@ public class LoginPresenter implements Presenter {
         SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil(loginView.getContext());
         sharedPreferencesUtil.addString(SharedPreferencesUtil.PREFERENCES_LOGIN, user.getEmail() );
         sharedPreferencesUtil.addString(SharedPreferencesUtil.PREFERENCES_PASSWORD , user.getPassword() );
+        sharedPreferencesUtil.addString(SharedPreferencesUtil.PREFERENCES_PASSWORD , user.getPassword() );
+        sharedPreferencesUtil.addInteger(SharedPreferencesUtil.PREFERENCES_USER_ID , user.getUserID() );
 
     }
 
