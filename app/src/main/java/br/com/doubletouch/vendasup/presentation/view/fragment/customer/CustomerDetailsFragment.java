@@ -1,7 +1,9 @@
 package br.com.doubletouch.vendasup.presentation.view.fragment.customer;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -19,6 +21,8 @@ import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import java.nio.charset.CharsetDecoder;
 
 import br.com.doubletouch.vendasup.R;
 import br.com.doubletouch.vendasup.VendasUp;
@@ -174,12 +178,32 @@ public class CustomerDetailsFragment  extends BaseParallacxFragment implements C
         inflater.inflate(R.menu.menu_details_view, menu);
 
         if( ViewMode.EDICAO.equals( viewMode ) || ViewMode.INCLUSAO.equals( viewMode ) ) {
+            menu.findItem(R.id.it_delete).setVisible(false);
             menuEdit = menu.findItem(R.id.it_edit).setVisible(false);
+
             menu.findItem(R.id.it_done).setVisible(true);
         } else {
+            menu.findItem(R.id.it_edit).setVisible(true);
             menuEdit = menu.findItem(R.id.it_edit).setVisible(true);
             menu.findItem(R.id.it_done).setVisible(false);
         }
+    }
+
+
+    private void deleteCustomer() {
+
+        new AlertDialog.Builder(activity)
+                .setMessage("Deseja excluir o cliente \"" + customer.getName() + "\" ?")
+                .setCancelable(true)
+                .setPositiveButton(R.string.btn_excluir, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        CustomerDetailsFragment.this.customerDetailsPresenter.deleteCustomer(customer);
+                    }
+                })
+                .setNegativeButton(R.string.btn_cancelar, null)
+                .show();
+
     }
 
     /**
@@ -224,11 +248,15 @@ public class CustomerDetailsFragment  extends BaseParallacxFragment implements C
             case R.id.it_done:
                 saveCustomer();
                 break;
+            case R.id.it_delete:
+                deleteCustomer();
+                break;
             default:
                 super.onOptionsItemSelected(item);
         }
         return super.onOptionsItemSelected(item);
     }
+
 
     @Override
     public void initializePresenter(){
@@ -268,6 +296,12 @@ public class CustomerDetailsFragment  extends BaseParallacxFragment implements C
     @Override
     public void customerSaved() {
         Toast.makeText(activity, "Cliente salvo com sucesso" ,Toast.LENGTH_LONG).show();
+        navigator.previousActivity(activity);
+    }
+
+    @Override
+    public void customerRemoved() {
+        Toast.makeText(activity, "Cliente excluido com sucesso" ,Toast.LENGTH_LONG).show();
         navigator.previousActivity(activity);
     }
 

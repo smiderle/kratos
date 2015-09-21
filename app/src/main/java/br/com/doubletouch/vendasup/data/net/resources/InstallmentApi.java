@@ -78,4 +78,35 @@ public class InstallmentApi extends AbstractApi {
         }
 
     }
+
+    public  ApiResponse<ServiceResponse<List<Installment>>> update( List<Installment> customers ) throws IOException, SyncronizationException {
+
+        InstallmentEntityJsonMaper customerEntityJsonMaper = new InstallmentEntityJsonMaper();
+        RestClient restClient = new RestClient(Endpoints.ENDPOINT_INSTALLMENT, Methods.INSALMENT_SAVE_LIST);
+
+        Gson gson = new Gson();
+        String customerJson = gson.toJson(customers);
+
+        RESTResponse response = restClient.post(customerJson);
+
+        if( response.getCode() == 200 ) {
+
+            String json = response.getJson();
+
+            ApiResponse<ServiceResponse<List<Installment>>> apiResponse =  customerEntityJsonMaper.transformInstallmentCollection(json);
+
+            if( apiResponse.getCode().equals( ApiResponse.CODE_SUCESS ) ) {
+
+                return apiResponse;
+
+            } else {
+
+                throw new SyncronizationException( apiResponse.getMessage() );
+
+            }
+        } else {
+            throw new SyncronizationException( response.getException() );
+        }
+
+    }
 }

@@ -2,6 +2,7 @@ package br.com.doubletouch.vendasup.presentation.view.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import br.com.doubletouch.vendasup.R;
 import br.com.doubletouch.vendasup.VendasUp;
 import br.com.doubletouch.vendasup.data.SharedPreferencesUtil;
+import br.com.doubletouch.vendasup.data.entity.enumeration.Flag;
 import br.com.doubletouch.vendasup.presentation.navigation.Navigator;
 import br.com.doubletouch.vendasup.presentation.presenter.SignupPresenter;
 import br.com.doubletouch.vendasup.presentation.view.SigninView;
@@ -114,9 +116,9 @@ public class SignupFragment   extends BaseFragment implements SigninView {
     @OnClick(R.id.btn_signup)
     public void onClickSignUp(){
 
-        String email = et_email.getText().toString().trim();
-        String password = et_password.getText().toString().trim();
-        String password_re = et_password_re.getText().toString().trim();
+        String email = et_email.getText().toString().replaceAll("\\s", "");
+        String password = et_password.getText().toString().replaceAll("\\s", "");
+        String password_re = et_password_re.getText().toString().replaceAll("\\s", "");
 
         String messageError = validate(email, password, password_re);
 
@@ -140,7 +142,8 @@ public class SignupFragment   extends BaseFragment implements SigninView {
 
         String messageError = null;
 
-        if( email.equals("") || !email.contains("@") ){
+
+        if( email.equals("") || !email.contains("@") || !email.contains(".com") ){
 
             messageError = "Email inválido.";
 
@@ -176,11 +179,11 @@ public class SignupFragment   extends BaseFragment implements SigninView {
     public void onSuccessSynchronization() {
 
 
-        Toast.makeText(getActivity(), "SUCESSO", Toast.LENGTH_LONG).show();
-        navigator.navigateTo(activity, LoginActivity.class);
+        //Toast.makeText(getActivity(), "SUCESSO", Toast.LENGTH_LONG).show();
+        navigator.navigateTo( activity, LoginActivity.class, Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK );
 
-        String email = et_email.getText().toString().trim();
-        String password = et_password.getText().toString().trim();
+        String email = et_email.getText().toString().replaceAll("\\s", "");
+        String password = et_password.getText().toString().replaceAll("\\s", "");
 
         SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil( activity );
         sharedPreferencesUtil.addString(SharedPreferencesUtil.PREFERENCES_LOGIN, email );

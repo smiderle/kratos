@@ -17,5 +17,13 @@
         app:showAsAction="always"/>
 
 
+    <item
+        android:id="@+id/it_delete"
+        android:icon="@drawable/ic_delete_white_24dp"
+        android:title="@string/save_title"
+        android:visible="true"
+        app:showAsAction="always"/>
+
+
 
 </menu>

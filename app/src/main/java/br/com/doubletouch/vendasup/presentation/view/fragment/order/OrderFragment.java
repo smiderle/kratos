@@ -441,10 +441,13 @@ public class OrderFragment extends BaseFragment implements OrderView {
 
 
     private void setOrderNumber(){
-        tv_order_number_title.setVisibility(View.VISIBLE);
-        tv_order_number.setVisibility(View.VISIBLE);
+        if(order.getID() > 0){
+            tv_order_number_title.setVisibility(View.VISIBLE);
+            tv_order_number.setVisibility(View.VISIBLE);
 
-        tv_order_number.setText( String.valueOf( order.getID() ) );
+            tv_order_number.setText( String.valueOf( order.getID() ) );
+        }
+
     }
 
 

@@ -11,6 +11,10 @@ public interface Methods {
     public static final String PRODUTO_ORDER_LIST = "saveList";
     public static final String INSALMENT_SAVE_LIST = "saveList";
 
+    public static final String PRODUTO_UPDATE_LIST = "updateList";
+    public static final String CUSTOMER_UPDATE_LIST = "updateList";
+    public static final String INSALMENT_UPDATE_LIST = "updateList";
+
     public static final String CUSTOMER_GET_ALL_BY_CHANGE_GREATER_THAN = "getAllByChangeGreaterThan";
     public static final String PRICE_TABLE_GET_ALL_BY_CHANGE_GREATER_THAN = "getAllByChangeGreaterThan";
     public static final String INSTALLMENT_GET_ALL_BY_CHANGE_GREATER_THAN = "getAllByChangeGreaterThan";

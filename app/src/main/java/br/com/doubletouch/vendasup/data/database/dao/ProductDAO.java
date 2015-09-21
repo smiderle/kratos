@@ -41,7 +41,7 @@ public class ProductDAO {
     public List<Product> getAll(Integer branchId){
         ArrayList<Product> products = new ArrayList<>();
 
-        String where = ProductDB.IDFILIAL+" = ? ";
+        String where = ProductDB.IDFILIAL+" = ? AND ( " + ProductDB.EXCLUIDO + " = 0 OR " + ProductDB.EXCLUIDO + " IS NULL )" ;
         Cursor c = db.query(ProductDB.TABELA, ProductDB.COLUNAS, where, new String[]{String.valueOf(branchId)}, null, null, null, LIMIT);
 
         if(c.moveToFirst()){
@@ -59,7 +59,7 @@ public class ProductDAO {
 
         String sql = "SELECT MAX("+ ProductDB.ID +") AS max_id FROM " + ProductDB.TABELA;
 
-        Cursor cursor = db.rawQuery( sql, null );
+        Cursor cursor = db.rawQuery(sql, null);
 
         if(cursor.moveToFirst()){
             max = cursor.getInt( 0 );
@@ -86,10 +86,26 @@ public class ProductDAO {
         return min;
     }
 
-    public List<Product> getAllSyncPending(Integer branchId) {
+    public List<Product> getAllSyncPendenteAtualizados(Integer branchId) {
         ArrayList<Product> products = new ArrayList<>();
 
-        String where = ProductDB.IDFILIAL+" = ? AND  " +ProductDB.SYNC_PENDENTE +" = 1 " ;
+        String where = ProductDB.IDFILIAL+" = ? AND  " +ProductDB.SYNC_PENDENTE +" = 1 AND "+ ProductDB.ID +" >= 0 " ;
+        Cursor c = db.query(ProductDB.TABELA, ProductDB.COLUNAS, where, new String[]{String.valueOf(branchId)}, null, null, null, null);
+
+        if(c.moveToFirst()){
+            do {
+                products.add(getByCursor(c));
+            } while (c.moveToNext());
+        }
+        c.close();
+        return  products;
+    }
+
+
+    public List<Product> getAllSyncPendenteNovos(Integer branchId) {
+        ArrayList<Product> products = new ArrayList<>();
+
+        String where = ProductDB.IDFILIAL+" = ? AND  " +ProductDB.SYNC_PENDENTE +" = 1 AND "+ ProductDB.ID_MOBILE +" < 0" ;
         Cursor c = db.query(ProductDB.TABELA, ProductDB.COLUNAS, where, new String[]{String.valueOf(branchId)}, null, null, null, null);
 
         if(c.moveToFirst()){
@@ -137,6 +153,11 @@ public class ProductDAO {
         where.append(" AND ");
         where.append(ProductDB.IDFILIAL);
         where.append(" = ? ");
+        where.append(" AND (");
+        where.append(ProductDB.EXCLUIDO );
+        where.append(" = 0 OR ");
+        where.append(ProductDB.EXCLUIDO );
+        where.append(" IS NULL )");
 
         Cursor c = db.query(ProductDB.TABELA, ProductDB.COLUNAS, where.toString(), new String[]{ productId, String.valueOf( branchId )}, null, null, null, LIMIT);
 
@@ -209,8 +230,12 @@ public class ProductDAO {
         product.setDescription(c.getString(idxDescricao));
         product.setActive( c.getInt(idxAtivo) == 1 );
         product.setPackaging(c.getString(idxEmbalagem));
-        product.setIdMobile(c.getInt(idxIdMobile));
+
         product.setSyncPending(c.getInt( idxSyncPendente ) == 1);
+
+        if(!c.isNull(idxIdMobile )){
+           product.setIdMobile( c.getInt( idxIdMobile ));
+        }
 
         return product;
     }

@@ -53,7 +53,15 @@ public class CustomerDetailsPresenter implements Presenter {
 
     public void saveCustomer(Customer customer){
         this.showViewLoading();
+        customer.setExcluded(false);
         this.saveCustomerExecutor(customer);
+    }
+
+    public void deleteCustomer(Customer customer){
+        this.showViewLoading();
+        customer.setSyncPending(true);
+        customer.setExcluded(true);
+        this.deleteCustomerExecutor(customer);
     }
 
 
@@ -95,6 +103,10 @@ public class CustomerDetailsPresenter implements Presenter {
         this.customerDetailsView.customerSaved();
     }
 
+    private void customerRemoved(){
+        this.customerDetailsView.customerRemoved();
+    }
+
 
     public void createNewCustomer() {
 
@@ -127,6 +139,10 @@ public class CustomerDetailsPresenter implements Presenter {
 
     private void saveCustomerExecutor(Customer customer){
         this.saveCustomerUseCase.execute(customer, this.saveCustomerCallback);
+    }
+
+    private void deleteCustomerExecutor(Customer customer){
+        this.saveCustomerUseCase.execute(customer, this.removeCustomerCallback);
     }
 
     private void showErrorMessage(ErrorBundle errorBundle) {
@@ -176,6 +192,21 @@ public class CustomerDetailsPresenter implements Presenter {
             CustomerDetailsPresenter.this.showErrorMessage(errorBundle);
         }
     };
+
+    private final SaveCustomerUseCase.Callback removeCustomerCallback = new SaveCustomerUseCase.Callback() {
+        @Override
+        public void onCustomerSaved(Customer customer) {
+            CustomerDetailsPresenter.this.customerRemoved();
+            CustomerDetailsPresenter.this.hideViewLoading();
+        }
+
+        @Override
+        public void onError(ErrorBundle errorBundle) {
+            CustomerDetailsPresenter.this.hideViewLoading();
+            CustomerDetailsPresenter.this.showErrorMessage(errorBundle);
+        }
+    };
+
 
 
     private final GetPriceTableListUseCase.Callback priceTableCallback = new GetPriceTableListUseCase.Callback(){

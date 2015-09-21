@@ -13,6 +13,8 @@ public interface InstallmentDetailsView extends LoadDataView {
 
     void installmentSaved();
 
+    void installmentRemoved();
+
 
 
 }

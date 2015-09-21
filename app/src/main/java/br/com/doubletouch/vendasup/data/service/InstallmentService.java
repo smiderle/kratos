@@ -32,6 +32,12 @@ public interface InstallmentService {
         void onError(ErrorBundle errorBundle);
     }
 
+    interface InstallmentRemoveCallback {
+        void onInstallmentRemoved(Installment installment);
+
+        void onError(ErrorBundle errorBundle);
+    }
+
     void getInstallmentList( InstallmentListCallback installmentListCallback);
 
     void getInstallment( Integer idInstallment, InstallmentCallback installmentCallback);
@@ -46,11 +52,15 @@ public interface InstallmentService {
 
     void save(Installment installment,final InstallmentSaveCallback installmentSaveCallback);
 
+    void delete(Installment installment,final InstallmentRemoveCallback installmentRemoveCallback);
+
     Integer getLessNegative();
 
     void updateByIdMobile(List<Installment> installments);
 
-    List<Installment> getAllSyncPending(Integer branchId);
+    List<Installment> getAllSyncPendenteNovos(Integer branchId);
+
+    List<Installment> getAllSyncPendenteAtualizados(Integer branchId);
 
 
 }

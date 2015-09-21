@@ -2,6 +2,7 @@ package br.com.doubletouch.vendasup.presentation.view.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -128,8 +129,8 @@ public class SigninFragment  extends BaseFragment implements SigninView {
     @Override
     public void showDialogSynchronization() {
 
-        String email = et_email.getText().toString().trim();
-        String password = et_password.getText().toString().trim();
+        String email = et_email.getText().toString().replaceAll("\\s", "");
+        String password = et_password.getText().toString().replaceAll("\\s", "");
 
         if(isValidate(email, password)){
 
@@ -148,7 +149,7 @@ public class SigninFragment  extends BaseFragment implements SigninView {
             dialog.show(getFragmentManager(), "");
 
         } else {
-            showError("Informe um email e senha válidos.");
+            showError("Informe um e-mail e senha válidos.");
         }
 
 
@@ -160,7 +161,7 @@ public class SigninFragment  extends BaseFragment implements SigninView {
 
     private boolean isValidate(String email, String password){
 
-        if(email.trim().equals("") || password.trim().equals("") || !email.contains("@") ){
+        if(email.trim().equals("") || password.trim().equals("") || !email.contains("@") || !email.contains(".com") ){
 
             return false;
 
@@ -174,11 +175,11 @@ public class SigninFragment  extends BaseFragment implements SigninView {
     @Override
     public void onSuccessSynchronization() {
 
-        Toast.makeText(getActivity(), "SUCESSO", Toast.LENGTH_LONG).show();
-        navigator.navigateTo(activity, LoginActivity.class);
+        //Toast.makeText(getActivity(), "SUCESSO", Toast.LENGTH_LONG).show();
+        navigator.navigateTo( activity, LoginActivity.class, Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK );
 
-        String email = et_email.getText().toString().trim();
-        String password = et_password.getText().toString().trim();
+        String email = et_email.getText().toString().replaceAll("\\s", "");
+        String password = et_password.getText().toString().replaceAll("\\s", "");
 
         SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil( activity );
         sharedPreferencesUtil.addString(SharedPreferencesUtil.PREFERENCES_LOGIN, email );

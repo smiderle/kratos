@@ -167,9 +167,16 @@ public class LoginFragment extends BaseFragment implements LoginView {
 
     @Override
     public void onMostraDiaExpiracao(License license) {
-        if(license.getVersionType().equals(VersionType.DEMONSTRACAO)){
+        if( license.getVersionType().equals(VersionType.DEMONSTRACAO ) ){
+
             tv_expired_info.setVisibility(View.VISIBLE);
-            tv_expired_info.setText( "Versão demonstração valida até "+ DateUtil.formatDate( license.getExpirationDate() ) );
+            if( loginPresenter.isLicensaValida( license ) ){
+                tv_expired_info.setText( "Versão demonstração válida até "+ DateUtil.formatDateUTC( license.getExpirationDate() ) );
+            } else {
+                tv_expired_info.setText( "Versão demonstração expirou dia "+ DateUtil.formatDateUTC( license.getExpirationDate() ) );
+            }
+
+
         }
 
     }

@@ -9,11 +9,11 @@
     <string name="title_activity_customer_details">Detalhes do Cliente</string>
     <string name="title_activity_login">Login</string>
     <string name="title_activity_order">Pedido</string>
-    <string name="title_activity_order_products">Produtos do Pedido</string>
+    <string name="title_activity_order_products">Itens do Pedido</string>
     <string name="title_activity_order_payments">Parcelamento</string>
     <string name="title_activity_synchronization">Sincronização</string>
     <string name="title_activity_historic">Histórico</string>
-    <string name="title_activity_welcome">Bem Vindo</string>
+    <string name="title_activity_welcome">Bem-Vindo</string>
     <string name="title_activity_expired">Versão Expirou</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -28,6 +28,8 @@
     <string name="btn_text_retry">Voltar</string>
 
     <string name="string_content_description">View não acessivel</string>
+    <string name="btn_excluir">Excluir</string>
+    <string name="btn_cancelar">Cancelar</string>
 
     <string name="tv_product_id">Código</string>
     <string name="tv_product_description">Descrição</string>

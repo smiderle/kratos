@@ -2,10 +2,12 @@ package br.com.doubletouch.vendasup.data.entity;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by LADAIR on 06/04/2015.
  */
-public class OrderItem {
+public class OrderItem implements Serializable{
 
     public OrderItem() {
     }

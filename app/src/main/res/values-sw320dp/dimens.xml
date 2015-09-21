@@ -66,8 +66,11 @@
     <!-- Altura da imagem principal que parace nos detalhes -->
     <dimen name="iv_height_main">105dp</dimen>
 
+
+    <dimen name="iv_height_menu">155dp</dimen>
+
     <!-- Altura da imagem principal que parace no login -->
-    <dimen name="iv_height_login">185dp</dimen>
+    <dimen name="iv_height_login">215dp</dimen>
 
     <!-- Largura da imagem que parace no menu -->
     <dimen name="iv_width_menu">65dp</dimen>
@@ -77,8 +80,8 @@
     <dimen name="lv_iv_width">47dp</dimen>
 
     <dimen name="parallax_min_header_height">106dp</dimen>
-    <dimen name="parallax_height">129dp</dimen>
-    <dimen name="parallax_tab_height">24dp</dimen>
+    <dimen name="parallax_height">145dp</dimen>
+    <dimen name="parallax_tab_height">40dp</dimen>
 
     <!-- Espaço a esquerda dos textos que estão após as imagens dos EditTexts de detalhes do produto por exemplo-->
     <dimen name="tv_title_marginleft_of_image">11dp</dimen>

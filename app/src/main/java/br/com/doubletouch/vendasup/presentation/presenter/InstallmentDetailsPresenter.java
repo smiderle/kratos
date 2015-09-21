@@ -5,6 +5,7 @@ import br.com.doubletouch.vendasup.data.entity.Installment;
 import br.com.doubletouch.vendasup.data.service.InstallmentService;
 import br.com.doubletouch.vendasup.data.service.InstallmentServiceImpl;
 import br.com.doubletouch.vendasup.domain.exception.ErrorBundle;
+import br.com.doubletouch.vendasup.domain.interactor.installment.DeleteInstallmentUseCase;
 import br.com.doubletouch.vendasup.domain.interactor.installment.GetInstallmentUseCase;
 import br.com.doubletouch.vendasup.domain.interactor.installment.SaveInstallmentUseCase;
 import br.com.doubletouch.vendasup.presentation.exception.ErrorMessageFactory;
@@ -21,10 +22,12 @@ public class InstallmentDetailsPresenter implements Presenter {
     private final InstallmentDetailsView installmentDetailsView;
     private final GetInstallmentUseCase getInstallmentDetailsUseCase;
     private final SaveInstallmentUseCase saveInstallmentUseCase;
+    private final DeleteInstallmentUseCase deleteInstallmentUseCase;
 
     private InstallmentService installmentService;
 
-    public InstallmentDetailsPresenter(InstallmentDetailsView installmentDetailsView, GetInstallmentUseCase getInstallmentDetailsUseCase, SaveInstallmentUseCase saveInstallmentUseCase) {
+    public InstallmentDetailsPresenter(InstallmentDetailsView installmentDetailsView, GetInstallmentUseCase getInstallmentDetailsUseCase, SaveInstallmentUseCase saveInstallmentUseCase,
+                                       DeleteInstallmentUseCase deleteInstallmentUseCase) {
         if (installmentDetailsView == null || getInstallmentDetailsUseCase == null || saveInstallmentUseCase == null) {
             throw new IllegalArgumentException("Parametros do construtor não podem ser nulos.");
         }
@@ -32,13 +35,36 @@ public class InstallmentDetailsPresenter implements Presenter {
         this.installmentDetailsView = installmentDetailsView;
         this.getInstallmentDetailsUseCase = getInstallmentDetailsUseCase;
         this.saveInstallmentUseCase = saveInstallmentUseCase;
-
+        this.deleteInstallmentUseCase = deleteInstallmentUseCase;
         installmentService = new InstallmentServiceImpl();
     }
 
     public void initialize(Integer customerId){
         this.customerId = customerId;
         this.loadInstallmentDetails();
+    }
+
+    public void deleteInstallment(Installment installment){
+        this.showViewLoading();
+        installment.setExcluded(true);
+        this.installmentRemoveExecutor(installment);
+    }
+
+    public void updateInstallment(Installment installment){
+
+        String msg = isValido(installment.getDescription(), installment.getInstallmentsDays());
+
+        if( msg == null ){
+
+            installment.setSetSyncPending(true);
+            installment.setExcluded(false);
+            this.showViewLoading();
+            this.installmentSaveExecutor(installment);
+        } else {
+            this.installmentDetailsView.showError(msg);
+        }
+
+
     }
 
     public void saveInstallment(String descricao, String condicoes){
@@ -175,6 +201,10 @@ public class InstallmentDetailsPresenter implements Presenter {
         this.installmentDetailsView.installmentSaved();
     }
 
+    private void installmentRemoved(){
+        this.installmentDetailsView.installmentRemoved();
+    }
+
 
 
 
@@ -186,6 +216,10 @@ public class InstallmentDetailsPresenter implements Presenter {
 
     private void installmentSaveExecutor(Installment installment){
         this.saveInstallmentUseCase.execute(installment, this.saveCustomerCallback);
+    }
+
+    private void installmentRemoveExecutor(Installment installment){
+        this.deleteInstallmentUseCase.execute(installment, this.deleteCustomerCallback);
     }
 
     private void showErrorMessage(ErrorBundle errorBundle) {
@@ -220,6 +254,22 @@ public class InstallmentDetailsPresenter implements Presenter {
         @Override
         public void onInstallmentSaved(Installment installment) {
             InstallmentDetailsPresenter.this.installmentSaved();
+            InstallmentDetailsPresenter.this.hideViewLoading();
+        }
+
+        @Override
+        public void onError(ErrorBundle errorBundle) {
+            InstallmentDetailsPresenter.this.hideViewLoading();
+            InstallmentDetailsPresenter.this.showErrorMessage(errorBundle);
+        }
+
+    };
+
+    private final DeleteInstallmentUseCase.Callback deleteCustomerCallback = new DeleteInstallmentUseCase.Callback() {
+
+        @Override
+        public void onInstallmentRemoved(Installment installment) {
+            InstallmentDetailsPresenter.this.installmentRemoved();
             InstallmentDetailsPresenter.this.hideViewLoading();
         }
 

@@ -58,13 +58,29 @@ public class ProductDetailsPresenter implements Presenter {
 
     public void saveProduct(Product product){
         this.showViewLoading();
+        product.setExcluded(false);
         this.saveProductExecutor(product);
     }
+
+    public void deleteProduct(Product product){
+        this.showViewLoading();
+        product.setExcluded(true);
+        product.setSyncPending(true);
+        this.removeProductExecutor(product);
+    }
+
+
 
 
     private void saveProductExecutor(Product product){
         this.saveProductUseCase.execute(product, this.saveProductCallback);
     }
+
+    private void removeProductExecutor(Product product){
+        this.saveProductUseCase.execute(product, this.removedProductCallback);
+    }
+
+
 
     @Override
     public void resume() {
@@ -123,11 +139,29 @@ public class ProductDetailsPresenter implements Presenter {
         this.productDetailsView.productSaved();
     }
 
+    private void productRemoved(){
+        this.productDetailsView.productRemoved();
+    }
+
 
     private final SaveProductUseCase.Callback saveProductCallback = new SaveProductUseCase.Callback() {
         @Override
         public void onProductSaved(Product product) {
             ProductDetailsPresenter.this.productSaved();
+            ProductDetailsPresenter.this.hideViewLoading();
+        }
+
+        @Override
+        public void onError(ErrorBundle errorBundle) {
+            ProductDetailsPresenter.this.hideViewLoading();
+            ProductDetailsPresenter.this.showErrorMessage(errorBundle);
+        }
+    };
+
+    private final SaveProductUseCase.Callback removedProductCallback = new SaveProductUseCase.Callback() {
+        @Override
+        public void onProductSaved(Product product) {
+            ProductDetailsPresenter.this.productRemoved();
             ProductDetailsPresenter.this.hideViewLoading();
         }
 

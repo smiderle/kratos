@@ -1,13 +1,8 @@
 package br.com.doubletouch.vendasup.data.net;
 
-import android.util.Log;
-
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
-import br.com.doubletouch.vendasup.VendasUp;
 import br.com.doubletouch.vendasup.controller.SincronizacaoController;
 import br.com.doubletouch.vendasup.data.database.script.BranchDB;
 import br.com.doubletouch.vendasup.data.database.script.GoalDB;
@@ -82,9 +77,12 @@ public class Integracao {
 
     public void enviarDados( Integer branchID ) throws IOException, SyncronizationException {
 
-        enviarClientes( branchID );
-        enviarProdutos( branchID );
+        atualizarParcelamentos(branchID);
         enviarParcelamentos(branchID);
+        atualizarClientes(branchID);
+        enviarClientes(branchID);
+        atualizarProdutos(branchID);
+        enviarProdutos( branchID );
         enviarPedidos( branchID );
 
     }
@@ -295,7 +293,7 @@ public class Integracao {
 
         ApiResponse<License> apiResponse = new LicenseApi().getByUserId(userID);
 
-        service.save( apiResponse.getPayload() );
+        service.save(apiResponse.getPayload());
 
     }
 
@@ -304,7 +302,7 @@ public class Integracao {
 
         ProductService productService = new ProductServiceImpl();
 
-        List<Product> products = productService.getAllSyncPending(branchID);
+        List<Product> products = productService.getAllSyncPendenteNovos(branchID);
 
         if( products.size() > 0 ){
 
@@ -319,11 +317,28 @@ public class Integracao {
 
     }
 
+    public void atualizarProdutos(Integer branchID) throws IOException, SyncronizationException {
+
+        ProductService productService = new ProductServiceImpl();
+
+        List<Product> products = productService.getAllSyncPendenteAtualizados(branchID);
+
+        if( products.size() > 0 ){
+
+            new ProductApi().update(products);
+
+            //Na atualização dos produtos, não precisa inserir nada no mobile, depois do retorno.
+
+        }
+
+
+    }
+
     public void enviarClientes(Integer branchID) throws  IOException, SyncronizationException {
 
         CustomerService customerService = new CustomerServiceImpl();
 
-        List<Customer> customers = customerService.getAllSyncPending(branchID);
+        List<Customer> customers = customerService.getAllSyncPendendenteClientesNovos(branchID);
 
         if(customers.size() > 0){
 
@@ -332,6 +347,22 @@ public class Integracao {
             List<Customer> customersSaved = apiResponse.getPayload().getValue();
 
             customerService.updateByIdMobile(customersSaved);
+
+        }
+
+    }
+
+    public void atualizarClientes(Integer branchID) throws  IOException, SyncronizationException {
+
+        CustomerService customerService = new CustomerServiceImpl();
+
+        List<Customer> customers = customerService.getAllSyncPendendenteClientesAtualizados(branchID);
+
+        if(customers.size() > 0){
+
+            new CustomerApi().update(customers);
+
+            //Na atualização dos clientes, não precisa inserir nada no mobile, depois do retorno.
 
         }
 
@@ -359,7 +390,7 @@ public class Integracao {
 
         UserEntityJsonMaper userEntityJsonMaper = new UserEntityJsonMaper();
 
-        ApiResponse<ServiceResponse<User>> apiResponse = new PublicApi().getUserByEmailAndPassword(email, password, userEntityJsonMaper);
+        ApiResponse<ServiceResponse<User>> apiResponse = new PublicApi().getUserByEmailAndPassword(email.replaceAll("\\s", ""), password.replaceAll("\\s", ""), userEntityJsonMaper);
 
         return apiResponse.getPayload().getValue();
 
@@ -380,7 +411,7 @@ public class Integracao {
 
         InstallmentService customerService = new InstallmentServiceImpl();
 
-        List<Installment> installments = customerService.getAllSyncPending(branchID);
+        List<Installment> installments = customerService.getAllSyncPendenteNovos(branchID);
 
         if(installments.size() > 0){
 
@@ -389,6 +420,21 @@ public class Integracao {
             List<Installment> installmentsSaved = apiResponse.getPayload().getValue();
 
             customerService.updateByIdMobile(installmentsSaved);
+
+        }
+
+    }
+
+
+    public void atualizarParcelamentos(Integer branchID) throws  IOException, SyncronizationException {
+
+        InstallmentService customerService = new InstallmentServiceImpl();
+
+        List<Installment> installments = customerService.getAllSyncPendenteAtualizados(branchID);
+
+        if(installments.size() > 0){
+
+            new InstallmentApi().update(installments);
 
         }
 

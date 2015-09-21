@@ -80,6 +80,37 @@ public class ProductApi {
 
     }
 
+    public  ApiResponse<ServiceResponse<List<Product>>> update( List<Product> products ) throws IOException, SyncronizationException {
+
+        ProductEntityJsonMaper productEntityJsonMaper = new ProductEntityJsonMaper();
+        RestClient restClient = new RestClient(Endpoints.ENDPOINT_PRODUTO, Methods.PRODUTO_UPDATE_LIST);
+
+        Gson gson = new Gson();
+        String productsJson = gson.toJson(products);
+
+        RESTResponse response = restClient.post(productsJson);
+
+        if( response.getCode() == 200 ) {
+
+            String json = response.getJson();
+
+            ApiResponse<ServiceResponse<List<Product>>> apiResponse =  productEntityJsonMaper.transformProductCollection(json);
+
+            if( apiResponse.getCode().equals( ApiResponse.CODE_SUCESS ) ){
+
+                return apiResponse;
+
+            } else {
+
+                throw new SyncronizationException( apiResponse.getMessage() );
+
+            }
+        } else {
+            throw new SyncronizationException( response.getException() );
+        }
+
+    }
+
     public  ApiResponse<ServiceResponse<List<Product>>> getAllByChangeGreaterThan(Long ultimaSincronizacao, Integer organizationId, Integer offset,ProductEntityJsonMaper productEntityJsonMaper) throws IOException, SyncronizationException {
         List<Product> products = null;
 

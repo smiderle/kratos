@@ -122,6 +122,27 @@ public class RestClient {
         return restResponse;
     }
 
+
+    public final RESTResponse getPublic() throws IOException, SyncronizationException {
+        if(resource == null || method == null) {
+            throw new IllegalArgumentException("É preciso definir o resource e o method");
+        }
+
+        String url = getUrl();
+        HttpGet httpget = new HttpGet(url);
+        HttpResponse response;
+        RESTResponse restResponse = null;
+
+        response = HttpClientSingleton.getHttpClientInstace().execute(httpget);
+        HttpEntity entity = response.getEntity();
+
+        if (entity != null) {
+            restResponse = new RESTResponse(response.getStatusLine().getStatusCode(), entity.getContent());
+        }
+
+        return restResponse;
+    }
+
     public final RESTResponse post(String json) {
 
         if(resource == null || method == null) {

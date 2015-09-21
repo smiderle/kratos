@@ -33,7 +33,11 @@ public abstract class BaseActivity extends ActionBarActivity {
         fragmentTransaction.commit();
     }
 
-
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getSupportActionBar().setElevation(0);
+    }
 
     @Override
     public void onBackPressed() {

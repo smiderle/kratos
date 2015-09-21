@@ -15,6 +15,8 @@ import br.com.doubletouch.vendasup.domain.exception.ErrorBundle;
 public interface CustomerService {
 
 
+    void updateInstallment(Integer oldCustomerId, Integer newCustomerId);
+
     /**
      * Callback usado para ser notificado quando uma lista de produto for carregada ou um erro ocorrer.
      */
@@ -90,7 +92,9 @@ public interface CustomerService {
 
     void updateByIdMobile(List<Customer> customers);
 
-    List<Customer> getAllSyncPending(Integer branchId);
+    List<Customer> getAllSyncPendendenteClientesAtualizados(Integer branchId);
+
+    List<Customer> getAllSyncPendendenteClientesNovos(Integer branchId);
 
     Customer get(Integer id);
 }

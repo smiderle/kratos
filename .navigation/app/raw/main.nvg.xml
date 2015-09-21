@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<navigationModel
+  ns = "http://schemas.android.com?import=com.android.tools.idea.editors.navigation.model.*">
+  <locations  
+    class = "java.util.ArrayList">
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "br.com.doubletouch.vendasup.presentation.view.activity.InstallmentActivity"/>
+      <point      
+        x = "500"      
+        y = "100"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "br.com.doubletouch.vendasup.presentation.view.activity.order.OrderPaymentActivity"/>
+      <point      
+        x = "550"      
+        y = "150"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "br.com.doubletouch.vendasup.presentation.view.activity.ExpiredActivity"/>
+      <point      
+        x = "600"      
+        y = "200"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "br.com.doubletouch.vendasup.presentation.view.activity.order.OrderListActivity"/>
+      <point      
+        x = "650"      
+        y = "250"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "br.com.doubletouch.vendasup.presentation.view.activity.ProductListActivity"/>
+      <point      
+        x = "700"      
+        y = "300"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "br.com.doubletouch.vendasup.presentation.view.activity.ProductDetailsActivity"/>
+      <point      
+        x = "748"      
+        y = "348"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "br.com.doubletouch.vendasup.presentation.view.activity.SigninActivity"/>
+      <point      
+        x = "800"      
+        y = "400"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "br.com.doubletouch.vendasup.presentation.view.activity.SignupActivity"/>
+      <point      
+        x = "850"      
+        y = "450"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "br.com.doubletouch.vendasup.presentation.view.activity.order.OrderProductActivity"/>
+      <point      
+        x = "900"      
+        y = "500"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "br.com.doubletouch.vendasup.presentation.view.activity.InstallmentDetailsActivity"/>
+      <point      
+        x = "950"      
+        y = "550"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "br.com.doubletouch.vendasup.presentation.view.activity.SplashActivity"/>
+      <point      
+        x = "1000"      
+        y = "600"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "br.com.doubletouch.vendasup.presentation.view.activity.CustomerListActivity"/>
+      <point      
+        x = "1050"      
+        y = "650"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "br.com.doubletouch.vendasup.presentation.view.activity.SynchronizationActivity"/>
+      <point      
+        x = "1108"      
+        y = "700"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "br.com.doubletouch.vendasup.presentation.view.activity.LoginActivity"/>
+      <point      
+        x = "1150"      
+        y = "750"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "br.com.doubletouch.vendasup.presentation.view.activity.CustomerDetailsActivity"/>
+      <point      
+        x = "1200"      
+        y = "800"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "br.com.doubletouch.vendasup.presentation.view.activity.MenuActivity"/>
+      <point      
+        x = "1250"      
+        y = "850"/>
+    </statePointEntry>
+    <statePointEntry>
+      <state      
+        class = "com.android.tools.idea.editors.navigation.model.ActivityState"      
+        className = "br.com.doubletouch.vendasup.presentation.view.activity.order.OrderActivity"/>
+      <point      
+        x = "1300"      
+        y = "900"/>
+    </statePointEntry>
+  </locations>
+</navigationModel>

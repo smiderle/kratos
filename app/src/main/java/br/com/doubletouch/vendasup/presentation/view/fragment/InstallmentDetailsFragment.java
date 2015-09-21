@@ -1,8 +1,9 @@
 package br.com.doubletouch.vendasup.presentation.view.fragment;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -21,6 +22,8 @@ import br.com.doubletouch.vendasup.data.entity.enumeration.ViewMode;
 import br.com.doubletouch.vendasup.data.executor.JobExecutor;
 import br.com.doubletouch.vendasup.domain.executor.PostExecutionThread;
 import br.com.doubletouch.vendasup.domain.executor.ThreadExecutor;
+import br.com.doubletouch.vendasup.domain.interactor.installment.DeleteInstallmentUseCase;
+import br.com.doubletouch.vendasup.domain.interactor.installment.DeleteInstallmentUseCaseImpl;
 import br.com.doubletouch.vendasup.domain.interactor.installment.GetInstallmentUseCase;
 import br.com.doubletouch.vendasup.domain.interactor.installment.GetInstallmentUseCaseImpl;
 import br.com.doubletouch.vendasup.domain.interactor.installment.SaveInstallmentUseCase;
@@ -29,7 +32,6 @@ import br.com.doubletouch.vendasup.presentation.UIThread;
 import br.com.doubletouch.vendasup.presentation.navigation.Navigator;
 import br.com.doubletouch.vendasup.presentation.presenter.InstallmentDetailsPresenter;
 import br.com.doubletouch.vendasup.presentation.view.InstallmentDetailsView;
-import br.com.doubletouch.vendasup.presentation.view.activity.CustomerDetailsActivity;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -69,6 +71,8 @@ public class InstallmentDetailsFragment  extends BaseFragment implements Install
     private MenuItem menuDone;
 
     private MenuItem menuEdit;
+
+    private MenuItem menuDelte;
 
     public static InstallmentDetailsFragment newInstance(Integer installmentId, ViewMode viewMode){
         InstallmentDetailsFragment customerDetailsFragment = new InstallmentDetailsFragment();
@@ -157,17 +161,19 @@ public class InstallmentDetailsFragment  extends BaseFragment implements Install
             case R.id.it_edit:
                 menuDone.setVisible(true);
                 menuEdit.setVisible(false);
+                menuDelte.setVisible(false);
                 showTextView();
                 et_installment_description.setText(installment.getDescription());
                 et_installment_condition.setText(installment.getInstallmentsDays());
-
+                break;
+            case R.id.it_delete:
+                deleteInstallment();
                 break;
             default:
                 super.onOptionsItemSelected(item);
         }
         return super.onOptionsItemSelected(item);
     }
-
 
 
     @Override
@@ -179,19 +185,46 @@ public class InstallmentDetailsFragment  extends BaseFragment implements Install
 
         menuDone = menu.findItem(R.id.it_done);
         menuEdit = menu.findItem(R.id.it_edit);
+        menuDelte = menu.findItem(R.id.it_delete);
 
         if( ViewMode.EDICAO.equals( viewMode ) || ViewMode.INCLUSAO.equals( viewMode ) ) {
             menuEdit.setVisible(false);
             menuDone.setVisible(true);
+            menuDelte.setVisible(false);
         } else {
             menuEdit.setVisible(true);
             menuDone.setVisible(false);
+            menuDelte.setVisible(true);
         }
     }
 
+
+    private void deleteInstallment() {
+
+        new AlertDialog.Builder(activity)
+                .setMessage("Deseja excluir o parcelamento \"" + installment.getDescription() + "\" ?")
+                .setCancelable(true)
+                .setPositiveButton(R.string.btn_excluir, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        InstallmentDetailsFragment.this.installmentDetailsPresenter.deleteInstallment(installment);
+                    }
+                })
+                .setNegativeButton(R.string.btn_cancelar, null)
+                .show();
+    }
+
+
     private void saveInstallment(){
 
-        InstallmentDetailsFragment.this.installmentDetailsPresenter.saveInstallment(et_installment_description.getText().toString(), et_installment_condition.getText().toString());
+        if(installment == null){
+            InstallmentDetailsFragment.this.installmentDetailsPresenter.saveInstallment(et_installment_description.getText().toString(), et_installment_condition.getText().toString());
+        } else {
+            installment.setDescription(et_installment_description.getText().toString());
+            installment.setInstallmentsDays( et_installment_condition.getText().toString() );
+            InstallmentDetailsFragment.this.installmentDetailsPresenter.updateInstallment(installment);
+        }
+
 
 
     }
@@ -206,8 +239,9 @@ public class InstallmentDetailsFragment  extends BaseFragment implements Install
 
         GetInstallmentUseCase getInstallmentDetailsUseCase = new GetInstallmentUseCaseImpl(threadExecutor, postExecutionThread);
         SaveInstallmentUseCase saveInstallmentUseCase = new SaveInstallmentUseCaseImpl(threadExecutor, postExecutionThread);
+        DeleteInstallmentUseCase deleteInstallmentUseCase = new DeleteInstallmentUseCaseImpl(threadExecutor, postExecutionThread);
 
-        installmentDetailsPresenter = new InstallmentDetailsPresenter(this, getInstallmentDetailsUseCase, saveInstallmentUseCase);
+        installmentDetailsPresenter = new InstallmentDetailsPresenter(this, getInstallmentDetailsUseCase, saveInstallmentUseCase, deleteInstallmentUseCase);
 
     }
 
@@ -241,7 +275,7 @@ public class InstallmentDetailsFragment  extends BaseFragment implements Install
 
         this.installment = installment;
 
-        if(viewMode.equals(ViewMode.VISUALIZACAO)){
+        if (viewMode.equals(ViewMode.VISUALIZACAO)){
             tv_installment_description.setText(installment.getDescription());
             tv_installment_condition.setText(installment.getInstallmentsDays());
 
@@ -257,6 +291,12 @@ public class InstallmentDetailsFragment  extends BaseFragment implements Install
     @Override
     public void installmentSaved() {
         Toast.makeText(activity, "Parcelamento salvo com sucesso", Toast.LENGTH_LONG).show();
+        navigator.previousActivity(activity);
+    }
+
+    @Override
+    public void installmentRemoved() {
+        Toast.makeText(activity, "Parcelamento excluido com sucesso", Toast.LENGTH_LONG).show();
         navigator.previousActivity(activity);
     }
 

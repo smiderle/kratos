@@ -18,7 +18,6 @@
         android:paddingRight="@dimen/activity_padding_right">
 
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -31,18 +30,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Bem-vindo ao VendasUp"
+                android:textSize="@dimen/font_size_h8"
                 style="@style/AppTheme.TextViewPrimary"
                 android:textColor="@color/primary_color"
+                android:gravity="center"
                 android:layout_gravity="center_horizontal" />
 
             <TextView
                 android:id="@+id/tv_wellcome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cadastre-se, e experimente o sistema Grátis por 20 Dias"
+                android:text="Experimente o sistema Grátis por 20 Dias"
                 style="@style/AppTheme.TextViewSecundary"
-                android:textSize="@dimen/font_size_h1"
-                android:layout_gravity="center_horizontal" />
+                android:gravity="center"
+                android:layout_gravity="center_horizontal"/>
 
             <EditText
                 android:id="@+id/et_email"
@@ -57,7 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:inputType="textVisiblePassword"
+                android:inputType="textPassword"
                 android:hint="@string/tv_password"
                 android:paddingTop="@dimen/font_size_h8"/>
 
@@ -66,7 +67,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:inputType="textVisiblePassword"
+                android:inputType="textPassword"
                 android:hint="@string/tv_password_re"
                 android:paddingTop="@dimen/font_size_h8"/>
 
@@ -108,6 +109,7 @@
         android:layout_alignParentTop="true"
         android:background="@drawable/notification_warning"
         android:textColor="@color/white"
-        android:text="" />
+        android:text=""
+        android:textAllCaps="false"/>
 
 </RelativeLayout>

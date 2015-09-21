@@ -4,7 +4,6 @@ import java.util.List;
 
 import br.com.doubletouch.vendasup.VendasUp;
 import br.com.doubletouch.vendasup.data.database.dao.InstallmentDAO;
-import br.com.doubletouch.vendasup.data.entity.Customer;
 import br.com.doubletouch.vendasup.data.entity.Installment;
 import br.com.doubletouch.vendasup.data.exception.RepositoryErrorBundle;
 
@@ -66,6 +65,28 @@ public class InstallmentServiceImpl implements InstallmentService {
     }
 
     @Override
+    public void delete(Installment installment, InstallmentRemoveCallback installmentRemoveCallback) {
+
+        try{
+
+            Integer count = installmentDAO.count();
+
+            if( count > 1 ){
+                installmentDAO.insert(installment);
+                installmentRemoveCallback.onInstallmentRemoved(installment);
+            } else {
+                Exception e = new Exception("Pelo menos um parcelamento deve estar cadastrado.");
+                installmentRemoveCallback.onError( new RepositoryErrorBundle(e));
+            }
+
+        }catch (Exception e) {
+            installmentRemoveCallback.onError(new RepositoryErrorBundle(e));
+
+        }
+
+    }
+
+    @Override
     public Integer getLessNegative() {
 
         Integer min = installmentDAO.min();
@@ -93,26 +114,33 @@ public class InstallmentServiceImpl implements InstallmentService {
     public void updateByIdMobile(List<Installment> installments) {
 
         OrderService orderService = new OrderServiceImpl();
+        CustomerService customerService = new CustomerServiceImpl();
 
         for( Installment installment : installments ) {
 
-            orderService.updateInstallment( installment.getIdMobile(), installment.getID() );
-
+            orderService.updateInstallment(installment.getIdMobile(), installment.getID());
+            customerService.updateInstallment(installment.getIdMobile(), installment.getID());
             installment.setSetSyncPending(false);
 
-
             installmentDAO.updateByIdMobile(installment);
+
 
         }
     }
 
 
     @Override
-    public List<Installment> getAllSyncPending(Integer branchId) {
+    public List<Installment> getAllSyncPendenteNovos(Integer branchId) {
 
-        return installmentDAO.getAllSyncPending(branchId);
+        return installmentDAO.getAllSyncPendendeNovos(branchId);
 
     }
 
+    @Override
+    public List<Installment> getAllSyncPendenteAtualizados(Integer branchId) {
+
+        return installmentDAO.getAllSyncPendendeAtualizados(branchId);
+
+    }
 
 }

@@ -26,6 +26,7 @@ public class MenuActivity extends BaseActivity implements MenuFragment.MenuListL
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+        getSupportActionBar().hide();
         //getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         initialize();
     }

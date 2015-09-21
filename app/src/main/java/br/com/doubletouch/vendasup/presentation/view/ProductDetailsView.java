@@ -15,4 +15,6 @@ public interface ProductDetailsView extends  LoadDataView {
     void renderProduct(Product product);
 
     void productSaved();
+
+    void productRemoved();
 }

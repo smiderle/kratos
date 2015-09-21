@@ -107,7 +107,7 @@ public class ExpiredFragment extends BaseFragment implements ExpiredView {
     @Override
     public void onExpiredLicense(License license) {
 
-        tv_expired_info.setText("Sua licensa expirou em " + DateUtil.formatDate(license.getExpirationDate()));
+        tv_expired_info.setText("Sua licensa expirou em " + DateUtil.formatDateUTC(license.getExpirationDate()));
 
     }
 

@@ -23,5 +23,4 @@
         android:visible="false"
         app:showAsAction="always"/>
 
-
 </menu>

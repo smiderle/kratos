@@ -136,16 +136,32 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public List<Customer> getAllSyncPending(Integer branchId) {
+    public List<Customer> getAllSyncPendendenteClientesAtualizados(Integer branchId) {
 
-        return customerDAO.getAllSyncPending(branchId);
+        return customerDAO.getAllSyncPendenteClientesAtualizados(branchId);
 
     }
+
+
+    @Override
+    public List<Customer> getAllSyncPendendenteClientesNovos(Integer branchId) {
+
+        return customerDAO.getAllSyncPendententeClientesNovos(branchId);
+
+    }
+
 
     @Override
     public Customer get(Integer id) {
 
         return customerDAO.get(id);
+
+    }
+
+    @Override
+    public void updateInstallment(Integer oldCustomerId, Integer newCustomerId) {
+
+        customerDAO.updateInstallment(oldCustomerId, newCustomerId);
 
     }
 

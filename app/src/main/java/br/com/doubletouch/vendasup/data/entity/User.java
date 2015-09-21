@@ -1,11 +1,12 @@
 package br.com.doubletouch.vendasup.data.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by LADAIR on 20/03/2015.
  */
-public class User {
+public class User implements Serializable{
 
     public User() {
     }

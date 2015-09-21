@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
+import java.util.TimeZone;
 
 /**
  * Created by LADAIR on 27/04/2015.
@@ -68,6 +70,21 @@ public class DateUtil {
     public static String formatDate(Long dataLong) {
 
         return formatDate(new Date(dataLong));
+
+    }
+
+    /**
+     * Retorna a data utc.
+     * Não aplica o gmt  local a data.
+     * @param dataLong
+     * @return
+     */
+    public static String formatDateUTC(Long dataLong){
+
+        SimpleDateFormat sf = new SimpleDateFormat(DATE_FORMAT);
+        sf.setTimeZone(TimeZone.getTimeZone("GMT"));
+        return sf.format(new Date(dataLong));
+
 
     }
 

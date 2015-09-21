@@ -31,7 +31,7 @@ public class PublicApi extends  AbstractApi {
         restClient.setParameter("email", email);
         restClient.setParameter("password", password);
 
-        RESTResponse response = restClient.get();
+        RESTResponse response = restClient.getPublic();
 
         if (response.getCode() == 200) {
             ApiResponse<ServiceResponse<User>> apiResponse = userEntityJsonMaper.transformUser( response.getJson());

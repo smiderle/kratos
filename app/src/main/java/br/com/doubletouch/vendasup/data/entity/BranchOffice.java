@@ -1,11 +1,13 @@
 package br.com.doubletouch.vendasup.data.entity;
 
+import java.io.Serializable;
+
 import br.com.doubletouch.vendasup.data.entity.Organization;
 
 /**
  * Created by LADAIR on 20/03/2015.
  */
-public class BranchOffice {
+public class BranchOffice implements Serializable{
 
     public BranchOffice() {
     }

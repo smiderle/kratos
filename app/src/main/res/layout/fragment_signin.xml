@@ -39,9 +39,11 @@
                 android:id="@+id/tv_wellcome_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Que bom que você voltou!!"
+                android:text="Que bom que você voltou!"
+                android:textSize="@dimen/font_size_h8"
                 style="@style/AppTheme.TextViewPrimary"
                 android:textColor="@color/primary_color"
+                android:gravity="center"
                 android:layout_gravity="center_horizontal" />
 
             <TextView
@@ -50,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:text="Informe seus dados, para realizarmos a instalação."
                 style="@style/AppTheme.TextViewSecundary"
-                android:textSize="@dimen/font_size_h1"
+                android:gravity="center"
                 android:layout_gravity="center_horizontal" />
 
             <EditText
@@ -67,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:hint="@string/tv_password"
-                android:inputType="textVisiblePassword"
+                android:inputType="textPassword"
                 android:layout_marginTop="@dimen/font_size_h1"/>
 
             <Button
@@ -76,7 +78,7 @@
                 android:text="@string/btn_signin"
                 android:id="@+id/btn_signin"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/button_corners"
+                android:background="@drawable/button_corners_background_white"
                 android:textColor="@color/white"
                 android:layout_marginTop="@dimen/font_size_h3" />
 
@@ -101,6 +103,7 @@
         android:layout_alignParentTop="true"
         android:background="@drawable/notification_warning"
         android:textColor="@color/white"
-        android:text="" />
+        android:text=""
+        android:textAllCaps="false"/>
 
 </RelativeLayout>

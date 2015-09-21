@@ -2,12 +2,13 @@ package br.com.doubletouch.vendasup.data.entity;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by LADAIR on 16/04/2015.
  */
-public class OrderPayment {
+public class OrderPayment implements Serializable {
 
     public OrderPayment() {
     }

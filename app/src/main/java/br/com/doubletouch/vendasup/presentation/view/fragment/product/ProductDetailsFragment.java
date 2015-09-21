@@ -1,7 +1,9 @@
 package br.com.doubletouch.vendasup.presentation.view.fragment.product;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -178,9 +180,11 @@ public class ProductDetailsFragment  extends BaseParallacxFragment implements Pr
         inflater.inflate(R.menu.menu_details_view, menu);
 
         if(ViewMode.EDICAO.equals(viewMode) || ViewMode.INCLUSAO.equals(viewMode)){
+            menu.findItem(R.id.it_edit).setVisible(false);
             menuEdit = menu.findItem(R.id.it_edit).setVisible(false);
             menu.findItem(R.id.it_done).setVisible(true);
         } else {
+            menu.findItem(R.id.it_edit).setVisible(true);
             menuEdit = menu.findItem(R.id.it_edit).setVisible(true);
             menu.findItem(R.id.it_done).setVisible(false);
         }
@@ -200,10 +204,28 @@ public class ProductDetailsFragment  extends BaseParallacxFragment implements Pr
             case R.id.it_done:
                 saveProduct();
                 break;
+            case R.id.it_delete:
+                deleteProduct();
+                break;
             default:
                 super.onOptionsItemSelected(item);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void deleteProduct() {
+        new AlertDialog.Builder(activity)
+                .setMessage("Deseja excluir o produto \"" + product.getDescription() + "\" ?")
+                .setCancelable(true)
+                .setPositiveButton(R.string.btn_excluir, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ProductDetailsFragment.this.productDetailsPresenter.deleteProduct(product);
+                    }
+                })
+                .setNegativeButton(R.string.btn_cancelar, null)
+                .show();
+
     }
 
     /**
@@ -274,6 +296,12 @@ public class ProductDetailsFragment  extends BaseParallacxFragment implements Pr
     @Override
     public void productSaved() {
         Toast.makeText(activity, "Produto salvo com sucesso", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void productRemoved() {
+        Toast.makeText(activity, "Produto excluido com sucesso", Toast.LENGTH_LONG).show();
+        navigator.previousActivity(activity);
     }
 
     @Override

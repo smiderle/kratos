@@ -33,7 +33,8 @@
         android:layout_alignParentTop="true"
         android:background="@drawable/notification_warning"
         android:textColor="@color/white"
-        android:text="" />
+        android:text=""
+        android:textAllCaps="false"/>
 
     <include
         layout="@layout/view_progress"/>

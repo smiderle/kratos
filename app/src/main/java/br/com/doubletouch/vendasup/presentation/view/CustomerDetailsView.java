@@ -10,4 +10,6 @@ public interface CustomerDetailsView extends LoadDataView {
     void renderCustomer(Customer customer);
 
     void customerSaved();
+
+    void customerRemoved();
 }

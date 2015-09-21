@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/primary_color">
+    android:background="@color/white">
 
 
     <RelativeLayout
@@ -29,8 +29,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/imageView2"
-                    android:src="@drawable/aaaa"
-                    android:layout_centerVertical="true"
+                    android:src="@drawable/vendas_up"
+                    android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true" />
             </RelativeLayout>
 
@@ -40,8 +40,7 @@
                 android:orientation="vertical"
                 android:paddingLeft="@dimen/activity_padding_left"
                 android:paddingRight="@dimen/activity_padding_right"
-                android:paddingTop="@dimen/activity_login_padding_top"
-                android:background="@color/primary_color">
+                android:paddingTop="@dimen/activity_login_padding_top">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -55,9 +54,10 @@
                 <Spinner
                     android:id="@+id/sp_login_branches"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="5dp"
                     style="@style/SpinerLogin"
                     android:spinnerMode="dialog"
+                    android:visibility="invisible"
                     android:prompt="@string/tv_organization"></Spinner>
 
 
@@ -87,7 +87,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/btn_entrar"
-                    android:background="@drawable/button_corners"
+                    android:background="@drawable/button_corners_background_white"
                     android:textColor="@color/white"
                     android:layout_marginTop="@dimen/font_size_h3"/>
 
@@ -97,7 +97,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/AppTheme.TextViewPrimary"
-                    android:textColor="@color/white"
+                    android:textColor="@color/blue_grey_405"
                     android:textSize="@dimen/font_size_h3"
                     android:layout_marginTop="@dimen/font_size_h5"
                     android:visibility="invisible"
@@ -120,7 +120,8 @@
             android:layout_alignParentTop="true"
             android:background="@drawable/notification_warning"
             android:textColor="@color/white"
-            android:text="" />
+            android:text=""
+            android:textAllCaps="false"/>
 
 
     </RelativeLayout>

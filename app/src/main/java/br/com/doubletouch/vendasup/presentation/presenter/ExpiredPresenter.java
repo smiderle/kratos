@@ -1,6 +1,8 @@
 package br.com.doubletouch.vendasup.presentation.presenter;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import br.com.doubletouch.vendasup.VendasUp;
 import br.com.doubletouch.vendasup.data.entity.License;
@@ -24,9 +26,6 @@ public class ExpiredPresenter implements Presenter  {
 
     public void validaDataExpiracao() {
 
-
-        boolean isValid = true;
-
         LicenseService licenseService = new LicenseServiceImpl();
 
         License license = licenseService.findByUserId( VendasUp.getUser().getUserID() );
@@ -47,15 +46,18 @@ public class ExpiredPresenter implements Presenter  {
 
         boolean isValid = true;
 
-        Date expirateDate = new Date( license.getExpirationDate() );
+        Calendar current = GregorianCalendar.getInstance();
+        current.set(Calendar.HOUR_OF_DAY, 0);
+        current.set(Calendar.MINUTE, 0);
+        current.set(Calendar.SECOND, 0);
+        current.set(Calendar.MILLISECOND, 0);
 
-        if( license.isExpired() ||  expirateDate.before( new Date() ) ){
-
+        if( license.isExpired() || current.compareTo( GregorianCalendar.getInstance() ) > 0  ) {
             isValid = false;
-
         }
 
         return isValid;
+
 
     }
 

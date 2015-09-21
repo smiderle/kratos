@@ -110,7 +110,7 @@ public class PriceTable implements Serializable {
 
     @Override
     public String toString() {
-        return getID() + " - " + getDescription();
+        return getDescription();
     }
 
     @Override

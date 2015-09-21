@@ -1,9 +1,11 @@
 package br.com.doubletouch.vendasup.data.entity;
 
+import java.io.Serializable;
+
 /**
  * Created by LADAIR on 09/02/2015.
  */
-public class Sincronizacao {
+public class Sincronizacao implements Serializable {
 
     public Sincronizacao() {
     }

@@ -10,6 +10,7 @@ import java.util.List;
 import br.com.doubletouch.vendasup.VendasUp;
 import br.com.doubletouch.vendasup.dao.SQLiteHelper;
 import br.com.doubletouch.vendasup.data.database.script.CustomerDB;
+import br.com.doubletouch.vendasup.data.database.script.OrderDB;
 import br.com.doubletouch.vendasup.data.entity.Customer;
 import br.com.doubletouch.vendasup.data.entity.Installment;
 
@@ -43,7 +44,7 @@ public class CustomerDAO {
 
     public List<Customer> getAll(Integer branchId) {
         {
-            String where = CustomerDB.IDFILIAL +" = ? ";
+            String where = CustomerDB.IDFILIAL +" = ? AND ("+ CustomerDB.EXCLUIDO + " = 0 OR " + CustomerDB.EXCLUIDO + " IS NULL)";
             ArrayList<Customer> customers = new ArrayList<>();
             Cursor c = db.query(CustomerDB.TABELA, CustomerDB.COLUNAS, where, new String[]{String.valueOf(branchId)}, null, null, null, LIMIT);
 
@@ -93,8 +94,8 @@ public class CustomerDAO {
 
     public void updateByIdMobile( Customer customer) {
 
-        String sql = "UPDATE " + CustomerDB.TABELA + " SET " + CustomerDB.ID +" = " + customer.getID() +"," + CustomerDB.SYNC_PENDENTE+" = 0 "+
-                "WHERE "+ CustomerDB.ID_MOBILE +" = " + customer.getIdMobile();
+        String sql = "UPDATE " + CustomerDB.TABELA + " SET " + CustomerDB.ID +" = " + customer.getID() +"," + CustomerDB.SYNC_PENDENTE+" = 0 , " + CustomerDB.ID_MOBILE +" = "+ customer.getID() +
+                " WHERE "+ CustomerDB.ID_MOBILE +" = " + customer.getIdMobile();
 
         db.execSQL(sql);
     }
@@ -116,11 +117,19 @@ public class CustomerDAO {
 
     public void update(Customer customer) {
         String where = CustomerDB.ID +" = ? ";
-        db.update(CustomerDB.TABELA, getContentValues(customer), where, new String[]{ String.valueOf(customer.getID()) });
+        db.update(CustomerDB.TABELA, getContentValues(customer), where, new String[]{String.valueOf(customer.getID())});
     }
 
     public void delete(Customer customer) {
         throw new UnsupportedOperationException("Não implementado.");
+    }
+
+    public void updateInstallment( Integer oldInstallment, Integer newInstallment ) {
+
+        String sql = "UPDATE " + CustomerDB.TABELA + " SET " + CustomerDB.PARCELAMENTO +" = " + newInstallment +
+                " WHERE "+ CustomerDB.PARCELAMENTO +" = " + oldInstallment;
+
+        db.execSQL(sql);
     }
 
     public List<Customer> getByNameOrCustomerId(String name, String customerId, Integer branchId) {
@@ -137,6 +146,11 @@ public class CustomerDAO {
         where.append(" AND ");
         where.append(CustomerDB.IDFILIAL);
         where.append(" = ? ");
+        where.append(" AND (");
+        where.append(CustomerDB.EXCLUIDO );
+        where.append(" = 0 OR ");
+        where.append(CustomerDB.EXCLUIDO );
+        where.append(" IS NULL )");
 
         Cursor c = db.query(CustomerDB.TABELA, CustomerDB.COLUNAS, where.toString(), new String[]{ customerId, String.valueOf( branchId )}, null, null, null, LIMIT);
 
@@ -151,10 +165,30 @@ public class CustomerDAO {
     }
 
 
-    public List<Customer> getAllSyncPending(Integer branchId) {
+    public List<Customer> getAllSyncPendenteClientesAtualizados(Integer branchId) {
         ArrayList<Customer> customers = new ArrayList<>();
 
-        String where = CustomerDB.IDFILIAL+" = ? AND  " +CustomerDB.SYNC_PENDENTE +" = 1 " ;
+        String where = CustomerDB.IDFILIAL+" = ? AND  " +CustomerDB.SYNC_PENDENTE +" = 1 AND " + CustomerDB.ID +" > 0 ";
+        Cursor c = db.query(CustomerDB.TABELA, CustomerDB.COLUNAS, where, new String[]{String.valueOf(branchId)}, null, null, null, null);
+
+        if(c.moveToFirst()){
+            do {
+                customers.add(getByCursor(c));
+            } while (c.moveToNext());
+        }
+        c.close();
+        return  customers;
+    }
+
+    /**
+     * Retorna todos os clientes novos que não foram sincronizados ainda.
+     * @param branchId
+     * @return
+     */
+    public List<Customer> getAllSyncPendententeClientesNovos(Integer branchId) {
+        ArrayList<Customer> customers = new ArrayList<>();
+
+        String where = CustomerDB.IDFILIAL+" = ? AND  " +CustomerDB.SYNC_PENDENTE +" = 1 AND " + CustomerDB.ID +" < 0 ";
         Cursor c = db.query(CustomerDB.TABELA, CustomerDB.COLUNAS, where, new String[]{String.valueOf(branchId)}, null, null, null, null);
 
         if(c.moveToFirst()){
@@ -202,6 +236,10 @@ public class CustomerDAO {
 
         if(customer.getInstallmentId() != null){
             cv.put(CustomerDB.PARCELAMENTO, customer.getInstallmentId());
+        }
+
+        if(customer.getPriceTable() != null){
+            cv.put(CustomerDB.TABELA_PRECO, customer.getPriceTable());
         }
 
 
@@ -274,10 +312,14 @@ public class CustomerDAO {
         customer.setPictureUrl(c.getString(idxPicture));
         customer.setPriceTable(c.getInt(idxPriceTable));
 
+        if( c.isNull(idxPriceTable) ){
+            customer.setPriceTable(c.getInt(idxPriceTable));
+        }
+
         if( ! c.isNull(idxInstallment)){
 
             customer.setInstallmentId( c.getInt(idxInstallment) );
-            customer.setInstallment( new Installment( c.getInt(idxInstallment) ) );
+            customer.setInstallment(new Installment(c.getInt(idxInstallment)));
 
         }
 
@@ -289,12 +331,9 @@ public class CustomerDAO {
 
         if( ! c.isNull(idxVendedor)){
 
-            customer.setDefaultSeller( c.getInt( idxVendedor ) );
+            customer.setDefaultSeller(c.getInt(idxVendedor));
 
         }
-
-
-
 
         return  customer;
     }

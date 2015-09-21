@@ -70,7 +70,7 @@ public interface ProductService {
     void save(Product product,final ProductSaveCallback productSaveCallback);
 
 
-    List<Product> getAllSyncPending(Integer branchId);
+    List<Product> getAllSyncPendenteAtualizados(Integer branchId);
 
     Integer getNextId();
 
@@ -79,4 +79,6 @@ public interface ProductService {
     void updateByIdMobile(List<Product> products);
 
     Product get( Integer id );
+
+    List<Product> getAllSyncPendenteNovos(Integer branchId);
 }

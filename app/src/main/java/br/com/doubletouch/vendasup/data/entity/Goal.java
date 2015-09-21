@@ -2,10 +2,12 @@ package br.com.doubletouch.vendasup.data.entity;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by LADAIR on 23/03/2015.
  */
-public class Goal {
+public class Goal implements Serializable {
 
     @SerializedName("id")
     private Integer ID;

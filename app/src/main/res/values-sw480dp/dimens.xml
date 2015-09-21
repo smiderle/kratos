@@ -66,6 +66,9 @@
     <!-- Altura da imagem principal que parace nos detalhes -->
     <dimen name="iv_height_main">210dp</dimen>
 
+
+    <dimen name="iv_height_menu">255dp</dimen>
+
     <!-- Altura da imagem principal que parace no login -->
     <dimen name="iv_height_login">310dp</dimen>
 

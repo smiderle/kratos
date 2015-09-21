@@ -95,6 +95,16 @@ public class Navigator {
         }
     }
 
+    public void navigateTo(Activity activity, Class<? extends BaseActivity> to, int flag) {
+        if(activity != null){
+            Intent it= new Intent(activity, to);
+            it.setFlags(flag);
+            activity.startActivity(it);
+
+            transitionGo(activity);
+        }
+    }
+
     /**
      * Finaliza a activity atula, retornando para a anterior.
      * @param activity

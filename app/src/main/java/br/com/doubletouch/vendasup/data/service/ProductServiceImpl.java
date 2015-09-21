@@ -79,11 +79,20 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getAllSyncPending(Integer branchId) {
+    public List<Product> getAllSyncPendenteAtualizados(Integer branchId) {
 
-        return productDAO.getAllSyncPending(branchId);
+        return productDAO.getAllSyncPendenteAtualizados(branchId);
 
     }
+
+    @Override
+    public List<Product> getAllSyncPendenteNovos(Integer branchId) {
+
+        return productDAO.getAllSyncPendenteNovos(branchId);
+
+    }
+
+
 
     @Override
     public Integer getNextId() {

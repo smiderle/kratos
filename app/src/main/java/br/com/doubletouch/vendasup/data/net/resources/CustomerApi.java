@@ -78,4 +78,36 @@ public class CustomerApi extends AbstractApi {
             }
 
     }
+
+
+    public  ApiResponse<ServiceResponse<List<Customer>>> update( List<Customer> customers ) throws IOException, SyncronizationException {
+
+        CustomerEntityJsonMaper customerEntityJsonMaper = new CustomerEntityJsonMaper();
+        RestClient restClient = new RestClient(Endpoints.ENDPOINT_CUSTOMER, Methods.CUSTOMER_UPDATE_LIST);
+
+        Gson gson = new Gson();
+        String customerJson = gson.toJson(customers);
+
+        RESTResponse response = restClient.post(customerJson);
+
+        if( response.getCode() == 200 ) {
+
+            String json = response.getJson();
+
+            ApiResponse<ServiceResponse<List<Customer>>> apiResponse =  customerEntityJsonMaper.transformCustomerCollection(json);
+
+            if( apiResponse.getCode().equals( ApiResponse.CODE_SUCESS ) ) {
+
+                return apiResponse;
+
+            } else {
+
+                throw new SyncronizationException( apiResponse.getMessage() );
+
+            }
+        } else {
+            throw new SyncronizationException( response.getException() );
+        }
+
+    }
 }
