@@ -23,6 +23,7 @@ import br.com.doubletouch.vendasup.presentation.view.SynchronizationView;
  */
 public class SigninSignupDialog extends DialogFragment {
 
+
     public static final int STATUS_ERROR = 0;
     private static final int STATUS_SUCESS = 1;
 
@@ -46,6 +47,8 @@ public class SigninSignupDialog extends DialogFragment {
     private String userName;
 
     private SignType signType;
+
+    private String codigo;
 
 
 
@@ -136,6 +139,9 @@ public class SigninSignupDialog extends DialogFragment {
 
                 } else {
 
+                    //Ira validar o código antes de gerar a carga. Se o código for invalido, ira lançar uma exception.
+                    integracao.validaCodigo( email, codigo );
+
                    user = integracao.generateNewUser(organizationName, userName, email, password);
                    VendasUp.setUser(user);
 
@@ -220,11 +226,12 @@ public class SigninSignupDialog extends DialogFragment {
         this.signinView = signinView;
     }
 
-    public void setSigninAttributes(String organizationName, String userName, String email, String password){
+    public void setSigninAttributes(String organizationName, String userName, String email, String password, String codigo){
         this.userName = userName;
         this.organizationName = organizationName;
         this.email = email;
         this.password = password;
+        this.codigo = codigo;
     }
 
     public void setSignType(SignType signType){

@@ -17,12 +17,16 @@ import br.com.doubletouch.vendasup.R;
 import br.com.doubletouch.vendasup.VendasUp;
 import br.com.doubletouch.vendasup.data.SharedPreferencesUtil;
 import br.com.doubletouch.vendasup.data.entity.enumeration.Flag;
+import br.com.doubletouch.vendasup.data.entity.enumeration.ViewMode;
 import br.com.doubletouch.vendasup.presentation.navigation.Navigator;
 import br.com.doubletouch.vendasup.presentation.presenter.SignupPresenter;
 import br.com.doubletouch.vendasup.presentation.view.SigninView;
 import br.com.doubletouch.vendasup.presentation.view.SignupView;
+import br.com.doubletouch.vendasup.presentation.view.activity.ConfirmacaoActivity;
 import br.com.doubletouch.vendasup.presentation.view.activity.LoginActivity;
 import br.com.doubletouch.vendasup.presentation.view.activity.SigninActivity;
+import br.com.doubletouch.vendasup.presentation.view.activity.order.OrderActivity;
+import br.com.doubletouch.vendasup.presentation.view.dialog.ConfirmacaoCadastroDialog;
 import br.com.doubletouch.vendasup.presentation.view.dialog.SigninSignupDialog;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -120,21 +124,48 @@ public class SignupFragment   extends BaseFragment implements SigninView {
         String password = et_password.getText().toString().replaceAll("\\s", "");
         String password_re = et_password_re.getText().toString().replaceAll("\\s", "");
 
+
         String messageError = validate(email, password, password_re);
 
         if( messageError == null ) {
 
-            SigninSignupDialog dialog = new SigninSignupDialog();
+            ConfirmacaoCadastroDialog dialog = new ConfirmacaoCadastroDialog();
             dialog.setSynchronizationView(this);
-            dialog.setSigninAttributes("Empresa Demonstração", "Usuário Demonstração", email, password );
+            dialog.setSigninAttributes( email );
 
-            dialog.show(getFragmentManager(), "");
+            dialog.show( getFragmentManager(), "" );
 
         } else {
-
-            mostrarNotificacao( messageError );
-
+            mostrarNotificacao(messageError);
         }
+
+
+
+
+//
+//
+//
+//
+//        String email = et_email.getText().toString().replaceAll("\\s", "");
+//        String password = et_password.getText().toString().replaceAll("\\s", "");
+//        String password_re = et_password_re.getText().toString().replaceAll("\\s", "");
+//
+//        String messageError = validate(email, password, password_re);
+//
+//        if( messageError == null ) {
+//
+//
+//            SigninSignupDialog dialog = new SigninSignupDialog();
+//            dialog.setSynchronizationView(this);
+//            dialog.setSigninAttributes("Empresa Demonstração", "Usuário Demonstração", email, password );
+//
+//            dialog.show(getFragmentManager(), "");
+//
+//        } else {
+//
+//            mostrarNotificacao( messageError );
+//
+//        }
 
     }
 
@@ -179,11 +210,16 @@ public class SignupFragment   extends BaseFragment implements SigninView {
     public void onSuccessSynchronization() {
 
 
-        //Toast.makeText(getActivity(), "SUCESSO", Toast.LENGTH_LONG).show();
-        navigator.navigateTo( activity, LoginActivity.class, Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK );
-
         String email = et_email.getText().toString().replaceAll("\\s", "");
         String password = et_password.getText().toString().replaceAll("\\s", "");
+
+        //Toast.makeText(getActivity(), "SUCESSO", Toast.LENGTH_LONG).show();
+        Intent it = ConfirmacaoActivity.getCallingIntent(activity, email, password );
+        startActivity( it);
+        navigator.transitionGo(activity);
+
+        //navigator.navigateTo( activity, ConfirmacaoActivity.class, Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK );
+
 
         SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil( activity );
         sharedPreferencesUtil.addString(SharedPreferencesUtil.PREFERENCES_LOGIN, email );

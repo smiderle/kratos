@@ -310,9 +310,9 @@ public class CustomerDAO {
         customer.setIdMobile(c.getInt(idxIdClienteMobile));
 
         customer.setPictureUrl(c.getString(idxPicture));
-        customer.setPriceTable(c.getInt(idxPriceTable));
+        
 
-        if( c.isNull(idxPriceTable) ){
+        if( ! c.isNull(idxPriceTable) ){
             customer.setPriceTable(c.getInt(idxPriceTable));
         }
 

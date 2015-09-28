@@ -1,7 +1,5 @@
 package br.com.doubletouch.vendasup.data.net.resources;
 
-import android.os.Build;
-
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
@@ -77,13 +75,13 @@ public class PublicApi extends  AbstractApi {
 
         List<NameValuePair> nameValuePairs = new ArrayList<>();
         nameValuePairs.add( new BasicNameValuePair( "password", password ) );
-        nameValuePairs.add( new BasicNameValuePair( "email", email ) );
-        nameValuePairs.add( new BasicNameValuePair( "organizationName", organizationName ) );
-        nameValuePairs.add( new BasicNameValuePair( "userName", userName ) );
-        nameValuePairs.add( new BasicNameValuePair( "serial", DeviceUtil.getDeviceId()) );
+        nameValuePairs.add(new BasicNameValuePair("email", email));
+        nameValuePairs.add(new BasicNameValuePair("organizationName", organizationName));
+        nameValuePairs.add(new BasicNameValuePair("userName", userName));
+        nameValuePairs.add(new BasicNameValuePair("serial", DeviceUtil.getDeviceId()));
 
 
-        RESTResponse response = restClient.post( Endpoints.ENDPOINT_SIGNIN.concat("/").concat( Methods.PUBLIC_GENERATE_NEW_USER ), nameValuePairs );
+        RESTResponse response = restClient.post(Endpoints.ENDPOINT_SIGNIN.concat("/").concat(Methods.PUBLIC_GENERATE_NEW_USER), nameValuePairs);
 
         if (response.getCode() == 200) {
             ApiResponse<ServiceResponse<User>> apiResponse = userEntityJsonMaper.transformUser( response.getJson());
@@ -98,5 +96,52 @@ public class PublicApi extends  AbstractApi {
         }
 
     }
+
+
+    public ApiResponse<ServiceResponse<Boolean>> confirmation( String email, UserEntityJsonMaper userEntityJsonMaper) throws IOException, SyncronizationException {
+
+        RestClient restClient = new RestClient(Endpoints.ENDPOINT_SIGNIN, Methods.CADASTRO_GERAR_CONFIRMACAO);
+        restClient.setParameter("email", email);
+
+        RESTResponse response = restClient.getPublic();
+
+        if (response.getCode() == 200) {
+            ApiResponse<ServiceResponse<Boolean>> apiResponse = userEntityJsonMaper.transformConfirmation(response.getJson());
+
+            if (apiResponse.getCode().equals(ApiResponse.CODE_SUCESS)) {
+                return apiResponse;
+            } else {
+                throw new SyncronizationException(apiResponse.getMessage());
+            }
+        } else {
+            throw new SyncronizationException(response.getException());
+        }
+
+    }
+
+    public ApiResponse<ServiceResponse<Boolean>> validaCodigo( String email, String codigo, UserEntityJsonMaper userEntityJsonMaper) throws IOException, SyncronizationException {
+
+        RestClient restClient = new RestClient(Endpoints.ENDPOINT_SIGNIN, Methods.CADASTRO_VALIDA_CODIGO);
+        restClient.setParameter("email", email);
+        restClient.setParameter("codigo", codigo);
+
+        RESTResponse response = restClient.getPublic();
+
+        if (response.getCode() == 200) {
+            ApiResponse<ServiceResponse<Boolean>> apiResponse = userEntityJsonMaper.transformConfirmation(response.getJson());
+
+            if (apiResponse.getCode().equals(ApiResponse.CODE_SUCESS)) {
+                return apiResponse;
+            } else {
+                throw new SyncronizationException(apiResponse.getMessage());
+            }
+        } else {
+            throw new SyncronizationException(response.getException());
+        }
+
+    }
+
+
+
 
 }

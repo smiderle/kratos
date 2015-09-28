@@ -119,6 +119,12 @@
             android:screenOrientation="portrait" >
         </activity>
 
+        <activity
+            android:name=".presentation.view.activity.ConfirmacaoActivity"
+            android:label="@string/title_activity_confirmacao"
+            android:screenOrientation="portrait" >
+        </activity>
+
 
 
 

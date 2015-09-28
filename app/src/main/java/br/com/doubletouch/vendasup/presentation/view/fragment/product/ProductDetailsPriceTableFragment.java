@@ -235,7 +235,7 @@ public class ProductDetailsPriceTableFragment extends ScrollTabHolderFragment im
             Double precoFinal = SalesUtil.aplicarPercentual(product.getSalePrice(), priceTable.getPercentage(), priceTable.isIncrease());
 
             tv_price.setText(DoubleUtil.formatToCurrency( precoFinal, true  ));
-            tv_price_table.setText(priceTable.getID() +" - " + priceTable.getDescription());
+            tv_price_table.setText( priceTable.getDescription());
 
             return view;
         }

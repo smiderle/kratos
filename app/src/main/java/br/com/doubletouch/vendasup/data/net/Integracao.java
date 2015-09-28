@@ -406,6 +406,24 @@ public class Integracao {
 
     }
 
+    public void confirmation( String email )  throws  IOException, SyncronizationException {
+
+        UserEntityJsonMaper userEntityJsonMaper = new UserEntityJsonMaper();
+
+        ApiResponse<ServiceResponse<Boolean>> apiResponse = new PublicApi().confirmation(email, userEntityJsonMaper);
+
+    }
+
+    public void validaCodigo( String email, String codigo )  throws  IOException, SyncronizationException {
+
+        UserEntityJsonMaper userEntityJsonMaper = new UserEntityJsonMaper();
+
+        ApiResponse<ServiceResponse<Boolean>> apiResponse = new PublicApi().validaCodigo(email, codigo, userEntityJsonMaper);
+
+    }
+
+
+
 
     public void enviarParcelamentos(Integer branchID) throws  IOException, SyncronizationException {
 

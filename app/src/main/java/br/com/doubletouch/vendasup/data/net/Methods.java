@@ -26,6 +26,8 @@ public interface Methods {
     public static final String PUBLIC_GENERATE_NEW_USER = "generateNewUser";
     public static final String LICENSE_GET_BY_USER_ID = "getByUserID";
     public static final String LICENSE_GET_BY_ID = "getByID";
+    public static final String CADASTRO_GERAR_CONFIRMACAO = "gerarConfirmacaoCadastro";
+    public static final String CADASTRO_VALIDA_CODIGO = "validaCodigo";
 
 
     public static final String ORGANIZATION_GET_BY_ID = "getByOrganizationId";

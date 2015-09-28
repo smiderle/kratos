@@ -37,4 +37,10 @@ public class UserEntityJsonMaper {
         ApiResponse<ServiceResponse<User>> apiResponse = new Gson().fromJson( organizationJsonResponse, serviceType);
         return apiResponse;
     }
+
+    public ApiResponse<ServiceResponse<Boolean>> transformConfirmation(String organizationJsonResponse){
+        Type serviceType = new TypeToken<ApiResponse<ServiceResponse<Boolean>>>() {}.getType();
+        ApiResponse<ServiceResponse<Boolean>> apiResponse = new Gson().fromJson( organizationJsonResponse, serviceType);
+        return apiResponse;
+    }
 }

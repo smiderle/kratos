@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
+
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/primary_color">
+
+
+
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
 
 
@@ -371,6 +380,7 @@
         android:layout_alignParentTop="true"
         android:background="@drawable/notification_warning"
         android:textColor="@color/white"
+        android:textAllCaps="false"
         android:text="" />
 
 
@@ -378,3 +388,4 @@
 
 
 
+</ScrollView>

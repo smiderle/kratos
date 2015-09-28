@@ -19,6 +19,7 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_carga_inicial">CargaInicialActivity</string>
     <string name="title_activity_installment">Parcelamento</string>
+    <string name="title_activity_confirmacao">Confirmação</string>
 
     <string name="tv_description">Descrição:</string>
 

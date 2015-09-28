@@ -42,7 +42,7 @@ public class PriceTableServiceImpl implements PriceTableService {
                 priceTableCallback.onError(new RepositoryErrorBundle(e));
             }
         } else {
-            priceTableCallback.onError(new RepositoryErrorBundle(new IllegalArgumentException("Id não informado")));
+            //priceTableCallback.onError(new RepositoryErrorBundle(new IllegalArgumentException("Id não informado")));
         }
 
 

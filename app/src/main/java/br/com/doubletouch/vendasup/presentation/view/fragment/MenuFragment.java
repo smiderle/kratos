@@ -193,7 +193,7 @@ public class MenuFragment extends BaseFragment implements MenuView {
         this.kratosLayoutManager = new KratosLayoutManager(getActivity());
         this.rv_menus.setLayoutManager(kratosLayoutManager);
 
-        imageLoader.displayImage(VendasUp.getUser().getPictureUrl(), img_user_picture);
+        imageLoader.displayImage( VendasUp.getUser().getPictureUrl(), img_user_picture );
     }
 
     @Override
