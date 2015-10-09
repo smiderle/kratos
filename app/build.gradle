@@ -13,8 +13,8 @@ android {
         applicationId "br.com.vendasup"
         minSdkVersion 15
         targetSdkVersion 21
-        versionCode 6
-        versionName "0.3.0"
+        versionCode 7
+        versionName "0.3.1"
     }
 
     compileOptions {

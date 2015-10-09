@@ -11,6 +11,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import br.com.doubletouch.vendasup.R;
 import br.com.doubletouch.vendasup.VendasUp;
@@ -44,6 +45,9 @@ public class ConfirmacaoFragment extends BaseFragment implements SigninView {
     @InjectView(R.id.et_codigo)
     EditText et_codigo;
 
+    @InjectView(R.id.tv_wellcome)
+    TextView tv_wellcome;
+
     @InjectView(R.id.btn_validar)
     Button btn_validar;
 
@@ -76,6 +80,8 @@ public class ConfirmacaoFragment extends BaseFragment implements SigninView {
         this.email = getArguments().getString(ARGUMENT_EMAIL);
         this.senha = getArguments().getString(ARGUMENT_PASSWORD);
 
+
+
         navigator = new Navigator();
     }
 
@@ -84,7 +90,9 @@ public class ConfirmacaoFragment extends BaseFragment implements SigninView {
         View fragmentView = inflater.inflate(R.layout.fragment_confirmation, container, false);
         ButterKnife.inject(this, fragmentView);
 
-        navigator = new Navigator();
+        String mensagem = getString(R.string.tv_confirmacao_codigo);
+
+        tv_wellcome.setText(  String.format( mensagem, email ) );
 
 
         return fragmentView;

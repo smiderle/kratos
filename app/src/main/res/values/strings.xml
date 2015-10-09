@@ -152,6 +152,10 @@
     <string name="btn_signin">Continuar</string>
     <string name="btn_singup">Cadastrar</string>
 
+    <string name="notificacao_sem_conexao">Parece que você não esta conectado na internet.</string>
+    <string name="tv_confirmacao_codigo">Enviamos um código de verificação para o e-mail %s . Por favor, insira o código a baixo:</string>
+
+
     <string name="message_expired_version_demo">Seu tempo de avaliação do sistema já encerrou. Adquira agora mesmo a versão completa, ou solicite um tempo adicional para a avaliação do sistema.</string>
     <string name="message_expired_version_registered">Desculpe. A licensa de uso expirou. Renove sua licensa para continuar utilizando o sistema.</string>
     <string name="title_expired_version_demo">Obrigado por utilizar nosso sistema.</string>

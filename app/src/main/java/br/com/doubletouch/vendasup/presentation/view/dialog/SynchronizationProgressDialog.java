@@ -9,10 +9,12 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
 
+import br.com.doubletouch.vendasup.R;
 import br.com.doubletouch.vendasup.VendasUp;
 import br.com.doubletouch.vendasup.data.net.Integracao;
 import br.com.doubletouch.vendasup.presentation.exception.ErrorMessageFactory;
 import br.com.doubletouch.vendasup.presentation.view.SynchronizationView;
+import br.com.doubletouch.vendasup.util.NetworkUtils;
 
 /**
  * Created by LADAIR on 06/05/2015.
@@ -116,6 +118,10 @@ public class SynchronizationProgressDialog extends DialogFragment {
             Integracao integracao = new Integracao();
 
             try {
+
+                if( !NetworkUtils.isThereInternetConnection()){
+                    throw new Exception(getResources().getString(R.string.notificacao_sem_conexao));
+                }
 
                 Integer organizationId = VendasUp.getBranchOffice().getOrganization().getOrganizationID();
 

@@ -11,18 +11,4 @@ import br.com.doubletouch.vendasup.VendasUp;
  */
 public abstract class AbstractApi {
 
-    /**
-     * Verifica se existe conexão com a internet
-     * @return
-     */
-    protected boolean isThereInternetConnection() {
-        boolean isConnected;
-
-        ConnectivityManager connectivityManager =
-                (ConnectivityManager) VendasUp.getAppContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        isConnected = (networkInfo != null && networkInfo.isConnectedOrConnecting());
-
-        return isConnected;
-    }
 }
