@@ -126,6 +126,18 @@
         </activity>
 
 
+        <activity
+            android:name=".presentation.view.activity.chart.ChartListActivity"
+            android:label="@string/title_activity_chart"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <activity
+            android:name=".presentation.view.activity.chart.BarChartActivity"
+            android:label="@string/title_activity_chart_vendas_por_periodo"
+            android:screenOrientation="portrait" >
+        </activity>
+
 
 
         <activity

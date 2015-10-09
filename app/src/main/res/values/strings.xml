@@ -20,6 +20,8 @@
     <string name="title_activity_carga_inicial">CargaInicialActivity</string>
     <string name="title_activity_installment">Parcelamento</string>
     <string name="title_activity_confirmacao">Confirmação</string>
+    <string name="title_activity_chart">Relatórios</string>
+    <string name="title_activity_chart_vendas_por_periodo">Relatórios</string>
 
     <string name="tv_description">Descrição:</string>
 
@@ -167,6 +169,10 @@
         <item>Cartão</item>
         <item>Duplicata</item>
         <item>Promissória</item>
+    </string-array>
+
+    <string-array name="charts_type">
+        <item>Valor de Vendas por Mês</item>
     </string-array>
 
     
