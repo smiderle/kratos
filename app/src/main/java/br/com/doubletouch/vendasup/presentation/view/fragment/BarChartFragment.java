@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.data.BarData;
@@ -48,8 +49,8 @@ public class BarChartFragment extends BaseFragment implements ChartView {
     @InjectView(R.id.chart_barchart)
     public BarChart mChart;
 
-    @InjectView(R.id.btn_calendario)
-    public Button btnCalendario;
+    @InjectView(R.id.tv_data)
+    public EditText tvData;
 
     private ChartPresenter chartPresenter;
 
@@ -100,7 +101,7 @@ public class BarChartFragment extends BaseFragment implements ChartView {
         ButterKnife.inject(this, fragmentView);
 
 
-        btnCalendario.setOnClickListener(new View.OnClickListener() {
+        tvData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -115,7 +116,7 @@ public class BarChartFragment extends BaseFragment implements ChartView {
                         Calendar dtInicial = DateUtil.getMinimunDateFromMonth( dtSelected.getTime() );
                         Calendar dtFinal = DateUtil.getMaximunDateFromMonth(dtSelected.getTime());
 
-                        btnCalendario.setText( format.format(dtFinal.getTime()) );
+                        tvData.setText( format.format(dtFinal.getTime()) );
 
 
                         chartPresenter.initialize(dtInicial.getTimeInMillis(), dtFinal.getTimeInMillis() );
@@ -142,7 +143,7 @@ public class BarChartFragment extends BaseFragment implements ChartView {
         Calendar dtInicial = DateUtil.getMinimunDateFromMonth(now);
         Calendar dtFinal = DateUtil.getMaximunDateFromMonth(now);
 
-        btnCalendario.setText( format.format(dtFinal.getTime()) );
+        tvData.setText( format.format(dtFinal.getTime()) );
 
         this.chartPresenter.initialize(dtInicial.getTimeInMillis(), dtFinal.getTimeInMillis());
 

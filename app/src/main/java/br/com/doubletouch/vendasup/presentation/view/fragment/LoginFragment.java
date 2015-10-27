@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -27,6 +28,7 @@ import br.com.doubletouch.vendasup.presentation.presenter.LoginPresenter;
 import br.com.doubletouch.vendasup.presentation.view.LoginView;
 import br.com.doubletouch.vendasup.presentation.view.activity.ExpiredActivity;
 import br.com.doubletouch.vendasup.util.DateUtil;
+import br.com.doubletouch.vendasup.util.anim.AnimationSetUtil;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -119,8 +121,9 @@ public class LoginFragment extends BaseFragment implements LoginView {
 
         btn_notification.setText(msg);
         btn_notification.setVisibility(View.VISIBLE);
-        Animation animBounce = AnimationUtils.loadAnimation(activity, R.anim.move_in_move_out);
-        btn_notification.startAnimation( animBounce );
+
+        AnimationSet animationSet = AnimationSetUtil.get(activity);
+        btn_notification.startAnimation(animationSet);
 
     }
 

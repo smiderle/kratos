@@ -1,132 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
-<ScrollView
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/white">
+    android:layout_height="match_parent">
 
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
 
-
-        <LinearLayout
-            android:orientation="vertical"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/iv_height_login"
-                android:background="@color/white">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/imageView2"
-                    android:src="@drawable/vendas_up"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true" />
-            </RelativeLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:paddingLeft="@dimen/activity_padding_left"
-                android:paddingRight="@dimen/activity_padding_right"
-                android:paddingTop="@dimen/activity_login_padding_top">
+                android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/tv_organization_whit_colon"
-                    style="@style/AppTheme.TextViewInListViewPrimary"
-                    android:textColor="@color/white">
 
-                </TextView>
-
-                <Spinner
-                    android:id="@+id/sp_login_branches"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="5dp"
-                    style="@style/SpinerLogin"
-                    android:spinnerMode="dialog"
-                    android:visibility="invisible"
-                    android:prompt="@string/tv_organization"></Spinner>
+                    android:layout_height="@dimen/iv_height_login"
+                    android:background="@color/white">
 
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/vendas_up" />
+                </RelativeLayout>
 
-                <EditText
-                    android:id="@+id/et_login_user"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/font_size_h16"
-                    android:textColor="@color/white"
-                    android:background="@drawable/textview_corners"
-                    android:layout_marginTop="@dimen/font_size_h3"
-                    android:textColorHint="@color/white"
-                    android:hint="@string/tv_user"/>
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/activity_padding_left"
+                    android:paddingRight="@dimen/activity_padding_right"
+                    android:paddingTop="@dimen/activity_login_padding_top">
+
+                    <TextView
+                        style="@style/AppTheme.TextViewInListViewPrimary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tv_organization_whit_colon"
+                        android:textColor="@color/white">
+
+                    </TextView>
+
+                    <Spinner
+                        android:id="@+id/sp_login_branches"
+                        style="@style/SpinerLogin"
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"
+                        android:prompt="@string/tv_organization"
+                        android:spinnerMode="dialog"
+                        android:visibility="invisible"></Spinner>
 
 
-                <EditText
-                    android:id="@+id/et_login_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/font_size_h16"
-                    android:inputType="textPassword"
-                    android:textColor="@color/white"
-                    android:background="@drawable/textview_corners"
-                    android:layout_marginTop="@dimen/font_size_h3"
-                    android:textColorHint="@color/white"
-                    android:hint="@string/tv_password"/>
-                <Button
-                    android:id="@+id/bt_login_login"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/btn_entrar"
-                    android:background="@drawable/button_corners_background_white"
-                    android:textColor="@color/white"
-                    android:layout_marginTop="@dimen/font_size_h3"/>
+                    <EditText
+                        android:id="@+id/et_login_user"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/font_size_h16"
+                        android:layout_marginTop="@dimen/font_size_h3"
+                        android:background="@drawable/textview_corners"
+                        android:hint="@string/tv_user"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white" />
 
 
-                <TextView
-                    android:id="@+id/tv_expired_info"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/AppTheme.TextViewPrimary"
-                    android:textColor="@color/blue_grey_405"
-                    android:textSize="@dimen/font_size_h3"
-                    android:layout_marginTop="@dimen/font_size_h5"
-                    android:visibility="invisible"
-                    android:layout_gravity="center_horizontal" />
+                    <EditText
+                        android:id="@+id/et_login_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/font_size_h16"
+                        android:layout_marginTop="@dimen/font_size_h3"
+                        android:background="@drawable/textview_corners"
+                        android:hint="@string/tv_password"
+                        android:inputType="textPassword"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white" />
 
+                    <Button
+                        android:id="@+id/bt_login_login"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/font_size_h3"
+                        android:background="@drawable/button_corners_background_white"
+                        android:text="@string/btn_entrar"
+                        android:textColor="@color/white" />
+
+
+                    <TextView
+                        android:id="@+id/tv_expired_info"
+                        style="@style/AppTheme.TextViewPrimary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/font_size_h5"
+                        android:textColor="@color/blue_grey_405"
+                        android:textSize="@dimen/font_size_h3"
+                        android:visibility="invisible" />
+
+
+                </LinearLayout>
 
             </LinearLayout>
 
-        </LinearLayout>
+
+        </RelativeLayout>
 
 
+    </ScrollView>
 
-        <Button
-            android:id="@+id/btn_notification"
-            android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/notification_initial_position"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:background="@drawable/notification_warning"
-            android:textColor="@color/white"
-            android:text=""
-            android:textAllCaps="false"/>
+    <Button
+        android:id="@+id/btn_notification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/notification_initial_position"
+        android:background="@drawable/notification_warning"
+        android:text=""
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
 
-
-    </RelativeLayout>
-
-
-
-</ScrollView>
-
+</RelativeLayout>
