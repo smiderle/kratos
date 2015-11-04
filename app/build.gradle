@@ -4,12 +4,17 @@ android {
     compileSdkVersion 21
     buildToolsVersion "21.1.2"
 
+
+    repositories {
+        maven { url "https://jitpack.io" }
+    }
+
     defaultConfig {
         applicationId "br.com.vendasup"
         minSdkVersion 15
         targetSdkVersion 21
-        versionCode 6
-        versionName "0.3.0"
+        versionCode 8
+        versionName "0.3.2"
     }
 
     compileOptions {
@@ -32,4 +37,5 @@ dependencies {
     compile 'com.jakewharton:butterknife:6.1.0'
     compile 'com.android.support:recyclerview-v7:21.0.+'
     compile 'de.hdodenhof:circleimageview:1.2.1'
+    compile 'com.github.PhilJay:MPAndroidChart:v2.1.4'
 }

@@ -93,6 +93,7 @@
         android:layout_alignParentTop="true"
         android:background="@drawable/notification_warning"
         android:textColor="@color/white"
+        android:textAllCaps="false"
         android:text="" />
 
 

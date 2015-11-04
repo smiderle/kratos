@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_padding_left"
+    android:paddingRight="@dimen/activity_padding_right"
+    android:background="@color/backgrount_primary"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/lv_row_padding_top"
+        android:paddingBottom="@dimen/lv_row_padding_botton">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_email_outline"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/tv_product_id"
+            android:text="@string/tv_user"
+            style="@style/AppTheme.TextViewPrimary"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/imageView"
+            android:layout_toEndOf="@+id/imageView"
+            android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
+            android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
+
+
+
+            <TextView
+                android:id="@+id/tv_user_email"
+                style="@style/AppTheme.TextViewSecundary"
+                android:layout_below="@+id/tv_product_id"
+                android:layout_alignLeft="@+id/tv_product_id"
+                android:layout_alignStart="@+id/tv_product_id" />
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/lv_row_padding_top"
+        android:paddingBottom="@dimen/lv_row_padding_botton">
+
+        <ImageView
+            android:id="@+id/img_user_picture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_photo_camera_grey600_36dp"
+            android:visibility="gone"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+
+        <ImageView
+            android:id="@+id/iv_user_picture"
+            android:layout_width="@dimen/iv_height_main"
+            android:layout_height="@dimen/iv_height_main"
+            android:layout_toRightOf="@+id/img_user_picture"
+            android:layout_toEndOf="@+id/img_user_picture"
+            android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
+            android:visibility="gone"
+            android:src="@drawable/ic_launcher"/>
+
+        <Button
+            android:id="@+id/bt_user_picture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Alterar"
+            android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
+            android:background="@color/white"
+            android:layout_centerVertical="true"
+            android:visibility="gone"
+            android:layout_toRightOf="@+id/iv_user_picture"
+            android:layout_toEndOf="@+id/iv_user_picture"/>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/lv_row_padding_top"
+        android:paddingBottom="@dimen/lv_row_padding_botton">
+        <ImageView
+            android:id="@+id/imageDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_person_grey600_36dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/tv_user_name_title"
+            android:text="@string/tv_user_name"
+            style="@style/AppTheme.TextViewPrimary"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/imageDescription"
+            android:layout_toEndOf="@+id/imageDescription"
+            android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
+            android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
+
+        <ViewSwitcher
+            android:id="@+id/vs_user_name"
+            style="@style/AppTheme.TextViewSecundary"
+            android:layout_below="@+id/tv_user_name_title"
+            android:layout_alignLeft="@+id/tv_user_name_title"
+            android:layout_alignStart="@+id/tv_user_name_title" >
+
+            <TextView
+                android:id="@+id/tv_user_name"
+                style="@style/AppTheme.TextViewSecundary"
+                android:text="@string/tv_default_user_name"/>
+
+
+            <EditText
+                android:id="@+id/et_user_name"
+                style="@style/AppTheme.TextViewSecundary"
+                android:maxLength="100"/>
+
+
+        </ViewSwitcher>
+
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/lv_row_padding_top"
+        android:paddingBottom="@dimen/lv_row_padding_botton">
+        <ImageView
+            android:id="@+id/imagePassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_lock_grey600_36dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/tv_user_password_title"
+            android:text="@string/tv_password"
+            style="@style/AppTheme.TextViewPrimary"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/imagePassword"
+            android:layout_toEndOf="@+id/imagePassword"
+            android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
+            android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
+
+        <ViewSwitcher
+            android:id="@+id/vs_user_password"
+            style="@style/AppTheme.TextViewSecundary"
+            android:layout_below="@+id/tv_user_password_title"
+            android:layout_alignLeft="@+id/tv_user_password_title"
+            android:layout_alignStart="@+id/tv_user_password_title" >
+
+            <TextView
+                android:id="@+id/tv_user_password"
+                style="@style/AppTheme.TextViewSecundary"/>
+
+
+            <EditText
+                android:id="@+id/et_user_password"
+                style="@style/AppTheme.TextViewSecundary"
+                android:maxLength="20"/>
+
+
+        </ViewSwitcher>
+
+
+    </RelativeLayout>
+
+</LinearLayout>

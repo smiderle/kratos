@@ -22,15 +22,31 @@ public class DateUtil {
      */
     public static Calendar getMaximunDate(Date date){
 
-
-
-
         Calendar dtFim = new GregorianCalendar();
         dtFim.setTime(date);
 
         dtFim.set(Calendar.HOUR_OF_DAY, dtFim.getActualMaximum(Calendar.HOUR_OF_DAY) );
         dtFim.set(Calendar.MINUTE, dtFim.getActualMaximum(Calendar.MINUTE) );
         dtFim.set(Calendar.SECOND, dtFim.getActualMaximum(Calendar.SECOND) );
+
+        return  dtFim;
+
+    }
+
+    /**
+     * Retorna a data com a ultimahora, minuto e segundo do mes.
+     * @param date
+     * @return
+     */
+    public static Calendar getMaximunDateFromMonth(Date date){
+
+        Calendar dtFim = new GregorianCalendar();
+        dtFim.setTime(date);
+
+        dtFim.set(Calendar.HOUR_OF_DAY, dtFim.getActualMaximum(Calendar.HOUR_OF_DAY));
+        dtFim.set(Calendar.MINUTE, dtFim.getActualMaximum(Calendar.MINUTE) );
+        dtFim.set(Calendar.SECOND, dtFim.getActualMaximum(Calendar.SECOND) );
+        dtFim.set(Calendar.DAY_OF_MONTH, dtFim.getActualMaximum(Calendar.DAY_OF_MONTH));
 
         return  dtFim;
 
@@ -53,6 +69,24 @@ public class DateUtil {
         return dtInicio;
     }
 
+
+    /**
+     * Retorna a data com a primeira hora, minuto e segundo do mes.
+     * @param date
+     * @return
+     */
+    public static Calendar getMinimunDateFromMonth(Date date){
+
+        Calendar dtInicio = new GregorianCalendar();
+        dtInicio.setTime(date);
+
+        dtInicio.set(Calendar.HOUR_OF_DAY, dtInicio.getActualMinimum(Calendar.HOUR_OF_DAY));
+        dtInicio.set(Calendar.MINUTE, dtInicio.getActualMinimum(Calendar.MINUTE) );
+        dtInicio.set(Calendar.SECOND, dtInicio.getActualMinimum(Calendar.SECOND) );
+        dtInicio.set(Calendar.DAY_OF_MONTH, dtInicio.getActualMinimum(Calendar.DAY_OF_MONTH) );
+
+        return dtInicio;
+    }
 
 
     public static String formatDateTime(Long dataLong) {

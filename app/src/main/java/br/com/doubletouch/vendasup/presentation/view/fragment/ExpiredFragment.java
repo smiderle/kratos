@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
@@ -20,6 +21,7 @@ import br.com.doubletouch.vendasup.presentation.view.ExpiredView;
 import br.com.doubletouch.vendasup.presentation.view.dialog.ExpiredProgressDialog;
 import br.com.doubletouch.vendasup.presentation.view.dialog.SynchronizationProgressDialog;
 import br.com.doubletouch.vendasup.util.DateUtil;
+import br.com.doubletouch.vendasup.util.anim.AnimationSetUtil;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -107,7 +109,9 @@ public class ExpiredFragment extends BaseFragment implements ExpiredView {
     @Override
     public void onExpiredLicense(License license) {
 
-        tv_expired_info.setText("Sua licensa expirou em " + DateUtil.formatDateUTC(license.getExpirationDate()));
+        String msg = "Sua licensa expirou em " + DateUtil.formatDateUTC(license.getExpirationDate());
+        mostrarNotificacao( msg);
+        tv_expired_info.setText(msg);
 
     }
 
@@ -139,8 +143,8 @@ public class ExpiredFragment extends BaseFragment implements ExpiredView {
         //É alterado para invisivel e depois para visivel, pois por algum motivo em algumas telas, a animação não esta iniciando. Então quando é alterado de invisivel para visivel a animação inicia.
         btn_notification.setVisibility(View.INVISIBLE);
         btn_notification.setVisibility(View.VISIBLE);
-        Animation animBounce = AnimationUtils.loadAnimation(activity, R.anim.move_in_move_out);
-        btn_notification.startAnimation( animBounce );
+        AnimationSet animationSet = AnimationSetUtil.get(activity);
+        btn_notification.startAnimation(animationSet);
 
 
     }

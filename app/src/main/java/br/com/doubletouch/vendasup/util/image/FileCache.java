@@ -15,7 +15,7 @@ public class FileCache {
 
     public FileCache(Context context) {
         if(android.os.Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
-            cacheDir = new File(android.os.Environment.getExternalStorageDirectory(),"TTImages_cache");
+            cacheDir = new File(android.os.Environment.getExternalStorageDirectory(),"vendasup_images_cache");
         } else {
             cacheDir = context.getCacheDir();
         } if(!cacheDir.exists()){

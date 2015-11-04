@@ -20,6 +20,9 @@
     <string name="title_activity_carga_inicial">CargaInicialActivity</string>
     <string name="title_activity_installment">Parcelamento</string>
     <string name="title_activity_confirmacao">Confirmação</string>
+    <string name="title_activity_chart">Relatórios</string>
+    <string name="title_activity_chart_vendas_por_periodo">Relatórios</string>
+    <string name="title_activity_user_profile">Perfil</string>
 
     <string name="tv_description">Descrição:</string>
 
@@ -43,6 +46,7 @@
     <string name="tv_product_stock_whit_colon">Estoque:</string>
     <string name="tv_product_price_whit_colon">Preço:</string>
 
+    <string name="tv_user_name">Nome</string>
 
     <string name="tv_customer_name">Nome</string>
     <string name="tv_customer_real_name">Razão Social</string>
@@ -105,6 +109,8 @@
     <string name="tv_default_customer_installment">Nenhuma forma de parcelamento</string>
     <string name="tv_default_customer_credit_limit">Nenhum limite de crédito</string>
 
+    <string name="tv_default_user_name">Nome do usuário</string>
+
     <string name="tv_default_address_postalcode">CEP não cadastrado</string>
     <string name="tv_default_address_city">Cidade não cadastrado</string>
     <string name="tv_default_address_district">Bairro não cadastrado</string>
@@ -150,6 +156,10 @@
     <string name="btn_signin">Continuar</string>
     <string name="btn_singup">Cadastrar</string>
 
+    <string name="notificacao_sem_conexao">Parece que você não esta conectado na internet.</string>
+    <string name="tv_confirmacao_codigo">Enviamos um código de verificação para o e-mail %s . Por favor, insira o código a baixo:</string>
+
+
     <string name="message_expired_version_demo">Seu tempo de avaliação do sistema já encerrou. Adquira agora mesmo a versão completa, ou solicite um tempo adicional para a avaliação do sistema.</string>
     <string name="message_expired_version_registered">Desculpe. A licensa de uso expirou. Renove sua licensa para continuar utilizando o sistema.</string>
     <string name="title_expired_version_demo">Obrigado por utilizar nosso sistema.</string>
@@ -167,6 +177,10 @@
         <item>Cartão</item>
         <item>Duplicata</item>
         <item>Promissória</item>
+    </string-array>
+
+    <string-array name="charts_type">
+        <item>Valor de Vendas por Mês</item>
     </string-array>
 
     
