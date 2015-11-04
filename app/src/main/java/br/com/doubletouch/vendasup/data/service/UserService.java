@@ -22,9 +22,18 @@ public interface UserService {
         void onError(ErrorBundle errorBundle);
     }
 
+    interface UserSavedCallback {
+
+        void onUserSaved(User user);
+
+        void onError(ErrorBundle errorBundle);
+    }
 
 
-    public void saveOrUpdateSynchronous(List<User> users) ;
+
+    void saveOrUpdate(User user, UserSavedCallback userSavedCallback) ;
+
+    void saveOrUpdateSynchronous(List<User> users) ;
 
     void getUserByLoginAndPassword(String login, String password,UserLoginCallback userLoginCallback);
 }

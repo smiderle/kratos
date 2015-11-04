@@ -1,7 +1,5 @@
 package br.com.doubletouch.vendasup.presentation.presenter;
 
-import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,8 +13,6 @@ import br.com.doubletouch.vendasup.data.service.OrderServiceImpl;
 import br.com.doubletouch.vendasup.domain.exception.ErrorBundle;
 import br.com.doubletouch.vendasup.domain.interactor.order.GetOrderDetailsUseCase;
 import br.com.doubletouch.vendasup.domain.interactor.order.SaveOrderUseCase;
-import br.com.doubletouch.vendasup.domain.interactor.target.GetTotalDailySalesUseCase;
-import br.com.doubletouch.vendasup.presentation.exception.ErrorMessageFactory;
 import br.com.doubletouch.vendasup.presentation.view.OrderView;
 import br.com.doubletouch.vendasup.presentation.view.fragment.order.OrderFragment;
 

@@ -22,6 +22,7 @@
     <string name="title_activity_confirmacao">Confirmação</string>
     <string name="title_activity_chart">Relatórios</string>
     <string name="title_activity_chart_vendas_por_periodo">Relatórios</string>
+    <string name="title_activity_user_profile">Perfil</string>
 
     <string name="tv_description">Descrição:</string>
 
@@ -45,6 +46,7 @@
     <string name="tv_product_stock_whit_colon">Estoque:</string>
     <string name="tv_product_price_whit_colon">Preço:</string>
 
+    <string name="tv_user_name">Nome</string>
 
     <string name="tv_customer_name">Nome</string>
     <string name="tv_customer_real_name">Razão Social</string>
@@ -106,6 +108,8 @@
     <string name="tv_default_customer_payment">Nenhuma forma de pagamento</string>
     <string name="tv_default_customer_installment">Nenhuma forma de parcelamento</string>
     <string name="tv_default_customer_credit_limit">Nenhum limite de crédito</string>
+
+    <string name="tv_default_user_name">Nome do usuário</string>
 
     <string name="tv_default_address_postalcode">CEP não cadastrado</string>
     <string name="tv_default_address_city">Cidade não cadastrado</string>

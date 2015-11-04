@@ -23,6 +23,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void saveOrUpdate(User user, UserSavedCallback userSavedCallback) {
+        try {
+            userDAO.insert(user);
+            userSavedCallback.onUserSaved( user );
+        } catch (Exception e) {
+            userSavedCallback.onError(new RepositoryErrorBundle(e));
+        }
+
+    }
+
+    @Override
     public void saveOrUpdateSynchronous(List<User> users) {
 
 
@@ -32,9 +43,9 @@ public class UserServiceImpl implements UserService {
         UserBranchService userBranchService = new UserBranchServiceImpl();
 
 
-        for (User user : users ){
+        for (User user : users) {
 
-            userBranchService.saveOrUpdateSynchronous( user.getUserBranches() );
+            userBranchService.saveOrUpdateSynchronous(user.getUserBranches());
 
         }
     }
@@ -44,13 +55,13 @@ public class UserServiceImpl implements UserService {
 
         User user = userDAO.getByLoginAndPassword(login, password);
 
-        if(user != null){
+        if (user != null) {
 
             userLoginCallback.onUserLoaded(user);
 
         } else {
 
-            userLoginCallback.onError(new RepositoryErrorBundle( new Exception("Usuário ou senha inválidos.") ));
+            userLoginCallback.onError(new RepositoryErrorBundle(new Exception("Usuário ou senha inválidos.")));
 
         }
 

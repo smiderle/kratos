@@ -27,6 +27,7 @@ import br.com.doubletouch.vendasup.presentation.navigation.Navigator;
 import br.com.doubletouch.vendasup.presentation.presenter.MenuPresenter;
 import br.com.doubletouch.vendasup.presentation.view.MenuView;
 import br.com.doubletouch.vendasup.presentation.view.activity.LoginActivity;
+import br.com.doubletouch.vendasup.presentation.view.activity.UserDetailsActivity;
 import br.com.doubletouch.vendasup.presentation.view.activity.order.OrderActivity;
 import br.com.doubletouch.vendasup.presentation.view.adapter.KratosLayoutManager;
 import br.com.doubletouch.vendasup.presentation.view.adapter.MenusAdapter;
@@ -37,7 +38,6 @@ import butterknife.InjectView;
 
 
 /**
- *
  * Created by LADAIR on 17/02/2015.
  */
 public class MenuFragment extends BaseFragment implements MenuView {
@@ -67,7 +67,8 @@ public class MenuFragment extends BaseFragment implements MenuView {
 
     private Activity activity;
 
-    private static final int RESULT_MENU = 0;
+    private static final int RESULT_ORDER = 0;
+    private static final int RESULT_PROFILE = 1;
 
     public MenuFragment() {
         super();
@@ -101,11 +102,10 @@ public class MenuFragment extends BaseFragment implements MenuView {
     }
 
 
-
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        if(activity instanceof MenuListListener){
+        if (activity instanceof MenuListListener) {
             this.menuListListener = (MenuListListener) activity;
         }
         imageLoader = new ImageLoader(activity);
@@ -120,14 +120,14 @@ public class MenuFragment extends BaseFragment implements MenuView {
         this.loadProductList();
     }
 
-    private void loadProductList(){
+    private void loadProductList() {
         this.menuPresenter.initialize();
     }
 
     @Override
     public void renderMenuView(List<MenuModel> menus) {
 
-        if(this.menuApdater == null){
+        if (this.menuApdater == null) {
 
             this.menuApdater = new MenusAdapter(getActivity(), menus);
 
@@ -143,22 +143,29 @@ public class MenuFragment extends BaseFragment implements MenuView {
 
     }
 
+
     @Override
-    public void goTo( MenuModel menuModel ) {
+    public void goTo(MenuModel menuModel) {
 
-        if( menuModel.getTo().equals( OrderActivity.class) ){
+        if (menuModel.getTo().equals(OrderActivity.class)) {
 
-            Intent it = OrderActivity.getCallingIntent( activity, null, ViewMode.INCLUSAO );
-            startActivityForResult( it, RESULT_MENU);
+            Intent it = OrderActivity.getCallingIntent(activity, null, ViewMode.INCLUSAO);
+            startActivityForResult(it, RESULT_ORDER);
             navigator.transitionGo(activity);
 
-        } else if(menuModel.getTo().equals(LoginActivity.class)) {
+        } else if (menuModel.getTo().equals(UserDetailsActivity.class)) {
+
+            Intent it = UserDetailsActivity.getCallingIntent(activity, null);
+            startActivityForResult(it, RESULT_PROFILE);
+            navigator.transitionGo(activity);
+
+        } else if (menuModel.getTo().equals(LoginActivity.class)) {
 
             navigator.previousActivity(activity);
 
         } else {
 
-            this.navigator.navigateTo( activity , menuModel.getTo() );
+            this.navigator.navigateTo(activity, menuModel.getTo());
 
         }
 
@@ -166,15 +173,14 @@ public class MenuFragment extends BaseFragment implements MenuView {
     }
 
 
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == RESULT_MENU) {
-
-
+        if (requestCode == RESULT_ORDER) {
             menuPresenter.initialize();
+        } else if (requestCode == RESULT_PROFILE) {
+            imageLoader.displayImage(VendasUp.getUser().getPictureUrl(), img_user_picture);
         }
 
     }
@@ -183,17 +189,17 @@ public class MenuFragment extends BaseFragment implements MenuView {
     private MenusAdapter.OnItemClickListener onItemClickListener = new MenusAdapter.OnItemClickListener() {
         @Override
         public void onMenuItemClicked(MenuModel menuModel) {
-            if(MenuFragment.this.menuPresenter != null && menuModel != null){
+            if (MenuFragment.this.menuPresenter != null && menuModel != null) {
                 MenuFragment.this.menuPresenter.onMenuClicked(menuModel);
             }
         }
     };
 
-    private void setupUI(){
+    private void setupUI() {
         this.kratosLayoutManager = new KratosLayoutManager(getActivity());
         this.rv_menus.setLayoutManager(kratosLayoutManager);
 
-        imageLoader.displayImage( VendasUp.getUser().getPictureUrl(), img_user_picture );
+        imageLoader.displayImage(VendasUp.getUser().getPictureUrl(), img_user_picture);
     }
 
     @Override
@@ -220,7 +226,7 @@ public class MenuFragment extends BaseFragment implements MenuView {
     @Override
     public void loadTotalDailySales(Double value) {
 
-        tv_menu_daily_sales.setText( DoubleUtil.formatToCurrency(value, true) );
+        tv_menu_daily_sales.setText(DoubleUtil.formatToCurrency(value, true));
 
     }
 
