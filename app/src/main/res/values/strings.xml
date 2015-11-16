@@ -88,6 +88,9 @@
     <string name="add_title">Adicionar</string>
     <string name="edit_title">Editar</string>
     <string name="save_title">Salvar</string>
+    <string name="add_export">Exportar</string>
+    <string name="menu_exportar_email">Enviar Email</string>
+
     <string name="tv_default_product_description">Descrição não cadastrado</string>
     <string name="tv_default_product_reference">Referência não cadastrado</string>
     <string name="tv_default_product_code">Código não cadastrado</string>

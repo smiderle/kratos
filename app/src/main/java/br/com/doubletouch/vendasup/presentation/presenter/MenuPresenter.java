@@ -72,10 +72,10 @@ public class MenuPresenter implements Presenter {
 
     public List<MenuModel>  createMenuModel(){
         List<MenuModel> menus = new ArrayList<>(5);
-        menus.add(new MenuModel(OrderActivity.class, "Novo Pedido", R.drawable.ic_shopping_cart_grey600_36dp,0));
+        menus.add(new MenuModel(OrderActivity.class, "Nova Venda", R.drawable.ic_shopping_cart_grey600_36dp,0));
         menus.add(new MenuModel(ProductListActivity.class, "Produtos", R.drawable.ic_cube_outline,1));
         menus.add(new MenuModel(CustomerListActivity.class, "Clientes", R.drawable.ic_person_grey600_36dp,2));
-        menus.add(new MenuModel(OrderListActivity.class, "Histórico", R.drawable.ic_history_grey600_36dp,3));
+        menus.add(new MenuModel(OrderListActivity.class, "Histórico de Vendas", R.drawable.ic_history_grey600_36dp,3));
         menus.add(new MenuModel(InstallmentActivity.class, "Parcelamento", R.drawable.ic_format_list_numbered_grey600_36dp,4));
         menus.add(new MenuModel(ChartListActivity.class, "Relatórios", R.drawable.ic_insert_chart_grey600_36dp,4));
         menus.add(new MenuModel(UserDetailsActivity.class, "Perfil", R.drawable.ic_account_circle_grey600_36dp,4));

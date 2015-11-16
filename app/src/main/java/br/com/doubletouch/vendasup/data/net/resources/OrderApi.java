@@ -50,4 +50,26 @@ public class OrderApi extends AbstractApi {
         }
 
     }
+
+
+    //http://stackoverflow.com/questions/19204796/gson-deserialize-complex-object-with-recursive-dependencies
+    public void sendEmail( Order order, String email ) throws IOException, SyncronizationException {
+
+        //RestClient restClient = new RestClient(Endpoints.ENDPOINT_ORDER, String.format( Methods.ORDER_SEND_EMAIL, email ));
+        RestClient restClient = new RestClient(Endpoints.ENDPOINT_ORDER, String.format( Methods.ORDER_SEND_EMAIL, email ) );
+
+        Gson gson = new Gson();
+        String customerJson = gson.toJson(order);
+
+        RESTResponse response = restClient.post(customerJson);
+
+        if( response.getCode() != 200 ) {
+
+            throw new SyncronizationException( response.getException() );
+
+        }
+
+
+    }
+
 }
