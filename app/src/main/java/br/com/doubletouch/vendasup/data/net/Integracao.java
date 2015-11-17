@@ -368,6 +368,13 @@ public class Integracao {
 
     }
 
+    public void enviarPedidos(Order order, String email) throws  IOException, SyncronizationException {
+
+        new OrderApi().sendEmail(order, email);
+
+    }
+
+
     public void enviarPedidos(Integer branchID) throws  IOException, SyncronizationException {
 
         OrderService orderService = new OrderServiceImpl();

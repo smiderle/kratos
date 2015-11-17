@@ -1,51 +1,58 @@
 package br.com.doubletouch.vendasup.presentation.view.fragment.order;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
-import java.util.Date;
+import java.io.IOException;
 import java.util.List;
 
 import br.com.doubletouch.vendasup.R;
-import br.com.doubletouch.vendasup.VendasUp;
 import br.com.doubletouch.vendasup.data.entity.Customer;
 import br.com.doubletouch.vendasup.data.entity.Order;
 import br.com.doubletouch.vendasup.data.entity.OrderItem;
 import br.com.doubletouch.vendasup.data.entity.OrderPayment;
 import br.com.doubletouch.vendasup.data.entity.PriceTable;
-import br.com.doubletouch.vendasup.data.entity.enumeration.OrderType;
 import br.com.doubletouch.vendasup.data.entity.enumeration.ViewMode;
 import br.com.doubletouch.vendasup.data.executor.JobExecutor;
+import br.com.doubletouch.vendasup.data.net.Integracao;
 import br.com.doubletouch.vendasup.domain.executor.PostExecutionThread;
 import br.com.doubletouch.vendasup.domain.executor.ThreadExecutor;
 import br.com.doubletouch.vendasup.domain.interactor.order.GetOrderDetailsUseCase;
 import br.com.doubletouch.vendasup.domain.interactor.order.GetOrderDetailsUseCaseImpl;
 import br.com.doubletouch.vendasup.domain.interactor.order.SaveOrderUseCase;
 import br.com.doubletouch.vendasup.domain.interactor.order.SaveOrderUseCaseImpl;
+import br.com.doubletouch.vendasup.exception.SyncronizationException;
 import br.com.doubletouch.vendasup.presentation.UIThread;
 import br.com.doubletouch.vendasup.presentation.navigation.Navigator;
 import br.com.doubletouch.vendasup.presentation.presenter.OrderPresenter;
+import br.com.doubletouch.vendasup.presentation.view.EmailPedidoView;
 import br.com.doubletouch.vendasup.presentation.view.OrderView;
 import br.com.doubletouch.vendasup.presentation.view.activity.CustomerListActivity;
 import br.com.doubletouch.vendasup.presentation.view.activity.order.OrderPaymentActivity;
 import br.com.doubletouch.vendasup.presentation.view.activity.order.OrderProductActivity;
+import br.com.doubletouch.vendasup.presentation.view.dialog.EmailPedidoDialog;
 import br.com.doubletouch.vendasup.presentation.view.fragment.BaseFragment;
 import br.com.doubletouch.vendasup.presentation.view.fragment.customer.CustomerListFragment;
 import br.com.doubletouch.vendasup.util.DoubleUtil;
@@ -59,7 +66,7 @@ import butterknife.Optional;
 /**
  * Created by LADAIR on 01/04/2015.
  */
-public class OrderFragment extends BaseFragment implements OrderView {
+public class OrderFragment extends BaseFragment implements OrderView, EmailPedidoView {
 
     public static Order order;
 
@@ -152,6 +159,8 @@ public class OrderFragment extends BaseFragment implements OrderView {
 
     private ViewMode viewMode;
 
+    private MenuItem menuExport;
+
     public static OrderFragment newInstance(Long orderId, ViewMode viewMode) {
         OrderFragment orderFragment = new OrderFragment();
         Bundle argumentsBundle = new Bundle();
@@ -162,18 +171,41 @@ public class OrderFragment extends BaseFragment implements OrderView {
         return orderFragment;
     }
 
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+
+        //Carrega o arquivo de menu.
+        inflater.inflate(R.menu.menu_order, menu);
+
+        menuExport = menu.findItem(R.id.it_export);
+
+        if (ViewMode.EDICAO.equals(viewMode) || ViewMode.VISUALIZACAO.equals(viewMode)) {
+            menuExport.setVisible(true);
+        } else {
+            menuExport.setVisible(false);
+        }
+
+
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
 
             case android.R.id.home:
                 navigator.previousActivity(activity);
+                break;
+            case R.id.it_export_email:
+                enviarEmail();
                 break;
             default:
                 super.onOptionsItemSelected(item);
         }
         return super.onOptionsItemSelected(item);
     }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -213,7 +245,7 @@ public class OrderFragment extends BaseFragment implements OrderView {
 
     }
 
-    private void bind( View fragmentView ){
+    private void bind(View fragmentView) {
 
         ButterKnife.inject(this, fragmentView);
 
@@ -230,10 +262,10 @@ public class OrderFragment extends BaseFragment implements OrderView {
 
         ThreadExecutor threadExecutor = JobExecutor.getInstance();
         PostExecutionThread postExecutionThread = UIThread.getInstance();
-        SaveOrderUseCase saveOrderUseCase = new SaveOrderUseCaseImpl( threadExecutor, postExecutionThread );
-        GetOrderDetailsUseCase getOrderDetailsUseCase = new GetOrderDetailsUseCaseImpl(  threadExecutor, postExecutionThread  );
+        SaveOrderUseCase saveOrderUseCase = new SaveOrderUseCaseImpl(threadExecutor, postExecutionThread);
+        GetOrderDetailsUseCase getOrderDetailsUseCase = new GetOrderDetailsUseCaseImpl(threadExecutor, postExecutionThread);
 
-        orderPresenter = new OrderPresenter( this, saveOrderUseCase, getOrderDetailsUseCase);
+        orderPresenter = new OrderPresenter(this, saveOrderUseCase, getOrderDetailsUseCase);
 
     }
 
@@ -244,6 +276,7 @@ public class OrderFragment extends BaseFragment implements OrderView {
         btn_new_order.setVisibility(View.VISIBLE);
 
         ll_order_details.removeView(btn_order_save);
+        menuExport.setVisible(true);
 
         setOrderNumber();
 
@@ -262,7 +295,7 @@ public class OrderFragment extends BaseFragment implements OrderView {
         setPayment();
         setOrderNumber();
 
-        if(!order.isSyncPending()){
+        if (!order.isSyncPending()) {
 
             setViewMode();
 
@@ -295,13 +328,19 @@ public class OrderFragment extends BaseFragment implements OrderView {
         return getActivity().getApplicationContext();
     }
 
-    private class CustomerOnClickListner implements  View.OnClickListener {
+    @Override
+    public void emailEnviado() {
+        showToast("Email Enviado.");
+
+    }
+
+    private class CustomerOnClickListner implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
 
             Intent it = CustomerListActivity.getCallingIntent(activity);
-            it.putExtra(CustomerListFragment.FROM_ACTIVITY , CustomerListFragment.FROM_ORDER_ACTIVITY_CODE);
+            it.putExtra(CustomerListFragment.FROM_ACTIVITY, CustomerListFragment.FROM_ORDER_ACTIVITY_CODE);
             startActivityForResult(it, RESULT_CUSTOMER);
             navigator.transitionGo(activity);
 
@@ -309,7 +348,7 @@ public class OrderFragment extends BaseFragment implements OrderView {
         }
     }
 
-    private class ProductOnClickListner implements  View.OnClickListener {
+    private class ProductOnClickListner implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
@@ -328,7 +367,7 @@ public class OrderFragment extends BaseFragment implements OrderView {
         public void onClick(View v) {
 
 
-            if( order.getCustomer() != null && order.getOrdersItens() != null && !order.getOrdersItens().isEmpty() ) {
+            if (order.getCustomer() != null && order.getOrdersItens() != null && !order.getOrdersItens().isEmpty()) {
 
                 Intent it = OrderPaymentActivity.getCallingIntent(activity, viewMode);
                 startActivityForResult(it, RESULT_PAYMENT);
@@ -341,7 +380,6 @@ public class OrderFragment extends BaseFragment implements OrderView {
             }
 
 
-
         }
     }
 
@@ -350,24 +388,24 @@ public class OrderFragment extends BaseFragment implements OrderView {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == RESULT_CUSTOMER) {
+        if (requestCode == RESULT_CUSTOMER) {
 
-            if(data != null){
+            if (data != null) {
 
                 Customer customer = (Customer) data.getSerializableExtra(CustomerListFragment.FROM_ACTIVITY);
 
-                if(customer != null){
+                if (customer != null) {
                     setCustomer(customer);
                 }
 
             }
 
 
-        } else if(requestCode == RESULT_PRODUCTS){
+        } else if (requestCode == RESULT_PRODUCTS) {
 
             setOrderItens();
 
-        } else if(requestCode == RESULT_PAYMENT ){
+        } else if (requestCode == RESULT_PAYMENT) {
 
             setPayment();
 
@@ -375,14 +413,14 @@ public class OrderFragment extends BaseFragment implements OrderView {
 
     }
 
-    private void setOrderItens(){
+    private void setOrderItens() {
 
         List<OrderItem> ordersItens = order.getOrdersItens();
 
         Double total = 0.0;
         Double quantidade = 0.0;
 
-        if(ordersItens.isEmpty()){
+        if (ordersItens.isEmpty()) {
             iv_cart.setImageResource(R.drawable.ic_shopping_cart_grey600_36dp);
             iv_cart.setColorFilter(null);
         } else {
@@ -390,32 +428,31 @@ public class OrderFragment extends BaseFragment implements OrderView {
             iv_cart.setColorFilter(getResources().getColor(R.color.green_primary_color));
         }
 
-        for (OrderItem orderItem : ordersItens){
+        for (OrderItem orderItem : ordersItens) {
 
-            if(orderItem.getSalePrice() == null){
+            if (orderItem.getSalePrice() == null) {
                 orderItem.setSalePrice(orderItem.getProduct().getSalePrice());
             }
 
-            total += ( orderItem.getSalePrice() * orderItem.getQuantity() );
+            total += (orderItem.getSalePrice() * orderItem.getQuantity());
             order.setNetValue(total);
 
             quantidade += orderItem.getQuantity();
 
         }
 
-        tv_cart.setText( quantidade+ " produtos no selecionados" );
+        tv_cart.setText(quantidade + " produtos no selecionados");
         tv_order_total.setText(DoubleUtil.formatToCurrency(total, true));
 
         calculaParcelas();
 
 
-
     }
 
 
-    private void setCustomer(Customer customer){
+    private void setCustomer(Customer customer) {
 
-        if(customer != null){
+        if (customer != null) {
             iv_customer.setImageResource(R.drawable.ic_done_white_36dp);
             iv_customer.setColorFilter(getResources().getColor(R.color.green_primary_color));
             tv_order_customer.setText(customer.getName());
@@ -433,30 +470,29 @@ public class OrderFragment extends BaseFragment implements OrderView {
 
         List<OrderPayment> ordersPayments = this.order.getOrdersPayments();
 
-        if( ordersPayments != null ){
+        if (ordersPayments != null) {
             iv_pyment.setImageResource(R.drawable.ic_done_white_36dp);
             iv_pyment.setColorFilter(getResources().getColor(R.color.green_primary_color));
-            tv_payment.setText( this.order.getInstallment().getDescription() );
+            tv_payment.setText(this.order.getInstallment().getDescription());
 
         }
     }
 
 
-    private void setOrderNumber(){
-        if(order.getID() > 0){
+    private void setOrderNumber() {
+        if (order.getID() > 0) {
             tv_order_number_title.setVisibility(View.VISIBLE);
             tv_order_number.setVisibility(View.VISIBLE);
 
-            tv_order_number.setText( String.valueOf( order.getID() ) );
+            tv_order_number.setText(String.valueOf(order.getID()));
         }
 
     }
-
 
 
     private void calculaParcelas() {
 
-        if( order.getInstallment() != null && order.getOrdersItens() != null && order.getOrdersItens().size() > 0 ){
+        if (order.getInstallment() != null && order.getOrdersItens() != null && order.getOrdersItens().size() > 0) {
 
             OrderPaymentUtil orderPaymentUtil = new OrderPaymentUtil();
             List<OrderPayment> payments = orderPaymentUtil.generate(order.getInstallment(), OrderFragment.order.getNetValue());
@@ -467,24 +503,23 @@ public class OrderFragment extends BaseFragment implements OrderView {
     }
 
 
-
     @OnClick(R.id.btn_order_save)
-    public void saveOrder(){
+    public void saveOrder() {
 
-        order.setObservation( et_order_observation.getText().toString() );
+        order.setObservation(et_order_observation.getText().toString());
         orderPresenter.saveOrder(order);
 
     }
 
     @OnClick(R.id.btn_menu)
-    public void goToMenu(){
+    public void goToMenu() {
 
         navigator.previousActivity(activity);
 
     }
 
     @OnClick(R.id.btn_new_order)
-    public void goToNewOrder(){
+    public void goToNewOrder() {
 
         Intent intent = activity.getIntent();
         activity.finish();
@@ -494,7 +529,7 @@ public class OrderFragment extends BaseFragment implements OrderView {
 
     }
 
-    private void mostrarNotificacaoSucess(final String msg){
+    private void mostrarNotificacaoSucess(final String msg) {
 
         btn_notification.setBackgroundResource(R.drawable.notification_success);
         mostrarNotificacao(msg);
@@ -502,14 +537,14 @@ public class OrderFragment extends BaseFragment implements OrderView {
     }
 
 
-    private void mostrarNotificacaoWarning(final String msg){
+    private void mostrarNotificacaoWarning(final String msg) {
 
         btn_notification.setBackgroundResource(R.drawable.notification_warning);
         mostrarNotificacao(msg);
 
     }
 
-    private void mostrarNotificacao(final String msg){
+    private void mostrarNotificacao(final String msg) {
 
         btn_notification.setText(msg);
         //É alterado para invisivel e depois para visivel, pois por algum motivo em algumas telas, a animação não esta iniciando. Então quando é alterado de invisivel para visivel a animação inicia.
@@ -522,7 +557,7 @@ public class OrderFragment extends BaseFragment implements OrderView {
 
     }
 
-    private void removeAllListner(){
+    private void removeAllListner() {
 
         rl_order_customer.setOnClickListener(null);
         rl_order_payment.setOnClickListener(null);
@@ -535,7 +570,7 @@ public class OrderFragment extends BaseFragment implements OrderView {
 
     }
 
-    private void switchObservation(){
+    private void switchObservation() {
 
         ((ViewSwitcher) activity.findViewById(R.id.vs_order_observation)).showNext();
 
@@ -544,16 +579,16 @@ public class OrderFragment extends BaseFragment implements OrderView {
 
     }
 
-    private void setObservation(){
+    private void setObservation() {
 
         String observation = order.getObservation() != null ? order.getObservation() : "";
-        tv_order_observation.setText( observation );
-        et_order_observation.setText( observation );
+        tv_order_observation.setText(observation);
+        et_order_observation.setText(observation);
 
     }
 
 
-    private void setViewMode(){
+    private void setViewMode() {
         switchObservation();
         btn_order_save.setVisibility(View.INVISIBLE);
         rl_order_customer.setOnClickListener(null);
@@ -562,5 +597,20 @@ public class OrderFragment extends BaseFragment implements OrderView {
     }
 
 
+
+    private void enviarEmail() {
+
+        EmailPedidoDialog emailPedidoDialog = new EmailPedidoDialog();
+        emailPedidoDialog.setContext(activity);
+        emailPedidoDialog.setOrder(order);
+        emailPedidoDialog.setEmailPedidoView(this);
+        emailPedidoDialog.show(getFragmentManager(), "Tag");
+
+
+    }
+
+    private void showToast(String message){
+        Toast.makeText(activity, message, Toast.LENGTH_LONG).show();
+    }
 
 }

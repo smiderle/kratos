@@ -11,6 +11,9 @@ public interface Methods {
     public static final String PRODUTO_ORDER_LIST = "saveList";
     public static final String INSALMENT_SAVE_LIST = "saveList";
 
+    public static final String ORDER_SEND_EMAIL = "sendEmail/%s/";
+
+
     public static final String PRODUTO_UPDATE_LIST = "updateList";
     public static final String CUSTOMER_UPDATE_LIST = "updateList";
     public static final String INSALMENT_UPDATE_LIST = "updateList";

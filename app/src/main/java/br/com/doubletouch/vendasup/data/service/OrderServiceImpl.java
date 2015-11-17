@@ -44,7 +44,7 @@ public class OrderServiceImpl implements  OrderService {
 
         for( OrderPayment orderPayment : ordersPayments ) {
 
-            orderPayment.setOrder(order);
+            orderPayment.setOrder( new Order( order.getID() ) );
 
         }
 
@@ -52,7 +52,7 @@ public class OrderServiceImpl implements  OrderService {
 
         for ( OrderItem orderItem : ordersItens ){
 
-            orderItem.setOrder( order );
+            orderItem.setOrder( new Order( order.getID() )  );
 
         }
 
