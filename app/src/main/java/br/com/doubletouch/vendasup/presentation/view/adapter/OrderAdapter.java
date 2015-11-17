@@ -48,8 +48,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
     public void onBindViewHolder(OrderViewHolder holder, int position) {
         final Order order = orders.get( position );
         holder.tv_order_customer.setText( order.getCustomer().getName() );
-        holder.tv_order_total.setText(DoubleUtil.formatToCurrency( order.getNetValue(), false ) );
-        holder.tv_order_emissao.setText(DateUtil.formatDateTime( order.getIssuanceTime() ));
+        holder.tv_order_total.setText(DoubleUtil.formatToCurrency(order.getNetValue(), false) );
+        holder.tv_order_emissao.setText(DateUtil.formatDateTime(order.getIssuanceTime()));
 
         if( order.getID() > 0 ){
             holder.tv_order_number.setText( String.valueOf( order.getID() ));
@@ -57,8 +57,14 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
         if(order.isSyncPending()){
             holder.iv_order_status.setBackgroundResource(R.drawable.status_pending);
+            holder.tv_order_status.setText("Pendente");
+            holder.tv_text_status.setText("P");
+            holder.tv_order_status.setTextColor(layoutInflater.getContext().getResources().getColor(R.color.orange_400));
         } else {
             holder.iv_order_status.setBackgroundResource(R.drawable.status_success);
+            holder.tv_order_status.setText("Sincronizado");
+            holder.tv_text_status.setText("S");
+            holder.tv_order_status.setTextColor( layoutInflater.getContext().getResources().getColor( R.color.green_400 ) );
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -95,6 +101,13 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
         @InjectView(R.id.tv_order_emissao)
         TextView tv_order_emissao;
+
+        @InjectView(R.id.tv_order_status)
+        TextView tv_order_status;
+
+        @InjectView(R.id.tv_text_status)
+        TextView tv_text_status;
+
 
         @InjectView(R.id.iv_order_status)
         View iv_order_status;
