@@ -13,7 +13,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:background="@drawable/button_corners"
-        android:text="@string/tv_sincronizar"
+        android:text="@string/btn_sincronizacao"
+        android:textAllCaps="false"
         android:textColor="@color/white" />
 
     <ListView

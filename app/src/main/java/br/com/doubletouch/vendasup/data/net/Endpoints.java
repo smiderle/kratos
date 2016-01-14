@@ -8,7 +8,7 @@ public interface Endpoints {
     public static final String VERSION = "/v1";
     public static final String ENDPOINT_PRIVATE = "/private";
     public static final String ENDPOINT_PUBLIC = "/public";
-    //public static final String CONTEXT = "http://192.168.1.14/vendas-api";
+    //public static final String CONTEXT = "http://192.168.1.19/vendas-api";
     public static final String CONTEXT = "http://www.vendasup.com.br/vendas-api";
 
     public static final String ENDPOINT_PRODUTO = CONTEXT.concat(ENDPOINT_PRIVATE).concat(VERSION).concat("/product");
@@ -23,7 +23,6 @@ public interface Endpoints {
     public static final String ENDPOINT_GOAL = CONTEXT.concat(ENDPOINT_PRIVATE).concat(VERSION).concat("/goal");
     public static final String ENDPOINT_SIGNIN = CONTEXT.concat(ENDPOINT_PUBLIC).concat(VERSION).concat("/signin");
     public static final String ENDPOINT_LICENSE = CONTEXT.concat(ENDPOINT_PRIVATE).concat(VERSION).concat("/license");
-
 
 
 
