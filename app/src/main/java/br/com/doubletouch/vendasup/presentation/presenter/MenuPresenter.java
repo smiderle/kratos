@@ -79,7 +79,7 @@ public class MenuPresenter implements Presenter {
         menus.add(new MenuModel(InstallmentActivity.class, "Parcelamento", R.drawable.ic_format_list_numbered_grey600_36dp,4));
         menus.add(new MenuModel(ChartListActivity.class, "Relatórios", R.drawable.ic_insert_chart_grey600_36dp,4));
         menus.add(new MenuModel(UserDetailsActivity.class, "Perfil", R.drawable.ic_account_circle_grey600_36dp,4));
-        menus.add(new MenuModel(SynchronizationActivity.class, "Sincronização", R.drawable.ic_import_export_grey600_36dp,4));
+        menus.add(new MenuModel(SynchronizationActivity.class, "Enviar e Receber Dados", R.drawable.ic_import_export_grey600_36dp,4));
         menus.add(new MenuModel(LoginActivity.class, "Sair", R.drawable.ic_exit_to_app_grey600_36dp,4));
 
         //menus.add(new MenuModel(TFCustomerDetails.class, "TFCustomerDetails", R.drawable.ic_cube_outline,3));

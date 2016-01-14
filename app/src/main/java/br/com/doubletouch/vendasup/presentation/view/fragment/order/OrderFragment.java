@@ -128,14 +128,6 @@ public class OrderFragment extends BaseFragment implements OrderView, EmailPedid
     @InjectView(R.id.btn_order_save)
     Button btn_order_save;
 
-
-    @InjectView(R.id.tv_order_number_title)
-    TextView tv_order_number_title;
-
-    @InjectView(R.id.tv_order_number)
-    TextView tv_order_number;
-
-
     @InjectView(R.id.btn_notification)
     Button btn_notification;
 
@@ -444,6 +436,12 @@ public class OrderFragment extends BaseFragment implements OrderView, EmailPedid
         tv_cart.setText(quantidade + " produtos no selecionados");
         tv_order_total.setText(DoubleUtil.formatToCurrency(total, true));
 
+
+        if (ViewMode.VISUALIZACAO.equals(viewMode)) {
+            tv_order_total.setTextSize(getResources().getDimension(R.dimen.font_size_h6));
+        }
+
+
         calculaParcelas();
 
 
@@ -480,12 +478,6 @@ public class OrderFragment extends BaseFragment implements OrderView, EmailPedid
 
 
     private void setOrderNumber() {
-        if (order.getID() > 0) {
-            tv_order_number_title.setVisibility(View.VISIBLE);
-            tv_order_number.setVisibility(View.VISIBLE);
-
-            tv_order_number.setText(String.valueOf(order.getID()));
-        }
 
     }
 
@@ -597,7 +589,6 @@ public class OrderFragment extends BaseFragment implements OrderView, EmailPedid
     }
 
 
-
     private void enviarEmail() {
 
         EmailPedidoDialog emailPedidoDialog = new EmailPedidoDialog();
@@ -609,7 +600,7 @@ public class OrderFragment extends BaseFragment implements OrderView, EmailPedid
 
     }
 
-    private void showToast(String message){
+    private void showToast(String message) {
         Toast.makeText(activity, message, Toast.LENGTH_LONG).show();
     }
 

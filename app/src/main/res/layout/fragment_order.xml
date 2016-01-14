@@ -30,7 +30,7 @@
                     android:focusableInTouchMode="true"
                     android:paddingBottom="@dimen/lv_row_padding_botton"
                     android:paddingLeft="@dimen/activity_padding_left"
-
+                    android:padding="@dimen/font_size_h3"
                     android:paddingRight="@dimen/activity_padding_right"
                     android:paddingTop="@dimen/lv_row_padding_top">
 
@@ -54,26 +54,14 @@
                         android:layout_toRightOf="@+id/iv_order_status"
                         android:text="@string/tv_customer_title" />
 
-                    <ViewSwitcher
-                        android:id="@+id/vs_customer_postalcode"
+
+                    <TextView
+                        android:id="@+id/tv_order_customer"
                         style="@style/AppTheme.TextViewSecundary"
                         android:layout_alignLeft="@+id/tv_order_customer_title"
                         android:layout_alignStart="@+id/tv_order_customer_title"
-                        android:layout_below="@+id/tv_order_customer_title">
-
-
-                        <TextView
-                            android:id="@+id/tv_order_customer"
-                            style="@style/AppTheme.TextViewSecundary"
-                            android:text="@string/tv_order_customer" />
-
-
-                        <EditText
-                            android:id="@+id/et_customer_postalcode"
-                            style="@style/AppTheme.TextViewSecundary"
-                            android:maxLength="10" />
-
-                    </ViewSwitcher>
+                        android:layout_below="@+id/tv_order_customer_title"
+                        android:text="@string/tv_order_customer" />
 
 
                     <ImageView
@@ -94,6 +82,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/lv_row_padding_botton"
                     android:paddingLeft="@dimen/activity_padding_left"
+                    android:padding="@dimen/font_size_h3"
                     android:paddingRight="@dimen/activity_padding_right"
                     android:paddingTop="@dimen/lv_row_padding_top">
 
@@ -144,6 +133,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/lv_row_padding_botton"
                     android:paddingLeft="@dimen/activity_padding_left"
+                    android:padding="@dimen/font_size_h3"
                     android:paddingRight="@dimen/activity_padding_right"
                     android:paddingTop="@dimen/lv_row_padding_top">
 
@@ -195,6 +185,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/lv_row_padding_botton"
                     android:paddingLeft="@dimen/activity_padding_left"
+                    android:padding="@dimen/font_size_h3"
                     android:paddingRight="@dimen/activity_padding_right"
                     android:paddingTop="@dimen/lv_row_padding_top">
 
@@ -238,6 +229,8 @@
                             android:id="@+id/et_order_observation"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:lines="2"
+                            android:gravity="top|left"
                             android:layout_below="@+id/tv_order_observation_title" />
 
 
@@ -252,7 +245,6 @@
 
                 </RelativeLayout>
 
-
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dip"
@@ -262,44 +254,13 @@
                     android:paddingRight="@dimen/activity_padding_right">
 
                     <TextView
-                        android:id="@+id/tv_order_number_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/font_size_h1"
-                        android:text="Pedido Nº "
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/font_size_h7"
-                        android:visibility="invisible" />
-
-                    <TextView
-                        android:id="@+id/tv_order_number"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignTop="@+id/tv_order_number_title"
-                        android:layout_toEndOf="@+id/tv_order_number_title"
-                        android:layout_toRightOf="@+id/tv_order_number_title"
-                        android:text="0"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/font_size_h7"
-                        android:visibility="invisible" />
-
-                    <TextView
-                        android:id="@+id/tv_order_total_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_below="@+id/tv_order_number_title"
-                        android:text="Total R$:"
-                        android:textColor="@color/white" />
-
-                    <TextView
                         android:id="@+id/tv_order_total"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tv_order_total_title"
                         android:layout_centerHorizontal="true"
                         android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/font_size_h5"
                         android:text="R$ 00,00"
                         android:textColor="@color/white"
                         android:textSize="@dimen/font_size_h12" />
@@ -316,6 +277,7 @@
                             android:id="@+id/btn_order_save"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/font_size_h5"
                             android:background="@drawable/button_corners"
                             android:text="Concluir Venda"
                             android:textColor="@color/white" />

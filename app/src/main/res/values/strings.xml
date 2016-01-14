@@ -141,6 +141,8 @@
     <string name="tv_organization">Empresa</string>
 
     <string name="tv_sincronizar">Sincronizar</string>
+    <string name="btn_sincronizacao">Enviar e Receber Dados</string>
+
 
     <string name="msg_order_error_customer">Selecione um cliente</string>
     <string name="msg_order_error_product">Selecione algum produto</string>
