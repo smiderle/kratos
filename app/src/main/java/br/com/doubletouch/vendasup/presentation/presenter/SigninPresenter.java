@@ -1,13 +1,6 @@
 package br.com.doubletouch.vendasup.presentation.presenter;
 
-import java.io.IOException;
-
-import br.com.doubletouch.vendasup.VendasUp;
-import br.com.doubletouch.vendasup.data.entity.User;
-import br.com.doubletouch.vendasup.data.net.Integracao;
-import br.com.doubletouch.vendasup.exception.SyncronizationException;
 import br.com.doubletouch.vendasup.presentation.view.SigninView;
-import br.com.doubletouch.vendasup.presentation.view.dialog.SynchronizationProgressDialog;
 
 /**
  * Created by LADAIR on 13/05/2015.

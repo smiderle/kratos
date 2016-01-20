@@ -8,7 +8,6 @@ import android.view.Window;
 import br.com.doubletouch.vendasup.R;
 import br.com.doubletouch.vendasup.data.entity.enumeration.ViewMode;
 import br.com.doubletouch.vendasup.presentation.navigation.Navigator;
-import br.com.doubletouch.vendasup.presentation.view.dialog.ConfirmacaoCadastroDialog;
 import br.com.doubletouch.vendasup.presentation.view.fragment.ConfirmacaoFragment;
 import br.com.doubletouch.vendasup.presentation.view.fragment.order.OrderFragment;
 

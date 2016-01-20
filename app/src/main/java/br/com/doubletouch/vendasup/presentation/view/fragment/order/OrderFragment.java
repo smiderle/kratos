@@ -1,14 +1,10 @@
 package br.com.doubletouch.vendasup.presentation.view.fragment.order;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,7 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
-import java.io.IOException;
 import java.util.List;
 
 import br.com.doubletouch.vendasup.R;
@@ -36,14 +31,12 @@ import br.com.doubletouch.vendasup.data.entity.OrderPayment;
 import br.com.doubletouch.vendasup.data.entity.PriceTable;
 import br.com.doubletouch.vendasup.data.entity.enumeration.ViewMode;
 import br.com.doubletouch.vendasup.data.executor.JobExecutor;
-import br.com.doubletouch.vendasup.data.net.Integracao;
 import br.com.doubletouch.vendasup.domain.executor.PostExecutionThread;
 import br.com.doubletouch.vendasup.domain.executor.ThreadExecutor;
 import br.com.doubletouch.vendasup.domain.interactor.order.GetOrderDetailsUseCase;
 import br.com.doubletouch.vendasup.domain.interactor.order.GetOrderDetailsUseCaseImpl;
 import br.com.doubletouch.vendasup.domain.interactor.order.SaveOrderUseCase;
 import br.com.doubletouch.vendasup.domain.interactor.order.SaveOrderUseCaseImpl;
-import br.com.doubletouch.vendasup.exception.SyncronizationException;
 import br.com.doubletouch.vendasup.presentation.UIThread;
 import br.com.doubletouch.vendasup.presentation.navigation.Navigator;
 import br.com.doubletouch.vendasup.presentation.presenter.OrderPresenter;

@@ -7,13 +7,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.doubletouch.vendasup.exception.SyncronizationException;
-import br.com.doubletouch.vendasup.domain.Credenciais;
-import br.com.doubletouch.vendasup.domain.OauthAccess;
-import br.com.doubletouch.vendasup.util.GsonUtil;
 import br.com.doubletouch.vendasup.data.net.Endpoints;
 import br.com.doubletouch.vendasup.data.net.RESTResponse;
 import br.com.doubletouch.vendasup.data.net.RestClient;
+import br.com.doubletouch.vendasup.domain.Credenciais;
+import br.com.doubletouch.vendasup.domain.OauthAccess;
+import br.com.doubletouch.vendasup.exception.SyncronizationException;
+import br.com.doubletouch.vendasup.util.GsonUtil;
 
 /**
  * Webservice responsavel pela geração de tokens

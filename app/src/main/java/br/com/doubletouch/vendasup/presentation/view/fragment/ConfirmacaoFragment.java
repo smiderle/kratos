@@ -25,7 +25,6 @@ import br.com.doubletouch.vendasup.presentation.view.ConfirmationView;
 import br.com.doubletouch.vendasup.presentation.view.SigninView;
 import br.com.doubletouch.vendasup.presentation.view.SignupView;
 import br.com.doubletouch.vendasup.presentation.view.activity.LoginActivity;
-import br.com.doubletouch.vendasup.presentation.view.dialog.ConfirmacaoCadastroDialog;
 import br.com.doubletouch.vendasup.presentation.view.dialog.SigninSignupDialog;
 import br.com.doubletouch.vendasup.util.anim.AnimationSetUtil;
 import butterknife.ButterKnife;

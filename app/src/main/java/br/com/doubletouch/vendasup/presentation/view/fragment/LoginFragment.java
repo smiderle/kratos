@@ -26,7 +26,6 @@ import br.com.doubletouch.vendasup.data.entity.enumeration.VersionType;
 import br.com.doubletouch.vendasup.presentation.navigation.Navigator;
 import br.com.doubletouch.vendasup.presentation.presenter.LoginPresenter;
 import br.com.doubletouch.vendasup.presentation.view.LoginView;
-import br.com.doubletouch.vendasup.presentation.view.activity.ExpiredActivity;
 import br.com.doubletouch.vendasup.util.DateUtil;
 import br.com.doubletouch.vendasup.util.anim.AnimationSetUtil;
 import butterknife.ButterKnife;
@@ -165,7 +164,7 @@ public class LoginFragment extends BaseFragment implements LoginView {
 
     @Override
     public void expiredVersion() {
-        navigator.navigateTo( activity, ExpiredActivity.class);
+
     }
 
     @Override

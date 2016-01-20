@@ -7,34 +7,23 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-
-import java.util.List;
 
 import br.com.doubletouch.vendasup.R;
 import br.com.doubletouch.vendasup.VendasUp;
 import br.com.doubletouch.vendasup.data.SharedPreferencesUtil;
-import br.com.doubletouch.vendasup.data.entity.BranchOffice;
-import br.com.doubletouch.vendasup.data.entity.Order;
 import br.com.doubletouch.vendasup.data.entity.User;
 import br.com.doubletouch.vendasup.data.entity.enumeration.SignType;
 import br.com.doubletouch.vendasup.presentation.navigation.Navigator;
 import br.com.doubletouch.vendasup.presentation.presenter.SigninPresenter;
 import br.com.doubletouch.vendasup.presentation.view.SigninView;
-import br.com.doubletouch.vendasup.presentation.view.SynchronizationView;
 import br.com.doubletouch.vendasup.presentation.view.activity.LoginActivity;
-import br.com.doubletouch.vendasup.presentation.view.activity.SignupActivity;
 import br.com.doubletouch.vendasup.presentation.view.dialog.SigninSignupDialog;
-import br.com.doubletouch.vendasup.presentation.view.dialog.SynchronizationProgressDialog;
 import br.com.doubletouch.vendasup.util.anim.AnimationSetUtil;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import butterknife.OnClick;
 
 /**
  * Created by LADAIR on 13/05/2015.
