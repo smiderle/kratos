@@ -35,88 +35,71 @@ public class LoginPresenter implements Presenter {
 
     private LoginView loginView;
 
-    GetBranchListUseCase getBranchListUseCase ;
+    GetBranchListUseCase getBranchListUseCase;
     GetUserLoginUseCase getUserLoginUseCase;
     GetUserBranchLoginUseCase getUserBranchLoginUseCase;
 
     private BranchOffice branchOffice;
     private User user;
 
-    public LoginPresenter(LoginView loginView) {
+    public LoginPresenter( LoginView loginView ) {
 
         this.loginView = loginView;
         ThreadExecutor threadExecutor = JobExecutor.getInstance();
         PostExecutionThread postExecutionThread = UIThread.getInstance();
 
-        getBranchListUseCase = new GetBranchListUseCaseImpl(threadExecutor, postExecutionThread);
-        getUserLoginUseCase = new GetUserLoginUseCaseImpl(threadExecutor, postExecutionThread);
-        getUserBranchLoginUseCase = new GetUserBranchLoginUseCaseImpl(threadExecutor, postExecutionThread);
+        getBranchListUseCase = new GetBranchListUseCaseImpl( threadExecutor, postExecutionThread );
+        getUserLoginUseCase = new GetUserLoginUseCaseImpl( threadExecutor, postExecutionThread );
+        getUserBranchLoginUseCase = new GetUserBranchLoginUseCaseImpl( threadExecutor, postExecutionThread );
 
     }
 
-    public void initialize(){
+    public void initialize() {
         loadLastLogin();
         loadBranches();
-        validaDataExpiracao();
     }
 
-    public void login(String login, String senha, BranchOffice branchOffice){
+    public void login( String login, String senha, BranchOffice branchOffice ) {
 
-        if(login != null && login.trim() != "" && senha.trim() != "" && senha != null && branchOffice != null)
-
-        this.branchOffice = branchOffice;
-        LoginPresenter.this.getUserLoginUseCase.execute(login, senha, getUserLoginUseCaseCallback);
-    }
-
-    private void showBranches(List<BranchOffice> branches){
-        loginView.renderBranches(branches);
-    }
-
-    private void userAndPasswordSuccess(User user) {
-
-        LicenseService licenseService = new LicenseServiceImpl();
-
-        License license = licenseService.findByUserId(user.getUserID());
-
-        if( isLicensaValida( user ) ){
-
-            getUserBranchLoginUseCase.execute( branchOffice, user, getUserBranchLoginUseCaseCallback );
-
-        } else {
-
-            VendasUp.setUser( user );
-            VendasUp.setBranchOffice( branchOffice );
-
-            this.loginView.expiredVersion();
-
+        if ( login != null && login.trim() != "" && senha.trim() != "" && senha != null && branchOffice != null ) {
+            this.branchOffice = branchOffice;
+            LoginPresenter.this.getUserLoginUseCase.execute( login, senha, getUserLoginUseCaseCallback );
         }
 
 
-
     }
 
-    private boolean isLicensaValida(User user){
+    private void showBranches( List< BranchOffice > branches ) {
+        loginView.renderBranches( branches );
+    }
+
+    private void userAndPasswordSuccess( User user ) {
 
         LicenseService licenseService = new LicenseServiceImpl();
 
-        License license = licenseService.findByUserId(user.getUserID());
 
-        return isLicensaValida( license );
+        getUserBranchLoginUseCase.execute( branchOffice, user, getUserBranchLoginUseCaseCallback );
+
+    }
+
+    private boolean isLicensaValida( User user ) {
+
+        return true;
 
 
     }
 
-    public boolean isLicensaValida(  License license ){
+    public boolean isLicensaValida( License license ) {
 
         boolean isValid = true;
 
         Calendar current = GregorianCalendar.getInstance();
-        current.set(Calendar.HOUR_OF_DAY, 0);
-        current.set(Calendar.MINUTE, 0);
-        current.set(Calendar.SECOND, 0);
-        current.set(Calendar.MILLISECOND, 0);
+        current.set( Calendar.HOUR_OF_DAY, 0 );
+        current.set( Calendar.MINUTE, 0 );
+        current.set( Calendar.SECOND, 0 );
+        current.set( Calendar.MILLISECOND, 0 );
 
-        if( license.isExpired() || current.compareTo( GregorianCalendar.getInstance() ) > 0  ) {
+        if ( license.isExpired() || current.compareTo( GregorianCalendar.getInstance() ) > 0 ) {
             isValid = false;
         }
 
@@ -131,11 +114,11 @@ public class LoginPresenter implements Presenter {
         LicenseService licenseService = new LicenseServiceImpl();
 
 
-        int userId = new SharedPreferencesUtil(loginView.getContext()).getInteger( SharedPreferencesUtil.PREFERENCES_USER_ID );
+        int userId = new SharedPreferencesUtil( loginView.getContext() ).getInteger( SharedPreferencesUtil.PREFERENCES_USER_ID );
 
         License license = licenseService.findByUserId( userId );
 
-        if( license != null &&  license.getVersionType().equals( VersionType.DEMONSTRACAO ) ){
+        if ( license != null && license.getVersionType().equals( VersionType.DEMONSTRACAO ) ) {
 
             loginView.onMostraDiaExpiracao( license );
 
@@ -153,65 +136,65 @@ public class LoginPresenter implements Presenter {
     }
 
 
-    public void loadBranches(){
+    public void loadBranches() {
 
-        getBranchListUseCase.execute(getBranchesTableCallback);
+        getBranchListUseCase.execute( getBranchesTableCallback );
     }
 
-    private final  GetUserBranchLoginUseCase.Callback getUserBranchLoginUseCaseCallback = new GetUserBranchLoginUseCase.Callback() {
+    private final GetUserBranchLoginUseCase.Callback getUserBranchLoginUseCaseCallback = new GetUserBranchLoginUseCase.Callback() {
 
 
         @Override
-        public void onUserBranchLoaded(UserBranchOffice userBranchOffice) {
+        public void onUserBranchLoaded( UserBranchOffice userBranchOffice ) {
             LoginPresenter.this.hideViewLoading();
             LoginPresenter.this.loginsuccessful();
         }
 
         @Override
-        public void onError(ErrorBundle errorBundle) {
+        public void onError( ErrorBundle errorBundle ) {
             LoginPresenter.this.hideViewLoading();
-            LoginPresenter.this.showErrorMessage(errorBundle);
+            LoginPresenter.this.showErrorMessage( errorBundle );
         }
     };
 
 
-    private final  GetBranchListUseCase.Callback getBranchesTableCallback = new GetBranchListUseCase.Callback() {
+    private final GetBranchListUseCase.Callback getBranchesTableCallback = new GetBranchListUseCase.Callback() {
 
         @Override
-        public void onBranchListLoaded(List<BranchOffice> branches) {
+        public void onBranchListLoaded( List< BranchOffice > branches ) {
             LoginPresenter.this.hideViewLoading();
-            LoginPresenter.this.showBranches(branches);
+            LoginPresenter.this.showBranches( branches );
         }
 
         @Override
-        public void onError(ErrorBundle errorBundle) {
+        public void onError( ErrorBundle errorBundle ) {
             LoginPresenter.this.hideViewLoading();
-            LoginPresenter.this.showErrorMessage(errorBundle);
+            LoginPresenter.this.showErrorMessage( errorBundle );
 
         }
     };
 
 
-    private final  GetUserLoginUseCase.Callback getUserLoginUseCaseCallback = new GetUserLoginUseCase.Callback() {
+    private final GetUserLoginUseCase.Callback getUserLoginUseCaseCallback = new GetUserLoginUseCase.Callback() {
 
         @Override
-        public void onUserLoaded(User user) {
+        public void onUserLoaded( User user ) {
             LoginPresenter.this.user = user;
-            LoginPresenter.this.userAndPasswordSuccess(user);
+            LoginPresenter.this.userAndPasswordSuccess( user );
         }
 
         @Override
-        public void onError(ErrorBundle errorBundle) {
+        public void onError( ErrorBundle errorBundle ) {
             LoginPresenter.this.hideViewLoading();
-            LoginPresenter.this.showErrorMessage(errorBundle);
+            LoginPresenter.this.showErrorMessage( errorBundle );
         }
     };
 
 
-    private void showErrorMessage(ErrorBundle errorBundle) {
-        String errorMessage = ErrorMessageFactory.create(this.loginView.getContext(),
-                errorBundle.getException());
-        this.loginView.showError(errorMessage);
+    private void showErrorMessage( ErrorBundle errorBundle ) {
+        String errorMessage = ErrorMessageFactory.create( this.loginView.getContext(),
+                errorBundle.getException() );
+        this.loginView.showError( errorMessage );
     }
 
     private void hideViewLoading() {
@@ -228,23 +211,23 @@ public class LoginPresenter implements Presenter {
 
     }
 
-    private void saveLastLogin(){
+    private void saveLastLogin() {
 
-        SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil(loginView.getContext());
-        sharedPreferencesUtil.addString(SharedPreferencesUtil.PREFERENCES_LOGIN, user.getEmail() );
-        sharedPreferencesUtil.addString(SharedPreferencesUtil.PREFERENCES_PASSWORD , user.getPassword() );
-        sharedPreferencesUtil.addString(SharedPreferencesUtil.PREFERENCES_PASSWORD , user.getPassword() );
-        sharedPreferencesUtil.addInteger(SharedPreferencesUtil.PREFERENCES_USER_ID , user.getUserID() );
+        SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil( loginView.getContext() );
+        sharedPreferencesUtil.addString( SharedPreferencesUtil.PREFERENCES_LOGIN, user.getEmail() );
+        sharedPreferencesUtil.addString( SharedPreferencesUtil.PREFERENCES_PASSWORD, user.getPassword() );
+        sharedPreferencesUtil.addString( SharedPreferencesUtil.PREFERENCES_PASSWORD, user.getPassword() );
+        sharedPreferencesUtil.addInteger( SharedPreferencesUtil.PREFERENCES_USER_ID, user.getUserID() );
 
     }
 
-    private void loadLastLogin(){
+    private void loadLastLogin() {
 
-        SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil(loginView.getContext());
-        String login = sharedPreferencesUtil.getString(SharedPreferencesUtil.PREFERENCES_LOGIN);
-        String password = sharedPreferencesUtil.getString(SharedPreferencesUtil.PREFERENCES_PASSWORD);
+        SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil( loginView.getContext() );
+        String login = sharedPreferencesUtil.getString( SharedPreferencesUtil.PREFERENCES_LOGIN );
+        String password = sharedPreferencesUtil.getString( SharedPreferencesUtil.PREFERENCES_PASSWORD );
 
-        loginView.loadLastLogin(login, password);
+        loginView.loadLastLogin( login, password );
 
     }
 }

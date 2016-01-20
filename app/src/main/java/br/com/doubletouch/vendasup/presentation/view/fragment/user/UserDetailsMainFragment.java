@@ -53,40 +53,40 @@ public class UserDetailsMainFragment extends ScrollTabHolderFragment {
     private ScrollView sv_content;
 
 
-    @InjectView(R.id.tv_user_email)
+    @InjectView( R.id.tv_user_email )
     @Optional
     TextView tv_user_email;
 
 
-    @InjectView(R.id.tv_user_name)
+    @InjectView( R.id.tv_user_name )
     @Optional
     TextView tv_user_name;
 
 
-    @InjectView(R.id.tv_user_password)
+    @InjectView( R.id.tv_user_password )
     @Optional
     TextView tv_user_password;
 
-    @InjectView(R.id.et_user_name)
+    @InjectView( R.id.et_user_name )
     @Optional
     EditText et_user_name;
 
 
-    @InjectView(R.id.et_user_password)
+    @InjectView( R.id.et_user_password )
     @Optional
     EditText et_user_password;
 
 
     @Optional
-    @InjectView(R.id.iv_user_picture)
+    @InjectView( R.id.iv_user_picture )
     public ImageView iv_user_picture;
 
     @Optional
-    @InjectView(R.id.img_user_picture)
+    @InjectView( R.id.img_user_picture )
     public ImageView img_user_picture;
 
     @Optional
-    @InjectView(R.id.bt_user_picture)
+    @InjectView( R.id.bt_user_picture )
     public Button bt_user_picture;
 
     private ImageLoader imageLoader;
@@ -104,96 +104,95 @@ public class UserDetailsMainFragment extends ScrollTabHolderFragment {
 
     private String nomeFotoAlterada = VendasUp.getUser().getPictureUrl();
 
-    public static Fragment newInstance(int position, ViewMode viewMode) {
+    public static Fragment newInstance( int position, ViewMode viewMode ) {
         UserDetailsMainFragment fragment = new UserDetailsMainFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt(ARGS, position);
-        bundle.putSerializable(ARGS_VIEW_MODE, viewMode);
-        fragment.setArguments(bundle);
+        bundle.putInt( ARGS, position );
+        bundle.putSerializable( ARGS_VIEW_MODE, viewMode );
+        fragment.setArguments( bundle );
         return fragment;
     }
 
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        position = getArguments().getInt(ARGS);
-        viewMode = (ViewMode) getArguments().getSerializable(ARGS_VIEW_MODE);
-        imageLoader = new ImageLoader(getActivity().getApplicationContext());
+    public void onCreate( Bundle savedInstanceState ) {
+        super.onCreate( savedInstanceState );
+        position = getArguments().getInt( ARGS );
+        viewMode = ( ViewMode ) getArguments().getSerializable( ARGS_VIEW_MODE );
+        imageLoader = new ImageLoader( getActivity().getApplicationContext() );
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach( Activity activity ) {
+        super.onAttach( activity );
 
         this.activity = activity;
     }
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView( LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState ) {
 
-        if (ViewMode.EDICAO.equals(viewMode) || ViewMode.INCLUSAO.equals(viewMode)) {
-            sv_content = new ScrollView(activity);
-            sv_content.setLayoutParams(new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.MATCH_PARENT));
-            sv_content.setPadding(0, (int) getResources().getDimension(R.dimen.parallax_tab_height), 0, 0);
-            View viewCustomerDetails = inflater.inflate(R.layout.view_user_details_main, null);
+        if ( ViewMode.EDICAO.equals( viewMode ) || ViewMode.INCLUSAO.equals( viewMode ) ) {
+            sv_content = new ScrollView( activity );
+            sv_content.setLayoutParams( new AbsListView.LayoutParams( AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.MATCH_PARENT ) );
+            sv_content.setPadding( 0, ( int ) getResources().getDimension( R.dimen.parallax_tab_height ), 0, 0 );
+            View viewCustomerDetails = inflater.inflate( R.layout.view_user_details_main, null );
 
-            bind(viewCustomerDetails);
+            bind( viewCustomerDetails );
 
-            sv_content.addView(viewCustomerDetails);
+            sv_content.addView( viewCustomerDetails );
             return sv_content;
         } else {
-            lv_content = new ListView(activity);
-            lv_content.setLayoutParams(new AbsListView.LayoutParams(AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.MATCH_PARENT));
+            lv_content = new ListView( activity );
+            lv_content.setLayoutParams( new AbsListView.LayoutParams( AbsListView.LayoutParams.MATCH_PARENT, AbsListView.LayoutParams.MATCH_PARENT ) );
 
-            View placeHolderView = inflater.inflate(R.layout.component_parallax_header_placeholder, lv_content, false);
+            View placeHolderView = inflater.inflate( R.layout.component_parallax_header_placeholder, lv_content, false );
 
-            lv_content.addHeaderView(placeHolderView);
+            lv_content.addHeaderView( placeHolderView );
             return lv_content;
         }
     }
 
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onActivityCreated( @Nullable Bundle savedInstanceState ) {
+        super.onActivityCreated( savedInstanceState );
 
-        if (ViewMode.EDICAO.equals(viewMode) || ViewMode.INCLUSAO.equals(viewMode)) {
+        if ( ViewMode.EDICAO.equals( viewMode ) || ViewMode.INCLUSAO.equals( viewMode ) ) {
 
 
         } else {
-            lv_content.setOnScrollListener(new OnScrollListner());
-            lv_content.setAdapter(new DetailsPersonalAdapter(activity));
+            lv_content.setOnScrollListener( new OnScrollListner() );
+            lv_content.setAdapter( new DetailsPersonalAdapter( activity ) );
         }
 
     }
 
-    private void bind(View view) {
+    private void bind( View view ) {
 
-        ButterKnife.inject(this, view);
+        ButterKnife.inject( this, view );
 
 
-        if (ViewMode.EDICAO.equals(viewMode)) {
+        if ( ViewMode.EDICAO.equals( viewMode ) ) {
 
-            ((ViewSwitcher) view.findViewById(R.id.vs_user_name)).showNext();
-            ((ViewSwitcher) view.findViewById(R.id.vs_user_password)).showNext();
+            ( ( ViewSwitcher ) view.findViewById( R.id.vs_user_name ) ).showNext();
+            ( ( ViewSwitcher ) view.findViewById( R.id.vs_user_password ) ).showNext();
 
-            this.tv_user_email.setText(user.getEmail());
-            this.et_user_name.setText(user.getName());
-            this.et_user_password.setText(user.getPassword());
-            this.iv_user_picture.setVisibility(View.VISIBLE);
-            this.bt_user_picture.setVisibility(View.VISIBLE);
-            this.img_user_picture.setVisibility(View.VISIBLE);
+            this.tv_user_email.setText( user.getEmail() );
+            this.et_user_name.setText( user.getName() );
+            this.et_user_password.setText( user.getPassword() );
+            this.iv_user_picture.setVisibility( View.VISIBLE );
+            this.bt_user_picture.setVisibility( View.VISIBLE );
+            this.img_user_picture.setVisibility( View.VISIBLE );
 
-            imageLoader.displayImage(user.getPictureUrl(), this.iv_user_picture);
+            imageLoader.displayImage( user.getPictureUrl(), this.iv_user_picture, R.drawable.jorge );
 
         } else {
 
-            this.tv_user_email.setText(user.getEmail());
-            this.tv_user_name.setText(user.getName());
-            this.tv_user_password.setText(user.getPassword());
-
+            this.tv_user_email.setText( user.getEmail() );
+            this.tv_user_name.setText( user.getName() );
+            this.tv_user_password.setText( user.getPassword() );
 
 
         }
@@ -201,21 +200,21 @@ public class UserDetailsMainFragment extends ScrollTabHolderFragment {
 
 
     @Override
-    public void adjustScroll(int scrollHeight) {
-        if (lv_content == null || (scrollHeight == 0 && lv_content.getFirstVisiblePosition() >= 1)) {
+    public void adjustScroll( int scrollHeight ) {
+        if ( lv_content == null || ( scrollHeight == 0 && lv_content.getFirstVisiblePosition() >= 1 ) ) {
             return;
         }
 
-        lv_content.setSelectionFromTop(1, scrollHeight);
+        lv_content.setSelectionFromTop( 1, scrollHeight );
     }
 
 
     @Override
-    public void setAtributes(Object object) {
+    public void setAtributes( Object object ) {
 
         VendasUp.getUser().setPictureUrl( nomeFotoAlterada );
-        VendasUp.getUser().setName(et_user_name.getText().toString());
-        VendasUp.getUser().setPassword(et_user_password.getText().toString());
+        VendasUp.getUser().setName( et_user_name.getText().toString() );
+        VendasUp.getUser().setPassword( et_user_password.getText().toString() );
 
 
     }
@@ -229,14 +228,14 @@ public class UserDetailsMainFragment extends ScrollTabHolderFragment {
     private class OnScrollListner implements AbsListView.OnScrollListener {
 
         @Override
-        public void onScrollStateChanged(AbsListView view, int scrollState) {
+        public void onScrollStateChanged( AbsListView view, int scrollState ) {
 
         }
 
         @Override
-        public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-            if (mScrollTabHolder != null)
-                mScrollTabHolder.onScroll(view, firstVisibleItem, visibleItemCount, totalItemCount, position);
+        public void onScroll( AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount ) {
+            if ( mScrollTabHolder != null )
+                mScrollTabHolder.onScroll( view, firstVisibleItem, visibleItemCount, totalItemCount, position );
         }
     }
 
@@ -248,102 +247,102 @@ public class UserDetailsMainFragment extends ScrollTabHolderFragment {
 
         private Context context;
 
-        public DetailsPersonalAdapter(Context context) {
+        public DetailsPersonalAdapter( Context context ) {
             this.context = context;
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View view = inflater.inflate(R.layout.view_user_details_main, null);
+        public View getView( int position, View convertView, ViewGroup parent ) {
+            LayoutInflater inflater = ( LayoutInflater ) context.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
+            View view = inflater.inflate( R.layout.view_user_details_main, null );
 
-            bind(view);
+            bind( view );
 
             return view;
         }
 
         //Desativa o evento onclick no item do listview.
         @Override
-        public boolean isEnabled(int position) {
+        public boolean isEnabled( int position ) {
             return false;
         }
     }
 
-    @OnClick(R.id.bt_user_picture)
+    @OnClick( R.id.bt_user_picture )
     public void onClickChangePicture() {
 
-        Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        Intent takePicture = new Intent( MediaStore.ACTION_IMAGE_CAPTURE );
 
-        Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        pickIntent.setType("image/*");
+        Intent pickIntent = new Intent( Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI );
+        pickIntent.setType( "image/*" );
 
-        Intent chooserIntent = Intent.createChooser(takePicture, "Foto do Perfil");
+        Intent chooserIntent = Intent.createChooser( takePicture, "Foto do Perfil" );
 
-        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{pickIntent});
+        chooserIntent.putExtra( Intent.EXTRA_INITIAL_INTENTS, new Intent[]{ pickIntent } );
 
 
-        startActivityForResult(chooserIntent, 10);
+        startActivityForResult( chooserIntent, 10 );
 
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 10 && resultCode == Activity.RESULT_OK) {
-            if (data == null) {
+    public void onActivityResult( int requestCode, int resultCode, Intent data ) {
+        super.onActivityResult( requestCode, resultCode, data );
+        if ( requestCode == 10 && resultCode == Activity.RESULT_OK ) {
+            if ( data == null ) {
                 return;
             }
             try {
 
-                if (data.getData() == null) {
+                if ( data.getData() == null ) {
 
-                    Bitmap photo = (Bitmap) data.getExtras().get("data");
+                    Bitmap photo = ( Bitmap ) data.getExtras().get( "data" );
 
                     String nomeArquivoFinal = UUID.randomUUID().toString() + ".jpg";
 
-                    imageLoader.add(photo, nomeArquivoFinal);
+                    imageLoader.add( photo, nomeArquivoFinal );
 
                     nomeFotoAlterada = nomeArquivoFinal;
-                    imageLoader.displayImage(nomeArquivoFinal, this.iv_user_picture);
+                    imageLoader.displayImage( nomeArquivoFinal, this.iv_user_picture );
 
 
                 } else {
 
-                    InputStream inputStream = getActivity().getContentResolver().openInputStream(data.getData());
+                    InputStream inputStream = getActivity().getContentResolver().openInputStream( data.getData() );
 
-                    String path = getFileName(data.getData());
+                    String path = getFileName( data.getData() );
 
                     //Pega somente o nome do arquivo
-                    path = path.substring(path.lastIndexOf("/") + 1);
+                    path = path.substring( path.lastIndexOf( "/" ) + 1 );
 
                     String urlRandomica = UUID.randomUUID().toString();
 
-                    String nomeArquivoFinal = urlRandomica.concat(path);
+                    String nomeArquivoFinal = urlRandomica.concat( path );
 
-                    imageLoader.addBitmap(inputStream, nomeArquivoFinal);
+                    imageLoader.addBitmap( inputStream, nomeArquivoFinal );
 
                     nomeFotoAlterada = nomeArquivoFinal;
 
-                    imageLoader.displayImage(nomeFotoAlterada, this.iv_user_picture);
+                    imageLoader.displayImage( nomeFotoAlterada, this.iv_user_picture );
 
                 }
 
-            } catch (java.io.IOException e) {
+            } catch ( java.io.IOException e ) {
                 e.printStackTrace();
             }
         }
     }
 
-    public String getFileName(Uri uri) {
-        String[] projection = {MediaStore.Images.Media.DATA};
-        @SuppressWarnings("deprecation")
-        Cursor cursor = activity.managedQuery(uri, projection, null, null, null);
+    public String getFileName( Uri uri ) {
+        String[] projection = { MediaStore.Images.Media.DATA };
+        @SuppressWarnings( "deprecation" )
+        Cursor cursor = activity.managedQuery( uri, projection, null, null, null );
         int column_index = cursor
-                .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+                .getColumnIndexOrThrow( MediaStore.Images.Media.DATA );
         cursor.moveToFirst();
-        String path = cursor.getString(column_index);
+        String path = cursor.getString( column_index );
 
-        return path.substring(path.lastIndexOf("/") + 1);
+        return path.substring( path.lastIndexOf( "/" ) + 1 );
     }
 
 }

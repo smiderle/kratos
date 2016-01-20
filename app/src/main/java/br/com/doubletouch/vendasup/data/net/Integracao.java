@@ -393,25 +393,6 @@ public class Integracao {
 
     }
 
-    public User getUserByEmail(String email, String password)  throws  IOException, SyncronizationException {
-
-        UserEntityJsonMaper userEntityJsonMaper = new UserEntityJsonMaper();
-
-        ApiResponse<ServiceResponse<User>> apiResponse = new PublicApi().getUserByEmailAndPassword(email.replaceAll("\\s", ""), password.replaceAll("\\s", ""), userEntityJsonMaper);
-
-        return apiResponse.getPayload().getValue();
-
-    }
-
-    public User generateNewUser(String organizationName, String userName, String email, String password)  throws  IOException, SyncronizationException {
-
-        UserEntityJsonMaper userEntityJsonMaper = new UserEntityJsonMaper();
-
-        ApiResponse<ServiceResponse<User>> apiResponse = new PublicApi().generateNewUser(organizationName, userName, email, password, userEntityJsonMaper);
-
-        return apiResponse.getPayload().getValue();
-
-    }
 
     public void confirmation( String email )  throws  IOException, SyncronizationException {
 
@@ -420,16 +401,6 @@ public class Integracao {
         ApiResponse<ServiceResponse<Boolean>> apiResponse = new PublicApi().confirmation(email, userEntityJsonMaper);
 
     }
-
-    public void validaCodigo( String email, String codigo )  throws  IOException, SyncronizationException {
-
-        UserEntityJsonMaper userEntityJsonMaper = new UserEntityJsonMaper();
-
-        ApiResponse<ServiceResponse<Boolean>> apiResponse = new PublicApi().validaCodigo(email, codigo, userEntityJsonMaper);
-
-    }
-
-
 
 
     public void enviarParcelamentos(Integer branchID) throws  IOException, SyncronizationException {

@@ -19,9 +19,18 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public void saveOrUpdateSynchronous(Organization organization) {
-        if(organization != null){
-            organizationDAO.insert(organization);
+    public void saveOrUpdateSynchronous( Organization organization ) {
+        if ( organization != null ) {
+            organizationDAO.insert( organization );
+        }
+
+    }
+
+    @Override
+    public void saveOrUpdateSynchronous( List< Organization > empresas ) {
+        for ( Organization empresa : empresas ) {
+
+            saveOrUpdateSynchronous( empresa );
         }
 
     }

@@ -39,7 +39,7 @@ import butterknife.OnClick;
 /**
  * Created by LADAIR on 13/05/2015.
  */
-public class SigninFragment  extends BaseFragment implements SigninView {
+public class SigninFragment extends BaseFragment implements SigninView {
 
 
     private Activity activity;
@@ -49,23 +49,20 @@ public class SigninFragment  extends BaseFragment implements SigninView {
     private SigninPresenter signinPresenter;
 
 
-    @InjectView(R.id.et_password)
+    @InjectView( R.id.et_password )
     EditText et_password;
 
-    @InjectView(R.id.et_email)
+    @InjectView( R.id.et_email )
     EditText et_email;
 
-    @InjectView(R.id.btn_signin)
-    Button btn_signin;
 
-
-    @InjectView(R.id.btn_notification)
+    @InjectView( R.id.btn_notification )
     Button btn_notification;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View fragmentView = inflater.inflate(R.layout.fragment_signin, container, false);
-        ButterKnife.inject(this, fragmentView);
+    public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {
+        View fragmentView = inflater.inflate( R.layout.fragment_signin, container, false );
+        ButterKnife.inject( this, fragmentView );
 
         navigator = new Navigator();
 
@@ -75,30 +72,22 @@ public class SigninFragment  extends BaseFragment implements SigninView {
 
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach( Activity activity ) {
+        super.onAttach( activity );
 
         this.activity = activity;
     }
 
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onActivityCreated( Bundle savedInstanceState ) {
+        super.onActivityCreated( savedInstanceState );
     }
 
     @Override
     public void initializePresenter() {
 
-        signinPresenter = new SigninPresenter(this);
-
-    }
-
-
-    @OnClick(R.id.btn_signin)
-    public void onClickSignIn(){
-
-        signinPresenter.signin();
+        signinPresenter = new SigninPresenter( this );
 
     }
 
@@ -114,13 +103,13 @@ public class SigninFragment  extends BaseFragment implements SigninView {
     }
 
     @Override
-    public void showError(String message) {
+    public void showError( String message ) {
 
-        btn_notification.setText(message);
-        btn_notification.setVisibility(View.VISIBLE);
+        btn_notification.setText( message );
+        btn_notification.setVisibility( View.VISIBLE );
 
-        AnimationSet animationSet = AnimationSetUtil.get(activity);
-        btn_notification.startAnimation(animationSet);
+        AnimationSet animationSet = AnimationSetUtil.get( activity );
+        btn_notification.startAnimation( animationSet );
 
     }
 
@@ -132,39 +121,35 @@ public class SigninFragment  extends BaseFragment implements SigninView {
     @Override
     public void showDialogSynchronization() {
 
-        String email = et_email.getText().toString().replaceAll("\\s", "");
-        String password = et_password.getText().toString().replaceAll("\\s", "");
+        String email = et_email.getText().toString().replaceAll( "\\s", "" );
+        String password = et_password.getText().toString().replaceAll( "\\s", "" );
 
-        if(isValidate(email, password)){
+        if ( isValidate( email, password ) ) {
 
             User user = new User();
-            user.setEmail(email);
-            user.setPassword(password);
+            user.setEmail( email );
+            user.setPassword( password );
 
-            VendasUp.setUser(user);
+            VendasUp.setUser( user );
 
 
             SigninSignupDialog dialog = new SigninSignupDialog();
-            dialog.setSynchronizationView(this);
-            dialog.setSignType(SignType.SIGNIN);
-            dialog.setSigninAttributes(null,null, email, password, null );
+            dialog.setSynchronizationView( this );
+            dialog.setSignType( SignType.SIGNIN );
+            dialog.setSigninAttributes( null, null, email, password, null );
 
-            dialog.show(getFragmentManager(), "");
+            dialog.show( getFragmentManager(), "" );
 
         } else {
-            showError("Informe um e-mail e senha válidos.");
+            showError( "Informe um e-mail e senha válidos." );
         }
-
-
-
-
 
 
     }
 
-    private boolean isValidate(String email, String password){
+    private boolean isValidate( String email, String password ) {
 
-        if(email.trim().equals("") || password.trim().equals("") || !email.contains("@") || !email.contains(".com") ){
+        if ( email.trim().equals( "" ) || password.trim().equals( "" ) || !email.contains( "@" ) || !email.contains( ".com" ) ) {
 
             return false;
 
@@ -181,12 +166,12 @@ public class SigninFragment  extends BaseFragment implements SigninView {
         //Toast.makeText(getActivity(), "SUCESSO", Toast.LENGTH_LONG).show();
         navigator.navigateTo( activity, LoginActivity.class, Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK );
 
-        String email = et_email.getText().toString().replaceAll("\\s", "");
-        String password = et_password.getText().toString().replaceAll("\\s", "");
+        String email = et_email.getText().toString().replaceAll( "\\s", "" );
+        String password = et_password.getText().toString().replaceAll( "\\s", "" );
 
         SharedPreferencesUtil sharedPreferencesUtil = new SharedPreferencesUtil( activity );
-        sharedPreferencesUtil.addString(SharedPreferencesUtil.PREFERENCES_LOGIN, email );
-        sharedPreferencesUtil.addString(SharedPreferencesUtil.PREFERENCES_PASSWORD , password );
+        sharedPreferencesUtil.addString( SharedPreferencesUtil.PREFERENCES_LOGIN, email );
+        sharedPreferencesUtil.addString( SharedPreferencesUtil.PREFERENCES_PASSWORD, password );
 
     }
 

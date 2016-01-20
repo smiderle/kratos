@@ -9,12 +9,16 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
 
+import java.io.InputStream;
+
 import br.com.doubletouch.vendasup.R;
 import br.com.doubletouch.vendasup.VendasUp;
+import br.com.doubletouch.vendasup.data.net.GerarDados;
 import br.com.doubletouch.vendasup.data.net.Integracao;
 import br.com.doubletouch.vendasup.presentation.exception.ErrorMessageFactory;
 import br.com.doubletouch.vendasup.presentation.view.SynchronizationView;
 import br.com.doubletouch.vendasup.util.NetworkUtils;
+import br.com.doubletouch.vendasup.util.StringUtil;
 
 /**
  * Created by LADAIR on 06/05/2015.
@@ -117,7 +121,15 @@ public class SynchronizationProgressDialog extends DialogFragment {
 
             Integracao integracao = new Integracao();
 
+            GerarDados gerarDados = new GerarDados();
+
             try {
+
+
+
+
+
+
 
                 if( !NetworkUtils.isThereInternetConnection()){
                     throw new Exception(getResources().getString(R.string.notificacao_sem_conexao));
@@ -127,12 +139,13 @@ public class SynchronizationProgressDialog extends DialogFragment {
 
 
                 integracao.receberLicencaPorUsuario( VendasUp.getUser().getUserID() );
-                publishProgress(10);
-                integracao.enviarDados( VendasUp.getBranchOffice().getBranchOfficeID() );
-                publishProgress(20);
-                integracao.receberProdutos(organizationId);
+                publishProgress( 10 );
+                publishProgress( 20 );
+                InputStream isProduto = getResources().openRawResource( R.raw.produto );
+                gerarDados.receberProdutos( StringUtil.inputStreamToString( isProduto ) );
                 publishProgress(30);
-                integracao.receberClientes(organizationId);
+                InputStream isCliente = getResources().openRawResource( R.raw.produto );
+                gerarDados.receberClientes( StringUtil.inputStreamToString( isCliente ) );
                 publishProgress(40);
                 integracao.receberPromocoes(organizationId);
                 publishProgress(50);

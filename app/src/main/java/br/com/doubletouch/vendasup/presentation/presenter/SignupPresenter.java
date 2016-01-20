@@ -1,5 +1,7 @@
 package br.com.doubletouch.vendasup.presentation.presenter;
 
+import br.com.doubletouch.vendasup.data.entity.User;
+import br.com.doubletouch.vendasup.data.service.UserServiceImpl;
 import br.com.doubletouch.vendasup.presentation.view.SigninView;
 import br.com.doubletouch.vendasup.presentation.view.SignupView;
 
@@ -10,7 +12,7 @@ public class SignupPresenter implements Presenter {
 
     private SigninView signinView;
 
-    public SignupPresenter(SigninView signinView) {
+    public SignupPresenter( SigninView signinView ) {
         this.signinView = signinView;
     }
 
@@ -22,6 +24,10 @@ public class SignupPresenter implements Presenter {
 
     private void hideViewLoading() {
         this.signinView.hideLoading();
+    }
+
+    public void saveUser( User user ) {
+        new UserServiceImpl().saveOrUpdateSynchronous( user );
     }
 
     @Override

@@ -1,0 +1,80 @@
+[
+  {
+    "organizationID": 3,
+    "branchID": 1,
+    "installmentID": 1,
+    "description": "30x60x90",
+    "installmentsDays": "30 60 90",
+    "tax": 10.0,
+    "active": true,
+    "changeTime": 1443572150555,
+    "excluded": false,
+    "idMobile": null,
+    "id": 7
+  },
+  {
+    "organizationID": 3,
+    "branchID": 1,
+    "installmentID": 2,
+    "description": "30x60",
+    "installmentsDays": "30 60",
+    "tax": 5.0,
+    "active": true,
+    "changeTime": 1443572150555,
+    "excluded": false,
+    "idMobile": null,
+    "id": 8
+  },
+  {
+    "organizationID": 3,
+    "branchID": 1,
+    "installmentID": 3,
+    "description": "Entrada 30 60",
+    "installmentsDays": "0 30 60",
+    "tax": 2.0,
+    "active": true,
+    "changeTime": 1443572150555,
+    "excluded": false,
+    "idMobile": null,
+    "id": 9
+  },
+  {
+    "organizationID": 3,
+    "branchID": 1,
+    "installmentID": 4,
+    "description": "A VISTA",
+    "installmentsDays": "0",
+    "tax": 0.0,
+    "active": true,
+    "changeTime": 1443572150555,
+    "excluded": false,
+    "idMobile": null,
+    "id": 10
+  },
+  {
+    "organizationID": 3,
+    "branchID": 1,
+    "installmentID": 5,
+    "description": "30x60x90x120x150",
+    "installmentsDays": "30 60 90 120 150",
+    "tax": 20.0,
+    "active": true,
+    "changeTime": 1443572150555,
+    "excluded": false,
+    "idMobile": null,
+    "id": 11
+  },
+  {
+    "organizationID": 3,
+    "branchID": 1,
+    "installmentID": 0,
+    "description": "algum parcelamento",
+    "installmentsDays": "10 20 30 40",
+    "tax": 0.0,
+    "active": true,
+    "changeTime": 1446916438538,
+    "excluded": false,
+    "idMobile": null,
+    "id": 131
+  }
+]

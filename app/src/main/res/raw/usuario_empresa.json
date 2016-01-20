@@ -1,0 +1,12 @@
+[
+  {
+    "enable": "true",
+    "userID": 3,
+    "branchOffice": {
+      "branchOfficeID": 1,
+      "organization": {
+        "organizationID": 3
+      }
+    }
+  }
+]

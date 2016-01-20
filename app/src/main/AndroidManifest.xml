@@ -74,12 +74,6 @@
 
 
         <activity
-            android:name=".presentation.view.activity.SynchronizationActivity"
-            android:label="@string/title_activity_synchronization"
-            android:screenOrientation="portrait">
-        </activity>
-
-        <activity
             android:name=".presentation.view.activity.order.OrderListActivity"
             android:label="@string/title_activity_historic"
             android:screenOrientation="portrait" >

@@ -35,5 +35,7 @@ public interface UserService {
 
     void saveOrUpdateSynchronous(List<User> users) ;
 
+    void saveOrUpdateSynchronous(User user) ;
+
     void getUserByLoginAndPassword(String login, String password,UserLoginCallback userLoginCallback);
 }

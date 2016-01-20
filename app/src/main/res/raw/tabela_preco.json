@@ -1,0 +1,14 @@
+[
+  {
+    "organizationID": 3,
+    "branchID": 1,
+    "priceTableID": 1,
+    "description": "TABELA PADRAO",
+    "percentage": 0.0,
+    "increase": false,
+    "active": true,
+    "changeTime": 1443572150539,
+    "excluded": false,
+    "id": 3
+  }
+]

@@ -20,26 +20,36 @@ public class BranchServiceImpl implements BranchService {
     }
 
     @Override
-    public void getBranchList(BranchListCallback branchListCallback) {
+    public void getBranchList( BranchListCallback branchListCallback ) {
 
         try {
 
-            List<BranchOffice> branches = branchDAO.getAll();
-            branchListCallback.onBranchListLoaded(branches);
+            List< BranchOffice > branches = branchDAO.getAll();
+            branchListCallback.onBranchListLoaded( branches );
 
-        }catch (Exception e){
+        } catch ( Exception e ) {
 
-            branchListCallback.onError(new RepositoryErrorBundle(e));
+            branchListCallback.onError( new RepositoryErrorBundle( e ) );
 
         }
 
 
     }
 
+
     @Override
-    public void saveOrUpdateSynchronous(List<BranchOffice> branches) {
-        if(branches != null){
-            branchDAO.insert(branches);
+    public List< BranchOffice > getBranchList() {
+
+
+        return branchDAO.getAll();
+
+
+    }
+
+    @Override
+    public void saveOrUpdateSynchronous( List< BranchOffice > branches ) {
+        if ( branches != null ) {
+            branchDAO.insert( branches );
         }
 
     }

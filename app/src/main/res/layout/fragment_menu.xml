@@ -23,7 +23,7 @@
                 android:layout_height="@dimen/iv_width_menu"
                 android:layout_gravity="center_vertical"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_launcher" />
+                android:src="@drawable/jorge" />
 
         </LinearLayout>
 

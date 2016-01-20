@@ -1,0 +1,34 @@
+[
+  {
+    "branchOfficeID": 1,
+    "organization": {
+      "organizationID": 3,
+      "name": "Empresa Demonstração                              ",
+      "changeTime": null
+    },
+    "realName": "Empresa Demonstração",
+    "fancyName": "Empresa Demonstração",
+    "phoneNumber": null,
+    "faxNumber": null,
+    "street": null,
+    "district": null,
+    "number": null,
+    "postalCode": null,
+    "changeTime": 1443572150336,
+    "email": null,
+    "website": null,
+    "registrationDate": 1443572154189,
+    "manager": null,
+    "cnpj": null,
+    "addressComplement": null,
+    "city": null,
+    "maximumDiscount": null,
+    "emailNotification": null,
+    "showStockProduct": false,
+    "negativeStockProduct": false,
+    "sellerRegisterCustomer": false,
+    "sendEmailCustomer": false,
+    "actionOverdue": "L",
+    "actionCreditLimit": "L"
+  }
+]

@@ -45,21 +45,12 @@
                         android:textColor="@color/primary_color"
                         android:textSize="@dimen/font_size_h8" />
 
-                    <TextView
-                        android:id="@+id/tv_wellcome"
-                        style="@style/AppTheme.TextViewSecundary"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:gravity="center"
-                        android:text="Experimente o sistema Grátis por 20 Dias" />
-
                     <EditText
                         android:id="@+id/et_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:hint="@string/tv_email"
+                        android:hint="@string/tv_user"
                         android:paddingTop="@dimen/font_size_h8" />
 
                     <EditText
@@ -91,15 +82,6 @@
                         android:text="@string/btn_singup"
                         android:textColor="@color/white" />
 
-                    <Button
-                        android:id="@+id/btn_signin"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="@dimen/font_size_h8"
-                        android:background="@drawable/button_corners_white_blue"
-                        android:text="Já estou cadastrado"
-                        android:textColor="@color/primary_color" />
 
 
                 </LinearLayout>

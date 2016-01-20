@@ -9,7 +9,9 @@ import android.os.Handler;
 import java.util.List;
 
 import br.com.doubletouch.vendasup.R;
+import br.com.doubletouch.vendasup.data.entity.BranchOffice;
 import br.com.doubletouch.vendasup.data.entity.License;
+import br.com.doubletouch.vendasup.data.service.BranchServiceImpl;
 import br.com.doubletouch.vendasup.data.service.LicenseService;
 import br.com.doubletouch.vendasup.data.service.LicenseServiceImpl;
 import br.com.doubletouch.vendasup.presentation.navigation.Navigator;
@@ -30,10 +32,10 @@ public class SplashActivity extends Activity {
             @Override
             public void run() {
 
-                LicenseService licenseService = new LicenseServiceImpl();
-                List<License> licenses = licenseService.getAll();
 
-                if( licenses == null || licenses.isEmpty() ) {
+                List< BranchOffice > filiais = new BranchServiceImpl().getBranchList();
+
+                if( filiais == null || filiais.isEmpty() ) {
 
                     navigator.navigateTo(SplashActivity.this, SignupActivity.class);
 

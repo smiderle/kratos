@@ -51,6 +51,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void saveOrUpdateSynchronous( User user ) {
+        userDAO.insert(user);
+    }
+
+    @Override
     public void getUserByLoginAndPassword(String login, String password, UserLoginCallback userLoginCallback) {
 
         User user = userDAO.getByLoginAndPassword(login, password);

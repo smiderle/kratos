@@ -1,0 +1,69 @@
+[
+  {
+    "userID": 3,
+    "organizationID": 3,
+    "email": "ladairsmiderle@gmail.com",
+    "password": "123",
+    "name": "Usuário Demonstração",
+    "changeTime": 1443572150336,
+    "registrationDate": 1443572154189,
+    "active": true,
+    "portalAccess": true,
+    "menusApplication": null,
+    "userBranches": [
+      {
+        "branchOffice": {
+          "branchOfficeID": 1,
+          "organization": {
+            "organizationID": 3,
+            "name": "Empresa Demonstração                              ",
+            "changeTime": null
+          },
+          "realName": "Empresa Demonstração",
+          "fancyName": "Empresa Demonstração",
+          "phoneNumber": null,
+          "faxNumber": null,
+          "street": null,
+          "district": null,
+          "number": null,
+          "postalCode": null,
+          "changeTime": 1443572150336,
+          "email": null,
+          "website": null,
+          "registrationDate": 1443572154189,
+          "manager": null,
+          "cnpj": null,
+          "addressComplement": null,
+          "city": null,
+          "maximumDiscount": null,
+          "emailNotification": null,
+          "showStockProduct": false,
+          "negativeStockProduct": false,
+          "sellerRegisterCustomer": false,
+          "sendEmailCustomer": false,
+          "actionOverdue": "L",
+          "actionCreditLimit": "L"
+        },
+        "userID": 3,
+        "enable": true
+      }
+    ],
+    "userRoles": null,
+    "birthDate": null,
+    "phoneNumber": "12345678",
+    "cellPhone": "12346454",
+    "pictureUrl": "https://s3-sa-east-1.amazonaws.com/vendasup.pictures.user/vendasup_user.jpg",
+    "linkFacebook": "facebook",
+    "linkGooglePlus": "googlePluss",
+    "skype": "skype",
+    "street": null,
+    "district": null,
+    "number": null,
+    "postalCode": null,
+    "city": null,
+    "cpfCnpj": null,
+    "inscricao": null,
+    "contactName": null,
+    "observation": null
+  }
+]
