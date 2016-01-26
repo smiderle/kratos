@@ -158,32 +158,11 @@ public class OrderFragment extends BaseFragment implements OrderView, EmailPedid
 
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-
-        //Carrega o arquivo de menu.
-        inflater.inflate(R.menu.menu_order, menu);
-
-        menuExport = menu.findItem(R.id.it_export);
-
-        if (ViewMode.EDICAO.equals(viewMode) || ViewMode.VISUALIZACAO.equals(viewMode)) {
-            menuExport.setVisible(true);
-        } else {
-            menuExport.setVisible(false);
-        }
-
-
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
 
             case android.R.id.home:
                 navigator.previousActivity(activity);
-                break;
-            case R.id.it_export_email:
-                enviarEmail();
                 break;
             default:
                 super.onOptionsItemSelected(item);

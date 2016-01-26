@@ -1,43 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_padding_left"
-    android:paddingRight="@dimen/activity_padding_right"
-    android:background="@color/backgrount_primary">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/backgrount_primary"
+              android:orientation="vertical"
+              android:paddingLeft="@dimen/activity_padding_left"
+              android:paddingRight="@dimen/activity_padding_right">
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/lv_row_padding_top"
-        android:paddingBottom="@dimen/lv_row_padding_botton">
+        android:paddingBottom="@dimen/lv_row_padding_botton"
+        android:paddingTop="@dimen/lv_row_padding_top">
+
+        <ImageView
+            android:id="@+id/img_user_picture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_photo_camera_grey600_36dp"
+            android:visibility="gone"/>
+
+
+        <ImageView
+            android:id="@+id/iv_user_picture"
+            android:layout_width="@dimen/iv_height_main"
+            android:layout_height="@dimen/iv_height_main"
+            android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
+            android:layout_toEndOf="@+id/img_user_picture"
+            android:layout_toRightOf="@+id/img_user_picture"
+            android:src="@drawable/jorge"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/bt_user_picture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
+            android:layout_toEndOf="@+id/iv_user_picture"
+            android:layout_toRightOf="@+id/iv_user_picture"
+            android:background="@color/white"
+            android:text="Alterar"
+            android:visibility="gone"/>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/lv_row_padding_botton"
+        android:paddingTop="@dimen/lv_row_padding_top">
 
         <ImageView
             android:id="@+id/imageName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_person_grey600_36dp"
-            android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_person_grey600_36dp"/>
 
         <TextView
             android:id="@+id/tv_customer_name_title"
-            android:text="@string/tv_customer_name"
             style="@style/AppTheme.TextViewPrimary"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/imageName"
-            android:layout_toEndOf="@+id/imageName"
             android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
-            android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
+            android:layout_marginStart="@dimen/tv_title_marginleft_of_image"
+            android:layout_toEndOf="@+id/imageName"
+            android:layout_toRightOf="@+id/imageName"
+            android:text="@string/tv_customer_name"/>
 
         <ViewSwitcher
             android:id="@+id/vs_customer_name"
             style="@style/AppTheme.TextViewSecundary"
-            android:layout_below="@+id/tv_customer_name_title"
             android:layout_alignLeft="@+id/tv_customer_name_title"
-            android:layout_alignStart="@+id/tv_customer_name_title" >
+            android:layout_alignStart="@+id/tv_customer_name_title"
+            android:layout_below="@+id/tv_customer_name_title">
 
             <TextView
                 android:id="@+id/tv_customer_name"
@@ -51,40 +94,40 @@
         </ViewSwitcher>
 
 
-
     </RelativeLayout>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/lv_row_padding_top"
-        android:paddingBottom="@dimen/lv_row_padding_botton">
+        android:paddingBottom="@dimen/lv_row_padding_botton"
+        android:paddingTop="@dimen/lv_row_padding_top">
 
         <ImageView
             android:id="@+id/imageNickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_mood_grey600_36dp"
-            android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_mood_grey600_36dp"/>
 
         <TextView
             android:id="@+id/tv_customer_nickname_title"
-            android:text="@string/tv_customer_nickname"
             style="@style/AppTheme.TextViewPrimary"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/imageNickname"
-            android:layout_toEndOf="@+id/imageNickname"
             android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
-            android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
+            android:layout_marginStart="@dimen/tv_title_marginleft_of_image"
+            android:layout_toEndOf="@+id/imageNickname"
+            android:layout_toRightOf="@+id/imageNickname"
+            android:text="@string/tv_customer_nickname"/>
 
         <ViewSwitcher
             android:id="@+id/vs_customer_nickname"
             style="@style/AppTheme.TextViewSecundary"
-            android:layout_below="@+id/tv_customer_nickname_title"
             android:layout_alignLeft="@+id/tv_customer_nickname_title"
-            android:layout_alignStart="@+id/tv_customer_nickname_title" >
+            android:layout_alignStart="@+id/tv_customer_nickname_title"
+            android:layout_below="@+id/tv_customer_nickname_title">
 
             <TextView
                 android:id="@+id/tv_customer_nickname"
@@ -98,54 +141,52 @@
         </ViewSwitcher>
 
 
-
-
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/lv_row_padding_top"
-        android:paddingBottom="@dimen/lv_row_padding_botton">
+        android:paddingBottom="@dimen/lv_row_padding_botton"
+        android:paddingTop="@dimen/lv_row_padding_top">
 
         <ImageView
             android:id="@+id/imagePersonType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_arrange_send_backward"
-            android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_arrange_send_backward"/>
 
         <TextView
             android:id="@+id/tv_customer_persontype_title"
-            android:text="@string/tv_customer_person_type"
             style="@style/AppTheme.TextViewPrimary"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/imagePersonType"
-            android:layout_toEndOf="@+id/imagePersonType"
             android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
-            android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
+            android:layout_marginStart="@dimen/tv_title_marginleft_of_image"
+            android:layout_toEndOf="@+id/imagePersonType"
+            android:layout_toRightOf="@+id/imagePersonType"
+            android:text="@string/tv_customer_person_type"/>
 
         <ViewSwitcher
             android:id="@+id/vs_order_observation"
             style="@style/AppTheme.TextViewSecundary"
-            android:layout_below="@+id/tv_customer_persontype_title"
             android:layout_alignLeft="@+id/tv_customer_persontype_title"
-            android:layout_alignStart="@+id/tv_customer_persontype_title">
+            android:layout_alignStart="@+id/tv_customer_persontype_title"
+            android:layout_below="@+id/tv_customer_persontype_title">
 
             <TextView
                 android:id="@+id/tv_customer_persontype_"
                 style="@style/AppTheme.TextViewSecundary"
-                android:text="@string/tv_default_customer_person_type" />
+                android:text="@string/tv_default_customer_person_type"/>
 
             <Spinner
                 android:id="@+id/sp_customer_persontype"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:entries="@array/customer_type_array"
-                android:spinnerMode="dialog"
-                android:prompt="@string/sp_title_customer_type">
+                android:prompt="@string/sp_title_customer_type"
+                android:spinnerMode="dialog">
             </Spinner>
 
         </ViewSwitcher>
@@ -155,34 +196,34 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/lv_row_padding_top"
-        android:paddingBottom="@dimen/lv_row_padding_botton">
+        android:paddingBottom="@dimen/lv_row_padding_botton"
+        android:paddingTop="@dimen/lv_row_padding_top">
 
         <ImageView
             android:id="@+id/imageCpfCnpj"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_credit_card_grey600_36dp"
-            android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_credit_card_grey600_36dp"/>
 
         <TextView
             android:id="@+id/tv_customer_cpfcnpj_title"
-            android:text="@string/tv_customer_cpf"
             style="@style/AppTheme.TextViewPrimary"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/imageCpfCnpj"
-            android:layout_toEndOf="@+id/imageCpfCnpj"
             android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
-            android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
+            android:layout_marginStart="@dimen/tv_title_marginleft_of_image"
+            android:layout_toEndOf="@+id/imageCpfCnpj"
+            android:layout_toRightOf="@+id/imageCpfCnpj"
+            android:text="@string/tv_customer_cpf"/>
 
         <ViewSwitcher
             android:id="@+id/vs_customer_cpfcnpj"
             style="@style/AppTheme.TextViewSecundary"
-            android:layout_below="@+id/tv_customer_cpfcnpj_title"
             android:layout_alignLeft="@+id/tv_customer_cpfcnpj_title"
-            android:layout_alignStart="@+id/tv_customer_cpfcnpj_title" >
+            android:layout_alignStart="@+id/tv_customer_cpfcnpj_title"
+            android:layout_below="@+id/tv_customer_cpfcnpj_title">
 
             <TextView
                 android:id="@+id/tv_customer_cpfcnpj"
@@ -197,47 +238,46 @@
         </ViewSwitcher>
 
 
-
     </RelativeLayout>
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/lv_row_padding_top"
-        android:paddingBottom="@dimen/lv_row_padding_botton">
+        android:paddingBottom="@dimen/lv_row_padding_botton"
+        android:paddingTop="@dimen/lv_row_padding_top">
 
         <ImageView
             android:id="@+id/iv_rg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_clipboard_account"
-            android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_clipboard_account"/>
 
         <TextView
             android:id="@+id/tv_customer_inscricao_title"
-            android:text="@string/tv_customer_rg"
             style="@style/AppTheme.TextViewPrimary"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/iv_rg"
-            android:layout_toEndOf="@+id/iv_rg"
             android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
-            android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
+            android:layout_marginStart="@dimen/tv_title_marginleft_of_image"
+            android:layout_toEndOf="@+id/iv_rg"
+            android:layout_toRightOf="@+id/iv_rg"
+            android:text="@string/tv_customer_rg"/>
 
         <ViewSwitcher
             android:id="@+id/vs_customer_inscricao"
             style="@style/AppTheme.TextViewSecundary"
-            android:layout_below="@+id/tv_customer_inscricao_title"
             android:layout_alignLeft="@+id/tv_customer_inscricao_title"
-            android:layout_alignStart="@+id/tv_customer_inscricao_title" >
+            android:layout_alignStart="@+id/tv_customer_inscricao_title"
+            android:layout_below="@+id/tv_customer_inscricao_title">
 
 
             <TextView
                 android:id="@+id/tv_customer_inscricao"
                 style="@style/AppTheme.TextViewSecundary"
-                android:text="@string/tv_default_customer_inscricao" />
+                android:text="@string/tv_default_customer_inscricao"/>
 
             <EditText
                 android:id="@+id/et_customer_inscricao"
@@ -252,34 +292,34 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/lv_row_padding_top"
-        android:paddingBottom="@dimen/lv_row_padding_botton">
+        android:paddingBottom="@dimen/lv_row_padding_botton"
+        android:paddingTop="@dimen/lv_row_padding_top">
 
         <ImageView
             android:id="@+id/iv_customer_birthday"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_cake_grey600_36dp"
-            android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_cake_grey600_36dp"/>
 
         <TextView
             android:id="@+id/tv_customer_birthday_title"
-            android:text="@string/tv_customer_birthday"
             style="@style/AppTheme.TextViewPrimary"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/iv_customer_birthday"
-            android:layout_toEndOf="@+id/iv_customer_birthday"
             android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
-            android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
+            android:layout_marginStart="@dimen/tv_title_marginleft_of_image"
+            android:layout_toEndOf="@+id/iv_customer_birthday"
+            android:layout_toRightOf="@+id/iv_customer_birthday"
+            android:text="@string/tv_customer_birthday"/>
 
         <ViewSwitcher
             android:id="@+id/vs_customer_birthday"
             style="@style/AppTheme.TextViewSecundary"
-            android:layout_below="@+id/tv_customer_birthday_title"
             android:layout_alignLeft="@+id/tv_customer_birthday_title"
-            android:layout_alignStart="@+id/tv_customer_birthday_title" >
+            android:layout_alignStart="@+id/tv_customer_birthday_title"
+            android:layout_below="@+id/tv_customer_birthday_title">
 
 
             <TextView
@@ -290,8 +330,8 @@
             <EditText
                 android:id="@+id/et_customer_birthday"
                 style="@style/AppTheme.TextViewSecundary"
-                android:maxLength="500"
-                android:inputType="date"/>
+                android:inputType="date"
+                android:maxLength="500"/>
 
         </ViewSwitcher>
 
@@ -301,34 +341,34 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/lv_row_padding_top"
-        android:paddingBottom="@dimen/lv_row_padding_botton">
+        android:paddingBottom="@dimen/lv_row_padding_botton"
+        android:paddingTop="@dimen/lv_row_padding_top">
 
         <ImageView
             android:id="@+id/iv_customer_observation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_comment_text_outline"
-            android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_comment_text_outline"/>
 
         <TextView
             android:id="@+id/tv_customer_observation_title"
-            android:text="@string/tv_customer_observation"
             style="@style/AppTheme.TextViewPrimary"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/iv_customer_observation"
-            android:layout_toEndOf="@+id/iv_customer_observation"
             android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
-            android:layout_marginStart="@dimen/tv_title_marginleft_of_image" />
+            android:layout_marginStart="@dimen/tv_title_marginleft_of_image"
+            android:layout_toEndOf="@+id/iv_customer_observation"
+            android:layout_toRightOf="@+id/iv_customer_observation"
+            android:text="@string/tv_customer_observation"/>
 
         <ViewSwitcher
             android:id="@+id/vs_customer_observation"
             style="@style/AppTheme.TextViewSecundary"
-            android:layout_below="@+id/tv_customer_observation_title"
             android:layout_alignLeft="@+id/tv_customer_observation_title"
-            android:layout_alignStart="@+id/tv_customer_observation_title"  >
+            android:layout_alignStart="@+id/tv_customer_observation_title"
+            android:layout_below="@+id/tv_customer_observation_title">
 
 
             <TextView
@@ -338,9 +378,9 @@
 
             <EditText
                 android:id="@+id/et_customer_observation"
-                style="@style/AppTheme.TextViewSecundary" />
+                style="@style/AppTheme.TextViewSecundary"/>
 
-            </ViewSwitcher>
+        </ViewSwitcher>
 
 
     </RelativeLayout>

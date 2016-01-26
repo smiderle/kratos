@@ -56,7 +56,7 @@ public class CustomersAdapter extends RecyclerView.Adapter<CustomersAdapter.Cust
         holder.tv_customer_name.setText(customer.getCustomerIdAndName());
         holder.tv_customer_phone.setText(getSomePhone(customer));
 
-        imageLoader.displayImage(customer.getPictureUrl(), holder.img_customer_picture);
+        imageLoader.displayImage(customer.getPictureUrl(), holder.img_customer_picture, R.drawable.jorge);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
