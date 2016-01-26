@@ -274,7 +274,7 @@ public class ProductDetailsFragment  extends BaseParallacxFragment implements Pr
     public void renderProduct(Product product) {
 
         if(ViewMode.VISUALIZACAO.equals(viewMode) ){
-            imageLoader.displayImage(product.getPictureUrl(), this.iv_header);
+            imageLoader.displayImage(product.getPictureUrl(), this.iv_header, R.drawable.caixa);
         }
 
         this.product = product;

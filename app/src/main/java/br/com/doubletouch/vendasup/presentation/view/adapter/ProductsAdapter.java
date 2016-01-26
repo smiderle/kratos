@@ -58,7 +58,7 @@ public class ProductsAdapter extends RecyclerView.Adapter<ProductsAdapter.Produc
         holder.lblProdutoEstoque.setText(DoubleUtil.formatToCurrency(product.getStockAmount(), false));
         holder.lblProdutoPreco.setText( DoubleUtil.formatToCurrency( product.getSalePrice() , true));
 
-        imageLoader.displayImage(product.getPictureUrl(), holder.imgProduto);
+        imageLoader.displayImage(product.getPictureUrl(), holder.imgProduto, R.drawable.caixa);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

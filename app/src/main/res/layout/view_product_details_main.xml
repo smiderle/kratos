@@ -10,6 +10,50 @@
     android:background="@color/backgrount_primary">
 
 
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/lv_row_padding_botton"
+        android:paddingTop="@dimen/lv_row_padding_top">
+
+        <ImageView
+            android:id="@+id/img_product_picture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_photo_camera_grey600_36dp"
+            android:visibility="gone"/>
+
+
+        <ImageView
+            android:id="@+id/iv_product_picture"
+            android:layout_width="@dimen/iv_height_main"
+            android:layout_height="@dimen/iv_height_main"
+            android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
+            android:layout_toEndOf="@+id/img_product_picture"
+            android:layout_toRightOf="@+id/img_product_picture"
+            android:src="@drawable/jorge"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/bt_product_picture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/tv_title_marginleft_of_image"
+            android:layout_toEndOf="@+id/iv_product_picture"
+            android:layout_toRightOf="@+id/iv_product_picture"
+            android:background="@color/white"
+            android:text="Alterar"
+            android:visibility="gone"/>
+
+
+    </RelativeLayout>
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
