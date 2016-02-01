@@ -144,7 +144,7 @@ public class OrderFragment extends BaseFragment implements OrderView, EmailPedid
 
     private ViewMode viewMode;
 
-    private MenuItem menuExport;
+    //private MenuItem menuExport;
 
     public static OrderFragment newInstance(Long orderId, ViewMode viewMode) {
         OrderFragment orderFragment = new OrderFragment();
@@ -240,7 +240,7 @@ public class OrderFragment extends BaseFragment implements OrderView, EmailPedid
         btn_new_order.setVisibility(View.VISIBLE);
 
         ll_order_details.removeView(btn_order_save);
-        menuExport.setVisible(true);
+        //menuExport.setVisible(true);
 
         setOrderNumber();
 
