@@ -146,7 +146,6 @@ public class OrderProductListFragment  extends ScrollTabHolderFragment implement
 
 
 
-        menu.findItem(R.id.add).setVisible(false);
         //Pega o Componente.
         SearchView mSearchView = (SearchView) menu.findItem(R.id.search).getActionView();
         //Define um texto de ajuda:

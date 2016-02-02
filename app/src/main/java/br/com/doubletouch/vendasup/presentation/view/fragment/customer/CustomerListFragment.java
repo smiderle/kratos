@@ -37,6 +37,7 @@ import br.com.doubletouch.vendasup.presentation.view.adapter.CustomersAdapter;
 import br.com.doubletouch.vendasup.presentation.view.fragment.BaseFragment;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 /**
  * Created by LADAIR on 12/02/2015.
@@ -58,10 +59,10 @@ public class CustomerListFragment extends BaseFragment implements CustomerListVi
     private CustomerListListener customerListListener;
     private CustomersAdapter customerAdapter;
 
-    @InjectView(R.id.rv_customers)
+    @InjectView( R.id.rv_customers )
     RecyclerView rv_customers;
 
-    @InjectView(R.id.rl_progress)
+    @InjectView( R.id.rl_progress )
     RelativeLayout rl_progress;
 
     public CustomerListFragment() {
@@ -73,23 +74,22 @@ public class CustomerListFragment extends BaseFragment implements CustomerListVi
     private Activity activity;
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        if(activity instanceof CustomerListListener){
-            this.customerListListener = (CustomerListListener) activity;
+    public void onAttach( Activity activity ) {
+        super.onAttach( activity );
+        if ( activity instanceof CustomerListListener ) {
+            this.customerListListener = ( CustomerListListener ) activity;
         }
 
         this.activity = activity;
     }
 
 
-
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {
 
-        View fragmentView = inflater.inflate(R.layout.fragment_list, container, true);
-        ButterKnife.inject(this, fragmentView);
+        View fragmentView = inflater.inflate( R.layout.fragment_customer_list, container, true );
+        ButterKnife.inject( this, fragmentView );
 
         setupUI();
 
@@ -99,55 +99,50 @@ public class CustomerListFragment extends BaseFragment implements CustomerListVi
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        setHasOptionsMenu(true);
+    public void onActivityCreated( Bundle savedInstanceState ) {
+        super.onActivityCreated( savedInstanceState );
+        setHasOptionsMenu( true );
         this.loadCustomerList();
     }
 
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
+    public void onCreateOptionsMenu( Menu menu, MenuInflater inflater ) {
+        super.onCreateOptionsMenu( menu, inflater );
 
         //Carrega o arquivo de menu.
-        inflater.inflate(R.menu.menu_search_view, menu);
+        inflater.inflate( R.menu.menu_search_view, menu );
 
         //Pega o Componente.
-        SearchView mSearchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        SearchView mSearchView = ( SearchView ) menu.findItem( R.id.search ).getActionView();
         //Define um texto de ajuda:
-        mSearchView.setQueryHint("Pesquisar");
+        mSearchView.setQueryHint( "Pesquisar" );
 
-        mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        mSearchView.setOnQueryTextListener( new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextSubmit(String s) {
+            public boolean onQueryTextSubmit( String s ) {
                 return false;
             }
 
             @Override
-            public boolean onQueryTextChange(String s) {
-                customerListPresenter.onCustomerFilterChange(s);
+            public boolean onQueryTextChange( String s ) {
+                customerListPresenter.onCustomerFilterChange( s );
                 return false;
             }
-        });
+        } );
     }
 
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+    public boolean onOptionsItemSelected( MenuItem item ) {
+        switch ( item.getItemId() ) {
             case android.R.id.home:
-                navigator.previousActivity(activity);
-                break;
-            case R.id.add:
-                Intent intentToLaunch = CustomerDetailsActivity.getCallingIntent(activity, 0, ViewMode.INCLUSAO);
-                startActivityForResult (intentToLaunch, 1);
-                navigator.transitionGo(activity);
+                navigator.previousActivity( activity );
                 break;
             default:
-                super.onOptionsItemSelected(item);
+                super.onOptionsItemSelected( item );
         }
-        return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected( item );
     }
 
     @Override
@@ -155,62 +150,62 @@ public class CustomerListFragment extends BaseFragment implements CustomerListVi
         ThreadExecutor threadExecutor = JobExecutor.getInstance();
         PostExecutionThread postExecutionThread = UIThread.getInstance();
 
-        GetCustomerListUseCase getCustomerListUseCase = new GetCustomerListUseCaseImpl( threadExecutor, postExecutionThread);
-        GetCustomerListFilterUseCase getCustomerListFilterUseCase = new GetCustomerListFilterUseCaseImpl( threadExecutor, postExecutionThread);
-        this.customerListPresenter = new CustomerListPresenter(this,getCustomerListUseCase, getCustomerListFilterUseCase);
+        GetCustomerListUseCase getCustomerListUseCase = new GetCustomerListUseCaseImpl( threadExecutor, postExecutionThread );
+        GetCustomerListFilterUseCase getCustomerListFilterUseCase = new GetCustomerListFilterUseCaseImpl( threadExecutor, postExecutionThread );
+        this.customerListPresenter = new CustomerListPresenter( this, getCustomerListUseCase, getCustomerListFilterUseCase );
     }
 
     @Override
-    public void renderCustomerList(List<Customer> customersCollection) {
-        if(customersCollection != null && !customersCollection.isEmpty()){
-            if(customerAdapter == null){
-                this.customerAdapter = new CustomersAdapter(getActivity(), customersCollection);
+    public void renderCustomerList( List<Customer> customersCollection ) {
+        if ( customersCollection != null && !customersCollection.isEmpty() ) {
+            if ( customerAdapter == null ) {
+                this.customerAdapter = new CustomersAdapter( getActivity(), customersCollection );
             } else {
-                this.customerAdapter.setCustomersCollection(customersCollection);
+                this.customerAdapter.setCustomersCollection( customersCollection );
             }
 
-            this.customerAdapter.setOnItemClickListener(onItemClickListener);
-            this.rv_customers.setAdapter(customerAdapter);
+            this.customerAdapter.setOnItemClickListener( onItemClickListener );
+            this.rv_customers.setAdapter( customerAdapter );
         }
     }
 
     @Override
-    public void viewCustomer(Customer customer) {
-        if(this.customerListListener != null) {
-            Intent intentToLaunch = CustomerDetailsActivity.getCallingIntent(activity, customer.getID(), ViewMode.VISUALIZACAO);
-            startActivityForResult (intentToLaunch, 1);
-            navigator.transitionGo(activity);
+    public void viewCustomer( Customer customer ) {
+        if ( this.customerListListener != null ) {
+            Intent intentToLaunch = CustomerDetailsActivity.getCallingIntent( activity, customer.getID(), ViewMode.VISUALIZACAO );
+            startActivityForResult( intentToLaunch, 1 );
+            navigator.transitionGo( activity );
         }
     }
 
     @Override
-    public void selectCustomerToOrder(Customer customer) {
+    public void selectCustomerToOrder( Customer customer ) {
 
         Bundle bundle = new Bundle();
-        bundle.putSerializable(FROM_ACTIVITY, customer);
-        Intent intent = activity.getIntent().putExtras(bundle);
-        activity.setResult(activity.RESULT_OK, intent);
+        bundle.putSerializable( FROM_ACTIVITY, customer );
+        Intent intent = activity.getIntent().putExtras( bundle );
+        activity.setResult( activity.RESULT_OK, intent );
 
-        navigator.previousActivity(activity);
+        navigator.previousActivity( activity );
 
     }
 
     @Override
     public void showLoading() {
-        this.rl_progress.setVisibility(View.VISIBLE);
-        this.getActivity().setProgressBarIndeterminateVisibility(true);
+        this.rl_progress.setVisibility( View.VISIBLE );
+        this.getActivity().setProgressBarIndeterminateVisibility( true );
     }
 
     @Override
     public void hideLoading() {
-        this.rl_progress.setVisibility(View.GONE);
-        this.getActivity().setProgressBarIndeterminateVisibility(false);
+        this.rl_progress.setVisibility( View.GONE );
+        this.getActivity().setProgressBarIndeterminateVisibility( false );
     }
 
 
     @Override
-    public void showError(String message) {
-        this.showToastMessage(message);
+    public void showError( String message ) {
+        this.showToastMessage( message );
     }
 
     @Override
@@ -218,25 +213,25 @@ public class CustomerListFragment extends BaseFragment implements CustomerListVi
         return this.getActivity().getApplicationContext();
     }
 
-    private void setupUI(){
-        this.kratosLayoutManager = new KratosLayoutManager(getActivity());
-        this.rv_customers.setLayoutManager(kratosLayoutManager);
+    private void setupUI() {
+        this.kratosLayoutManager = new KratosLayoutManager( getActivity() );
+        this.rv_customers.setLayoutManager( kratosLayoutManager );
     }
 
     private CustomersAdapter.OnItemClickListener onItemClickListener = new CustomersAdapter.OnItemClickListener() {
         @Override
-        public void onCustomerItemClicked(Customer customer) {
+        public void onCustomerItemClicked( Customer customer ) {
 
-            if(CustomerListFragment.this.customerListPresenter != null && customer != null){
-                int intExtra = activity.getIntent().getIntExtra(FROM_ACTIVITY, 0);
+            if ( CustomerListFragment.this.customerListPresenter != null && customer != null ) {
+                int intExtra = activity.getIntent().getIntExtra( FROM_ACTIVITY, 0 );
 
-                if(intExtra == FROM_ORDER_ACTIVITY_CODE) {
+                if ( intExtra == FROM_ORDER_ACTIVITY_CODE ) {
 
-                    CustomerListFragment.this.customerListPresenter.selectCustomerToOrder(customer);
+                    CustomerListFragment.this.customerListPresenter.selectCustomerToOrder( customer );
 
                 } else {
 
-                    CustomerListFragment.this.customerListPresenter.onCustomerClicked(customer);
+                    CustomerListFragment.this.customerListPresenter.onCustomerClicked( customer );
 
                 }
 
@@ -247,17 +242,24 @@ public class CustomerListFragment extends BaseFragment implements CustomerListVi
     /**
      * Carrega os produtos
      */
-    private void loadCustomerList(){
+    private void loadCustomerList() {
         this.customerListPresenter.initialize();
     }
 
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    public void onActivityResult( int requestCode, int resultCode, Intent data ) {
+        super.onActivityResult( requestCode, resultCode, data );
 
         this.customerListPresenter.initialize();
 
+    }
+
+    @OnClick( R.id.btnAdd )
+    public void addCustomer() {
+        Intent intentToLaunch = CustomerDetailsActivity.getCallingIntent( activity, 0, ViewMode.INCLUSAO );
+        startActivityForResult( intentToLaunch, 1 );
+        navigator.transitionGo( activity );
     }
 
 }

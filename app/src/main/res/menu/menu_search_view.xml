@@ -10,13 +10,6 @@
         app:showAsAction="collapseActionView|ifRoom"/>
 
     <item
-        android:id="@+id/add"
-        android:icon="@drawable/ic_add_white_24dp"
-        android:title="@string/add_title"
-        app:showAsAction="always"/>
-
-
-    <item
         android:id="@+id/it_done"
         android:icon="@drawable/ic_done_white_24dp"
         android:title="@string/save_title"

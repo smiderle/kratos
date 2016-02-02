@@ -37,6 +37,7 @@ import br.com.doubletouch.vendasup.presentation.view.adapter.KratosLayoutManager
 import br.com.doubletouch.vendasup.presentation.view.adapter.ProductsAdapter;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 /**
  * Created by LADAIR on 12/02/2015.
@@ -207,10 +208,6 @@ public class ProductListFragment extends BaseFragment implements ProductListView
             case android.R.id.home:
                 navigator.previousActivity(activity);
                 break;
-            case R.id.add:
-                Intent intentToLaunch = ProductDetailsActivity.getCallingIntent(activity, 0, ViewMode.INCLUSAO);
-                startActivityForResult(intentToLaunch,1);
-                break;
             default:
                 super.onOptionsItemSelected(item);
         }
@@ -223,5 +220,11 @@ public class ProductListFragment extends BaseFragment implements ProductListView
 
         this.productListPresenter.initialize();
 
+    }
+
+    @OnClick( R.id.btnAdd )
+    public void addProduct() {
+        Intent intentToLaunch = ProductDetailsActivity.getCallingIntent(activity, 0, ViewMode.INCLUSAO);
+        startActivityForResult(intentToLaunch,1);
     }
 }

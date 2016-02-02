@@ -68,8 +68,9 @@
 
         <!-- Remove a sombra de baixo do action bar -->
         <item name="android:windowContentOverlay">@null</item>
+        <!-- Cor do botão Action Float button-->
+        <item name="colorAccent">@color/primary_color</item>
     </style>
-
 
 
     <!-- Action bar -->

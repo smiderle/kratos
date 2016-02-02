@@ -127,7 +127,6 @@ public class OrderPaymentFragment extends BaseFragment implements OrderPaymentVi
             menu.findItem(R.id.it_done).setVisible(true);
         }
 
-        menu.findItem(R.id.add).setVisible(false);
         menu.findItem(R.id.search).setVisible(false);
 
 

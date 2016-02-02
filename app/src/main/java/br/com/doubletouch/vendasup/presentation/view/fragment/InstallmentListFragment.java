@@ -37,11 +37,12 @@ import br.com.doubletouch.vendasup.presentation.view.adapter.KratosLayoutManager
 import br.com.doubletouch.vendasup.presentation.view.fragment.customer.CustomerListFragment;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 /**
  * Created by LADAIR on 27/07/2015.
  */
-public class InstallmentListFragment  extends BaseFragment implements InstallmentView {
+public class InstallmentListFragment extends BaseFragment implements InstallmentView {
 
     private Navigator navigator;
 
@@ -53,29 +54,27 @@ public class InstallmentListFragment  extends BaseFragment implements Installmen
 
     private InstallmentAdapter installmentAdapter;
 
-    @InjectView(R.id.rv_customers)
+    @InjectView( R.id.rv_customers )
     RecyclerView rv_customers;
 
-    @InjectView(R.id.rl_progress)
+    @InjectView( R.id.rl_progress )
     RelativeLayout rl_progress;
 
 
     public static InstallmentListFragment newInstance() {
         InstallmentListFragment installmentListFragment = new InstallmentListFragment();
         Bundle argumentsBundle = new Bundle();
-        installmentListFragment.setArguments(argumentsBundle);
+        installmentListFragment.setArguments( argumentsBundle );
         return installmentListFragment;
     }
 
 
-
-
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView( LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {
 
-        View fragmentView = inflater.inflate(R.layout.fragment_list, container, true);
-        ButterKnife.inject(this, fragmentView);
+        View fragmentView = inflater.inflate( R.layout.fragment_installment_list, container, true );
+        ButterKnife.inject( this, fragmentView );
 
         setupUI();
 
@@ -86,54 +85,47 @@ public class InstallmentListFragment  extends BaseFragment implements Installmen
 
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach( Activity activity ) {
+        super.onAttach( activity );
 
         this.activity = activity;
     }
 
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public void onActivityCreated( @Nullable Bundle savedInstanceState ) {
+        super.onActivityCreated( savedInstanceState );
 
-        setHasOptionsMenu(true);
+        setHasOptionsMenu( true );
         this.installmentListPresenter.initialize();
 
     }
 
 
-
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
+    public void onCreateOptionsMenu( Menu menu, MenuInflater inflater ) {
+        super.onCreateOptionsMenu( menu, inflater );
 
         //Carrega o arquivo de menu.
-        inflater.inflate(R.menu.menu_search_view, menu);
+        inflater.inflate( R.menu.menu_search_view, menu );
 
-        menu.findItem(R.id.search).setVisible(false);
+        menu.findItem( R.id.search ).setVisible( false );
 
 
     }
 
 
-
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+    public boolean onOptionsItemSelected( MenuItem item ) {
+        switch ( item.getItemId() ) {
 
             case android.R.id.home:
-                navigator.previousActivity(activity);
-                break;
-            case R.id.add:
-                Intent intentToLaunch = InstallmentDetailsActivity.getCallingIntent(activity, 0, ViewMode.INCLUSAO);
-                startActivityForResult (intentToLaunch, 1);
-                navigator.transitionGo(activity);
+                navigator.previousActivity( activity );
                 break;
             default:
-                super.onOptionsItemSelected(item);
+                super.onOptionsItemSelected( item );
         }
-        return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected( item );
     }
 
     @Override
@@ -142,32 +134,32 @@ public class InstallmentListFragment  extends BaseFragment implements Installmen
         ThreadExecutor threadExecutor = JobExecutor.getInstance();
         PostExecutionThread postExecutionThread = UIThread.getInstance();
 
-        GetInstallmentListUseCase getInstallmentListUseCase = new GetInstallmentListUseCaseImpl( threadExecutor, postExecutionThread);
-        this.installmentListPresenter = new InstallmentListPresenter( this,getInstallmentListUseCase);
+        GetInstallmentListUseCase getInstallmentListUseCase = new GetInstallmentListUseCaseImpl( threadExecutor, postExecutionThread );
+        this.installmentListPresenter = new InstallmentListPresenter( this, getInstallmentListUseCase );
 
     }
 
-    private void setupUI(){
-        this.kratosLayoutManager = new KratosLayoutManager(getActivity());
-        this.rv_customers.setLayoutManager(kratosLayoutManager);
+    private void setupUI() {
+        this.kratosLayoutManager = new KratosLayoutManager( getActivity() );
+        this.rv_customers.setLayoutManager( kratosLayoutManager );
     }
 
 
     @Override
     public void showLoading() {
-        this.rl_progress.setVisibility(View.VISIBLE);
-        this.getActivity().setProgressBarIndeterminateVisibility(true);
+        this.rl_progress.setVisibility( View.VISIBLE );
+        this.getActivity().setProgressBarIndeterminateVisibility( true );
     }
 
     @Override
     public void hideLoading() {
-        this.rl_progress.setVisibility(View.GONE);
-        this.getActivity().setProgressBarIndeterminateVisibility(false);
+        this.rl_progress.setVisibility( View.GONE );
+        this.getActivity().setProgressBarIndeterminateVisibility( false );
     }
 
     @Override
-    public void showError(String message) {
-        this.showToastMessage(message);
+    public void showError( String message ) {
+        this.showToastMessage( message );
     }
 
     @Override
@@ -177,29 +169,29 @@ public class InstallmentListFragment  extends BaseFragment implements Installmen
 
 
     @Override
-    public void viewInstallment(Installment intInstallment) {
+    public void viewInstallment( Installment intInstallment ) {
 
-            Intent intentToLaunch = InstallmentDetailsActivity.getCallingIntent(activity, intInstallment.getID(), ViewMode.VISUALIZACAO);
-            startActivityForResult (intentToLaunch, 1);
-            navigator.transitionGo(activity);
+        Intent intentToLaunch = InstallmentDetailsActivity.getCallingIntent( activity, intInstallment.getID(), ViewMode.VISUALIZACAO );
+        startActivityForResult( intentToLaunch, 1 );
+        navigator.transitionGo( activity );
 
     }
 
     @Override
-    public void renderInstamentList(List<Installment> list) {
+    public void renderInstamentList( List<Installment> list ) {
 
-        if(list != null && !list.isEmpty()){
+        if ( list != null && !list.isEmpty() ) {
 
-            if(installmentAdapter == null){
+            if ( installmentAdapter == null ) {
 
                 this.installmentAdapter = new InstallmentAdapter( getActivity(), list );
 
             } else {
 
-                this.installmentAdapter.setInstallmentCollection(list);
+                this.installmentAdapter.setInstallmentCollection( list );
 
             }
-            this.installmentAdapter.setOnItemClickListener(onItemClickListener);
+            this.installmentAdapter.setOnItemClickListener( onItemClickListener );
             this.rv_customers.setAdapter( installmentAdapter );
         }
 
@@ -209,10 +201,10 @@ public class InstallmentListFragment  extends BaseFragment implements Installmen
     private InstallmentAdapter.OnInstallmentClickListener onItemClickListener = new InstallmentAdapter.OnInstallmentClickListener() {
 
         @Override
-        public void onInstallmentItemClicked(Installment installment) {
-            if(InstallmentListFragment.this.installmentListPresenter != null && installment != null){
+        public void onInstallmentItemClicked( Installment installment ) {
+            if ( InstallmentListFragment.this.installmentListPresenter != null && installment != null ) {
 
-                InstallmentListFragment.this.installmentListPresenter.onInstallmentClicked(installment);
+                InstallmentListFragment.this.installmentListPresenter.onInstallmentClicked( installment );
 
             }
         }
@@ -220,12 +212,20 @@ public class InstallmentListFragment  extends BaseFragment implements Installmen
     };
 
 
-
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    public void onActivityResult( int requestCode, int resultCode, Intent data ) {
+        super.onActivityResult( requestCode, resultCode, data );
 
         this.installmentListPresenter.initialize();
+
+    }
+
+    @OnClick( R.id.btnAdd )
+    public void addProduct() {
+
+        Intent intentToLaunch = InstallmentDetailsActivity.getCallingIntent( activity, 0, ViewMode.INCLUSAO );
+        startActivityForResult( intentToLaunch, 1 );
+        navigator.transitionGo( activity );
 
     }
 
